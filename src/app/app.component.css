@@ -9,13 +9,19 @@
   font-family: Poppins;
 }
 
+.hr-img{
+  width: 147%;
+    height: 85px;
+   padding: 0px 75px 20px 0px;
+}
+
 .resimg {
   margin: 0;
   padding: 0;
 }
 
 .align-head {
-  margin: 16px;
+  margin: 8px 48px;
   display: flex;
   flex-direction: column;
 }

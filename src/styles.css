@@ -2406,3 +2406,22 @@ td {
     font-size: 30px;
     font-weight: 600;
   }
+
+  .sidebar {
+    overflow-y: auto;
+    height: 87vh;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    transition: .5s;
+    overflow-x: hidden;
+    white-space: nowrap;
+    padding: 0;
+}
+.sidebar-image{
+  margin: 0px 31px;
+  width: 60%;
+}

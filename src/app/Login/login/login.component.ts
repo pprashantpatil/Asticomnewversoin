@@ -87,6 +87,11 @@ export class LoginComponent implements OnInit {
     this.showPopup = 0;
     debugger
     this.loader = true;
+    sessionStorage.setItem('roledid', '1');
+    sessionStorage.setItem('staffid', '1');
+    localStorage.setItem('roledid','1');
+    localStorage.setItem('ProjectID', '244');
+    localStorage.setItem('selectedLanguageID', '1');
     this.router.navigate(['/Employee/EmployeeDash']).then(() => {
       this.loader = false;
       location.reload();

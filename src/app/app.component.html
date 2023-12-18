@@ -1,5 +1,5 @@
 <app-loader *ngIf="loader"></app-loader>
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="!showMobileView">
   <div class="row app-overflow">
     <div class="col-12 dynamiccss">
       <div class="row">
@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-3 resimg">
               <div>
-                <img style="width: 67%;" src="assets/Images/fmslogo.svg" />
+                <img class="hr-img"  src="assets/Images/Logo_digiOffice_Colored.png" />
               </div>
             </div>
 
@@ -36,17 +36,36 @@
                   <img src="assets/Images/revamp/bell-icon-bg.png" class="icon-alignment" />
                 </div>
 
-                <img src="assets/FigmaImg/person-01.png" class="icon-alignment1" />
+                <img src="assets/FigmaImg/person-01.png" (click)="logout()" class="icon-alignment1" />
               </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="sidebar">
-        <app-sidebar></app-sidebar>
+  
+  </div>
+  <div class="row" style="background-color: #f2f2f2">
+    <div class="sidebar" [ngClass]="[!sidenav ? 'col-1 side-width' : 'col-2',showsidebar==0?'blur-background':'']"
+      *ngIf="showsidebar != 0">
+      <app-sidebar (activate)="onActivate($event)" (data11)="getHeaderLabel($event)"></app-sidebar>
+    </div>
+    <div [ngClass]="!sidenav ? 'col-11' : 'col-10'">
+      <div style="
+          height: 83vh;
+          overflow-y: auto;
+          background-color: #f2f2f2;
+          overflow-x: hidden;
+          padding-right: 10px;
+        " *ngIf="temp1 == 0 || temp1 == undefined">
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
       </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="login!=null">
+    <div [ngClass]="!sidenav ? 'col-lg-12' : 'col-lg-12'" style="background: #e4ebf4">
+      <app-footer (activate)="onActivate($event)"></app-footer>
     </div>
   </div>
 </div>
