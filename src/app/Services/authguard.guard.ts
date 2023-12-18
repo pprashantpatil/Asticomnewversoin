@@ -36,21 +36,22 @@ export class AuthguardGuard implements CanActivate {
 // >>>>>>> 660e0c685b9cfc83626a45fc6cd41438a2caaff0
       debugger
       //var isAuthenticated = this.session;
-      if (this.session == null ||this.session==undefined||this.session=='') {
-        debugger
-        //
-        debugger
-        localStorage.clear()
-        sessionStorage.clear();
-        localStorage.setItem('roledid', "0");
-        this.router.navigate(['/Login']);
-        location.reload()
-        return false;
+      // if (this.session == null ||this.session==undefined||this.session=='') {
+      //   debugger
+      //   //
+      //   debugger
+      //   localStorage.clear()
+      //   sessionStorage.clear();
+      //   localStorage.setItem('roledid', "0");
+      //   this.router.navigate(['/Login']);
+      //   location.reload()
+      //   return false;
    
-      }
-      else {
-        return true;
-      }
+      // }
+      // else {
+      //   return true;
+      // }
+      return true;
   }
   
 }
