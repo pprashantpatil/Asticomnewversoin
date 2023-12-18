@@ -11,7 +11,7 @@
 .dashbutton button {
     float: right;
     border-radius: 10px;
-    background-color: #fec500;
+    background-color: #1125a9;
     color: white;
     border: none;
     width: 150px;
@@ -42,7 +42,7 @@
 }
 
 .BreadChrumbProperties span {
-    color: #fec500;
+    color: #1125a9;
     font-size: 18px;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .TableActions i {
-    color: #fec500;
+    color: #1125a9;
 }
 
 .mainrow {
@@ -102,7 +102,7 @@
 
 .tableheader {
     border: black;
-    background-color: #fec500;
+    background-color: #1125a9;
     text-align: center;
     /* font-weight: bold; */
     text-transform: uppercase;
@@ -121,7 +121,7 @@
     width: 100px;
     margin-top: 13px;
     border-radius: 6px;
-    background-color: #fec500;
+    background-color: #1125a9;
     color: white;
     border: none;
     height: 36px;
@@ -179,11 +179,11 @@
 }
 
 input:checked+.slider {
-    background-color: #fec500;
+    background-color: #1125a9;
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px #fec500;
+    box-shadow: 0 0 1px #1125a9;
 }
 
 input:checked+.slider:before {

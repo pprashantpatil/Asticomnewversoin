@@ -8,8 +8,8 @@ const routes: Routes = [
 
   { path: '', redirectTo: '/Login', pathMatch: 'full' },
   { path: 'Login', component: LoginComponent },
- { path: 'Manager', loadChildren: () => import('./Modules/manager/manager.module').then(m => m.ManagerModule) ,canActivate: [AuthguardGuard]},
- 
+  { path: 'Manager', loadChildren: () => import('./Modules/manager/manager.module').then(m => m.ManagerModule), canActivate: [AuthguardGuard] },
+  { path: 'Employee', loadChildren: () => import('./Modules/employee/employee.module').then(m => m.EmployeeModule), canActivate: [AuthguardGuard] },
 
 ];
 
@@ -17,6 +17,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
-  
+
 })
 export class AppRoutingModule { }
