@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DigiofficecorehrService } from './Services/digiofficecorehr.service';
 import Swal from 'sweetalert2';
+import { NgbDropdownConfig, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [NgbDropdownConfig],
 })
 export class AppComponent {
   title = 'Asticomnewversion';
@@ -25,7 +27,9 @@ EmployeeID:any;
 username:any;
 Comapnayname:any;
 notificationslist1:any;
-constructor(public router: Router, public DigiofficeService: DigiofficecorehrService) {}
+constructor(public router: Router, public DigiofficeService: DigiofficecorehrService) {
+		
+}
 
 ngOnInit(): void {
   debugger
