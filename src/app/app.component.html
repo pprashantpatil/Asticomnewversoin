@@ -31,13 +31,67 @@
               </select>
             </div>
 
-              <div class="noti">
-                <div ngbDropdown container="body">
-                  <img src="assets/Images/revamp/bell-icon-bg.png" class="icon-alignment" />
+            <div class="noti">
+              <!-- <div class="sub-card">
+                <span class="notify-number">1</span>
+              </div> -->
+              <div ngbDropdown container="body">
+                <img src="assets/Images/revamp/bell-icon-bg.png" class="icon-alignment" id="notificationmodal"
+                  ngbDropdownToggle />
+                <div ngbDropdownMenu aria-labelledby="notificationmodal" class="content-1">
+                  <div class="icon-close">
+                    <div class="icon-align">
+                      <img src="assets/Images/revamp/cancle-icon.png" class="close-icon-txt" ngbDropdownToggle />
+                    </div>
+                    <div class="notifi">
+                      <p class="notifi-txt">Notifications</p>
+                    </div>
+                    <div class="d-flex alin-img-txt">
+                      <img src="assets/Images/markasread.png" class="right-icon-img" />
+                      <p class="read-txt">
+                        Mark all as read
+                      </p>
+                    </div>
+  
+                    <div *ngFor="let item of notificationslist">
+                      <div class="align-test" [ngClass]="item?.seen != null ? 'text' : 'text1'"
+                        *ngIf="item?.message!=null">
+                        <div class="d-flex content-set">
+                          <div class="d-flex">
+                            <img src="assets/Images/revamp/dot.png" class="dot" />
+  
+                            <div class="d-flex flex-column" *ngIf="item?.isRead != 0">
+                              <p class="status-txt">
+                                {{item?.message.length> 80 ?item?.message.substring(0,80)+"..." :item?.message}}
+                              </p>
+                              <p class="date-txt">
+                                {{ item?.time | date }} at {{ item?.phtime }}
+                              </p>
+                            </div>
+                            <div class="d-flex flex-column" *ngIf="item?.isRead == 0" >
+                              <p class="status-txtseen">
+                                {{item?.message.length> 80 ?item?.message.substring(0,80)+"..." :item?.message}}
+                              </p>
+                              <p class="date-txt">
+                                {{ item?.time | date }} at {{ item?.phtime }}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div *ngIf="notificationslist.length!=0" class="row" (click)="notification()">
+                      <div class="col-lg-12">
+                        <p class="view-txt">View all notifications</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
-                <img src="assets/FigmaImg/person-01.png" (click)="logout()" class="icon-alignment1" />
+                
               </div>
+              <img src="assets/FigmaImg/person-01.png" (click)="logout()" class="icon-alignment1" />
+             </div>
           </div>
         </div>
       </div>

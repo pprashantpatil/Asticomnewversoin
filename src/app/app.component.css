@@ -9,6 +9,39 @@
   font-family: Poppins;
 }
 
+.notify-number {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 10px;
+  align-items: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.sub-card {
+  z-index: 1;
+  background: red;
+  /* margin-right: -59px; */
+  /* margin-top: -12px; */
+  color: whitesmoke;
+  height: 23px;
+  width: 25px;
+  position: rte;
+  margin-top: -12px;
+  left: 95px;
+  /* top: -16%; */
+  padding: 30px;
+  position: relative;
+  /* top: 4%; */
+  /* left: 80%; */
+  text-align: center;
+  justify-content: center;
+  padding: 1px;
+  border-radius: 6px;
+}
+
 .hr-img{
   width: 100%;
     height: 85px;
@@ -90,6 +123,10 @@
   display: flex;
   margin-right: 4%;
 }
+.close-icon-txt {
+  margin-top: 10px;
+  margin-right: 20px;
+}
 
 .icon-alignment {
   width: 42px !important;
@@ -101,4 +138,94 @@
   width: 40px;
   height: 40px;
   border-radius: 20px;
+}
+
+.notifi-txt {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.alin-img-txt {
+  margin-left: 34px;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.right-icon-img {
+  width: 16px;
+  height: 15px;
+}
+
+.read-txt {
+  width: 85px;
+  height: 15px;
+  margin-left: 8px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.5px;
+  color: #3247d5;
+}
+
+.view-txt {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  padding-right: 128px;
+  padding-top: 6px;
+  letter-spacing: 0.5px;
+  color: #3247d5;
+}
+
+.align-test {
+  width: 100%;
+  padding: 4px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  justify-content: space-around;
+  height: auto;
+  border-bottom: 1px solid #EAECF1;
+}
+
+.content-set {
+  color: black;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.text {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.status-txt {
+  width: 100%;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 15px;
+  margin-left: 13px;
+  letter-spacing: 0.5px;
+  color: #000000;
+}
+
+.status-txtseen {
+  width: 100%;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 15px;
+  margin-left: 13px;
+  letter-spacing: 0.5px;
+  color: #3247d5;
 }

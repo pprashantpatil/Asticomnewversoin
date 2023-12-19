@@ -16,6 +16,7 @@ login:any;
 showsidebar:any;
 sidenav = true;
 temp1: any;
+notificationslist:any=[]
 constructor(public router: Router) { }
 ngOnInit(): void {
   debugger
@@ -49,6 +50,14 @@ public onActivate(event: any) {
 getHeaderLabel(sasa: any) {
 
   this.pagename = localStorage.getItem('Pagename');
+}
+
+public notification() {
+
+  localStorage.setItem('Pagename', 'Notifications');
+ // this.router.navigate(['/Notification']);
+  document.getElementById('dropdownConfig1')?.click();
+  
 }
 
 public logout() {

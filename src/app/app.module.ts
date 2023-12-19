@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import { SidebarComponent } from './Shared/sidebar/sidebar.component';
 import { FooterComponent } from './Shared/footer/footer.component';
 import { LoaderComponent } from './Shared/loader/loader.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { LoaderComponent } from './Shared/loader/loader.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    DatePipe
+    DatePipe,
+    NgbModule
   ],
   providers: [DatePipe,
     CookieService
