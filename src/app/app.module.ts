@@ -10,21 +10,21 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { SidebarComponent } from './Shared/sidebar/sidebar.component';
 import { FooterComponent } from './Shared/footer/footer.component';
-import { LoaderComponent } from './Shared/loader/loader.component';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpage.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SharedModuleModule } from './Shared/shared-module/shared-module.module';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SidebarComponent,
     FooterComponent,
-    LoaderComponent,
-    CommonalertpageComponent
+  
   ],
   imports: [
     BrowserModule,
@@ -35,8 +35,12 @@ import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpa
     NgbModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgxPaginationModule,
+    SharedModuleModule
   ],
+
+
   providers: [DatePipe,
     CookieService
   ],

@@ -14,16 +14,23 @@
             <div class="col-6">
               <div class="align-head">
                 <span class="dash-heading" style="margin-left: -16%;">{{ pagename }}</span>
-                <!-- <span class="welcomename">
-                  Welcome {{ username }}
-                  <img class="hai" src="assets/Images/revamp/hai.png" />
-                </span> -->
+                <!-- <div>
+                  <div class="time1">
+                    <p class="time">11<span class="sem"></span></p>
+                  </div>
+                  <div class="times">
+                    <p class="time">22<span class="sem"></span></p>
+                  </div>
+              </div> -->
+             
               </div>
             </div>
           </div>
         </div>
 
         <div class="col-6">
+       
+        
           <div class="header-class">
             <div class="topheader">
               <select class="form-control" id="companyid" name="companyid" [(ngModel)]="companyid"
@@ -41,7 +48,7 @@
               <!-- <div class="sub-card">
                 <span class="notify-number">1</span>
               </div> -->
-              <div ngbDropdown container="body" placement="bottom-start" >
+              <div ngbDropdown container="body" placement="bottom-start">
                 <img src="assets/Images/revamp/bell-icon-bg.png" class="icon-alignment" id="notificationmodal"
                   ngbDropdownToggle />
                 <div ngbDropdownMenu aria-labelledby="notificationmodal" class="notifimodal">
@@ -98,18 +105,18 @@
               </div>
               <!-- <img src="assets/FigmaImg/person-01.png" (click)="logout()" class="icon-alignment1" /> -->
             </div>
-        
-          <p class="welcomename">Hi {{username}} !</p>
-          <div ngbDropdown placement="bottom-end" class="d-inline-block">
-            <img src="assets/FigmaImg/person-01.png" id="dropdownBasic1" ngbDropdownToggle  class="icon-alignment1" />
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="logoutmodal">
-              <button ngbDropdownItem>My Profile</button>
-              <button ngbDropdownItem>Account Settings</button>
-              <button ngbDropdownItem (click)="logout()">Logout</button>
+
+            <p class="welcomename">Hi {{username}} !</p>
+            <div ngbDropdown placement="bottom-end" class="d-inline-block">
+              <img src="assets/FigmaImg/person-01.png" id="dropdownBasic1" ngbDropdownToggle class="icon-alignment1" />
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="logoutmodal">
+                <button ngbDropdownItem>My Profile</button>
+                <button ngbDropdownItem>Account Settings</button>
+                <button ngbDropdownItem (click)="logout()">Logout</button>
+              </div>
             </div>
-          </div>
-         
-       
+
+
           </div>
         </div>
       </div>

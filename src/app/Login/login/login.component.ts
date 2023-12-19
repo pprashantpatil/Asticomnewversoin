@@ -685,5 +685,322 @@ export class LoginComponent implements OnInit {
 
   }
 
+  sssvalid: any;
+  public checksssandtin(event: any) {
+    debugger
+    var entity = {
+      'm0ucEgBZCmnxjEpj': 'XOxKhzxPTuKbEeYS',
+      'jPsUmyVPIbCpPuf3': 'P@sn3JrYm5OyfhiDUxksw0rd',
+    }
+    this.DigiofficeService.Getantiforgerytoken(entity).subscribe((data: any) => {
+      debugger
+      localStorage.setItem('antiforgerytoken', btoa(data.antiForgeryToken));
+      this.DigiofficeService.GetStaffDetailsByEmpIDandSSS(this.Empid, this.sssno)
+        .subscribe({
+          next: data => {
+            debugger
+            let temp: any = data;
+            if (temp.length == 0) {
+              this.sssvalid = false;
+            }
+
+            else {
+              this.sssvalid = true;
+
+            }
+
+          }, error: (err) => {
+
+            // Insert error in Db Here//
+            // var obj = {
+            //   'PageName': this.currentUrl,
+            //   'ErrorMessage': err.error.message
+            // }
+            // this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+            //   data => {
+            //     debugger
+            //   },
+            // )
+          }
+        })
+
+    })
+    // this.DigiofficeService.Authenicate(entity).subscribe((data: any) => {
+    //   debugger
+    //   if (data['requestMessage'] != undefined || null) {
+    //     localStorage.setItem('token', data['requestMessage'].headers[0].value[0]);
+
+
+
+    //   }
+    // })
+
+  }
+  public checksssandtinforforgot(event: any) {
+    debugger
+    var entity = {
+      'm0ucEgBZCmnxjEpj': 'XOxKhzxPTuKbEeYS',
+      'jPsUmyVPIbCpPuf3': 'P@sn3JrYm5OyfhiDUxksw0rd',
+    }
+
+    this.DigiofficeService.Getantiforgerytoken(entity).subscribe((data: any) => {
+      debugger
+      localStorage.setItem('antiforgerytoken', btoa(data.antiForgeryToken));
+
+      this.DigiofficeService.GetStaffDetailsByEmpIDandSSS(this.Empid, this.sssno)
+        .subscribe({
+          next: data => {
+            debugger
+            let temp: any = data;
+            if (temp.length == 0) {
+              this.sssvalid = false;
+            }
+
+            else {
+              this.sssvalid = true;
+
+            }
+
+          }, error: (err) => {
+
+            // Insert error in Db Here//
+            // var obj = {
+            //   'PageName': this.currentUrl,
+            //   'ErrorMessage': err.error.message
+            // }
+            // this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+            //   data => {
+            //     debugger
+            //   },
+            // )
+          }
+        })
+
+    })
+    // this.DigiofficeService.Authenicate(entity).subscribe((data: any) => {
+    //   debugger
+    //   if (data['requestMessage'] != undefined || null) {
+
+
+
+
+
+    //     // this.DigiofficeService.Getantiforgerytoken().subscribe((data: any) => {
+    //     //   debugger
+    //     //   localStorage.setItem('token', data['requestMessage'].headers[0].value[0]);
+
+    //     //   localStorage.setItem('antiforgerytoken', data.antiForgeryToken);
+
+    //     // })
+    //   }
+    // })
+
+  }
+
+
+  pp: any;
+  public checkStrength(password: any) {
+    var strength = 0;
+
+
+    //If password contains both lower and uppercase characters, increase strength value.
+    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) {
+      strength += 1;
+
+
+    }
+
+    //If it has numbers and characters, increase strength value.
+    if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) {
+      strength += 1;
+
+    }
+
+    //If it has one special character, increase strength value.
+    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) {
+      strength += 1;
+
+
+    }
+    if (password.length > 7) {
+      strength += 1;
+    }
+
+    if (strength >= 4) {
+      this.pp = 2;
+    } else {
+      this.pp = 1;
+    }
+    // Swal.fire('c' + strength);
+
+
+
+    // If value is less than 2
+
+    // if (strength < 2) {
+
+    // } else if (strength == 2) {
+
+    //   return 'Week'
+    // } else if (strength == 4) {
+
+
+    //   return 'Strong'
+    // }
+
+  }
+  public checkpassword(event: any) {
+    debugger
+    this.showPopup = 0;
+    this.confirmpassword = event.target.value;
+    if (this.confirmpassword.includes('#') == true || this.confirmpassword.includes('&') == true || this.confirmpassword.includes('+') == true || this.confirmpassword.includes('*') == true || this.confirmpassword.includes('%') == true) {
+      /*   Swal.fire("Special Character  not allowed in Passowrd"); */
+
+      this.passvaild = false;
+      this.loader = false;
+      this.showPopup = 1;
+      this.messageId = 39
+    } else {
+      if (this.newpassword === this.confirmpassword) {
+        this.passvaild = true;
+      } else {
+        this.passvaild = false;
+      }
+    }
+  }
+  public Save() {
+    var entity = {
+      'username': 'Amaze',
+      'Password': 'P@ssw0rd',
+      'RoleID': 1
+    }
+    this.getpassword();
+    // this.DigiofficeService.Authenicate(entity).subscribe((data: any) => {
+    //   debugger
+    //   if (data['requestMessage'] != undefined || null) {
+    //     localStorage.setItem('token', data['requestMessage'].headers[0].value[0]);
+
+
+
+
+    //   }
+    // })
+
+
+  }
+
+  getpassword() {
+    debugger
+    this.showPopup = 0
+    this.loader = true;
+
+    var entity = {
+      'm0ucEgBZCmnxjEpj': 'XOxKhzxPTuKbEeYS',
+      'jPsUmyVPIbCpPuf3': 'P@sn3JrYm5OyfhiDUxksw0rd',
+    }
+    this.DigiofficeService.Getantiforgerytoken(entity).subscribe((data: any) => {
+      debugger
+      localStorage.setItem('antiforgerytoken', btoa(data.antiForgeryToken));
+      this.DigiofficeService.GetStaffDetailsByEmpIDandSSS(this.Empid, this.sssno)
+        .subscribe({
+          next: data => {
+            debugger
+            let temp: any = data;
+            if (temp.length != 0) {
+              this.password1 = temp[0].password;
+              var entity1 = {
+                'emailto': this.email,
+                'emailsubject': 'Forgot Password',
+                'emailbody': 'Hi  ' + temp[0].name + ', <br> Below is the Password for login into DigiOffice. <br><br>' + 'Password :  ' + this.password1 + '<br>  <br> Thanks <br> Team Digi-Office',
+                'attachmenturl': this.Attactments,
+                'cclist': this.email,
+                'bcclist': this.email,
+              }
+              this.DigiofficeService.sendemailattachementsforemail(entity1)
+                .subscribe({
+                  next: data => {
+                    debugger
+                    this.Attactments = [];
+                    /*      Swal.fire('Password sent to your email.'); */
+                    this.loader = false;
+                    this.showPopup = 1;
+                    this.messageId = 92;
+                  }, error: (err) => {
+                    // Swal.fire('Issue in Sending Attachments For Email');
+                    // this.loader = false;
+                    // this.loader = false;
+                    // Insert error in Db Here//
+                    var obj = {
+                      'PageName': this.currentUrl,
+                      'ErrorMessage': err.error.message == null ? err.message : err.error.message,
+                      'EmailId': localStorage.getItem('EmployeeID'),
+                      'LoginType': localStorage.getItem('roledid'),
+                      'API': 'Login APi for Staff'
+                    }
+                    this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                      data => {
+                        debugger
+                      },
+                    )
+                  }
+                })
+
+            }
+            else {
+              /*      Swal.fire('This Email is not found in the system'); */
+              this.loader = false;
+              this.showPopup = 1;
+              this.messageId = 93;
+            }
+          }, error: (err) => {
+            // Swal.fire('Issue in Getting password');
+
+            // this.loader = false;
+            // Insert error in Db Here//
+            var obj = {
+              'PageName': this.currentUrl,
+              'ErrorMessage': err.error.message
+            }
+            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+              data => {
+                debugger
+              },
+            )
+          }
+        })
+
+    })
+
+
+  }
+  public ChangePassword() {
+    debugger
+    this.showPopup = 0;
+    if (this.newpassword == undefined || this.newpassword == null || this.newpassword == '' || this.confirmpassword == undefined || this.confirmpassword == null || this.confirmpassword == '') {
+      /*  Swal.fire("Please fill Mandatory Fields"); */
+      this.loader = false;
+      this.showPopup = 1;
+      this.messageId = 7
+    } else {
+      var entity = {
+        ID: this.id,
+        Password: btoa(this.confirmpassword),
+        'jS1vSGsaIRdhVtOp': 'sIAnElKvYV6XUm6V',
+      }
+      this.DigiofficeService.UpdateDefaultPassword(entity).subscribe(data => {
+        /*         Swal.fire("Password Changed Successfully.Login With New Password"); */
+        this.loader = false;
+        this.showPopup = 1;
+        this.messageId = 84
+        this.newpassword = '';
+        this.confirmpassword = ''
+        this.ngOnInit();
+        this.loader = false;
+      })
+    }
+
+
+
+  }
 
 }

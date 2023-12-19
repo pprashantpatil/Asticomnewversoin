@@ -34,6 +34,11 @@ import { HelpComponent } from './Help/help/help.component';
 import { PayslipComponent } from './Payslip/payslip/payslip.component';
 import { ShiftDetailsFormComponent } from './Attendance/shift-details-form/shift-details-form.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SharedModuleModule } from 'src/app/Shared/shared-module/shared-module.module';
+import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave-request.component';
+
 @NgModule({
   declarations: [
     EmployeeDashComponent,
@@ -57,11 +62,12 @@ import { ShiftDetailsFormComponent } from './Attendance/shift-details-form/shift
     AttendanceCorrectionReportComponent,
     LeaveReportComponent,
     TimesheetReportComponent,
-    
     EmployeeCertificateDashComponent,
     HelpComponent,
     PayslipComponent,
-    ShiftDetailsFormComponent
+    ShiftDetailsFormComponent,
+    NewLeaveRequestComponent,
+  
   ],
   imports: [
     CommonModule,
@@ -70,6 +76,9 @@ import { ShiftDetailsFormComponent } from './Attendance/shift-details-form/shift
     NgxDropzoneModule,
     Ng2SearchPipeModule,
     BsDatepickerModule.forRoot(),
+    NgbModule,
+    NgxPaginationModule,
+    SharedModuleModule
 
   ]
 })

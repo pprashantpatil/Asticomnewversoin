@@ -1,1 +1,829 @@
-<p>leave-request-dash works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li *ngIf="roledid==6"><a class="Heading">
+                        <p class="Heading">My Leave Details</p>
+                        <hr *ngIf="roledid==2||roledid==9" class="line-border">
+
+                    </a></li>
+                <!-- <li *ngIf="roledid==6"><a class=" Heading"><u>My Leave Details</u>
+                    </a></li>&nbsp;&nbsp;&nbsp; -->
+                <li *ngIf="roledid==2"><a class="Heading" routerLink="/Manager/MyTeamLeaveDetails">My Team Leave
+                        Details</a></li>
+                <li *ngIf="roledid==9||roledid==10"><a class="Heading " routerLink="/HR/HRLeaveRequest">Staff
+                        Leave
+                        Details</a>
+                </li>
+            </ul>
+
+            <div class="d-flex flex-wrap justify-content-between FilterClass ">
+                <div class="card">
+                    <div class="d-flex flex-wrap ">
+                        <div class="d-flex align-items-center">
+                            <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                            <p class="filter">Filter by:</p>
+                        </div>
+                        <div class="cardinputs">
+                            <p class="leavecol">Select Dates</p>
+                            <p class="leavereq">
+                                <input type="bsdate" style="width:220px" placeholder="mm/dd/yyyy-mm/dd/yyyy"
+                                    class="form-control" bsDaterangepicker [(ngModel)]="startdate"
+                                    (ngModelChange)="getenddate($event)" [bsConfig]="{ showWeekNumbers:false }">
+                            </p>
+                           
+                        </div>
+                        <input class="form-control search-icon" [(ngModel)]="term" type="search"
+                            placeholder="Search">
+                    </div>
+
+                    <!-- <div class="leavetype">
+                        <label class="date-txt">Leave Type</label>
+                        <div class="d-flex flex-wrap">
+                            <select class="form-control align-bottm select" id="LeaveType" name="LeaveType"
+                                [(ngModel)]="LeaveType" (change)="filterbyleaveType()">
+                                <option value="" [disabled]="true">Select LeaveType</option>
+                                <option value="{{leavetype.id}}" *ngFor="let leavetype of LeaveTypeList">
+                                    {{leavetype.short}} </option>
+                            </select>
+
+                            <input class="form-control search-icon" [(ngModel)]="term" type="search"
+                                placeholder="Search">
+                        </div>
+                    </div> -->
+
+                    <!-- <p class="">Start Date:</p>
+                                <input class="form-control" id="date" name="date" [(ngModel)]="startdate" type="date"
+                                    onkeydown="return false" placeholder="Duration"> -->
+
+
+                    <!-- <div class="col-lg-6">
+                                <p class="">End Date:</p>
+                                <input class="form-control" id="date" name="date" [(ngModel)]="enddate"
+                                    (change)="getenddate($event)" type="date" placeholder="Duration"
+                                    onkeydown="return false">
+                            </div> -->
+                </div>
+                <div class="cards-side">
+                    <div class="row">
+                        <div class="col-lg-12 d-flex justify-content-between">
+                            <p class="leavecol">Leave Balance</p>
+                            <div class="align-btns">
+                                <div (click)="previousStep()" [ngClass]="this.isPrevious ?'':''" class="space-btn">
+                                    <img src="assets/Images/revamp/disabled icon-lef-side.png"
+                                        style="margin-top: 3px;width: 22px;height: 22px;" class="side-btn"
+                                        *ngIf="this.isPrevious" />
+                                    <img src="assets/Images/revamp/MicrosoftTeams-image (1).png" class="side-btn"
+                                        *ngIf="!this.isPrevious" />
+                                </div>
+                                <div (click)="nextStep()" [ngClass]="this.isNext ?'':''">
+                                    <img src="assets/Images/revamp/disabled icon-right-side.png" class="side-btn"
+                                        *ngIf="this.isNext" />
+                                    <img src="assets/Images/revamp/MicrosoftTeams-image.png" class="side-btn"
+                                        *ngIf="!this.isNext" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <ngb-carousel #carousel [interval]="0" [showNavigationArrows]="false" [showNavigationIndicators]="true" >
+
+                            <ng-template ngbSlide>
+                                <div class="alignment" *ngFor="let item of Staffleaveenitilment">
+
+                                    <div class="small-card">
+                                        <div class="Ellipse">
+                                            <img src="assets/Images/revamp/Leave_VAWC RA9262 1.png"
+                                                class="Ellipse-img" />
+                                        </div>
+                                        <p class="align-text-smallcard"><b> Vacation Leave </b></p>
+                                        <p><b class="number">{{item.vacation_Leaveremaining}}</b></p>
+                                    </div>
+                                    <div class="small-card" >
+                                        <div class="Ellipse">
+                                            <img src="assets/Images/revamp/Leave_Current Reserve VL 1.png"
+                                                class="Ellipse-img" />
+                                        </div>
+                                        <p class="align-text-smallcard"><b>Sick Leave</b></p>
+                                        <p><b class="number">{{item.sick_Leaveremaining}}</b></p>
+                                    </div>
+                                    <div class="small-card" *ngIf="item.awardname != 'No Award'">
+                                        <div class="Ellipse">
+                                            <img src="assets/Images/revamp/Leave_Current Reserve VL 1.png"
+                                                class="Ellipse-img" />
+                                        </div>
+                                        <p class="align-text-smallcard"><b> Service Incentive Leave</b></p>
+                                        <p><b class="number">{{item.service_Incentive_Leaveremaining}}</b></p>
+                                    </div>
+                                    
+                                </div>
+                            </ng-template>
+                            <ng-template ngbSlide>
+                                <div class="alignment" *ngFor="let item of Staffleaveenitilment">
+                                    <div class="small-card" *ngIf="item.gender == 'Female'">
+                                        <div class="Ellipse">
+                                            <img src="assets/Images/revamp/Leave_VAWC RA9262 1.png"
+                                                class="Ellipse-img" />
+                                        </div>
+                                        <p class="align-text-smallcard"><b>Maternity Leave</b></p>
+                                        <p><b class="number">{{item.maternitityLeaveremaining}}</b></p>
+                                    </div>
+                                    <div class="small-card" *ngIf="item.gender == 'Male' "> 
+                                        <div class="Ellipse">
+                                            <img src="assets/Images/revamp/Leave_SickLeave 1.png" class="Ellipse-img" />
+                                        </div>
+                                        <p class="align-text-smallcard"><b>Paternity Leave</b></p>
+                                        <p><b class="number">{{item.paternitityLeaveremaining}}</b></p>
+                                    </div>
+                                    <!-- as per BRD ALPI only staff has SL Accrual -->
+                                    <div class="small-card" >
+                                        <div class="Ellipse">
+                                            <img src="assets/Images/revamp/Leave_Magna Carta of Women 1.png"
+                                                class="Ellipse-img" />
+                                        </div>
+                                        <p class="align-text-smallcard"><b>Leave without Pay - SL</b></p>
+                                        <p><b class="number">{{item.leave_without_PaySLremaining}}</b></p>
+                                    </div>
+
+                                </div>
+                            </ng-template>
+
+                            <ng-template ngbSlide>
+                                <div class="alignment" *ngFor="let item of Staffleaveenitilment">
+
+                                    <div class="small-card" >
+                                        <div class="Ellipse">
+                                            <img src="assets/Images/revamp/Leave_Birthday 1.png" class="Ellipse-img" />
+                                        </div>
+                                        <p class="align-text-smallcard"><b>Leave without Pay - VL</b></p>
+                                        <p><b class="number">{{item.leave_without_PayVLremaining}}</b></p>
+                                    </div>
+                                    <div class="small-card">
+                                        <div class="Ellipse">
+                                            <img src="assets/Images/revamp/Leave_Emergency 1.png" class="Ellipse-img" />
+                                        </div>
+                                        <p class="align-text-smallcard"><b>{{item.emergencyLeave_Leave_Name}}</b></p>
+                                        <p><b class="number">{{item.emergencyTakenremaining}}</b></p>
+                                    </div>
+                                    <div class="small-card" *ngIf="item.is_Solo_Parent == 1">
+                                        <div class="Ellipse">
+                                            <img src="assets/Images/revamp/Leave_EL Bereavement 1.png"
+                                                class="Ellipse-img" />
+                                        </div>
+                                        <p class="align-text-smallcard"><b> Solo Parent Leave</b></p>
+                                        <p><b class="number">{{item.solo_Parent_Leaveremaining}}</b></p>
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                          
+
+                         
+
+                        </ngb-carousel>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-8 rw-bg" *ngFor="let item of Staffleaveenitilment">
+                    <div class="row">
+                        <div class="col-lg-4" *ngIf="item.gender == 'Female' && item.status == 'Married'">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.maternitityLeaveremaining}}
+                                    
+                                    Maternity Leave </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" *ngIf="item.gender == 'Male' && item.status == 'Married'">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.paternitityLeaveremaining}}
+                                    Paternity Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.currentSlremaining}}
+                                    Current SL</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.slaccrualbalanceremaining}}
+                                    SL Accrual Balance</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.lwopremaining}}
+                                    Leave without pay</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.defferedVlremaining}}
+                                    Deferred VL</p>
+                            </div>
+                        </div>
+                     
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.vlaccrualBalanceremaining}}
+                                    VL Accrual Balance</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" *ngIf="companyid==1001">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.voluntarALILeaveremaining}}
+                                    VoluntarALI Leave</p>
+                            </div>
+                        </div> && companyid==1001 
+                        <div class="col-lg-4"
+                            *ngIf=" item.gender == 'Female'  && item.status == 'Solo Parent'">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.soloParentMaternityLeaveTakenremaining}}
+                                    Solo Parent Maternity Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4"
+                            *ngIf="companyid==1113 && item.gender == 'Female' && item.status == 'Married'">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.allocatedMaternityLeaveTakenremaining}}
+                                    Allocated Maternity Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" *ngIf="companyid!=1003">
+    
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.currentReserveVLremaining}}
+                                    Current Reserve VL</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" *ngIf="companyid==1003 || companyid==1001">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.birthdayLeaveEntitlementremaining}}
+                                    Birthday Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.emergencyTakenremaining}}
+                                    Emergency Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" *ngIf=" item.gender == 'Female'">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.vawcTakenremaining}}
+                                    VAWC</p>
+                            </div>
+                        </div>
+                         <div class="row" *ngIf="item.status == 'Solo Parent'"> 
+                        <div class="col-lg-4" *ngIf="item.status == 'Solo Parent'">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.solo_Parent_Leaveremaining}}
+                                    Solo Parent Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" *ngIf="item.gender == 'Female' && item.status == 'Married'">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.emergencyMaternityLeaveremaining}}
+                                    Emergency Maternity Leave</p>
+                            </div>
+                        </div>
+    
+                       </div> -->
+
+                <!-- <div  *ngIf="item.gender == 'Female'"> 
+                        <div class="col-lg-4" *ngIf="item.gender == 'Female'">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.specialLeaveforWomenTakenremaining}}
+                                    Special Leave for Women</p>
+                            </div>
+                        </div>
+    
+                         </div> -->
+                <!-- <div class="row" *ngIf="companyid==1001||companyid==1002"> 
+                        <div class="col-lg-4" *ngIf="companyid==1001||companyid==1002">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.studyleaveremaining}}
+                                    Study Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" *ngIf="companyid==1001||companyid==1002||companyid==1003">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.currentVlremaining}}
+                                    Current VL</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med" *ngIf="companyid!=1003">
+                                <p class="para"> <b class="number">{{item.emergencyLeaveBereavementremaining}}
+                                    Emergency Leave Bereavement</p>
+                            </div>
+                        </div>
+                        </div> -
+                    </div>
+    
+    
+    
+                    <div class="row" style="margin-bottom: 3px"> -->
+                <!-- <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.lwopremaining}}
+                                    Leave without pay</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.defferedVlremaining}}
+                                    Deferred VL</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med" *ngIf="companyid!=1003">
+                                <p class="para"> <b class="number">{{item.emergencyLeaveBereavementremaining}}
+                                    Emergency Leave Bereavement</p>
+                            </div>
+                        </div> -->
+                <!-- </div> -->
+
+
+                <!-- <div class="row" style="margin-bottom: 3px"> -->
+
+                <!-- <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.vlaccrualBalanceremaining}}
+                                    VL Accrual Balance</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" *ngIf="companyid==1001">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.voluntarALILeaveremaining}}
+                                    VoluntarALI Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4"
+                            *ngIf=" item.gender == 'Female' && companyid==1001 && item.status == 'Solo Parent'">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.soloParentMaternityLeaveTakenremaining}}
+                                    Solo Parent Maternity Leave</p>
+                            </div>
+                        </div> -->
+
+
+                <!-- </div> -->
+
+
+                <!-- <div class="row" style="margin-bottom: 3px"> -->
+                <!-- <div class="col-lg-4"
+                            *ngIf="companyid!=1003 && item.gender == 'Female' && item.status == 'Married'">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.allocatedMaternityLeaveTakenremaining}}
+                                    Allocated Maternity Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" *ngIf="companyid!=1003">
+    
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.currentReserveVLremaining}}
+                                    Current Reserve VL</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" *ngIf="companyid==1003 || companyid==1001">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.birthdayLeaveEntitlementremaining}}
+                                    Birthday Leave</p>
+                            </div>
+                        </div> -->
+                <!-- </div> -->
+
+
+                <!-- <div class="row" style="margin-bottom: 3px"> -->
+
+                <!-- <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.emergencyTakenremaining}}
+                                    Emergency Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.vawcTakenremaining}}
+                                    VAWC</p>
+                            </div>
+                        </div> -->
+                <!-- </div> -->
+
+
+
+                <!-- <div class="row" *ngIf="item.status == 'Solo Parent'">
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.solo_Parent_Leaveremaining}}
+                                    Solo Parent Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.emergencyMaternityLeaveremaining}}
+                                    Emergency Maternity Leave</p>
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                    <div class="row" *ngIf="item.gender == 'Female'">
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.specialLeaveforWomenTakenremaining}}
+                                    Special Leave for Women</p>
+                            </div>
+                        </div>
+    
+                    </div> -->
+
+                <!-- <div class="row" *ngIf="companyid==1001||companyid==1002">
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.studyleaveremaining}}
+                                    Study Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card med">
+                                <p class="para"> <b class="number">{{item.currentVlremaining}}
+                                    Current VL</p>
+                            </div>
+                        </div>
+                    </div> 
+                </div> -->
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 d-flex justify-content-between mt-4 mb-2">
+                    <!--  <div class="row">
+                        <div class="col-lg-10">
+                            <div class="col-lg-4">
+                                <select class="inputclass" (change)="changeStatus($event)">
+                                    <option value="2">Calendar</option>
+                                    <option value="1">List View</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="calender">
+                        <div class="listview">
+                            <div class="tab-slider--nav">
+                                <ul class="tab-slider--tabs">
+                                    <li class="tab-slider--trigger" [class.active]="!showorhidecontent" rel="tab1"
+                                        value="2" (click)="changeStatus($event)">
+                                        Calendar </li>
+                                    <li class="tab-slider--trigger" [class.active]="showorhidecontent" rel="tab2"
+                                        value="1" (click)="changeStatus($event)">List View</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="applyleavebtn">
+                        <button class="butn-sadow" (click)="showDialog()"><img src="assets/Images/plus.svg"
+                                class="plus-icon">
+                            Apply Leave</button>
+                    </div>
+                </div>
+            </div>
+            <div class="shadow p-3 mb-5 bg-white rounded  maincard " [hidden]="showorhidecontent">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row callendernavButtons">
+                            <div class="col-lg-4">
+                                <a (click)="previousmonth()">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-lg-4">
+                                <strong>{{callenderMonth}}</strong> {{callenderyear}}
+                            </div>
+                            <div class="col-lg-4">
+                                <a (click)="nextmonth()">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row callenderdiv">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-2 callenderboxes"
+                                        *ngFor="let calday of callenderdaysdount;let i = index">
+                                        {{calday.date}} {{calday.day}}
+
+                                        <!-- <div *ngIf="calday.mantainenceHtml!=null" class="event_Pending calenderalign"
+                                            [innerHtml]='calday.mantainenceHtml'>
+                                        </div> -->
+
+                                        <div class="event_Pending calenderalign" [innerHtml]='calday.mantainenceHtml'
+                                            (click)="ShowMaintenanceRequest($event)"
+                                            style="overflow-y: auto; border-bottom: solid 6px white;">
+                                        </div>
+                                        <div class="col-md-2" *ngIf=" calday.mantainenceHtml!=null">
+                                            <h6 class="event_Pending calenderalign"
+                                                style="width: 100px;margin-left:30px" (click)="changeStatus1()">
+                                                View More....
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" [hidden]="!showorhidecontent">
+                <div class="col-lg-12 ">
+                    <div class="tab-slider--nav">
+                        <ul class="tab-slider--tabs">
+                            <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1"
+                                (click)="viewMode ='tab1'">
+                                Pending</li>
+                            <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2"
+                                (click)="viewMode ='tab2'">Approved</li>
+                            <li class="tab-slider--trigger" [class.active]="viewMode == 'tab3'" rel="tab3"
+                                (click)="viewMode ='tab3'">Rejected</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" [hidden]="!showorhidecontent">
+                <div class="tab-slider--container col-lg-12" [ngSwitch]="viewMode">
+                    <div *ngSwitchCase="'tab1'" id="tab1">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p class="show3res">SHOWING <span>{{(staffleaves2 | filter: term)?.length}}</span>
+                                    RESULT(S)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="listscroll">
+                                <table class="table" *ngIf="(staffleaves2 | filter: term)">
+                                    <thead>
+                                        <tr>
+                                            <th>From Date</th>
+                                            <th>To Date</th>
+                                            <th>Leave Type</th>
+                                            <th>Leave Reason</th>
+                                            <th>Leave Days Count</th>
+                                            <th>Attachment </th>
+                                            <th>Stage & Status</th>
+                                            <th class="actionpadding">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let list of staffleaves2|filter: term| paginate: { itemsPerPage: count1, currentPage: p}">
+                                            <td>{{list.sDateOfLeave}} </td>
+                                            <td>{{list.eDateOfLeave}} </td>
+                                            <td>
+                                                {{list.leavetype}}
+                                            </td>
+                                            <td>{{list.leaveReason}}<br>
+                                            <td>{{list.noOfDays}}<br>
+                                            <td>
+                                                <p
+                                                    *ngIf="list.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
+                                                    No Attachment</p>
+                                                <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
+                                                <a href="{{list.medicalUrl}}" target="_blank">
+                                                    <img *ngIf="list.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
+                                                        src="assets/Images/attachment (1).svg" alt="pdf.img"
+                                                        class="attachmentPin"></a>
+
+                                                <!-- <img *ngIf="list.medicalUrl!=null && list.filetype!='pdf' && list.filetype!='docx'
+                                                && list.filetype!='xlsx'" src="{{list.medicalUrl}}"
+                                                    (click)="getmedicalurl(list)" alt="medical.img" data-toggle="modal"
+                                                    data-target="#Allocate" class="imgurl"> -->
+
+                                                <!-- <a *ngIf="list.filetype=='docx' && list.medicalUrl!=null"
+                                                    href="{{list.medicalUrl}}" target="_blank"> <img
+                                                        src="assets/Images/word.png" alt="pdf.img" class="attachmentimg"></a> -->
+
+                                                <!-- <a *ngIf="list.filetype=='xlsx' && list.medicalUrl!=null"
+                                                    href="{{list.medicalUrl}}" target="_blank"> <img
+                                                        src="assets/Images/attachment.png" alt="pdf.img"
+                                                        class="attachmentimgxlsx"></a> -->
+                                            </td>
+                                            <td>{{list.status}}</td>
+                                            <!-- <td class="actionpadding">
+                                                <button
+                                                    *ngIf="list.status=='Manager Pending HR Pending' || list.status=='Manager Pending' || list.status=='HR Pending'"
+                                                    class="edit-btn-red" (click)="CancelLeave(list)">Cancel</button>
+                                            </td> -->
+                                            <td class="actionpadding">
+                                                <div class="arrangeIcon">
+                                                    <img class="dashedit-icon" src="assets/Images/cancel-02.svg"
+                                                        *ngIf="list.status=='Manager Pending HR Pending' || list.status=='Manager Pending' || list.status=='HR Pending'"
+                                                        (click)="CancelLeave(list)" [ngbTooltip]="tipContentCancel"
+                                                        tooltipClass="my-custom-class">
+                                                </div>
+                                                <div class="col-lg-2 Text p-0">
+                                                    <ng-template #tipContentCancel>
+                                                        <div>
+                                                            <div class="d-flex">
+                                                                <div class="flex-column mt-2">
+                                                                    <p class="tooltip-txtForIcons">Cancel</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table><br>
+                                <span class="NoResultShow" *ngIf="(staffleaves2 | filter: term)?.length==0">
+                                    Sorry, we couldn't find any results.</span><br>
+                            </div>
+
+
+                            <!-- <ng-template #noResults1
+                                <p class="NoResultShow"> Sorry, we couldn't find any results. </p>
+                            </ng-template>--><br>
+                            <div class="text-right" *ngIf="staffleaves2?.length>count1">
+                                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                                    class="poppinns"></pagination-controls>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div *ngSwitchCase="'tab2'" id="tab2">
+                        <div class="row">
+                            <div class="col-md-10">
+
+                                <p class="show3res">SHOWING <span>{{(staffleaves1 | filter: term)?.length}}</span>
+                                    RESULT(S)
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+
+                            <div class="listscroll">
+                                <table class="table"
+                                    *ngIf="(staffleaves1 | filter: term |paginate: { itemsPerPage: count1, currentPage: p}) ">
+                                    <thead>
+                                        <tr>
+                                            <th>From Date</th>
+                                            <th>To Date</th>
+                                            <th>Leave Type</th>
+                                            <th>Leave Reason</th>
+                                            <th>Leave Days Count</th>
+                                            <th>Attachment </th>
+                                            <th>Stage & Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let list of staffleaves1|filter: term">
+                                            <td>{{list.sDateOfLeave}} </td>
+                                            <td>{{list.eDateOfLeave}} </td>
+                                            <td>
+                                                {{list.leavetype}}
+                                            </td>
+                                            <td>{{list.leaveReason}}<br>
+                                            <td>{{list.noOfDays}}<br>
+                                            <td>
+                                                <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
+                                                <p
+                                                    *ngIf="list.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
+                                                    No Attachment</p>
+                                                <a href="{{list.medicalUrl}}" target="_blank">
+                                                    <img *ngIf="list.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
+                                                        src="assets/Images/attachment (1).svg" alt="pdf.img"
+                                                        class="attachmentPin"></a>
+                                                <!-- <img *ngIf="list.medicalUrl!=null && list.filetype!='pdf'"
+                                                src="{{list.medicalUrl}}" (click)="getmedicalurl(list)" alt="medical.img"
+                                                data-toggle="modal" data-target="#Allocate" class="imgurl"> -->
+                                            </td>
+                                            <td>{{list.status}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table><br>
+                                <span class="NoResultShow" *ngIf="(staffleaves1 | filter: term)?.length==0">
+                                    Sorry, we couldn't find any results.</span> <br>
+                            </div>
+
+
+                            <div class="text-right" *ngIf="staffleaves1?.length>count1">
+                                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                                    class="poppinns"></pagination-controls>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div *ngSwitchCase="'tab3'" id="tab3">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p class="show3res">SHOWING <span>{{(staffleaves3 | filter: term)?.length}}</span>
+                                    RESULT(S)
+                                </p>
+                                <!-- <p class="show3res">SHOWING<span>{{staffleaves3.length}}</span> RESULT(S)</p> -->
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="listscroll">
+                                <table class="table" *ngIf="(staffleaves3 | filter: term)">
+                                    <thead>
+                                        <tr>
+                                            <th>From Date</th>
+                                            <th>To Date</th>
+                                            <th>Leave Type</th>
+                                            <th>Leave Reason</th>
+                                            <th>Leave Days Count</th>
+                                            <th>Attachment </th>
+                                            <th>Reject Reason</th>
+                                            <th>Stage & Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let list of staffleaves3|filter: term | paginate: { itemsPerPage: count1, currentPage: p}">
+                                            <td>{{list.sDateOfLeave}} </td>
+                                            <td>{{list.eDateOfLeave}} </td>
+                                            <td>
+                                                {{list.leavetype}}
+                                            </td>
+                                            <td>{{list.leaveReason}}<br>
+                                            <td>{{list.noOfDays}}<br>
+                                            <td>
+                                                <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
+                                                <p
+                                                    *ngIf="list.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
+                                                    No Attachment</p>
+                                                <a href="{{list.medicalUrl}}" target="_blank">
+                                                    <img *ngIf="list.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
+                                                        src="assets/Images/attachment (1).svg" alt="pdf.img"
+                                                        class="attachmentPin"></a>
+
+                                                <!-- <img *ngIf="list.medicalUrl!=null && list.filetype!='pdf'"
+                                                    src="{{list.medicalUrl}}" target="blank" (click)="getmedicalurl(list)"
+                                                    alt="medical.img" data-toggle="modal" data-target="#Allocate"
+                                                    class="imgurl"> -->
+                                            </td>
+                                            <td>{{list.rejectReason}}</td>
+                                            <td>{{list.status}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table><br>
+                                <span class="NoResultShow" *ngIf="(staffleaves3 | filter: term)?.length==0">
+                                    Sorry, we couldn't find any results.</span><br>
+                            </div>
+                        </div>
+                        <div class="text-right" *ngIf="staffleaves3?.length>=count1">
+                            <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                                class="poppinns">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="Allocate" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h1>Attachment</h1>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body ">
+                <div class="container-fluid">
+                    <div class="row centertxt">
+                        <div class="col-lg-3">
+                        </div>
+                        <img src="{{medicalurl}}" alt="medical.img" class="imgwidth">
+                    </div>
+                    <br />
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
