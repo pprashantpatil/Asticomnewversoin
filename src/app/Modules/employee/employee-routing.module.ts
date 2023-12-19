@@ -22,7 +22,7 @@ import { HelpComponent } from './Help/help/help.component';
 import { PayslipComponent } from './Payslip/payslip/payslip.component';
 
 const routes: Routes = [
-  { path: 'EmployeeDash', component: EmployeeDashComponent },
+  { path: 'Employeedashboard', component: EmployeeDashComponent },
 
   { path: 'AttendanceCorrectionDash', component: AttendanceCorrectionDashComponent },
   { path: 'AttendanceDetailsDash', component: AttendanceDetailsDashComponent },

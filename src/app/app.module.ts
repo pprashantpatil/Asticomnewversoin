@@ -12,13 +12,15 @@ import { SidebarComponent } from './Shared/sidebar/sidebar.component';
 import { FooterComponent } from './Shared/footer/footer.component';
 import { LoaderComponent } from './Shared/loader/loader.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpage.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SidebarComponent,
     FooterComponent,
-    LoaderComponent
+    LoaderComponent,
+    CommonalertpageComponent
   ],
   imports: [
     BrowserModule,
