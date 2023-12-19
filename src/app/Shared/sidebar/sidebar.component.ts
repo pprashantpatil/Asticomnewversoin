@@ -18,7 +18,9 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  public getvalues(val: any) {
+    this.mini = val;
+  }
   public employeeDash() {
     this.active = 1;
     this.router.navigate(['/Employee/EmployeeDash']);

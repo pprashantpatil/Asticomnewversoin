@@ -2432,3 +2432,17 @@ td {
   margin: 0px 31px;
   width: 60%;
 }
+
+/* Responsive code */
+
+.popupinputs {
+  width: 48%;
+  margin-top: 16px;
+}
+
+.popupcontent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
