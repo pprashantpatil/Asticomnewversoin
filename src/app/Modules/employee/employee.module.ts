@@ -5,6 +5,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {  BsDatepickerModule  } from 'ngx-bootstrap/datepicker';
 
+
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeDashComponent } from './Dashboard/employee-dash/employee-dash.component';
 import { AttendanceDetailsDashComponent } from './Attendance/attendance-details-dash/attendance-details-dash.component';
@@ -68,7 +69,8 @@ import { ShiftDetailsFormComponent } from './Attendance/shift-details-form/shift
     FormsModule,
     NgxDropzoneModule,
     Ng2SearchPipeModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+
   ]
 })
 export class EmployeeModule { }

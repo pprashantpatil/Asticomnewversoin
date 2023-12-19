@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
 import { ShiftDetailsFormComponent } from '../shift-details-form/shift-details-form.component';
 import Swal from 'sweetalert2';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-shift-details-dash',
@@ -15,13 +16,17 @@ export class ShiftDetailsDashComponent implements OnInit {
   search: any;
   loader: any;
   staffID: any;
+  date: any;
+  startDate: any;
+  endDate: any;
+  shiftFilter: any;
 
-  constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog) { }
+  constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.loader = true;
     this.currentUrl = window.location.href;
-    this.staffID = sessionStorage.getItem('staffid');
+    this.staffID = localStorage.getItem('staffid');
     this.getData();
   }
 
@@ -29,13 +34,14 @@ export class ShiftDetailsDashComponent implements OnInit {
     this.DigiofficecorehrService.GetStaffShiftDetails().subscribe(
       res => {
         debugger;
-        this.shiftList = res
-        // .filter(x => x.staffID == this.staffID);
+        this.shiftList = res.filter(x => x.staffID == this.staffID);
+        this.shiftFilter = res.filter(x => x.staffID == this.staffID);
         this.loader = false;
       })
   }
 
   showDialog() {
+    debugger
     let ID = undefined
     this.matDialog.open(ShiftDetailsFormComponent, {
       data: ID,
@@ -88,5 +94,22 @@ export class ShiftDetailsDashComponent implements OnInit {
           })
       }
     });
+  }
+
+  public getenddate(event: any) {
+    debugger
+    this.startDate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.endDate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
+    if (this.endDate < this.startDate) {
+      Swal.fire("The end date should be greater than the start date")
+      this.endDate = ""
+    }
+    else if (this.startDate == undefined) {
+      Swal.fire("Please select the start date first")
+      this.endDate = ""
+    }
+    else {
+      this.shiftList = this.shiftFilter.filter((x: { staffID: any; filterdate: any; filterenddate: any; }) => x.staffID == this.staffID && (x.filterdate >= this.startDate && x.filterenddate <= this.endDate));
+    }
   }
 }

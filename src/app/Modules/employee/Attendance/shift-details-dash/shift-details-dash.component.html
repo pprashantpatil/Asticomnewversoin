@@ -7,7 +7,9 @@
             </div>
 
             <div class="cardinputs">
-                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
+                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }"
+                    (ngModelChange)="getenddate($event)">
             </div>
 
             <div class="cardinputs" (click)="showDialog()">
