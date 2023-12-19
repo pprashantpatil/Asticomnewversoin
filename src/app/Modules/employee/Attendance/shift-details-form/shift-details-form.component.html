@@ -26,11 +26,11 @@
                 <div class="popupinputs">
                     <p>Shift Name<span class="span">*</span></p>
                     <div>
-                        <select class="form-control inputfield select" id="rentForTheMonth" name="rentForTheMonth"
-                            [(ngModel)]="shiftName">
+                        <select class="form-control inputfield select" id="shiftName" name="shiftName"
+                            [(ngModel)]="shiftName" (change)="getShiftTime()">
                             <option value="">Select Shift</option>
-                            <option *ngFor="let Staff of shiftNameList" value="{{Staff.description}}">
-                                {{Staff.description}}
+                            <option *ngFor="let data of shiftNameList" value="{{data.description}}">
+                                {{data.description}}
                             </option>
                         </select>
                     </div>
@@ -40,7 +40,7 @@
                     <p>Start Time<span class="span">*</span></p>
                     <div>
                         <input type="text" class="form-control" placeholder="Start Time" [(ngModel)]="startTime"
-                            name="startTime" id="startTime">
+                            name="startTime" id="startTime" disabled>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                     <p>End Time<span class="span">*</span></p>
                     <div>
                         <input type="text" class="form-control" placeholder="End Time" [(ngModel)]="endTime"
-                            name="endTime" id="endTime">
+                            name="endTime" id="endTime" disabled>
                     </div>
                 </div>
 
@@ -64,7 +64,8 @@
 
                 <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
                     <button class="close-button" (click)="cancel()">Cancel</button>
-                    <button class="submit-button" (click)="submit()">Submit</button>
+                    <button *ngIf="ID==undefined" class="submit-button" (click)="submit()">Submit</button>
+                    <button *ngIf="ID!=undefined" class="submit-button" (click)="update()">Update</button>
                 </div>
             </div>
         </div>

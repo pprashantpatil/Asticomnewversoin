@@ -33,6 +33,7 @@ import { EmployeeCertificateDashComponent } from './EmployeeCertification/employ
 import { HelpComponent } from './Help/help/help.component';
 import { PayslipComponent } from './Payslip/payslip/payslip.component';
 import { ShiftDetailsFormComponent } from './Attendance/shift-details-form/shift-details-form.component';
+import { OverTimeDetailsFormComponent } from './Attendance/over-time-details-form/over-time-details-form.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -69,6 +70,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ShiftDetailsFormComponent,
     NewLeaveRequestComponent,
   
+    OverTimeDetailsFormComponent
   ],
   imports: [
     CommonModule,
@@ -82,6 +84,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     SharedModuleModule,
     NgMultiSelectDropDownModule
 
+    
   ]
 })
 export class EmployeeModule { }

@@ -1,1 +1,82 @@
-<p>attendance-details-dash works!</p>
+<div class="container-fluid">
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getenddate($event)">
+            </div>
+
+            <div class="cardinputs">
+                <button class="butn-sadow" type="button" (click)="exportexcel()">Export to Excel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <p class="show3res">SHOWING <span>{{(attendanceList|filter:search)?.length}} </span>RESULT(S)</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="listscroll">
+                <table class="table" id="document">
+                    <thead>
+                        <tr class="head">
+                            <th>Date</th>
+                            <th>Sign In Type</th>
+                            <th>Expected In Time</th>
+                            <th>Punch In Time</th>
+                            <th>Punch In Location/IP Address</th>
+                            <th>Expected Out Time</th>
+                            <th>Punch Out Time</th>
+                            <th>Punch Out Location/IP Address</th>
+                            <th>Sign Out Type</th>
+                            <th>Work Hours(HH:MM)</th>
+                            <th>UnderTime</th>
+                            <th>Late</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of attendanceList|filter:search">
+                            <td>{{data.signinDate|date}}</td>
+                            <td>{{data.signInType}}</td>
+                            <td>{{data.expectedIn}}</td>
+                            <td>{{data.stime}}</td>
+                            <td>
+                                <p *ngIf="data.signInType=='Web Application'">{{data.punchinip}}</p>
+                                <p *ngIf="data.signInType!='Web Application'">{{data.signinLocation}}</p>
+                            </td>
+                            <td>{{data.expectedOut}}</td>
+                            <td>{{data.etime}}</td>
+                            <td>
+                                <p *ngIf="data.signOutTypeID==2">{{data.punchoutip}}</p>
+                                <p *ngIf="data.signOutTypeID==1">{{data.signoutLocation}}</p>
+                            </td>
+                            <td>
+                                <p *ngIf="data.signOutTypeID==2">Web Application</p>
+                                <p *ngIf="data.signOutTypeID==1">Mobile</p>
+                            </td>
+                            <td>{{data.hr1}}</td>
+                            <td>{{data.undertime}}</td>
+                            <td>{{data.latepunchin}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+    </div>
+</div>

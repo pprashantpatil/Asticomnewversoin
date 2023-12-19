@@ -60,9 +60,9 @@
                                 <p *ngIf="data.approve==2">Rejected</p>
                             </td>
                             <td class="onelinetext"> <img class="dashedit-icon" (click)="edit(data.id)"
-                                    src="assets/Images/Edit.svg">
+                                    src="assets/Images/Edit.svg" *ngIf="roleID==6 && data.approve==null">
                                 <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
-                                    src="assets/Images/Delete.svg">
+                                    src="assets/Images/Delete.svg" *ngIf="data.approve==0">
                             </td>
                         </tr>
                     </tbody>

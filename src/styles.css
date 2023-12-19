@@ -168,6 +168,10 @@ textarea {
   border: 1px;
 }
 
+.modal-title{
+  color: #071da8;
+}
+
 .acct {
   background-color: #f1b91c;
   color: black;
@@ -2445,4 +2449,14 @@ td {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+.dropdown-item{
+  display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #3247d5 ;
+    text-align: inherit;
+    white-space: nowrap;
 }

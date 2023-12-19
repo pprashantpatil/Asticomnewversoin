@@ -18,6 +18,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpage.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModuleModule } from './Shared/shared-module/shared-module.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,7 @@ import { SharedModuleModule } from './Shared/shared-module/shared-module.module'
     NgMultiSelectDropDownModule.forRoot(),
     NgxPaginationModule,
     SharedModuleModule
+    
   ],
   exports:[
     NgMultiSelectDropDownModule
