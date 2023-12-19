@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-4 resimg">
               <div>
-                <img class="hr-img"  src="assets/Images/Logo_digiOffice_Colored.png" />
+                <img class="hr-img" src="assets/Images/Logo_digiOffice_Colored.png" />
               </div>
             </div>
 
@@ -26,8 +26,14 @@
         <div class="col-6">
           <div class="header-class">
             <div class="topheader">
-              <select class="form-control">
-                <option value="">Select Subsidiary</option>
+              <select class="form-control" id="companyid" name="companyid" [(ngModel)]="companyid"
+                (change)="getCompanyDetails($event)">
+                <option value="1001">Asticom Main</option>
+                <option value="1002">Asticom ABSI (ABSI)</option>
+                <option value="1005">Asticom FINSI</option>
+                <option value="1003">Asticom BRAD</option>
+                <!-- <option value="1004" >Asticom HCX</option> -->
+                <option value="1006" *ngIf="login!=9 && login!=10 && login!=1">Asticom HQ</option>
               </select>
             </div>
 
@@ -52,35 +58,35 @@
                         Mark all as read
                       </p>
                     </div>
-  
+
                     <div *ngFor="let item of notificationslist">
                       <div class="align-test" [ngClass]="item?.seen != null ? 'text' : 'text1'"
                         *ngIf="item?.message!=null">
                         <div class="d-flex content-set">
                           <div class="d-flex">
                             <img src="assets/Images/revamp/dot.png" class="dot" />
-  
+
                             <div class="d-flex flex-column" *ngIf="item?.isRead != 0">
                               <p class="status-txt">
                                 {{item?.message.length> 80 ?item?.message.substring(0,80)+"..." :item?.message}}
                               </p>
                               <p class="date-txt">
-                                {{ item?.time | date }} at {{ item?.phtime }}
+                                {{ item?.date | date }} at {{ item?.time }}
                               </p>
                             </div>
-                            <div class="d-flex flex-column" *ngIf="item?.isRead == 0" >
+                            <div class="d-flex flex-column" *ngIf="item?.isRead == 0">
                               <p class="status-txtseen">
                                 {{item?.message.length> 80 ?item?.message.substring(0,80)+"..." :item?.message}}
                               </p>
                               <p class="date-txt">
-                                {{ item?.time | date }} at {{ item?.phtime }}
+                                {{ item?.date | date }} at {{ item?.time }}
                               </p>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-  
+
                     <div *ngIf="notificationslist.length!=0" class="row" (click)="notification()">
                       <div class="col-lg-12">
                         <p class="view-txt">View all notifications</p>
@@ -88,16 +94,66 @@
                     </div>
                   </div>
                 </div>
-                
+
               </div>
-              <img src="assets/FigmaImg/person-01.png" (click)="logout()" class="icon-alignment1" />
-             </div>
+              <!-- <img src="assets/FigmaImg/person-01.png" (click)="logout()" class="icon-alignment1" /> -->
+            </div>
+        
+          <p class="welcomename">Hi {{username}} !</p>
+          <img src="assets/FigmaImg/person-01.png" id="logoutmodal" (click)="logout()" class="icon-alignment1" />
+          <div  class="content-1">
+              <ul class="dropdown dropdown-menu" style="width: 250px;margin-top: 1%;">
+                  <div class="container-fluid contain">
+
+                      <div class="row link1">
+                          <div class="col-lg-2"></div>
+                          <div class="col-lg-4">
+                              <img src="assets/Images/mt-pro.svg" class="img-set">
+                          </div>
+                          <div class="col-lg-2"></div>
+                          <div class="col-lg-4">
+                              <h6 [routerLink]="['/HR/AddressDetailsWizard', EmployeeID]">
+                                  My Profile
+                              </h6>
+                          </div>
+                      </div>
+                      <div class="row link1">
+                          <div class="col-lg-2"></div>
+                          <div class="col-lg-4">
+                              <img src="assets/Images/setting.svg" class="img-set">
+                          </div>
+                          <div class="col-lg-2"></div>
+                          <div class="col-lg-4">
+                              <h6 >My Account Settings</h6>
+                          </div>
+                      </div>
+                      <div class="row link1">
+                          <div class="col-lg-2"></div>
+                          <div class="col-lg-4">
+                              <img src="assets/Images/exit.svg" class="img-set">
+                          </div>
+                          <div class="col-lg-2"></div>
+                          <div class="col-lg-4">
+                              <h6 class="red" (click)="logout()">Logout</h6>
+                          </div>
+                      </div>
+
+
+                      <div class="row">
+                          <div class="col-lg-12" style="overflow: auto"></div>
+                      </div>
+
+                      <li class="divider"></li>
+                  </div>
+
+              </ul>
+          </div>
           </div>
         </div>
       </div>
     </div>
 
-  
+
   </div>
   <div class="row" style="background-color: #f2f2f2">
     <div class="sidebar" [ngClass]="[!sidenav ? 'col-1 side-width' : 'col-2',showsidebar==0?'blur-background':'']"

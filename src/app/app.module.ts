@@ -15,13 +15,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 
+import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpage.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SidebarComponent,
     FooterComponent,
-    LoaderComponent
+    LoaderComponent,
+    CommonalertpageComponent
   ],
   imports: [
     BrowserModule,

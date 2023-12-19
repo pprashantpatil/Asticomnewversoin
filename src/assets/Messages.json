@@ -1,0 +1,498 @@
+[
+    {
+        "id": 1,
+        "message": "Please Select Company"
+    },
+    {
+        "id": 2,
+        "message": "Please Select Login Type"
+    },
+    {
+        "id": 3,
+        "message": "Delete Record"
+    },
+    {
+        "id": 4,
+        "message": "Your session will expire in the next five (5) minutes. You may CONTINUE by logging in again."
+    },
+    {
+        "id": 5,
+        "message": "Sorry! Session has expired. Don't worry, you may log in again."
+    },
+    {
+        "id": 6,
+        "message": "Sorry! You entered an invalid company. Please try again."
+    },
+    {
+        "id": 7,
+        "message": "Please make sure you fill out all the Mandatory Fields."
+    },
+    {
+        "id": 8,
+        "message": "Success! Record has been saved."
+    },
+    {
+        "id": 9,
+        "message": "Success! Record has been cleared."
+    },
+    {
+        "id": 10,
+        "message": "Success! Record has been updated."
+    },
+    {
+        "id": 11,
+        "message": "Success! Record has been deleted."
+    },
+    {
+        "id": 12,
+        "message": "Success! Attachment has been saved."
+    },
+    {
+        "id": 13,
+        "message": "Please make sure you fill out all fields."
+    },
+    {
+        "id": 14,
+        "message": "Please upload file less than 2 MB."
+    },
+    {
+        "id": 15,
+        "message": "Please select the date before adding start time."
+    },
+    {
+        "id": 16,
+        "message": "Please select the date before adding end time."
+    },
+    {
+        "id": 17,
+        "message": "Please add shift and get approval from your manager before filing overtime for this date."
+    },
+    {
+        "id": 18,
+        "message": "You did not render work on this date. Hence, you cannot file your overtime."
+    },
+    {
+        "id": 19,
+        "message": "End time time must be later than sign out time. Please try again."
+    },
+    {
+        "id": 20,
+        "message": "You have not punched out for this date. Hence, you cannot file your overtime."
+    },
+    {
+        "id": 21,
+        "message": "Please add shift and get approval from your manager before filing overtime for this date."
+    },
+    {
+        "id": 22,
+        "message": "Overtime start time must be later than punch out time. Please try again."
+    },
+    {
+        "id": 23,
+        "message": "You have not met the minimum 8 hours of work on this date. Hence, you cannot file your overtime."
+    },
+    {
+        "id": 24,
+        "message": "You did not meet minimum work hours required on this date. Hence, you cannot file your overtime."
+    },
+    {
+        "id": 25,
+        "message": "Overtime start time must be later than shift end time. Please try again."
+    },
+    {
+        "id": 26,
+        "message": "You already filed overtime on this date."
+    },
+    {
+        "id": 27,
+        "message": "You have an approved leave on this date. Hence, you are not allowed to file overtime."
+    },
+    {
+        "id": 28,
+        "message": "Please select Start Date."
+    },
+    {
+        "id": 29,
+        "message": "End date must be later than start date. Please try again."
+    },
+    {
+        "id": 30,
+        "message": "Success! Request has been cancelled."
+    },
+    {
+        "id": 31,
+        "message": "Start time must be earlier than end time. Please try again."
+    },
+    {
+        "id": 32,
+        "message": "Please select the Start Date first."
+    },
+    {
+        "id": 33,
+        "message": "Shift record already exists for this day."
+    },
+    {
+        "id": 34,
+        "message": "Please enter message."
+    },
+    {
+        "id": 35,
+        "message": "Oops! You already punched in for the day."
+    },
+    {
+        "id": 36,
+        "message": "Great! You punched in successfully."
+    },
+    {
+        "id": 37,
+        "message": "Oops! You already punched out for the day."
+    },
+    {
+        "id": 38,
+        "message": "Great! You punched out successfully."
+    },
+    {
+        "id": 39,
+        "message": "Special characters are not allowed. Please try again."
+    },
+    {
+        "id": 40,
+        "message": "Created successfully."
+    },
+    {
+        "id": 41,
+        "message": "Request has been accepted."
+    },
+    {
+        "id": 42,
+        "message": "Request has been rejected."
+    },
+    {
+        "id": 43,
+        "message": "Request has been accepted by HR."
+    },
+    {
+        "id": 44,
+        "message": "Request has been rejected by HR."
+    },
+    {
+        "id": 45,
+        "message": "You already have a pending request. Please check."
+    },
+    {
+        "id": 46,
+        "message": "End time must be later than start time. Please try again."
+    },
+    {
+        "id": 47,
+        "message": "You already have a request for this time."
+    },
+    {
+        "id": 48,
+        "message": "You are not yet eligible to file for a Service Incentive Leave. Please contact your manager."
+    },
+    {
+        "id": 49,
+        "message": "You are not eligible to file for maternity leave. Please contact your manager."
+    },
+    {
+        "id": 50,
+        "message": "You are not eligible to file for paternity leave. Please contact your manager."
+    },
+    {
+        "id": 51,
+        "message": "Please configure this leave type."
+    },
+    {
+        "id": 52,
+        "message": "You have already filed a leave on this date."
+    },
+    {
+        "id": 53,
+        "message": "You have already filed a leave on this date. Please select a different date."
+    },
+    {
+        "id": 54,
+        "message": "Future dates are not allowed."
+    },
+    {
+        "id": 55,
+        "message": "You did not render work on this date. Hence, timesheet cannot be filled."
+    },
+    {
+        "id": 56,
+        "message": "Start time must be later than punch in time. Please try again."
+    },
+    {
+        "id": 57,
+        "message": "End time must be later than punch in time and earlier than punch out time. Please try again."
+    },
+    {
+        "id": 58,
+        "message": "You have not punched out on this date. Hence, you cannot add a time sheet."
+    },
+    {
+        "id": 59,
+        "message": "Email address or phone number already exists. Please try another one."
+    },
+    {
+        "id": 60,
+        "message": "Start date must be earlier than end date. Please try again."
+    },
+    {
+        "id": 61,
+        "message": "Employee has filed for leave on this date."
+    },
+    {
+        "id": 62,
+        "message": "Success! Attendance has been added."
+    },
+    {
+        "id": 63,
+        "message": "Success! Default configuration has been set."
+    },
+    {
+        "id": 64,
+        "message": "Success! Attendance record was added."
+    },
+    {
+        "id": 65,
+        "message": "Success! Configuration was added."
+    },
+    {
+        "id": 66,
+        "message": "Your request was approved."
+    },
+    {
+        "id": 67,
+        "message": "Your request was rejected."
+    },
+    {
+        "id": 68,
+        "message": "File format not supported. Please try again."
+    },
+    {
+        "id": 69,
+        "message": "Success! Promotion was added."
+    },
+    {
+        "id": 70,
+        "message": "Please select Start Date and End Date and Cut-off Date."
+    },
+    {
+        "id": 71,
+        "message": "Issue encountered in generating payroll files. Please try again."
+    },
+    {
+        "id": 72,
+        "message": "Success! File was uploaded to the server."
+    },
+    {
+        "id": 73,
+        "message": "Approved successfully"
+    },
+    {
+        "id": 74,
+        "message": "Rejected successfully."
+    },
+    {
+        "id": 75,
+        "message": "Please select the record to modify."
+    },
+    {
+        "id": 76,
+        "message": "You have successfully disabled."
+    },
+    {
+        "id": 77,
+        "message": "You have successfully enabled."
+    },
+    {
+        "id": 78,
+        "message": "Error"
+    },
+    {
+        "id": 79,
+        "message": "User already exists."
+    },
+    {
+        "id": 80,
+        "message": "Invalid Company. Please try again."
+    },
+    {
+        "id": 81,
+        "message": "Leave has been filed on this date. Hence, your correction  request cannot be completed."
+    },
+    {
+        "id": 82,
+        "message": "Please select the Start Date."
+    },
+    {
+        "id": 83,
+        "message": "Uploaded successfully."
+    },
+    {
+        "id": 84,
+        "message": "Password change successful. Please login using your New Password."
+    },
+    {
+        "id": 85,
+        "message": "Please select Company."
+    },
+    {
+        "id": 86,
+        "message": "Please select Login Type."
+    },
+    {
+        "id": 87,
+        "message": "Incorrect Username or Subsidiary. Please try again."
+    },
+    {
+        "id": 88,
+        "message": "Incorrect Username or Password. Please try again."
+    },
+    {
+        "id": 89,
+        "message": "Username does not exsit. Please try again."
+    },
+    {
+        "id": 90,
+        "message": "OTP field cannot be empty. Please try again."
+    },
+    {
+        "id": 91,
+        "message": "OTP does not match. Please try again."
+    },
+    {
+        "id": 92,
+        "message": "Password has been sent to your email. Please check."
+    },
+    {
+        "id": 93,
+        "message": "Email was not found in the records. Please enter a valid email."
+    },
+    {
+        "id": 94,
+        "message": "You do not have a vacation leave record"
+    },
+    {
+        "id": 95,
+        "message": "You do not have a sick leave record."
+    },
+    {
+        "id": 96,
+        "message": "You do not have a service incentive leave record."
+    },
+    {
+        "id": 97,
+        "message": "You do not have a leave without pay record."
+    },
+    {
+        "id": 98,
+        "message": "You do not have a maternity leave record."
+    },
+    {
+        "id": 99,
+        "message": "You do not have a paternity leave record."
+    },
+    {
+        "id": 100,
+        "message": "You have reached your annual limit for this leave type."
+    },
+    {
+        "id": 101,
+        "message": "Sorry, You Can not Apply Leave on Holiday or Off Days"
+    },
+    {
+        "id": 102,
+        "message": "Time sheet already exists."
+    },
+    {
+        "id": 103,
+        "message": "Success! Record has been removed."
+    },
+    {
+        "id": 104,
+        "message": "Staff shift already exists. Details have been updated."
+    },
+    {
+        "id": 105,
+        "message": "You cannot file for Attendance Correction because no manager has been mapped to you. Please contact your HR."
+    },
+    {
+        "id": 206,
+        "message": "Please enter correct pin"
+    },
+    {
+        "id": 207,
+        "message": "You have successfully replied."
+    },
+    {
+        "id": 208,
+        "message": "Contradiction deduction already exists."
+    },
+    {
+        "id": 209,
+        "message": "Choose a file."
+    },
+    {
+        "id": 210,
+        "message": "Email address is not registered with HPM. Please try again."
+    },
+    {
+        "id": 211,
+        "message": "You are late more than half day  on this date. So Cant Apply Ot"
+    },
+    {
+        "id": 212,
+        "message": "You are Undertime on this date , So you can not Apply OT."
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    },
+    {
+        "id": "",
+        "message": ""
+    }
+]
