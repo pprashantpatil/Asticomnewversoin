@@ -12,8 +12,6 @@ import { ShiftDetailsDashComponent } from '../shift-details-dash/shift-details-d
 })
 export class ShiftDetailsFormComponent implements OnInit {
   loader: any;
-  short: any;
-  description: any;
   startDate: any;
   endDate: any;
   shiftName: any;
@@ -22,9 +20,14 @@ export class ShiftDetailsFormComponent implements OnInit {
   endTime: any;
   restDays: any;
   restDayList: any;
+  shiftTimeList: any;
+  shiftID: any;
   dropdownSettingsRestDays: any = {};
   public restDaysArray: any = [];
   public restDaysArray1: any = [];
+  shiftDetailsList: any;
+  employeeName: any;
+  public selectedstaff: any = [];
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private activatedroute: ActivatedRoute, public dialogRef: MatDialogRef<ShiftDetailsDashComponent>,
     @Inject(MAT_DIALOG_DATA) public ID: any) { }
@@ -32,6 +35,7 @@ export class ShiftDetailsFormComponent implements OnInit {
   ngOnInit(): void {
     debugger
     this.shiftName = "";
+    this.restDays = "";
     this.dropdownSettingsRestDays = {
       singleSelection: false,
       idField: 'id',
@@ -86,6 +90,30 @@ export class ShiftDetailsFormComponent implements OnInit {
           this.loader = false;
         }
       })
+
+    this.activatedroute.params.subscribe(params => {
+      debugger;
+      if (this.ID == undefined) {
+        this.loader = false;
+      }
+      else {
+        this.DigiofficecorehrService.GetStaffShiftDetails()
+          .subscribe({
+            next: data => {
+              debugger
+              this.loader = false;
+              this.shiftDetailsList = data.filter(x => x.id == this.ID);
+              this.startDate = this.shiftDetailsList[0].filterdate;
+              this.endDate = this.shiftDetailsList[0].filterenddate;
+              this.shiftName = this.shiftDetailsList[0].shiftName;
+              this.startTime = this.shiftDetailsList[0].startTime;
+              this.endTime = this.shiftDetailsList[0].endTime;
+              this.restDays = this.shiftDetailsList[0].restdays;
+              this.employeeName = this.shiftDetailsList[0].name;
+            }
+          })
+      }
+    })
   }
 
   public cancel() {
@@ -95,24 +123,56 @@ export class ShiftDetailsFormComponent implements OnInit {
   }
 
   public submit() {
-    let Entity = {
+    if (this.startDate == undefined || this.shiftName == undefined || this.shiftName == "" ||
+      this.endDate == undefined || this.restDays == undefined || this.restDays == "" ||
+      this.startTime == undefined || this.endTime == undefined) {
+      Swal.fire('Please fill out all mandatory fields');
+    }
+    else {
+      let entity = {
+        'ShiftDate': this.startDate,
+        'ShiftName': this.shiftName,
+        'StartTime': '2022-04-30 10:00:00.000',
+        'EndTime': '2022-04-30 10:00:00.000',
+        'StaffID1': localStorage.getItem('staffid'),
+        'EndDate': this.endDate,
+        'RestDays': this.restDays
+      }
+      this.DigiofficecorehrService.InsertStaffShiftDetails(entity).subscribe(res => {
+        debugger;
+        if (res == 0) {
+          Swal.fire('Please choose another dates as these dates are overlapping with your existing shift');
+        }
+        else {
+          Swal.fire("Saved Successfully");
+          location.href = "#/Employee/ShiftDetailsDash";
+        }
+      })
+    }
+  }
+
+  public update() {
+    // for (let i = 0; i < this.restDaysArray1.length; i++) {
+    //   this.restDays = this.restDays + this.restDaysArray1[i].name + ','
+    // }
+    // if (this.restDaysArray1.length == 1) {
+    //   this.getDaysBetweenDates(this.startDate, this.endDate, this.restDaysArray1[0].name, '');
+    // } else {
+    //   this.getDaysBetweenDates(this.startDate, this.endDate, this.restDaysArray1[0].name, this.restDaysArray1[1].name);
+    // }
+    var entity = {
+      'ID': this.ID,
       'ShiftDate': this.startDate,
       'ShiftName': this.shiftName,
-      'StartTime': '2022-04-30 10:00:00.000',
-      'EndTime': '2022-04-30 10:00:00.000',
-      'StaffID1': localStorage.getItem('staffid'),
-      'EndDate': this.endDate,
-      'RestDays': this.restDays
+      'StartTime': this.startTime,
+      'EndTime': this.endTime,
+      'EndDate': this.endDate
     }
-    this.DigiofficecorehrService.InsertStaffShiftDetails(Entity).subscribe(res => {
-      debugger;
-      if (res == 0) {
-        Swal.fire('Please choose another dates as these dates are overlapping with your existing shift');
-      }
-      else {
-        Swal.fire("Saved Successfully");
-        location.href = "#/Employee/ShiftDetailsDash";
-      }
+    this.DigiofficecorehrService.UpdateStaffShiftDetails(entity).subscribe(res => {
+      debugger
+      Swal.fire("Updated Successfully");
+      location.href = "#/Employee/ShiftDetailsDash";
+      this.loader = false;
     })
   }
 
@@ -130,5 +190,44 @@ export class ShiftDetailsFormComponent implements OnInit {
       return x.id;
     }).indexOf(index1);
     this.restDaysArray1.splice(inde, 1);
+  }
+
+  public getShiftTime() {
+    debugger
+    this.DigiofficecorehrService.GetShiftMaster()
+      .subscribe({
+        next: data => {
+          debugger
+          this.loader = false;
+          this.shiftTimeList = data.filter(x => x.description == this.shiftName)
+          this.startTime = this.shiftTimeList[0].starttime,
+            this.endTime = this.shiftTimeList[0].endtime,
+            this.shiftID = this.shiftTimeList[0].id
+        }
+      })
+  }
+
+  public getDaysBetweenDates(start: any, end: any, dayName: any, dayName2: any) {
+    debugger
+    var result = [];
+    var result1 = [];
+    var days: any = { sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6 };
+    var day = days[dayName.toLowerCase().substr(0, 3)];
+    var day1 = days[dayName2.toLowerCase().substr(0, 3)];
+    var current = new Date(start);
+    current.setDate(current.getDate() + (day - current.getDay() + 7) % 7);
+    while (current < new Date(end)) {
+      result.push(new Date(+current));
+      current.setDate(current.getDate() + 7);
+    }
+    var current1 = new Date(start);
+    current1.setDate(current1.getDate() + (day1 - current1.getDay() + 7) % 7);
+    while (current1 < new Date(end)) {
+      result.push(new Date(+current1));
+      current1.setDate(current1.getDate() + 7);
+    }
+    console.log(result.length + result1.length)
+    debugger
+    return result;
   }
 }

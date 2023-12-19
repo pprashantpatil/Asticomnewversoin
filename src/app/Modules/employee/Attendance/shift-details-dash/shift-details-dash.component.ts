@@ -20,6 +20,7 @@ export class ShiftDetailsDashComponent implements OnInit {
   startDate: any;
   endDate: any;
   shiftFilter: any;
+  roleID: any;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
@@ -27,6 +28,7 @@ export class ShiftDetailsDashComponent implements OnInit {
     this.loader = true;
     this.currentUrl = window.location.href;
     this.staffID = localStorage.getItem('staffid');
+    this.roleID = localStorage.getItem('roledid');
     this.getData();
   }
 

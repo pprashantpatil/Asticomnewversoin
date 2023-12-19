@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpage.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpa
     NgbModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    
   ],
   providers: [DatePipe,
     CookieService

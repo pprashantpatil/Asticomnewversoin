@@ -33,6 +33,7 @@ import { EmployeeCertificateDashComponent } from './EmployeeCertification/employ
 import { HelpComponent } from './Help/help/help.component';
 import { PayslipComponent } from './Payslip/payslip/payslip.component';
 import { ShiftDetailsFormComponent } from './Attendance/shift-details-form/shift-details-form.component';
+import { OverTimeDetailsFormComponent } from './Attendance/over-time-details-form/over-time-details-form.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ShiftDetailsFormComponent } from './Attendance/shift-details-form/shift
     EmployeeCertificateDashComponent,
     HelpComponent,
     PayslipComponent,
-    ShiftDetailsFormComponent
+    ShiftDetailsFormComponent,
+    OverTimeDetailsFormComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,7 @@ import { ShiftDetailsFormComponent } from './Attendance/shift-details-form/shift
     NgxDropzoneModule,
     Ng2SearchPipeModule,
     BsDatepickerModule.forRoot(),
-
+    
   ]
 })
 export class EmployeeModule { }

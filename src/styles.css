@@ -168,6 +168,10 @@ textarea {
   border: 1px;
 }
 
+.modal-title{
+  color: #071da8;
+}
+
 .acct {
   background-color: #f1b91c;
   color: black;
