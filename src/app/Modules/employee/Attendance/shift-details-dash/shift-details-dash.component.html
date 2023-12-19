@@ -1,1 +1,78 @@
-<p>shift-details-dash works!</p>
+<div class="container-fluid">
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
+            </div>
+
+            <div class="cardinputs" (click)="showDialog()">
+                <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Shift</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <p class="show3res">SHOWING <span>{{(shiftList|filter:search)?.length}} </span>RESULT(S)</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Employee ID</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Submit Date</th>
+                            <th>Approved Date</th>
+                            <th>Shift Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Rest Days</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of shiftList|filter:search">
+                            <td>{{data.employeID}}</td>
+                            <td>{{data.shiftDate|date}}</td>
+                            <td>{{data.endDate|date}}</td>
+                            <td>{{data.modifieddate|date}}</td>
+                            <td>{{data.approveddate|date}}</td>
+                            <td>{{data.shiftName}}</td>
+                            <td>{{data.startTime}}</td>
+                            <td>{{data.endTime}}</td>
+                            <td>{{data.restdays}}</td>
+                            <td>
+                                <p *ngIf="data.approve==0||data.approve==null">Pending</p>
+                                <p *ngIf="data.approve==1">Approved</p>
+                                <p *ngIf="data.approve==2">Rejected</p>
+                            </td>
+                            <td class="onelinetext"> <img class="dashedit-icon" (click)="edit(data.id)"
+                                    src="assets/Images/Edit.svg">
+                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                    src="assets/Images/Delete.svg">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+    </div>
+</div>

@@ -12,6 +12,9 @@ import { SidebarComponent } from './Shared/sidebar/sidebar.component';
 import { FooterComponent } from './Shared/footer/footer.component';
 import { LoaderComponent } from './Shared/loader/loader.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +29,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     DatePipe,
-    NgbModule
+    NgbModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [DatePipe,
     CookieService
