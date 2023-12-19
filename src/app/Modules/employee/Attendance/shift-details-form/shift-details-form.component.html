@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <p class="Heading">Shift Details</p>
+                <img src="assets/Images/revamp/cancle-icon.png" (click)="cancel()" class="closeicon">
+            </div>
+
+            <div class="popupcontent">
+                <div class="popupinputs">
+                    <p>Start Date<span class="span">*</span></p>
+                    <div>
+                        <input type="date" class="form-control" name="startDate" id="startDate" onkeydown="return false"
+                            [(ngModel)]="startDate">
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>End Date<span class="span">*</span></p>
+                    <div>
+                        <input type="date" class="form-control" name="endDate" id="endDate" onkeydown="return false"
+                            [(ngModel)]="endDate">
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Shift Name<span class="span">*</span></p>
+                    <div>
+                        <select class="form-control inputfield select" id="rentForTheMonth" name="rentForTheMonth"
+                            [(ngModel)]="shiftName">
+                            <option value="">Select Shift</option>
+                            <option *ngFor="let Staff of shiftNameList" value="{{Staff.description}}">
+                                {{Staff.description}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Start Time<span class="span">*</span></p>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Start Time" [(ngModel)]="startTime"
+                            name="startTime" id="startTime">
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>End Time<span class="span">*</span></p>
+                    <div>
+                        <input type="text" class="form-control" placeholder="End Time" [(ngModel)]="endTime"
+                            name="endTime" id="endTime">
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Rest Days<span class="span">*</span></p>
+                    <!-- <div>
+                        <ng-multiselect-dropdown [placeholder]="'Select Rest Day'" [settings]="dropdownSettingsRestDays"
+                            [data]="restDayList" [(ngModel)]="restDaysArray" (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="restDaysOnItemDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div> -->
+                </div>
+
+                <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                    <button class="close-button" (click)="cancel()">Cancel</button>
+                    <button class="submit-button" (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

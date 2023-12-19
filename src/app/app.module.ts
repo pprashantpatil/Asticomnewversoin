@@ -12,7 +12,11 @@ import { SidebarComponent } from './Shared/sidebar/sidebar.component';
 import { FooterComponent } from './Shared/footer/footer.component';
 import { LoaderComponent } from './Shared/loader/loader.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpage.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,10 @@ import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpa
     FormsModule,
     HttpClientModule,
     DatePipe,
-    NgbModule
+    NgbModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [DatePipe,
     CookieService

@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {  BsDatepickerModule  } from 'ngx-bootstrap/datepicker';
+
 
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeDashComponent } from './Dashboard/employee-dash/employee-dash.component';
@@ -27,6 +32,7 @@ import { TimesheetReportComponent } from './Reports/timesheet-report/timesheet-r
 import { EmployeeCertificateDashComponent } from './EmployeeCertification/employee-certificate-dash/employee-certificate-dash.component';
 import { HelpComponent } from './Help/help/help.component';
 import { PayslipComponent } from './Payslip/payslip/payslip.component';
+import { ShiftDetailsFormComponent } from './Attendance/shift-details-form/shift-details-form.component';
 
 @NgModule({
   declarations: [
@@ -54,11 +60,17 @@ import { PayslipComponent } from './Payslip/payslip/payslip.component';
     
     EmployeeCertificateDashComponent,
     HelpComponent,
-    PayslipComponent
+    PayslipComponent,
+    ShiftDetailsFormComponent
   ],
   imports: [
     CommonModule,
-    EmployeeRoutingModule
+    EmployeeRoutingModule,
+    FormsModule,
+    NgxDropzoneModule,
+    Ng2SearchPipeModule,
+    BsDatepickerModule.forRoot(),
+
   ]
 })
 export class EmployeeModule { }
