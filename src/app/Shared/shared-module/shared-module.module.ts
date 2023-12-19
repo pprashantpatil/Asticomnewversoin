@@ -16,7 +16,8 @@ import { CommonalertpageComponent } from '../commonalertpage/commonalertpage.com
   ],
   exports:[
     LoaderComponent,
-    CommonalertpageComponent
+    CommonalertpageComponent,
+    CommonModule
   ]
 })
 export class SharedModuleModule { }

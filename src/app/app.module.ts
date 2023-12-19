@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Login/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { SidebarComponent } from './Shared/sidebar/sidebar.component';
 import { FooterComponent } from './Shared/footer/footer.component';
 
@@ -30,6 +30,7 @@ import { SharedModuleModule } from './Shared/shared-module/shared-module.module'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    CommonModule,
     HttpClientModule,
     DatePipe,
     NgbModule,
@@ -38,6 +39,9 @@ import { SharedModuleModule } from './Shared/shared-module/shared-module.module'
     NgMultiSelectDropDownModule.forRoot(),
     NgxPaginationModule,
     SharedModuleModule
+  ],
+  exports:[
+    NgMultiSelectDropDownModule
   ],
 
 

@@ -38,6 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModuleModule } from 'src/app/Shared/shared-module/shared-module.module';
 import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave-request.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave
     BsDatepickerModule.forRoot(),
     NgbModule,
     NgxPaginationModule,
-    SharedModuleModule
+    SharedModuleModule,
+    NgMultiSelectDropDownModule
 
   ]
 })
