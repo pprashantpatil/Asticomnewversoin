@@ -1,1 +1,68 @@
-<p>holidays-dash works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
+            </div>
+
+            <div class="cardinputs" (click)="showDialog()" *ngIf="roleID==1||roleID==9||roleID==10||roleID==11">
+                <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Holiday</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <p class="show3res">SHOWING <span>{{(holidayList|filter:search)?.length}} </span>RESULT(S)</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Holiday</th>
+                            <th>Holiday Description</th>
+                            <th>Holiday Date</th>
+                            <th>Attachment</th>
+                            <th *ngIf="roleID=='9'||roleID=='10'||roleID=='11'">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of holidayList|filter:search">
+                            <td>{{data.holiday}}</td>
+                            <td>{{data.holidayDescription}}</td>
+                            <td>{{data.holidayDate|date}}</td>
+                            <td>
+                                <a href="{{data.attachment}}" target="_blank"> <img src="assets/Images/image.png"
+                                    style="width:20px; height:20px"
+                                    alt="data.img"></a>
+                            </td>
+                            <td class="onelinetext" *ngIf="roleID=='9'||roleID=='10'||roleID=='11'"> <img class="dashedit-icon" (click)="edit(data.id)"
+                                    src="assets/Images/Edit.svg">
+                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                    src="assets/Images/Delete.svg">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+    </div>
+</div>

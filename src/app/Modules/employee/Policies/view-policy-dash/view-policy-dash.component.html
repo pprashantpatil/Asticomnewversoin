@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-11">
+            <p *ngIf="pageName=='ORIENTATION DOCS'" class="Heading">Orientation Dashboard</p>
+            <p *ngIf="pageName!='ORIENTATION DOCS'" class="Heading">Policy Dashboard</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate($event)">
+            </div>
+
+            <div class="cardinputs">
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
+            </div>
+
+            <div class="cardinputs" (click)="showDialog()" *ngIf="pageName=='ORIENTATION DOCS'">
+                <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Policy</button>
+            </div>
+
+            <div class="cardinputs" (click)="showDialog()" *ngIf="pageName!='ORIENTATION DOCS'">
+                <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Policy</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <p class="show3res">SHOWING <span>{{(policyList|filter:search)?.length}} </span>RESULT(S)</p>
+        </div>
+        <div class="col-md-2">
+            <img class="cursor" title="back" src="assets/Images/goback.png" class="imgwidth" (click)="goBack()">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Date</th>
+                            <th *ngIf="pageName!='ORIENTATION DOCS'">Policy Name</th>
+                            <th *ngIf="pageName=='ORIENTATION DOCS'">Orientation Name</th>
+                            <th>Document Version</th>
+                            <th>Description</th>
+                            <th>Attachment</th>
+                            <th *ngIf="roleID==1||roleID==9">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of policyList|filter:search">
+                            <td class="policydate">{{data.filterdate}}</td>
+                            <td>{{data.documnet_Name}}</td>
+                            <td>{{data.version}}</td>
+                            <td>{{data.documnet_Description}}</td>
+                            <td>
+                                <a href="{{data.attachment}}" target="_blank"> <img src="assets/Images/image.png"
+                                        style="width:20px; height:20px"
+                                        alt="data.img"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td *ngIf="roleID==1||roleID==9">
+                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                    src="assets/Images/Delete.svg">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+    </div>
+</div>

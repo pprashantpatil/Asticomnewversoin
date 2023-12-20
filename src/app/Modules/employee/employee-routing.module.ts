@@ -21,6 +21,7 @@ import { EmployeeCertificateDashComponent } from './EmployeeCertification/employ
 import { HelpComponent } from './Help/help/help.component';
 import { PayslipComponent } from './Payslip/payslip/payslip.component';
 import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave-request.component';
+import { ViewPolicyDashComponent } from './Policies/view-policy-dash/view-policy-dash.component';
 
 const routes: Routes = [
   { path: 'Employeedashboard', component: EmployeeDashComponent },
@@ -39,6 +40,8 @@ const routes: Routes = [
   { path: 'TimesheetRequestDash', component: TimesheetRequestDashComponent },
 
   { path: 'PoliciesDash', component: PoliciesDashComponent },
+  { path: 'ViewPolicyDash', component: ViewPolicyDashComponent },
+  { path: 'ViewPolicyDash/:id', component: ViewPolicyDashComponent },
   { path: 'HolidaysDash', component: HolidaysDashComponent },
   { path: 'AnnouncementsDash', component: AnnouncementsDashComponent },
 

@@ -41,6 +41,11 @@ import { SharedModuleModule } from 'src/app/Shared/shared-module/shared-module.m
 import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave-request.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { AttendanceCorrectionFormComponent } from './Attendance/attendance-correction-form/attendance-correction-form.component';
+import { ViewPolicyDashComponent } from './Policies/view-policy-dash/view-policy-dash.component';
+import { PoliciesFormComponent } from './Policies/policies-form/policies-form.component';
+import { HolidaysFormComponent } from './Holidays/holidays-form/holidays-form.component';
+import { AnnouncementsFormComponent } from './Announcements/announcements-form/announcements-form.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +79,11 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     OverTimeDetailsFormComponent,
     OverTimeDetailsFormComponent,
     NewLeaveRequestComponent,
+    AttendanceCorrectionFormComponent,
+    ViewPolicyDashComponent,
+    PoliciesFormComponent,
+    HolidaysFormComponent,
+    AnnouncementsFormComponent,
   
   ],
   imports: [
@@ -83,7 +93,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     NgxDropzoneModule,
     Ng2SearchPipeModule,
     BsDatepickerModule.forRoot(),
-    
+    TimepickerModule.forRoot(),
     NgbModule,
     NgxPaginationModule,
     SharedModuleModule,

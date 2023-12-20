@@ -94,7 +94,7 @@ export class LeaveRequestDashComponent implements OnInit {
       })
   }
 
-  public getenddate(event: any) {
+  public getEndDate(event: any) {
     this.showPopup = 0;
     this.startdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');;
     this.enddate = this.datePipe.transform(event[1], 'yyyy-MM-dd');;

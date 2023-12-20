@@ -1,0 +1,95 @@
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <p class="Heading">Shift Details</p>
+                <img src="assets/Images/revamp/cancle-icon.png" (click)="cancel()" class="closeicon">
+            </div>
+
+            <div class="popupcontent">
+                <div class="popupinputs">
+                    <p>Type<span class="span">*</span></p>
+                    <div>
+                        <div class="dropdown">
+                            <select class="form-control inputfield select" id="type" name="type" [(ngModel)]="type">
+                                <option value="">Select Type</option>
+                                <option value="General Holiday ">Legal Holiday</option>
+                                <option value="Special Holiday">Special Holiday </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Holiday<span class="span">*</span></p>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Holiday" [(ngModel)]="short" name="short"
+                            id="short">
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Holiday Description<span class="span">*</span></p>
+                    <div>
+                        <textarea type="text" class="form-control" rows="4" placeholder="Holiday Description"
+                            [(ngModel)]="description" name="description" id="description"></textarea>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Holiday Date<span class="span">*</span></p>
+                    <div>
+                        <input type="date" class="form-control" name="date" id="date" onkeydown="return false"
+                            [(ngModel)]="date">
+                    </div>
+                </div>
+
+                <div class="popupinputs" *ngIf="ID==undefined">
+                    <p>All City<span class="span">*</span></p>
+                    <div>
+                        <input type="text" class="form-control" placeholder="All City" [(ngModel)]="allCity"
+                            name="allCity" id="allCity">
+                    </div>
+                </div>
+
+                <div class="popupinputs" *ngIf="ID==undefined">
+                    <p>City<span class="span">*</span></p>
+                    <div>
+                        <div class="dropdown">
+                            <select class="form-control inputfield select" id="city" name="city" [(ngModel)]="city">
+                                <option value="">Select City </option>
+                                <option *ngFor="let role of cityList" value="{{role.id}}">{{role.short}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Attachment</p>
+                    <div>
+                        <ngx-dropzone accept=".png,.jpg,.jpeg" (change)="onSelect21($event)" class="dropFile">
+                            <img src="assets/Images/MicrosoftTeams-image.png" *ngIf="attachments21.length==0"
+                                class="img-set dropdowning">
+                            <ngx-dropzone-label>Drop files here<br>only jpg/png/jpeg (max 5mb)</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of attachments21" [removable]="true"
+                                (removed)="onRemove21(f)">
+                                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                        </ngx-dropzone>
+                    </div>
+                    <a *ngIf="ID!=undefined" href="{{attachment}}" target="_blank">
+                        <img width="25" height="25" border="0" align="center" src="assets/attached.png" />
+                    </a>
+                </div>
+
+                <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                    <button class="close-button" (click)="cancel()">Cancel</button>
+                    <button *ngIf="ID==undefined" class="submit-button" (click)="submit()">Submit</button>
+                    <button *ngIf="ID!=undefined" class="submit-button" (click)="update()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
