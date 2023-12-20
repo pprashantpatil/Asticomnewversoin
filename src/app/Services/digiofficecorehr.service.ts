@@ -2656,7 +2656,6 @@ export class DigiofficecorehrService {
     return this.http.post(this.url, data);
   }
   public InsertEmployeeAttendance_Holidays(data: any) {
-    debugger;
     this.url = this.host + '/Master/InsertEmployeeAttendance_Holidays';
     return this.http.post(this.url, data);
   }

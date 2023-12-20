@@ -43,6 +43,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { TimesheetformComponent } from './Requests/timesheetform/timesheetform.component';
 import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-accountsetting-modify.component';
+import { AttendanceCorrectionFormComponent } from './Attendance/attendance-correction-form/attendance-correction-form.component';
+import { ViewPolicyDashComponent } from './Policies/view-policy-dash/view-policy-dash.component';
+import { PoliciesFormComponent } from './Policies/policies-form/policies-form.component';
+import { HolidaysFormComponent } from './Holidays/holidays-form/holidays-form.component';
+import { AnnouncementsFormComponent } from './Announcements/announcements-form/announcements-form.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +83,11 @@ import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-a
     NewLeaveRequestComponent,
     TimesheetformComponent,
     MyAccountsettingModifyComponent,
+    AttendanceCorrectionFormComponent,
+    ViewPolicyDashComponent,
+    PoliciesFormComponent,
+    HolidaysFormComponent,
+    AnnouncementsFormComponent,
   
   ],
   imports: [
@@ -88,6 +98,7 @@ import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-a
     Ng2SearchPipeModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule,
+    TimepickerModule.forRoot(),
     NgbModule,
     NgxPaginationModule,
     SharedModuleModule,

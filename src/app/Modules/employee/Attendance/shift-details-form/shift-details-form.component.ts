@@ -28,14 +28,21 @@ export class ShiftDetailsFormComponent implements OnInit {
   shiftDetailsList: any;
   employeeName: any;
   public selectedstaff: any = [];
+  jDate: any;
+  userName:any;
+  attactments: any = [];
   showPopup: number = 0;
   messageId: number = 0;
+  managerEmailList: any;
+  managerEmailID: any;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private activatedroute: ActivatedRoute, public dialogRef: MatDialogRef<ShiftDetailsDashComponent>,
     @Inject(MAT_DIALOG_DATA) public ID: any) { }
 
   ngOnInit(): void {
     debugger
+    this.jDate = localStorage.getItem('jdate');
+    this.userName = localStorage.getItem('UserName');
     this.shiftName = "";
     this.restDays = "";
     this.dropdownSettingsRestDays = {
@@ -116,6 +123,16 @@ export class ShiftDetailsFormComponent implements OnInit {
           })
       }
     })
+
+    this.DigiofficecorehrService.GetMyDetailsByStaffID(localStorage.getItem('staffid'))
+      .subscribe({
+        next: data => {
+          debugger
+          this.managerEmailList = data;
+          this.managerEmailID = this.managerEmailList[0].manageremailid;
+          this.loader = false;
+        }
+      })
   }
 
   public cancel() {
@@ -125,12 +142,23 @@ export class ShiftDetailsFormComponent implements OnInit {
   }
 
   public submit() {
+    this.showPopup = 0;
+    // this.restDays = '';
+    // for (let i = 0; i < this.restDaysArray1.length; i++) {
+    //   this.restDays = this.restDays + this.restDaysArray1[i].name + ','
+    // }
     if (this.startDate == undefined || this.shiftName == undefined || this.shiftName == "" ||
       this.endDate == undefined || this.restDays == undefined || this.restDays == "" ||
       this.startTime == undefined || this.endTime == undefined) {
-      Swal.fire('Please fill out all mandatory fields');
+      this.loader = false;
+      this.showPopup = 1;
+      this.messageId = 7;
     }
     else {
+      this.restDays = '';
+      // for (let i = 0; i < this.restDaysArray1.length; i++) {
+      //   this.restDays = this.restDays + this.restDaysArray1[i].name + ',';
+      // }
       let entity = {
         'ShiftDate': this.startDate,
         'ShiftName': this.shiftName,
@@ -146,14 +174,41 @@ export class ShiftDetailsFormComponent implements OnInit {
           Swal.fire('Please choose another dates as these dates are overlapping with your existing shift');
         }
         else {
-          Swal.fire("Saved Successfully");
+          this.loader = false;
+          this.showPopup = 1;
+          this.messageId = 8;
+          this.dialogRef.close(false);
           location.href = "#/Employee/ShiftDetailsDash";
+          this.sendEmail();
         }
       })
     }
   }
 
+  public sendEmail() {
+    var entity1 = {
+      'FromUser': 'Admin',
+      'emailto': this.managerEmailID,
+      'emailsubject': 'Shift Request',
+      'Message': 'Your Shift Request Sent Successfully !!',
+      'emailbody': 'Hi  <br> Your Employee ' + this.userName + ' has Applied Shift Request in Digi-Office., <br> Please Login in DigiOffice to Approve. <br><br>' + '<br>  <br> Thanks <br> Team Digi-Office',
+      'attachmenturl': this.attactments,
+      'cclist': this.managerEmailID,
+      'bcclist': this.managerEmailID,
+    }
+    this.DigiofficecorehrService.sendemailattachementsforemail(entity1)
+      .subscribe({
+        next: data => {
+          debugger
+          this.attactments = [];
+          //Swal.fire('Password sent to your email.');
+          this.loader = false;
+        }
+      })
+  }
+
   public update() {
+    this.showPopup = 0;
     // for (let i = 0; i < this.restDaysArray1.length; i++) {
     //   this.restDays = this.restDays + this.restDaysArray1[i].name + ','
     // }
@@ -172,7 +227,10 @@ export class ShiftDetailsFormComponent implements OnInit {
     }
     this.DigiofficecorehrService.UpdateStaffShiftDetails(entity).subscribe(res => {
       debugger
-      Swal.fire("Updated Successfully");
+      this.loader = false;
+      this.showPopup = 1;
+      this.messageId = 10;
+      this.dialogRef.close(false);
       location.href = "#/Employee/ShiftDetailsDash";
       this.loader = false;
     })
@@ -231,5 +289,29 @@ export class ShiftDetailsFormComponent implements OnInit {
     console.log(result.length + result1.length)
     debugger
     return result;
+  }
+
+  public getEndDate() {
+    this.showPopup = 0;
+    if (this.endDate < this.startDate) {
+      this.loader = 0;
+      this.showPopup = 1;
+      this.messageId = 29;
+      this.endDate = "";
+    }
+    if (new Date(this.jDate) > new Date(this.startDate)) {
+      this.loader = false;
+      Swal.fire('Sorry, Shift Date is prior the New Hire Date');
+    }
+    this.DigiofficecorehrService.GetCurrentPhTime(localStorage.getItem('staffid'), this.startDate, this.endDate)
+      .subscribe({
+        next: data => {
+          debugger
+          let temp: any = data;
+          if (temp[0].overlappingshifts > 0) {
+            Swal.fire('Please choose another dates as these dates are overlapping with your existing shift')
+          }
+        }
+      })
   }
 }

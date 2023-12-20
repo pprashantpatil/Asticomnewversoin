@@ -122,7 +122,7 @@ export class OverTimeDetailsDashComponent implements OnInit {
     });
   }
 
-  public getenddate(event: any) {
+  public getEndDate(event: any) {
     debugger
     this.startDate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
     this.endDate = this.datePipe.transform(event[1], 'yyyy-MM-dd');

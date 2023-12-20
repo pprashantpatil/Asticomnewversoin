@@ -1,72 +1,58 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
-import { ShiftDetailsFormComponent } from '../shift-details-form/shift-details-form.component';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { PoliciesFormComponent } from '../policies-form/policies-form.component';
 
 @Component({
-  selector: 'app-shift-details-dash',
-  templateUrl: './shift-details-dash.component.html',
-  styleUrls: ['./shift-details-dash.component.css']
+  selector: 'app-view-policy-dash',
+  templateUrl: './view-policy-dash.component.html',
+  styleUrls: ['./view-policy-dash.component.css']
 })
-export class ShiftDetailsDashComponent implements OnInit {
+export class ViewPolicyDashComponent implements OnInit {
   currentUrl: any;
-  shiftList: any;
+  policyList: any;
   search: any;
   loader: any;
   staffID: any;
-  date: any;
   startDate: any;
   endDate: any;
-  shiftFilter: any;
   roleID: any;
+  noProjectFolders: any;
+  pageName: any;
+  date: any;
+  folderID:any
+  policyFilter: any;
 
-  constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
+  constructor(public DigiofficecorehrService: DigiofficecorehrService, private activatedroute: ActivatedRoute, public router: Router, private datePipe: DatePipe, private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loader = true;
     this.currentUrl = window.location.href;
     this.staffID = localStorage.getItem('staffid');
     this.roleID = localStorage.getItem('roledid');
+    this.pageName = localStorage.getItem('Pagename')
     this.getData();
   }
 
   public getData() {
-    this.DigiofficecorehrService.GetStaffShiftDetails().subscribe(
+    debugger
+    this.activatedroute.params.subscribe(params => {
+      debugger;
+      this.folderID = params['id'];
+      this.loader = false;
+    })
+
+    this.DigiofficecorehrService.GetPolicies().subscribe(
       res => {
         debugger;
-        this.shiftList = res.filter(x => x.staffID == this.staffID);
-        this.shiftFilter = res.filter(x => x.staffID == this.staffID);
+        this.policyList = res.filter(x => x.folderID == this.folderID);
+        this.policyFilter = res.filter(x => x.folderID == this.folderID);
         this.loader = false;
       })
-  }
-
-  showDialog() {
-    debugger
-    let ID = undefined
-    this.matDialog.open(ShiftDetailsFormComponent, {
-      data: ID,
-      width: '100%',
-      maxHeight: '80vh'
-    }).afterClosed()
-      .subscribe(result => {
-        console.log('Result' + result);
-        this.ngOnInit();
-      });
-  }
-
-  edit(ID: any) {
-    debugger
-    this.matDialog.open(ShiftDetailsFormComponent, {
-      data: ID,
-      width: '100%',
-      maxHeight: '80vh'
-    }).afterClosed()
-      .subscribe(result => {
-        console.log('Result' + result);
-        this.ngOnInit();
-      });
   }
 
   public openDeletePopUp(id: any) {
@@ -80,7 +66,7 @@ export class ShiftDetailsDashComponent implements OnInit {
       confirmButtonText: 'Proceed'
     }).then((result) => {
       if (result.value == true) {
-        this.DigiofficecorehrService.DeleteStaffShiftDetails(id)
+        this.DigiofficecorehrService.DeletePolicies(id)
           .subscribe({
             next: data => {
               Swal.fire('Deleted Successfully');
@@ -111,7 +97,27 @@ export class ShiftDetailsDashComponent implements OnInit {
       this.endDate = ""
     }
     else {
-      this.shiftList = this.shiftFilter.filter((x: { staffID: any; filterdate: any; filterenddate: any; }) => x.staffID == this.staffID && (x.filterdate >= this.startDate && x.filterenddate <= this.endDate));
+      this.policyList = this.policyFilter.filter((x: { filterdate: any; }) => (x.filterdate >= this.startDate && x.filterdate <= this.endDate));
     }
+  }
+
+  showDialog() {
+    debugger
+    // let ID = undefined
+    this.matDialog.open(PoliciesFormComponent, {
+      data: this.folderID,
+      width: '100%',
+      maxHeight: '80vh'
+    }).afterClosed()
+      .subscribe(result => {
+        console.log('Result' + result);
+        this.ngOnInit();
+      });
+  }
+
+  public goBack() {
+    debugger
+    location.href = "#/Employee/PoliciesDash";
+    this.loader = false;
   }
 }

@@ -32,7 +32,7 @@
                             <p class="leavereq">
                                 <input type="bsdate" style="width:220px" placeholder="mm/dd/yyyy-mm/dd/yyyy"
                                     class="form-control" bsDaterangepicker [(ngModel)]="startdate"
-                                    (ngModelChange)="getenddate($event)" [bsConfig]="{ showWeekNumbers:false }">
+                                    (ngModelChange)="getEndDate($event)" [bsConfig]="{ showWeekNumbers:false }">
                             </p>
                            
                         </div>
@@ -63,7 +63,7 @@
                     <!-- <div class="col-lg-6">
                                 <p class="">End Date:</p>
                                 <input class="form-control" id="date" name="date" [(ngModel)]="enddate"
-                                    (change)="getenddate($event)" type="date" placeholder="Duration"
+                                    (change)="getEndDate($event)" type="date" placeholder="Duration"
                                     onkeydown="return false">
                             </div> -->
                 </div>

@@ -43,7 +43,8 @@ import { SharedModuleModule } from './Shared/shared-module/shared-module.module'
     SharedModuleModule,
     NgxPaginationModule,
     SharedModuleModule,
-    TimepickerModule
+    TimepickerModule,
+    TimepickerModule.forRoot(),
   ],
   exports:[
     NgMultiSelectDropDownModule,

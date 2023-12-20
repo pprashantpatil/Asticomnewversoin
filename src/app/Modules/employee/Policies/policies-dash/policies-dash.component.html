@@ -1,1 +1,67 @@
-<p>policies-dash works!</p>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <p class="show3res">SHOWING <span>{{(policyList|filter:search)?.length}} </span>RESULT(S)</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th class="headerborder"></th>
+                            <th class="headerborder">Folder Name</th>
+                            <th class="headerborder">Date Created</th>
+                            <th class="headerborder">Department</th>
+                            <th class="headerborder">Uploaded By</th>
+                            <th class="headerborder" *ngIf="roleID==9">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of policyList|filter:search">
+                            <td>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <i class="fa fa-folder fold" (click)="views(data.id)" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td (click)="views(data.id)" class="foldertxt">{{data.folderName}}</td>
+                            <td (click)="views(data.id)" class="modified">{{data.modifieddate|date}}</td>
+                            <td (click)="views(data.id)" class="modified">{{data.department_name}}</td>
+                            <td (click)="views(data.id)" class="modified">HR</td>
+                            <td *ngIf="roleID==9">
+                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                    src="assets/Images/Delete.svg">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+    </div>
+</div>

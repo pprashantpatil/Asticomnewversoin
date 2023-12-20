@@ -24,6 +24,7 @@ import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave
 import { TimesheetformComponent } from './Requests/timesheetform/timesheetform.component';
 import { AuthguardGuard } from '../../Services/authguard.guard';
 import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-accountsetting-modify.component';
+import { ViewPolicyDashComponent } from './Policies/view-policy-dash/view-policy-dash.component';
 
 const routes: Routes = [
   { path: 'Employeedashboard', component: EmployeeDashComponent ,canActivate: [AuthguardGuard]},
@@ -44,6 +45,11 @@ const routes: Routes = [
   { path: 'PoliciesDash', component: PoliciesDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'HolidaysDash', component: HolidaysDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'AnnouncementsDash', component: AnnouncementsDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'PoliciesDash', component: PoliciesDashComponent },
+  { path: 'ViewPolicyDash', component: ViewPolicyDashComponent },
+  { path: 'ViewPolicyDash/:id', component: ViewPolicyDashComponent },
+  { path: 'HolidaysDash', component: HolidaysDashComponent },
+  { path: 'AnnouncementsDash', component: AnnouncementsDashComponent },
 
   { path: 'AttendanceCorrectionReport', component: AttendanceCorrectionReportComponent ,canActivate: [AuthguardGuard]},
   { path: 'AttendanceReport', component: AttendanceReportComponent ,canActivate: [AuthguardGuard]},

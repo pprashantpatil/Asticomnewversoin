@@ -3,9 +3,9 @@ import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.servi
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ShiftDetailsDashComponent } from '../shift-details-dash/shift-details-dash.component';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { OverTimeDetailsDashComponent } from '../over-time-details-dash/over-time-details-dash.component';
 
 @Component({
   selector: 'app-over-time-details-form',
@@ -57,10 +57,11 @@ export class OverTimeDetailsFormComponent implements OnInit {
   public attachments21: any = [];
   public attachments: any = [];
   public attachmentsurl: any = [];
-  showPopup: any;
-  messageId: any;
+  showPopup: number = 0;
+  messageId: number = 0;
+  showDetails: any;
 
-  constructor(public DigiofficecorehrService: DigiofficecorehrService, public router: Router, public Datepipe: DatePipe, private activatedroute: ActivatedRoute, public dialogRef: MatDialogRef<ShiftDetailsDashComponent>,
+  constructor(public DigiofficecorehrService: DigiofficecorehrService, public router: Router, public Datepipe: DatePipe, private activatedroute: ActivatedRoute, public dialogRef: MatDialogRef<OverTimeDetailsDashComponent>,
     @Inject(MAT_DIALOG_DATA) public ID: any) { }
 
   ngOnInit(): void {
@@ -69,42 +70,6 @@ export class OverTimeDetailsFormComponent implements OnInit {
     this.showSpinners = false;
     this.staffID = localStorage.getItem('staffid');
     this.maxDate = new Date().toISOString().split("T")[0];
-    this.getData();
-  }
-
-  public getData() {
-    this.DigiofficecorehrService.GetShiftMaster()
-      .subscribe({
-        next: data => {
-          debugger
-          // this.shiftNameList = data;
-          this.loader = false;
-        }
-      })
-
-    this.activatedroute.params.subscribe(params => {
-      debugger;
-      if (this.ID == undefined) {
-        this.loader = false;
-      }
-      else {
-        this.DigiofficecorehrService.GetStaffShiftDetails()
-          .subscribe({
-            next: data => {
-              debugger
-              this.loader = false;
-              // this.shiftDetailsList = data.filter(x => x.id == this.ID);
-              // this.startDate = this.shiftDetailsList[0].filterdate;
-              // this.endDate = this.shiftDetailsList[0].filterenddate;
-              // this.shiftName = this.shiftDetailsList[0].shiftName;
-              // this.startTime = this.shiftDetailsList[0].startTime;
-              // this.endTime = this.shiftDetailsList[0].endTime;
-              // this.restDays = this.shiftDetailsList[0].restdays;
-              // this.employeeName = this.shiftDetailsList[0].name;
-            }
-          })
-      }
-    })
   }
 
   public cancel() {
@@ -115,15 +80,15 @@ export class OverTimeDetailsFormComponent implements OnInit {
 
   public submit() {
     this.DigiofficecorehrService.ProjectAttachments(this.attachments21)
-    .subscribe({
-      next: data => {
-        debugger
-        this.attachmentsurl.push(data);
-        this.attachments.length = 0;
-        this.InsertStaffOverTimeDetails();
-        this.loader = false;
-      }
-    })
+      .subscribe({
+        next: data => {
+          debugger
+          this.attachmentsurl.push(data);
+          this.attachments.length = 0;
+          this.InsertStaffOverTimeDetails();
+          this.loader = false;
+        }
+      })
   }
 
   public InsertStaffOverTimeDetails() {
@@ -180,11 +145,13 @@ export class OverTimeDetailsFormComponent implements OnInit {
               this.loader = false;
               this.showPopup = 1;
               this.messageId = 26;
+              this.dialogRef.close(false);
             } else {
               this.loader = false;
               this.showPopup = 1;
               this.messageId = 8;
               this.uploadmultipleimages(data);
+              this.dialogRef.close(false);
               this.router.navigate(['/Employee/OverTimeDetailsDash']);
               this.loader = false;
             }
@@ -229,6 +196,7 @@ export class OverTimeDetailsFormComponent implements OnInit {
     this.DigiofficecorehrService.UpdateStaffShiftDetails(entity).subscribe(res => {
       debugger
       Swal.fire("Updated Successfully");
+      this.dialogRef.close(false);
       location.href = "#/Employee/OverTimeDetailsDash";
       this.loader = false;
     })
@@ -236,12 +204,16 @@ export class OverTimeDetailsFormComponent implements OnInit {
 
   getOverTimeDate() {
     debugger
+    this.showPopup = 0;
     this.DigiofficecorehrService.GetApprovedStaffLeavesByStaffID(localStorage.getItem('staffid'), 1, this.date, this.date)
       .subscribe({
         next: data => {
           debugger
           let temp: any = data.filter(x => x.halfDayBit == 0);
           if (temp.length > 0) {
+            this.showPopup = 1;
+            this.messageId = 27;
+            this.showbtn = false;
             this.loader = false;
           }
           this.loader = false;
@@ -272,11 +244,15 @@ export class OverTimeDetailsFormComponent implements OnInit {
 
   public checkStartDate() {
     debugger
+    this.showPopup = 0;
     this.updatedStartTime = this.add_leading0(this.startTime.getHours()) + ':' + this.add_leading0(this.startTime.getMinutes());
     let date = new Date(this.date);
     let dayname = date.toLocaleDateString('en-US', { weekday: 'long' });
     if (this.date == undefined || this.date == null) {
       this.loader = false;
+      this.showPopup = 1;
+      this.messageId = 15;
+      this.startTime = "";
     }
     this.DigiofficecorehrService.GetHolidaybit(this.date, this.staffID).subscribe(data1 => {
       let temp1: any = data1.filter(x => x.filterdate == this.date);
@@ -290,11 +266,17 @@ export class OverTimeDetailsFormComponent implements OnInit {
               let temp = data.filter(x => (x.filterenddate >= this.date && x.filterdate <= this.date) && x.approve == 1);
               if (temp.length == 0) {
                 this.loader = false;
+                this.showPopup = 1;
+                this.messageId = 17;
               } else {
                 if (temp[0].restdays.includes(dayname) == true) {
                 } else {
                   if (this.updatedStartTime < temp[0].shifendtime) {
                     this.loader = false;
+                    this.showPopup = 1;
+                    this.messageId = 25;
+                    this.showbtn = false;
+                    this.startTime = '';
                   }
                 }
                 this.shift = temp[0].shiftType;
@@ -325,12 +307,18 @@ export class OverTimeDetailsFormComponent implements OnInit {
     if (((this.endTime - this.startTime) / 60000) < 60 && (this.endTime - this.startTime) > 0) {
       Swal.fire('Overtime Should be minimum of 1 Hour');
       this.loader = false;
+      this.showbtn = false;
+      this.showDetails = false;
     }
     else {
+      this.showPopup = 0;
       this.updatedEndTime = this.add_leading0(this.endTime.getHours()) + ':' + this.add_leading0(this.endTime.getMinutes());
       if (this.date == undefined || this.date == null) {
         Swal.fire("Please Select the Date Before adding End Time");
         this.loader = false;
+        this.showPopup = 1;
+        this.messageId = 16;
+        this.endTime = "";
       }
 
       this.DigiofficecorehrService.GetHolidaybit(this.date, this.staffID).subscribe(data1 => {
@@ -363,18 +351,28 @@ export class OverTimeDetailsFormComponent implements OnInit {
                         var tomotrwdate = this.Datepipe.transform(endDate, 'yyyy-MM-dd');
                         let temp1: any = data.filter(x => x.filterdate == tomotrwdate && x.userID == localStorage.getItem('staffid'));
                         if (temp.length == 0) {
-                          Swal.fire('You have not worked on this day. So Cant Apply Ot');
                           this.loader = false;
+                          this.showPopup = 1;
+                          this.messageId = 18;
+                          this.showbtn = false;
+                          this.showDetails = false;
                         }
                         this.updatedStartTime = this.startTime.getHours() + ':' + this.startTime.getMinutes()
                         this.updatedEndTime = this.add_leading0(this.endTime.getHours()) + ':' + this.add_leading0(this.endTime.getMinutes());
                         if (this.updatedEndTime > temp[0].etime) {
-                          Swal.fire('Endtime time must be less than sign out time');
                           this.loader = false;
+                          this.showPopup = 1;
+                          this.messageId = 19;
+                          this.showbtn = false;
+                          this.showDetails = false;
                         }
                         if (temp[0].webSignoutDate == null || temp[0].webSignoutDate == undefined) {
                           Swal.fire('You can not Apply Overtime as you are not Punched Out on this day');
                           this.loader = false;
+                          this.showPopup = 1;
+                          this.messageId = 20;
+                          this.showbtn = false;
+                          this.showDetails = false;
                         }
                         if (this.showbtn != false) {
                           this.DigiofficecorehrService.GetOtNightOt(this.updatedStartTime, this.updatedEndTime, this.shift, this.staffID, this.date)
@@ -431,8 +429,9 @@ export class OverTimeDetailsFormComponent implements OnInit {
                 debugger
                 let temp5 = data.filter(x => (x.filterenddate >= this.date && x.filterdate <= this.date) && x.approve == 1);
                 if (temp5.length == 0) {
-                  Swal.fire('Please Add shift and Get Approved From your Manager Before Applying OT for this date.')
                   this.loader = false;
+                  this.showPopup = 1;
+                  this.messageId = 21;
                 } else {
                   this.shift = temp5[0].shiftType;
                   if (this.shift == undefined || this.shift == null) {
@@ -452,25 +451,39 @@ export class OverTimeDetailsFormComponent implements OnInit {
                         var tomotrwdate = this.Datepipe.transform(endDate, 'yyyy-MM-dd');
                         let temp1: any = data.filter(x => x.filterdate == tomotrwdate && x.userID == localStorage.getItem('staffid'));
                         if (temp.length == 0) {
-                          Swal.fire('You have not worked on this day. So Cant Apply Ot');
                           this.loader = false;
+                          this.showPopup = 1;
+                          this.messageId = 18;
+                          this.showbtn = false;
+                          this.showDetails = false;
                         }
                         if (this.startTime < temp[0].endTime && this.shift == 1) {
-                          Swal.fire('OT Start  time must be greater  than Punch Out time');
+                          this.showPopup = 1;
+                          this.messageId = 22;
+                          this.showbtn = false;
+                          this.showDetails = false;
                           this.loader = false;
                         }
                         if (temp5[0].restdays.includes(dayname) == true) {
                         } else {
                           if (temp[0].minutesdiff < 480 && temp[0].minutesdiff > 0) {
-                            Swal.fire('You have not worked 8 hours on this date. So Cant Apply Ot');
+                            this.showPopup = 1;
+                            this.messageId = 23;
+                            this.showbtn = false;
+                            this.showDetails = false;
                             this.loader = false;
                           }
                           if (temp[0].mlate > 240) {
-                            Swal.fire('You are late more than half day  on this date. So Cant Apply Ot');
+                            this.showPopup = 1;
+                            this.messageId = 211;
+                            this.showbtn = false;
+                            this.showDetails = false;
                             this.loader = false;
                           }
                           if (this.updatedStartTime < temp5[0].shifendtime) {
-                            Swal.fire('OT Start time must be greater than Shift End time');
+                            this.showPopup = 1;
+                            this.messageId = 25;
+                            this.showbtn = false;
                             this.loader = false;
                           }
                         }
@@ -480,14 +493,19 @@ export class OverTimeDetailsFormComponent implements OnInit {
                           Swal.fire('Endtime  must be equal to sign out time');
                         }
                         if (temp[0].webSignoutDate == null || temp[0].webSignoutDate == undefined) {
-                          Swal.fire('You can not Apply Overtime as you are not Punched Out on this day');
-                          this.loader = false;
+                          this.showPopup = 1;
+                          this.messageId = 20;
+                          this.showbtn = false;
+                          this.showDetails = false;
                           this.loader = false;
                         }
                         if (temp.length == 1) {
                           if (temp[0].undertime == "Yes" && this.overNight != 1) {
-                            Swal.fire('You can not Apply Overtime as you are undertime on this Day');
                             this.loader = false;
+                            this.showPopup = 1;
+                            this.messageId = 24;
+                            this.showbtn = false;
+                            this.showDetails = false;
                           }
                         }
                         if (this.showbtn != false) {
@@ -548,9 +566,12 @@ export class OverTimeDetailsFormComponent implements OnInit {
 
   onSelect21(event: any) {
     debugger
+    this.showPopup = 0;
     this.attachments21.length = 0;
-    if (event.addedFiles == 0) {
-      Swal.fire('Invalid Attachment Type');
+    if (event.addedFiles[0].size / 1048576 > 2) {
+      this.loader = false;
+      this.showPopup = 1;
+      this.messageId = 14;
     }
     else {
       const uploadedFiles: File[] = event.addedFiles;
