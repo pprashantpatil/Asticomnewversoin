@@ -28,6 +28,8 @@ export class ShiftDetailsFormComponent implements OnInit {
   shiftDetailsList: any;
   employeeName: any;
   public selectedstaff: any = [];
+  showPopup: number = 0;
+  messageId: number = 0;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private activatedroute: ActivatedRoute, public dialogRef: MatDialogRef<ShiftDetailsDashComponent>,
     @Inject(MAT_DIALOG_DATA) public ID: any) { }

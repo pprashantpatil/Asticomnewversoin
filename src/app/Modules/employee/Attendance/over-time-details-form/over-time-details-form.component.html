@@ -1,3 +1,5 @@
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -17,21 +19,47 @@
                 </div>
 
                 <div class="popupinputs">
-                    <p>Actual Start Time<span class="span">*</span></p>
+                    <p>Start Time<span class="span">*</span></p>
                     <div>
-                        <!-- <timepicker [showMeridian]="false" [showSpinners]="showSpinners" name="startTime"
+                        <timepicker [showMeridian]="false" [showSpinners]="showSpinners" name="startTime"
                             [(ngModel)]="startTime" id="startTime" (change)="checkStartDate()">
-                        </timepicker> -->
+                        </timepicker>
                         <span class="red">Note:Please Enter Military Time</span>
                     </div>
                 </div>
 
                 <div class="popupinputs">
-                    <p>Actual End Time<span class="span">*</span></p>
+                    <p>End Time<span class="span">*</span></p>
                     <div>
-                        <!-- <timepicker [showMeridian]="false" [showSpinners]="showSpinners" name="endTime"
-                            [(ngModel)]="endTime" id="endTime" (change)="duration()"></timepicker> -->
+                        <timepicker [showMeridian]="false" [showSpinners]="showSpinners" name="endTime"
+                            [(ngModel)]="endTime" id="endTime" (change)="duration()"></timepicker>
                             <span class="red">Note:Please Enter Military Time</span>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Attachment</p>
+                    <div>
+                        <ngx-dropzone accept=".png,.jpg,.jpeg" (change)="onSelect21($event)" class="dropFile">
+                            <img src="assets/Images/MicrosoftTeams-image.png" *ngIf="attachments21.length==0"
+                                class="img-set dropdowning">
+                            <ngx-dropzone-label>Drop files here<br>only jpg/png/jpeg (max 5mb)</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of attachments21" [removable]="true"
+                                (removed)="onRemove21(f)">
+                                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                        </ngx-dropzone>
+                    </div>
+                    <!-- <a *ngIf="ID!=undefined" href="{{documentAttachment}}" target="_blank">
+                        <img width="25" height="25" border="0" align="center" src="assets/attached.png" />
+                    </a> -->
+                </div>
+
+                <div class="popupinputs">
+                    <p>Comments<span class="span">*</span></p>
+                    <div>
+                        <textarea type="text" class="form-control" rows="4" placeholder="Comments" [(ngModel)]="comment"
+                            name="comment" id="comment"></textarea>
                     </div>
                 </div>
 

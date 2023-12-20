@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ShiftDetailsDashComponent } from '../shift-details-dash/shift-details-dash.component';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-over-time-details-form',
@@ -52,8 +53,14 @@ export class OverTimeDetailsFormComponent implements OnInit {
   specialHoliday: any;
   showbtn: any;
   showSpinners: any;
+  comment: any;
+  public attachments21: any = [];
+  public attachments: any = [];
+  public attachmentsurl: any = [];
+  showPopup: any;
+  messageId: any;
 
-  constructor(public DigiofficecorehrService: DigiofficecorehrService, public Datepipe: DatePipe, private activatedroute: ActivatedRoute, public dialogRef: MatDialogRef<ShiftDetailsDashComponent>,
+  constructor(public DigiofficecorehrService: DigiofficecorehrService, public router: Router, public Datepipe: DatePipe, private activatedroute: ActivatedRoute, public dialogRef: MatDialogRef<ShiftDetailsDashComponent>,
     @Inject(MAT_DIALOG_DATA) public ID: any) { }
 
   ngOnInit(): void {
@@ -101,35 +108,104 @@ export class OverTimeDetailsFormComponent implements OnInit {
   }
 
   public cancel() {
-    location.href = "#/Employee/ShiftDetailsDash";
+    location.href = "#/Employee/OverTimeDetailsDash";
     this.loader = false;
     this.dialogRef.close(false);
   }
 
   public submit() {
-    if (this.date == undefined) {
-      Swal.fire('Please fill out all mandatory fields');
+    this.DigiofficecorehrService.ProjectAttachments(this.attachments21)
+    .subscribe({
+      next: data => {
+        debugger
+        this.attachmentsurl.push(data);
+        this.attachments.length = 0;
+        this.InsertStaffOverTimeDetails();
+        this.loader = false;
+      }
+    })
+  }
+
+  public InsertStaffOverTimeDetails() {
+    debugger
+    this.showPopup = 0;
+    this.loader = true;
+    if (this.date == " " || this.startTime == "" || this.endTime == "" || this.date == undefined || this.startTime == undefined || this.endTime == undefined) {
+      this.loader = false;
+      this.showPopup = 1;
+      this.messageId = 7;
+      this.loader = false;
     }
     else {
-      let entity = {
-        // 'ShiftDate': this.startDate,
-        // 'ShiftName': this.shiftName,
-        // 'StartTime': '2022-04-30 10:00:00.000',
-        // 'EndTime': '2022-04-30 10:00:00.000',
-        // 'StaffID1': localStorage.getItem('staffid'),
-        // 'EndDate': this.endDate,
-        // 'RestDays': this.restDays
+      var eb = {
+        'StaffID': localStorage.getItem('staffid'),
+        'Date': this.date,
+        'noofhours': this.noOfHours,
+        'NightOT': this.nightOTHours,
+        'Comments': this.comment,
+        'StartTime': this.updatedStartTime,
+        'EndTime': this.updatedEndTime,
+        'Status': 'Manager Pending',
+        'Attachment': this.attachmentsurl[0] == "" ? null : this.attachmentsurl[0],
+        'ExccessNormalOt': this.exccessNormalOT,
+        'ExccessNightOt': this.exccessNightOT,
+        'NSD_REGULAR': this.nSDRegular,
+        'RestNightOt': this.restNightOT,
+        'RestNormalOT': this.restNormalOT,
+        'ExccessRestNormalOt': this.exccessRestNormalOT,
+        'RestExccessNightOt': this.restExccessNightOT,
+        'LegalNightOt': this.legalNightOT,
+        'LegalNormalOT': this.legalNormalOT,
+        'LegalExccessNormalOt': this.legalExccessNormalOT,
+        'LegalExccessNightOt': this.legalExccessNightOT,
+        'SpecialHoliday': this.specialHoliday,
+        'SpecialNightOt': this.specialNightOT,
+        'SpecialNormalOT': this.specialNormalOT,
+        'SpecialExccessNormalOt': this.specialExccessNormalOT,
+        'SpecialExccessNightOt': this.specialExccessNightOT,
+        'SpecialRestNightOt': this.specialRestNightOT,
+        'SpecialRestNormalOT': this.specialRestNormalOT,
+        'SpecialRestExccessNormalOt': this.specialRestExccessNormalOT,
+        'SpecialRestExccessNightOt': this.specialRestExccessNightOT,
+        'LegalRestNightOt': this.legalRestNightOT,
+        'LegalRestNormalOT': this.legalRestNormalOT,
+        'LegalExccessRestNormalOt': this.legalExccessRestNormalOT,
+        'LegalExccessRestNightOt': this.legalExccessRestNightOT
       }
-      this.DigiofficecorehrService.InsertStaffShiftDetails(entity).subscribe(res => {
-        debugger;
-        if (res == 0) {
-          Swal.fire('Please choose another dates as these dates are overlapping with your existing shift');
+      this.DigiofficecorehrService.InsertStaffOverTimeDetails(eb)
+        .subscribe({
+          next: data => {
+            debugger
+            if (data == 0) {
+              this.loader = false;
+              this.showPopup = 1;
+              this.messageId = 26;
+            } else {
+              this.loader = false;
+              this.showPopup = 1;
+              this.messageId = 8;
+              this.uploadmultipleimages(data);
+              this.router.navigate(['/Employee/OverTimeDetailsDash']);
+              this.loader = false;
+            }
+          }
+        })
+    }
+  }
+
+  public uploadmultipleimages(id: any) {
+    debugger
+    for (let i = 0; i < this.attachmentsurl.length; i++) {
+      var entity = {
+        "Attachment": this.attachmentsurl[i],
+        "OverTimeID": id,
+      }
+      this.DigiofficecorehrService.InsertStaffOverTimeDetailsAttachment(entity).subscribe(
+        data => {
+
+          this.loader = false;
         }
-        else {
-          Swal.fire("Saved Successfully");
-          location.href = "#/Employee/ShiftDetailsDash";
-        }
-      })
+      )
     }
   }
 
@@ -153,7 +229,7 @@ export class OverTimeDetailsFormComponent implements OnInit {
     this.DigiofficecorehrService.UpdateStaffShiftDetails(entity).subscribe(res => {
       debugger
       Swal.fire("Updated Successfully");
-      location.href = "#/Employee/ShiftDetailsDash";
+      location.href = "#/Employee/OverTimeDetailsDash";
       this.loader = false;
     })
   }
@@ -463,6 +539,39 @@ export class OverTimeDetailsFormComponent implements OnInit {
             })
         }
       })
+    }
+  }
+
+  onRemove21(event: any) {
+    this.attachments21.splice(this.attachments.indexOf(event), 1);
+  }
+
+  onSelect21(event: any) {
+    debugger
+    this.attachments21.length = 0;
+    if (event.addedFiles == 0) {
+      Swal.fire('Invalid Attachment Type');
+    }
+    else {
+      const uploadedFiles: File[] = event.addedFiles;
+      for (const file of uploadedFiles) {
+        try {
+          const img = new Image();
+          img.src = window.URL.createObjectURL(file);
+          img.onload = async () => {
+            if ((event.addedFiles[0].size) > 5242880) {
+              Swal.fire('Please upload a file that is less than or equal to 5 MB.')
+              this.attachments21.length = 0;
+            }
+            else {
+              this.attachments21.push(...event.addedFiles);
+              Swal.fire('Attachment uploaded');
+            }
+          }
+        } catch (e) {
+          throw 'This is being thrown after setting img.src';
+        }
+      };
     }
   }
 }
