@@ -20,6 +20,7 @@ import { TimesheetReportComponent } from './Reports/timesheet-report/timesheet-r
 import { EmployeeCertificateDashComponent } from './EmployeeCertification/employee-certificate-dash/employee-certificate-dash.component';
 import { HelpComponent } from './Help/help/help.component';
 import { PayslipComponent } from './Payslip/payslip/payslip.component';
+import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave-request.component';
 
 const routes: Routes = [
   { path: 'Employeedashboard', component: EmployeeDashComponent },
@@ -31,6 +32,8 @@ const routes: Routes = [
 
   { path: 'EmployeeResignationDash', component: EmployeeResignationDashComponent },
   { path: 'LeaveRequestDash', component: LeaveRequestDashComponent },
+  { path: 'NewLeaveRequest', component: NewLeaveRequestComponent },
+  
   { path: 'LoanRequestDash', component: LoanRequestDashComponent },
   { path: 'LocatorRequestDash', component: LocatorRequestDashComponent },
   { path: 'TimesheetRequestDash', component: TimesheetRequestDashComponent },

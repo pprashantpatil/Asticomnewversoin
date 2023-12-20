@@ -35,6 +35,12 @@ import { PayslipComponent } from './Payslip/payslip/payslip.component';
 import { ShiftDetailsFormComponent } from './Attendance/shift-details-form/shift-details-form.component';
 import { OverTimeDetailsFormComponent } from './Attendance/over-time-details-form/over-time-details-form.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SharedModuleModule } from 'src/app/Shared/shared-module/shared-module.module';
+import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave-request.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 @NgModule({
   declarations: [
     EmployeeDashComponent,
@@ -58,12 +64,13 @@ import { OverTimeDetailsFormComponent } from './Attendance/over-time-details-for
     AttendanceCorrectionReportComponent,
     LeaveReportComponent,
     TimesheetReportComponent,
-    
     EmployeeCertificateDashComponent,
     HelpComponent,
     PayslipComponent,
     ShiftDetailsFormComponent,
-    OverTimeDetailsFormComponent
+    OverTimeDetailsFormComponent,
+    NewLeaveRequestComponent,
+  
   ],
   imports: [
     CommonModule,
@@ -73,6 +80,11 @@ import { OverTimeDetailsFormComponent } from './Attendance/over-time-details-for
     Ng2SearchPipeModule,
     BsDatepickerModule.forRoot(),
     
+    NgbModule,
+    NgxPaginationModule,
+    SharedModuleModule,
+    NgMultiSelectDropDownModule
+
   ]
 })
 export class EmployeeModule { }

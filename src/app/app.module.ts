@@ -7,38 +7,44 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Login/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { SidebarComponent } from './Shared/sidebar/sidebar.component';
 import { FooterComponent } from './Shared/footer/footer.component';
-import { LoaderComponent } from './Shared/loader/loader.component';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpage.component';
-
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SharedModuleModule } from './Shared/shared-module/shared-module.module';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SidebarComponent,
     FooterComponent,
-    LoaderComponent,
-    CommonalertpageComponent
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    CommonModule,
     HttpClientModule,
     DatePipe,
     NgbModule,
     MatDialogModule,
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule.forRoot(),
-    
+    NgxPaginationModule,
+    SharedModuleModule
   ],
+  exports:[
+    NgMultiSelectDropDownModule
+  ],
+
+
   providers: [DatePipe,
     CookieService
   ],

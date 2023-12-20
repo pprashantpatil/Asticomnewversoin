@@ -2024,7 +2024,14 @@ input[type="bsdate"] {
     border-bottom: 10px solid transparent;
     opacity: 0px !important;
     transition: opacity .6s ease;
+    display: none;
   }
+  .visually-hidden{
+    display: none;
+  }
+  .carousel-inner .sr-only {
+    display: none;
+ }
 
 
   .anno-text {

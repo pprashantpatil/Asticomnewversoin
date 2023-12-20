@@ -55,17 +55,10 @@
                 <div class="popupinputs">
                     <p>Rest Days<span class="span">*</span></p>
                     <div>
-                        <!-- <ng-multiselect-dropdown [placeholder]="'Select Rest Day'" [settings]="dropdownSettingsRestDays"
+                        <ng-multiselect-dropdown [placeholder]="'Select Rest Day'" [settings]="dropdownSettingsRestDays"
                             [data]="restDayList" [(ngModel)]="restDaysArray" (onSelect)="onItemSelect($event)"
                             (onDeSelect)="restDaysOnItemDeSelect($event)">
-                        </ng-multiselect-dropdown> -->
-                        <select class="form-control inputfield select" id="restDays" name="restDays"
-                            [(ngModel)]="restDays">
-                            <option value="">Select Rest Day</option>
-                            <option *ngFor="let data of restDayList" value="{{data.name}}">
-                                {{data.name}}
-                            </option>
-                        </select>
+                        </ng-multiselect-dropdown>
                     </div>
                 </div>
 

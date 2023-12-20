@@ -53,7 +53,8 @@
                     <div class="d-flex flex-column w-100">
                         <div class="d-flex justify-content-between align-item-center">
                             <div>
-                                <a class="forg-ps" target="_blank">Forgot Password</a>
+                                <a data-target="#changepassword" data-toggle="modal" class="forget"> Forgot
+                                    Password</a>
                             </div>
                             <button type="button" class="loginBtn" (click)="login()">Log In</button>
                         </div>
@@ -69,5 +70,215 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div id="changepassword" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 100px;">
+            <div class="modal-header">
+                <h4><b>Forgot Password</b></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-lg-4 ">
+                        <p style="padding:3px"> Subsidary
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <select class="inputclass padp-20" (change)="getCompanyDetails($event)">
+                            <option selected>Select Company</option>
+                            <option value="1001">Asticom Main</option>
+                            <option value="1002">Asticom ABSI (ABSI)</option>
+                            <option value="1005">Asticom FINSI</option>
+                            <option value="1003">Asticom BRAD</option>
+                            <option value="1004">Asticom HCX</option>
+                            <option value="1006">Asticom HQ</option>
+                        </select>
+                        <img class="imgview" src="assets/Images/dropdown.svg">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-4 ">
+                        <p style="padding:3px"> Employee ID
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="inputclass" id="Empid" name="Empid" type="text" [(ngModel)]="Empid"
+                            placeholder="Employee ID">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 ">
+                        <p style="padding:3px"> SSS NO
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="inputclass" id="sssno" name="sssno" type="text" [(ngModel)]="sssno"
+                            placeholder="SSS No" (keyup)="checksssandtinforforgot($event)">
+
+                    </div>
+                    <span *ngIf="!sssvalid" class="span empsss">Employee ID And SSS No Does not Match</span>
+                    <span *ngIf="sssvalid" class="span passok">Employee ID And SSS Match</span>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 ">
+                        <p style="padding:3px">Enter Email
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <input type="text" [(ngModel)]="email" class="inputclass" name="email" id="email" required
+                            placeholder="Enter Email" class="inputclass">
+                    </div>
+                </div>
+
+
+                <!-- <p *ngIf="showotp==1"> 6-digit verification code was just sent to your email. Please verify </p>
+                <div *ngIf="showotp==1" class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-3 ">
+                        <p style="padding:5px">Enter OTP
+                            <span class="starspan">*</span>
+
+                        </p>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <input type="text" [(ngModel)]="Otp" maxlength="6" onkeypress="return /[0-9]/i.test(event.key)"
+                            class="inputclass" name="Otp" id="Otp" required placeholder="Enter OTP"
+                            class="inputclass">
+                        
+                    </div>
+                </div>
+                <div *ngIf="showotp==2" class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-3 ">
+                        <p style="padding:5px">New Password
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <input type="text" [(ngModel)]="newpassword" class="inputclass" name="newpassword"
+                            id="newpassword" required placeholder="New Password" class="inputclass">
+                    </div>
+                </div>
+                <div *ngIf="showotp==0" class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-2">
+                        <button style="width: auto;" [disabled]="email === ''" class="btn btn-success form-control"
+                            type="button" (click)="SendOTP()">Submit</button>
+                    </div>
+                </div>
+                <div *ngIf="showotp==1" class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-2">
+                        <button style="width: auto;" class="btn btn-success form-control" type="button"
+                            (click)="VerifyOTP()">Verify</button>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-2">
+                        <button style="width: auto;" [disabled]="email==undefined ||email=='' ||!sssvalid"
+                            class="btn btn-success form-control" data-dismiss="modal" type="button"
+                            (click)="Save()">Send</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<button id="opencost" data-toggle="modal" data-target="#changepassword1" type="button" class="loginbtn" hidden></button>
+<div id="changepassword1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 100px;width: 700px;">
+            <div class="modal-header">
+                <h5><b>Default Password is Expired .Please Change Your Password </b></h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4 ">
+                        <p style="padding:3px">Enter Employee ID
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <input class="inputclass" id="Empid" name="Empid" type="text" [(ngModel)]="Empid"
+                            placeholder="Employee ID">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 ">
+                        <p style="padding:3px">Enter SSS NO
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <input class="inputclass" id="sssno" name="sssno" type="text" [(ngModel)]="sssno"
+                            placeholder="SSS No" (keyup)="checksssandtin($event)">
+
+                    </div>
+                    <span *ngIf="!sssvalid" class="span empsss">Employee ID And SSS No Does not Match</span>
+                    <span *ngIf="sssvalid" class="span passok">Employee ID And SSS Match</span>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 ">
+                        <p style="padding:3px">Enter New Password
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <input class="inputclass" id="newpassword" name="newpassword" type="password"
+                            [(ngModel)]="newpassword" placeholder="New Password"
+                            (ngModelChange)="checkStrength(newpassword)">
+                        <span *ngIf="pp==1" class="span empsss1">Weak Password!! At least 8 characters and must have
+                            the following: uppercase, lowercase, numeric and special characters</span>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4 ">
+                        <p style="padding:3px">Confirm Password
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <input class="inputclass" id="confirmpassword" name="confirmpassword"
+                            (keyup)="checkpassword($event)" type="text" [(ngModel)]="confirmpassword"
+                            placeholder="Confirm Password"><br>
+                        <span *ngIf="!passvaild" class="span empsss1">Password Doesn't Match</span>
+                        <span *ngIf="passvaild" class="span passok1">Password Match</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                    </div>
+                    <div class="col-lg-2">
+                        <button style="width: auto;" [disabled]="!passvaild"  class="btn btn-success form-control" data-dismiss="modal"
+                            type="button" (click)="ChangePassword()">Change Password</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </div>
