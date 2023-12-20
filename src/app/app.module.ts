@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SidebarComponent } from './Shared/sidebar/sidebar.component';
 import { FooterComponent } from './Shared/footer/footer.component';
-
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -37,11 +37,13 @@ import { SharedModuleModule } from './Shared/shared-module/shared-module.module'
     MatDialogModule,
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule.forRoot(),
+    TimepickerModule.forRoot(),
     NgxPaginationModule,
     SharedModuleModule
   ],
   exports:[
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    TimepickerModule
   ],
 
 

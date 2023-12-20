@@ -40,6 +40,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModuleModule } from 'src/app/Shared/shared-module/shared-module.module';
 import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave-request.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NgbModule,
     NgxPaginationModule,
     SharedModuleModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    TimepickerModule
 
   ]
 })
