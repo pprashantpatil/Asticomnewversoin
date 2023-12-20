@@ -22,36 +22,43 @@ import { HelpComponent } from './Help/help/help.component';
 import { PayslipComponent } from './Payslip/payslip/payslip.component';
 import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave-request.component';
 import { ViewPolicyDashComponent } from './Policies/view-policy-dash/view-policy-dash.component';
+import { TimesheetformComponent } from './Requests/timesheetform/timesheetform.component';
+import { AuthguardGuard } from '../../Services/authguard.guard';
+import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-accountsetting-modify.component';
 
 const routes: Routes = [
-  { path: 'Employeedashboard', component: EmployeeDashComponent },
-
-  { path: 'AttendanceCorrectionDash', component: AttendanceCorrectionDashComponent },
-  { path: 'AttendanceDetailsDash', component: AttendanceDetailsDashComponent },
-  { path: 'OverTimeDetailsDash', component: OverTimeDetailsDashComponent },
-  { path: 'ShiftDetailsDash', component: ShiftDetailsDashComponent },
-
-  { path: 'EmployeeResignationDash', component: EmployeeResignationDashComponent },
-  { path: 'LeaveRequestDash', component: LeaveRequestDashComponent },
-  { path: 'NewLeaveRequest', component: NewLeaveRequestComponent },
+  { path: 'Employeedashboard', component: EmployeeDashComponent ,canActivate: [AuthguardGuard]},
   
-  { path: 'LoanRequestDash', component: LoanRequestDashComponent },
-  { path: 'LocatorRequestDash', component: LocatorRequestDashComponent },
-  { path: 'TimesheetRequestDash', component: TimesheetRequestDashComponent },
+  { path: 'AttendanceCorrectionDash', component: AttendanceCorrectionDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'AttendanceDetailsDash', component: AttendanceDetailsDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'OverTimeDetailsDash', component: OverTimeDetailsDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'ShiftDetailsDash', component: ShiftDetailsDashComponent ,canActivate: [AuthguardGuard]},
 
   { path: 'PoliciesDash', component: PoliciesDashComponent },
   { path: 'ViewPolicyDash', component: ViewPolicyDashComponent },
   { path: 'ViewPolicyDash/:id', component: ViewPolicyDashComponent },
   { path: 'HolidaysDash', component: HolidaysDashComponent },
   { path: 'AnnouncementsDash', component: AnnouncementsDashComponent },
+  { path: 'EmployeeResignationDash', component: EmployeeResignationDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'LeaveRequestDash', component: LeaveRequestDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'NewLeaveRequest', component: NewLeaveRequestComponent ,canActivate: [AuthguardGuard]},
+  
+  { path: 'LoanRequestDash', component: LoanRequestDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'LocatorRequestDash', component: LocatorRequestDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'TimesheetRequestDash', component: TimesheetRequestDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'Timesheetform', component: TimesheetformComponent ,canActivate: [AuthguardGuard]},
+  { path: 'PoliciesDash', component: PoliciesDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'HolidaysDash', component: HolidaysDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'AnnouncementsDash', component: AnnouncementsDashComponent ,canActivate: [AuthguardGuard]},
 
-  { path: 'AttendanceCorrectionReport', component: AttendanceCorrectionReportComponent },
-  { path: 'AttendanceReport', component: AttendanceReportComponent },
-  { path: 'LeaveReport', component: LeaveReportComponent },
-  { path: 'TimesheetReport', component: TimesheetReportComponent },
+  { path: 'AttendanceCorrectionReport', component: AttendanceCorrectionReportComponent ,canActivate: [AuthguardGuard]},
+  { path: 'AttendanceReport', component: AttendanceReportComponent ,canActivate: [AuthguardGuard]},
+  { path: 'LeaveReport', component: LeaveReportComponent ,canActivate: [AuthguardGuard]},
+  { path: 'TimesheetReport', component: TimesheetReportComponent ,canActivate: [AuthguardGuard]},
 
-  { path: 'EmployeeCertificateDash', component: EmployeeCertificateDashComponent },
-  { path: 'Help', component: HelpComponent },
+  { path: 'EmployeeCertificateDash', component: EmployeeCertificateDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'Help', component: HelpComponent ,canActivate: [AuthguardGuard]},
+  { path: 'MyAccountSetting', component: MyAccountsettingModifyComponent ,canActivate: [AuthguardGuard]},
   { path: 'Payslip', component: PayslipComponent }
 ];
 

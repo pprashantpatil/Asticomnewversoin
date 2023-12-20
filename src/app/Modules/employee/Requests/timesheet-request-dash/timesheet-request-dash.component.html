@@ -1,1 +1,212 @@
-<p>timesheet-request-dash works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li *ngIf="roleid==6"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
+                        <p class="Heading"> My Timesheet Details</p>
+                    </a></li>
+                <li *ngIf="roleid==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
+                        <p class="Heading"> Team Timesheet Details</p>
+                    </a></li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getenddate($event)">
+            </div>
+
+            <div class="cardinputs" (click)="showDialog()">
+                <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Timesheet</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-lg-12 dashbutton bttn">
+            <div class="tab-slider--nav">
+                <ul class="tab-slider--tabs">
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1"
+                        (click)="viewMode ='tab1'">
+                        Pending</li>
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2"
+                        (click)="viewMode ='tab2'">
+                        Approved</li>
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab3'" rel="tab3"
+                        (click)="viewMode ='tab3'">
+                        Rejected</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-slider--container" [ngSwitch]="viewMode">
+        <div *ngSwitchCase="'tab1'" id="tab1">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(timesheets1|filter:search)?.length}} </span>RESULT(S)
+                    </p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>No Of Hours</th>
+                            <th>Task</th>
+                            <th>Attachment</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of timesheets1|filter: term|paginate: { itemsPerPage: count1, currentPage: p}">
+                            <td>{{item.date|date}}</td>
+                            <td>{{item.startTime}}</td>
+                            <td>{{item.endTime}}</td>
+                            <td>{{item.noOfHrs|date:"HH:mm"}}</td>
+                            <td>{{item.task}}</td>
+                            <td>
+                                <p *ngIf="item.excelURL==null">No Attachment</p>
+                                <p *ngIf="item.excelURL=='0'">No Attachment</p>
+                                <a href="{{item.excelURL}}" target="_blank"> <img
+                                        *ngIf="item.excelURL!=null" src="assets/Images/attachment (1).png"
+                                        class="attachmentPin"></a>
+                            </td>
+                            <td>
+                                <p *ngIf="item.comments==null">No Comments</p>
+                                <p *ngIf="item.comments!=null">{{item.comments}}</p>
+
+                            </td>
+                            <td>
+                                <p *ngIf="item.status==null">Not Approved</p>
+                                {{item.status}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+
+        <div *ngSwitchCase="'tab2'" id="tab2">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(timesheets2|filter:search)?.length}} </span>RESULT(S)
+                    </p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>No Of Hours</th>
+                            <th>Attachment</th>
+                            <th>Task</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of timesheets2|filter: term|paginate: { itemsPerPage: count1, currentPage: p}">
+                            <td>{{item.date|date}}</td>
+                            <td>{{item.startTime}}</td>
+                            <td>{{item.endTime}}</td>
+                            <td>{{item.noOfHrs|date:"HH:mm"}}</td>
+                            <td>
+                                <p *ngIf="item.excelURL==null">No Attachment</p>
+                                <a href="{{item.excelURL}}" target="blank"> <img *ngIf="item.excelURL!=null"
+                                        src="assets/Images/attachment (1).png" class="attachmentPin"></a>
+                            </td>
+                            <td>{{item.task}}</td>
+                            <td>{{item.comments}}</td>
+                            <td>
+                                <p *ngIf="item.status==null">Not Approved</p>
+                                {{item.status}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+
+        <div *ngSwitchCase="'tab3'" id="tab3">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(timesheets3|filter:search)?.length}} </span>RESULT(S)
+                    </p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>No Of Hours</th>
+                            <th>Task</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of timesheets3|filter: term|paginate: { itemsPerPage: count1, currentPage: p}">
+                            <td>{{item.date|date}}</td>
+                            <td>{{item.startTime}}</td>
+                            <td>{{item.endTime}}</td>
+                            <td>{{item.noOfHrs|date:"HH:mm"}}</td>
+                            <td>{{item.task}}</td>
+                            <td>{{item.comments}}</td>
+                            <td>
+                                <p *ngIf="item.status==null">Not Approved</p>
+                                {{item.status}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+    </div>
+</div>
+

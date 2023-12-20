@@ -46,6 +46,8 @@ import { ViewPolicyDashComponent } from './Policies/view-policy-dash/view-policy
 import { PoliciesFormComponent } from './Policies/policies-form/policies-form.component';
 import { HolidaysFormComponent } from './Holidays/holidays-form/holidays-form.component';
 import { AnnouncementsFormComponent } from './Announcements/announcements-form/announcements-form.component';
+import { TimesheetformComponent } from './Requests/timesheetform/timesheetform.component';
+import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-accountsetting-modify.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import { AnnouncementsFormComponent } from './Announcements/announcements-form/a
     PoliciesFormComponent,
     HolidaysFormComponent,
     AnnouncementsFormComponent,
+    TimesheetformComponent,
+    MyAccountsettingModifyComponent,
   
   ],
   imports: [
@@ -94,6 +98,7 @@ import { AnnouncementsFormComponent } from './Announcements/announcements-form/a
     Ng2SearchPipeModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
+    TimepickerModule,
     NgbModule,
     NgxPaginationModule,
     SharedModuleModule,

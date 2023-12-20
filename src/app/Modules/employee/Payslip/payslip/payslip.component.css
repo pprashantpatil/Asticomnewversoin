@@ -1,0 +1,444 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    text-decoration: 3px solid rgb(72, 83, 238) underline;
+    color: rgb(72, 83, 238)
+  }
+  
+  .card {
+    background-color: white;
+  }
+  
+  .card-padding {
+    padding: 1%;
+  }
+  
+  .table {
+    border-radius: 5px;
+  }
+  
+  .Heading {
+    padding-left: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    text-decoration-line: underline;
+  }
+  
+  .button {
+    text-transform: uppercase;
+    font-weight: initial;
+    text-shadow: initial;
+    letter-spacing: 0.5px;
+    background-color: #2F87CC;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    width: 90%;
+    float: right;
+    margin-right: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .edit {
+    width: 85%;
+    border: none;
+    background-color: #2F87CC;
+    text-align: center;
+    border-radius: 16px;
+    color: white;
+    margin-top: 6px;
+  }
+  
+  .FilterClass {
+    padding-left: 15px;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .View {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  
+  
+  .HrLine {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  
+  .form-control {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .newFont {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .img {
+    width: 25px;
+    height: 10%;
+  }
+  
+  .img:hover {
+    background-color: chartreuse;
+    color: white;
+  }
+  
+  .imgcancel {
+    width: 25px;
+    height: 10%;
+  }
+  
+  .imgcancel:hover {
+    background-color: red;
+    color: white;
+  }
+  
+  .SelectData {
+    text-align: center;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 27px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked+.slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+  
+  .EditBTN {
+    border-radius: 5px;
+    border-width: 1.5px;
+    width: 50px;
+    margin-right: 10px;
+  }
+  
+  .DeleteBTN {
+    border-radius: 5px;
+    border-width: 1.5px;
+    width: 50px;
+  }
+  
+  .SubmitBTN {
+    background-color: #21a4da;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 20px;
+  }
+  
+  .fonttxt {
+    font-size: 12px;
+    font-weight: bold;
+    float: right;
+  }
+  
+  .Cal {
+    width: 115px;
+  }
+  
+  .Year {
+    margin-left: 10px;
+    width: 100px;
+  }
+  
+  .Signatory {
+    width: 220px;
+    margin-left: -110px;
+  }
+  
+  span.cls_004 {
+    font-family: Arial, serif;
+    font-size: 10.6px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  div.cls_004 {
+    font-family: Arial, serif;
+    font-size: 10.6px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  span.cls_002 {
+    font-family: Arial, serif;
+    font-size: 10.1px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  div.cls_002 {
+    font-family: Arial, serif;
+    font-size: 10.1px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  span.cls_003 {
+    font-family: Arial, serif;
+    font-size: 10.1px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  div.cls_003 {
+    font-family: Arial, serif;
+    font-size: 10.1px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  span.cls_005 {
+    font-family: Arial, serif;
+    font-size: 9.1px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  div.cls_005 {
+    font-family: Arial, serif;
+    font-size: 9.1px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  span.cls_006 {
+    font-family: Arial, serif;
+    font-size: 9.1px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  div.cls_006 {
+    font-family: Arial, serif;
+    font-size: 9.1px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  span.cls_007 {
+    font-family: Arial, serif;
+    font-size: 8.1px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+    font-style: italic;
+    text-decoration: none
+  }
+  
+  div.cls_007 {
+    font-family: Arial, serif;
+    font-size: 8.1px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+    font-style: italic;
+    text-decoration: none
+  }
+  
+  span.cls_008 {
+    font-family: Arial, serif;
+    font-size: 8.3px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  div.cls_008 {
+    font-family: Arial, serif;
+    font-size: 8.3px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+  }
+  
+  .button1 {
+    text-transform: uppercase;
+    font-weight: initial;
+    text-shadow: initial;
+    letter-spacing: 0.5px;
+    background-color: #2F87CC;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    width: 73%;
+    float: right;
+    margin-right: 64px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: -12px;
+  }
+  
+  .button2 {
+    text-transform: uppercase;
+    font-weight: initial;
+    text-shadow: initial;
+    letter-spacing: 0.5px;
+    background-color: #2F87CC;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    width: 30%;
+    float: right;
+    margin-right: 73px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 28px;
+  }
+  
+  .certificate {
+    text-align: center;
+    font-weight: bolder;
+  }
+  
+  
+  
+  .bol {
+    font-weight: bolder;
+  }
+  
+  .padding {
+    padding: 10px;
+  }
+  
+  .image {
+    width: 100%;
+    height: 50px;
+  }
+  
+  .CertifyEmploButn {
+    text-transform: uppercase;
+    font-weight: initial;
+    text-shadow: initial;
+    letter-spacing: 0.5px;
+    background-color: #3247d5;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    width: 40%;
+    float: right;
+    margin-right: 77px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: -10px;
+  
+  }
+  
+  .butn-sadow {
+    position: relative;
+    width: 145px;
+    left: 225px;
+  }
+  
+  @media (min-width: 1920px) and (max-width: 2560px) {
+    .butn-sadow {
+      position: relative;
+      width: 145px;
+      left: 300px
+    }
+  }

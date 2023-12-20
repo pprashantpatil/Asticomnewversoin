@@ -37,7 +37,7 @@ ngOnInit(): void {
  
   this.staffID = localStorage.getItem('staffid');
   this.login = localStorage.getItem('roledid');
-
+  this.EmployeeID = localStorage.getItem('EmployeeID');
 
 
   if (sessionStorage.getItem('roledid') == undefined) {
@@ -116,6 +116,17 @@ public notification() {
   document.getElementById('dropdownConfig1')?.click();
   
 }
+
+public profile(){
+  this.router.navigate(['/HR/AddressDetailsWizard',this.EmployeeID]);
+
+}
+
+public accountsetting() {
+  debugger
+  this.router.navigate(['/Employee/MyAccountSetting']);
+}
+
 
 public logout() {
   this.loader = true;

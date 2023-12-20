@@ -571,3 +571,15 @@
   /*   border: 1px solid #DBDBDB; */
   border-radius: 4px;
 }
+
+.defclrchange :hover,.logoutlabel:hover,.defclrchange:visited,.logoutlabel:visited,.defclrchange:active,.logoutlabel:active{
+  background: transparent;
+  outline: none;
+  color: #2F87CC;
+}
+.logoutlabel{
+  margin-left: 10px;
+}
+.img-set{
+  margin-left: 4px;
+}

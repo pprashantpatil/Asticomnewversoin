@@ -19,13 +19,14 @@ import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpa
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModuleModule } from './Shared/shared-module/shared-module.module';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SidebarComponent,
     FooterComponent,
-  
   ],
   imports: [
     BrowserModule,
@@ -43,6 +44,7 @@ import { SharedModuleModule } from './Shared/shared-module/shared-module.module'
     NgxPaginationModule,
     SharedModuleModule,
     TimepickerModule.forRoot(),
+    TimepickerModule
   ],
   exports:[
     NgMultiSelectDropDownModule,
