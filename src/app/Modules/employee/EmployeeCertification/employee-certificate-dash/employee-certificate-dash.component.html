@@ -1,1 +1,660 @@
-<p>employee-certificate-dash works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+    <div class="card">
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="Heading1" style="text-align: center;">CERTIFICATE OF EMPLOYMENT</p>
+                <!-- <hr class="HrLine"> -->
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div> -->
+
+            <!-- <div class="col-lg-3">
+                <p style="text-align: center;"> Select Start Month & Year</p>
+            </div> -->
+
+            <div class="col-lg-3">
+                <p><b>COE Type</b></p>
+                <select name="coeType" id="coeType" class="form-control" [(ngModel)]="coeType">
+                    <option value="0">Select COE Type</option>
+                    <option value="COE Active Employee No Salary Details">COE - Active Employee (No Salary Details)
+                    </option>
+                    <option value="COE Active Employee with Compensation">COE - Active Employee (with Compensation)
+                    </option>
+                    <option value="Certificate of Deployment No Salary Details">CERTIFICATE OF DEPLOYMENT (No Salary
+                        Details)</option>
+                    <option value="RAAWA/Security Pass No Salary Details">RAAWA/Security Pass (No Salary Details)
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-lg-4">
+                <p><b>Reason for COE Request</b></p>
+                <select name="reason" id="reason" class="form-control" [(ngModel)]="reason">
+                    <option value="0">Select Reason for COE Request</option>
+                    <option value="Personal Reference">Personal Reference</option>
+                    <option value="Personal Loan Application">Personal Loan Application</option>
+                    <option value="Credit Card Application">Credit Card Application</option>
+                    <option value="Housing Loan Application">Housing Loan Application</option>
+                    <option value="Car Loan Application">Car Loan Application</option>
+                    <option value="Motorcycle Loan Application">Motorcycle Loan Application</option>
+                    <option value="Postpaid Line Application">Postpaid Line Application</option>
+                    <option value="Government Loan Application">Government Loan Application</option>
+                    <option value="Travel For Leisure Purposes">Travel For Leisure Purposes</option>
+                    <option value="Academic Documentary Requirement">Academic Documentary Requirement</option>
+                    <option value="Visa Application">Visa Application</option>
+                </select>
+            </div>
+
+            <div class="col-lg-3" *ngIf="reason=='Visa Application'">
+                <p><b>Please specify</b></p>
+                <input type="text" class="form-control" placeholder="Country Name" [(ngModel)]="countryName"
+                    name="countryName" id="countryName">
+            </div>
+        </div><br>
+
+        <div class="row FilterClass fontheading">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-2">
+                <!-- <p style="text-align: center;">Signatory Person</p> -->
+            </div>
+            <div class="col-lg-2">
+                <!-- <select name="cars" id="Month" class="form-control" [(ngModel)]="sign" (change)="getsign()">
+                    <option value="0">Select</option>
+                    <option value="HR">HR</option>
+                </select> -->
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-4">
+                <!-- <button class="generate" (click)="showpdf()">GENERATE</button> -->
+                <button class="butn-sadow" *ngIf="coeType=='COE Active Employee No Salary Details' && reason!='0'"
+                    data-toggle="modal" data-target="#modalCOEActiveEmployeeNoSalaryDetails"
+                    (click)="getempcert()">Download</button>
+                <button class="butn-sadow" *ngIf="coeType=='COE Active Employee with Compensation' && reason!='0'"
+                    data-toggle="modal" data-target="#modalCOEActiveEmployeeWithCompensation"
+                    (click)="getempcert()">Download</button>
+                <button class="butn-sadow" *ngIf="coeType=='Certificate of Deployment No Salary Details' && reason!='0'"
+                    data-toggle="modal" data-target="#modalCertificateOfDeploymentNoSalaryDetails"
+                    (click)="getempcert()">Download</button>
+                <button class="butn-sadow" *ngIf="coeType=='RAAWA/Security Pass No Salary Details' && reason!='0'"
+                    data-toggle="modal" data-target="#modalRAAWASecurityPassNoSalaryDetails"
+                    (click)="getempcert()">Download</button>
+            </div>
+        </div>
+    </div><br>
+
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="modal fade" id="modalCOEActiveEmployeeNoSalaryDetails" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="height: 600px;overflow-y: scroll;padding: 5%;">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>CERTIFICATE OF EMPLOYMENT</b></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div><br>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                        </div>
+                        <div class="col-lg-6">
+                            <button class="CertifyEmploButn"
+                                (click)="convertToPDFCOEActiveEmployeeNoSalaryDetails()">Generate COE Request
+                                <i class="fa fa-download" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="downloadCOEActiveEmployeeNoSalaryDetails" *ngFor="let item of stafflist">
+                        <div class="container-fluid padding">
+                            <div *ngIf="companyid==1001"> <img src="assets/Images/AsticomCertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1002"> <img src="assets/Images/ABSICertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1005"> <img src="assets/Images/FINSICertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1006"> <img src="assets/Images/HQCertificate.png" alt=""
+                                    class="image"></div>
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <br><br>
+                                    <!-- <img src="assets/Images/asticom.jfif" alt="" class="image"> -->
+                                </div>
+                                <br><br>
+                                <div class="col-lg-10">
+                                    <br><br>
+                                    <h4 class="certificate">CERTIFICATE OF EMPLOYMENT</h4>
+                                </div>
+                            </div><br><br>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p class="cert">This is to certify that <span class="bol">{{
+                                            username|uppercase}}</span> is currently employed at <span class="bol">
+                                            {{companyName}} </span> since <span
+                                            class="bol">{{item.joiningDate|date:'MMMM d, y'}},</span>
+                                        with a position title of <span class="bol">{{item.role}}.</span>
+                                        <br>
+
+                                    <p class="cert">This certification was issued on <span
+                                            class="bol">{{todaydate|date:'MMMM d, y'}}</span> and is valid for 30 days
+                                        from the date of
+                                        issuance, for <span class="bol">{{reason}}.</span></p>
+                                    <br>
+                                    <br>
+                                    <p class="certi"><b>{{companyName}}</b></p>
+                                    <div *ngIf="companyid==1001"> <img src="assets/Images/AstiCertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1002"> <img src="assets/Images/ABSICertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1005"> <img src="assets/Images/FINSICertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1006"> <img src="assets/Images/HQCertificateSign.png" alt=""
+                                            class="certificateimage"></div>
+
+                                    <p class="certi" *ngIf="companyid==1001 || companyid==1002"><b>Juan Miguel M.
+                                            Tulay</b></p>
+                                    <p class="certi" *ngIf="companyid==1005"><b>Leah Marie M. Reyes</b></p>
+                                    <p class="certi" *ngIf="companyid==1006"><b>Marisol Apsay</b></p>
+                                    <br>
+                                    <br>
+                                    <p class="certi"><b>Human Resources Head</b></p>
+
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p class="cert">Printed on: {{todaydate|date:'MMMM d, y'}}</p>
+                                    <p class="cert">Printed by: {{username|uppercase}}</p>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p>This is a system generated document. No physical signature and dry seal required.
+                                    </p>
+                                    <hr>
+                                    <p>Disclaimer: Should you wish to verify the authenticity of the information stated
+                                        above, please e-mail everification@asticom.com.ph</p>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" *ngIf="companyid==1001">
+                            <p>15/F W Fifth Building, Bonifacio Global City, Taguig City, 1634, Metro Manila,
+                                Philippines   
+                                Email: inquiry@asticom.com.ph | <img src="assets/Images/webicon.png"
+                                    style="height: 20px;width: 20px;"> www.asticom.com.ph</p>
+                        </div>
+                        <div class="modal-footer" *ngIf="companyid==1002">
+                            <p>7th Floor, Bayantel Building, Roosevelt Avenue, Quezon City, 1105, Metro Manila,
+                                Philippines
+                                Email: inquiry@absi.com.ph | <img src="assets/Images/webicon.png"
+                                    style="height: 20px;width: 20px;"> https://absi.ph | www.asticom.com.ph</p>
+                        </div>
+                        <div class="modal-footer" *ngIf="companyid==1005">
+                            <p>4/F Globe Telecom Plaza Tower 1, Madison corner Pioneer Streets, Bonifacio Avenue,
+                                Mandaluyong
+                                City, 1552, Metro Manila, Philippines
+                                Tel.No. (0917) 853 25 06 | Email: inquiry@finsi.com.ph | <img
+                                    src="assets/Images/webicon.png" style="height: 20px;width: 20px;">
+                                https://www.finsi.com.ph |
+                                www.asticom.com.ph</p>
+                        </div>
+                        <div class="modal-footer" *ngIf="companyid==1006">
+                            <p>15/F W Fifth Building, Bonifacio Global City, Taguig City, 1634, Metro Manila,
+                                Philippines
+                                Email: inquiry@acquiro.com.ph | <img src="assets/Images/webicon.png"
+                                    style="height: 20px;width: 20px;"> https://acquiro.com.ph | www.asticom.com.ph</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCOEActiveEmployeeWithCompensation" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="height: 600px;overflow-y: scroll;padding: 5%;">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>CERTIFICATE OF EMPLOYMENT</b></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div><br>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                        </div>
+                        <div class="col-lg-6">
+                            <button class="CertifyEmploButn"
+                                (click)="convertToCOEActiveEmployeeWithCompensation()">Generate COE Request
+                                <i class="fa fa-download" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="downloadCOEActiveEmployeeWithCompensation" *ngFor="let item of stafflist">
+                        <div class="container-fluid padding">
+                            <div *ngIf="companyid==1001"> <img src="assets/Images/AsticomCertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1002"> <img src="assets/Images/ABSICertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1005"> <img src="assets/Images/FINSICertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1006"> <img src="assets/Images/HQCertificate.png" alt=""
+                                    class="image"></div>
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <br><br>
+                                    <!-- <img src="assets/Images/asticom.jfif" alt="" class="image"> -->
+                                </div>
+                                <br><br>
+                                <div class="col-lg-10">
+                                    <br><br>
+                                    <h4 class="certificate">CERTIFICATE OF EMPLOYMENT</h4>
+                                </div>
+                            </div><br><br>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p class="cert">This is to certify that <span class="bol">{{username|uppercase}}
+                                        </span> is currently employed at <span class="bol">
+                                            Asticom </span> since <span class="bol">{{item.joiningDate|date:'MMMM d,
+                                            y'}} ,</span>
+                                        with a position title of <span class="bol">{{item.role}}.</span>
+                                        <br>
+                                    <p class="cert"> Futhermore, <span class="bol">{{ username|uppercase}}</span> is
+                                        receiving an
+                                        annual salary of <span class="bol">{{item.currentBMS*13}} </span>pesos with 13th
+                                        month
+                                        pay.</p>
+
+
+                                    <p class="cert">This certification was issued on <span
+                                            class="bol">{{todaydate|date:'MMMM d, y'}}</span> and is valid for 30 days
+                                        from date of
+                                        issuance for <span class="bol">{{reason}}.</span></p>
+                                    <br>
+                                    <br>
+                                    <p class="certi"><b>{{companyName}}</b></p>
+                                    <div *ngIf="companyid==1001"> <img src="assets/Images/AstiCertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1002"> <img src="assets/Images/ABSICertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1005"> <img src="assets/Images/FINSICertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1006"> <img src="assets/Images/HQCertificateSign.png" alt=""
+                                            class="certificateimage"></div>
+
+                                    <p class="certi" *ngIf="companyid==1001 || companyid==1002"><b>Juan Miguel M.
+                                            Tulay</b></p>
+                                    <p class="certi" *ngIf="companyid==1005"><b>Leah Marie M. Reyes</b></p>
+                                    <p class="certi" *ngIf="companyid==1006"><b>Marisol Apsay</b></p>
+                                    <br>
+                                    <br>
+                                    <p class="certi"><b>Human Resources Head</b></p>
+
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p class="cert">Printed on: {{todaydate|date:'MMMM d, y'}}</p>
+                                    <p class="cert">Printed by: {{username|uppercase}}</p>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p>This is a system generated document. No physical signature and dry seal required.
+                                    </p>
+                                    <hr>
+                                    <p>Disclaimer: Should you wish to verify the authenticity of the information stated
+                                        above, please e-mail everification@asticom.com.ph</p>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" *ngIf="companyid==1001">
+                    <p>15/F W Fifth Building, Bonifacio Global City, Taguig City, 1634, Metro Manila, Philippines
+                        Email: inquiry@asticom.com.ph | <img src="assets/Images/webicon.png"
+                            style="height: 20px;width: 20px;"> www.asticom.com.ph</p>
+                </div>
+                <div class="modal-footer" *ngIf="companyid==1002">
+                    <p>7th Floor, Bayantel Building, Roosevelt Avenue, Quezon City, 1105, Metro Manila, Philippines
+                        Email: inquiry@absi.com.ph | <img src="assets/Images/webicon.png"
+                            style="height: 20px;width: 20px;"> https://absi.ph | www.asticom.com.ph</p>
+                </div>
+                <div class="modal-footer" *ngIf="companyid==1005">
+                    <p>4/F Globe Telecom Plaza Tower 1, Madison corner Pioneer Streets, Bonifacio Avenue, Mandaluyong
+                        City, 1552, Metro Manila, Philippines
+                        Tel.No. (0917) 853 25 06 | Email: inquiry@finsi.com.ph | <img src="assets/Images/webicon.png"
+                            style="height: 20px;width: 20px;"> https://www.finsi.com.ph |
+                        www.asticom.com.ph</p>
+                </div>
+                <div class="modal-footer" *ngIf="companyid==1006">
+                    <p>15/F W Fifth Building, Bonifacio Global City, Taguig City, 1634, Metro Manila, Philippines
+                        Email: inquiry@acquiro.com.ph | <img src="assets/Images/webicon.png"
+                            style="height: 20px;width: 20px;"> https://acquiro.com.ph | www.asticom.com.ph</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCertificateOfDeploymentNoSalaryDetails" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="height: 600px;overflow-y: scroll;padding: 5%;">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>CERTIFICATE OF EMPLOYMENT</b></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div><br>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                        </div>
+                        <div class="col-lg-6">
+                            <button class="CertifyEmploButn"
+                                (click)="convertToCertificateOfDeploymentNoSalaryDetails()">Generate COE Request
+                                <i class="fa fa-download" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="downloadCertificateOfDeploymentNoSalaryDetails" *ngFor="let item of stafflist">
+                        <div class="container-fluid padding">
+                            <div *ngIf="companyid==1001"> <img src="assets/Images/AsticomCertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1002"> <img src="assets/Images/ABSICertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1005"> <img src="assets/Images/FINSICertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1006"> <img src="assets/Images/HQCertificate.png" alt=""
+                                    class="image"></div>
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <br><br>
+                                    <!-- <img src="assets/Images/asticom.jfif" alt="" class="image"> -->
+                                </div>
+                                <br><br>
+                                <div class="col-lg-10">
+                                    <br><br>
+                                    <h4 class="certificate">CERTIFICATE OF DEPLOYMENT</h4>
+                                </div>
+                            </div><br><br>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p class="cert">This is to certify that <span class="bol">{{
+                                            username|uppercase}}</span> is an employee of <span class="bol">
+                                            Asticom </span> since <span class="bol">{{item.joiningDate|date:'MMMM d,
+                                            y'}}</span>
+                                        deployed at <span class="bol">{{item.role}}</span>
+                                        <br>
+
+                                    <p class="cert">This certification is issued on <span
+                                            class="bol">{{todaydate}}</span> for work area verification purposes only.
+                                    </p>
+                                    <br>
+                                    <br>
+                                    <p class="certi"><b>{{companyName}}</b></p>
+                                    <div *ngIf="companyid==1001"> <img src="assets/Images/AstiCertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1002"> <img src="assets/Images/ABSICertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1005"> <img src="assets/Images/FINSICertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1006"> <img src="assets/Images/HQCertificateSign.png" alt=""
+                                            class="certificateimage"></div>
+                                   
+                                    <p class="certi" *ngIf="companyid==1001 || companyid==1002"><b>Juan Miguel M.
+                                            Tulay</b></p>
+                                    <p class="certi" *ngIf="companyid==1005"><b>Leah Marie M. Reyes</b></p>
+                                    <p class="certi" *ngIf="companyid==1006"><b>Marisol Apsay</b></p>
+                                    <br>
+                                    <br>
+                                    <p class="certi"><b>Human Resources Head</b></p>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p class="cert">Printed on: {{todaydate|date:'MMMM d, y'}}</p>
+                                    <p class="cert">Printed by: {{username|uppercase}}</p>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p>This is a system generated document. No physical signature and dry seal required.
+                                    </p>
+                                    <hr>
+                                    <p>Disclaimer: Should you wish to verify the authenticity of the information stated
+                                        above, please e-mail everification@asticom.com.ph</p>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" *ngIf="companyid==1001">
+                    <p>15/F W Fifth Building, Bonifacio Global City, Taguig City, 1634, Metro Manila, Philippines
+                        Email: inquiry@asticom.com.ph | <img src="assets/Images/webicon.png"
+                            style="height: 20px;width: 20px;"> www.asticom.com.ph</p>
+                </div>
+                <div class="modal-footer" *ngIf="companyid==1002">
+                    <p>7th Floor, Bayantel Building, Roosevelt Avenue, Quezon City, 1105, Metro Manila, Philippines
+                        Email: inquiry@absi.com.ph | <img src="assets/Images/webicon.png"
+                            style="height: 20px;width: 20px;"> https://absi.ph | www.asticom.com.ph</p>
+                </div>
+                <div class="modal-footer" *ngIf="companyid==1005">
+                    <p>4/F Globe Telecom Plaza Tower 1, Madison corner Pioneer Streets, Bonifacio Avenue, Mandaluyong
+                        City, 1552, Metro Manila, Philippines
+                        Tel.No. (0917) 853 25 06 | Email: inquiry@finsi.com.ph | <img src="assets/Images/webicon.png"
+                            style="height: 20px;width: 20px;"> https://www.finsi.com.ph |
+                        www.asticom.com.ph</p>
+                </div>
+                <div class="modal-footer" *ngIf="companyid==1006">
+                    <p>15/F W Fifth Building, Bonifacio Global City, Taguig City, 1634, Metro Manila, Philippines
+                        Email: inquiry@acquiro.com.ph | <img src="assets/Images/webicon.png"
+                            style="height: 20px;width: 20px;"> https://acquiro.com.ph | www.asticom.com.ph</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalRAAWASecurityPassNoSalaryDetails" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="height: 600px;overflow-y: scroll;padding: 5%;">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>CERTIFICATE OF EMPLOYMENT</b></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div><br>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                        </div>
+                        <div class="col-lg-6">
+                            <button class="CertifyEmploButn"
+                                (click)="convertToRAAWASecurityPassNoSalaryDetails()">Generate COE Request
+                                <i class="fa fa-download" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="downloadRAAWASecurityPassNoSalaryDetails" *ngFor="let item of stafflist">
+                        <div class="container-fluid padding">
+                            <div *ngIf="companyid==1001"> <img src="assets/Images/AsticomCertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1002"> <img src="assets/Images/ABSICertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1005"> <img src="assets/Images/FINSICertificate.png" alt=""
+                                    class="image"></div>
+                            <div *ngIf="companyid==1006"> <img src="assets/Images/HQCertificate.png" alt=""
+                                    class="image"></div>
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <br><br>
+                                    <!-- <img src="assets/Images/asticom.jfif" alt="" class="image"> -->
+                                </div>
+                                <br><br>
+                                <div class="col-lg-10">
+                                    <br><br>
+                                    <h4 class="certificate">CERTIFICATE OF EMPLOYMENT</h4>
+                                </div>
+                            </div><br><br>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p><b>To Security Team:</b></p>
+                                    <br>
+                                    <p class="cert">This is to certify that <span class="bol">{{
+                                            username|uppercase}}</span> is currently employed under <span class="bol">
+                                            {{companyName}} </span> assigned at <span
+                                            class="bol">{{item.joiningDate|date:'MMMM d, y'}}</span>
+                                        effective <span class="bol">{{item.joiningDate|date:'MMMM d, y'}}</span>
+                                        <br>
+
+                                    <p class="cert">This certification is issued on <span
+                                            class="bol">{{todaydate}}</span> as a requirement for the <span
+                                            class="bol">Restricted Area Access and Work Authorization (RAAWA) / Security
+                                            Pass</span> purposes only.</p>
+                                    <br>
+                                    <br>
+                                    <p class="certi"><b>{{companyName}}</b></p>
+                                    <div *ngIf="companyid==1001"> <img src="assets/Images/AstiCertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1002"> <img src="assets/Images/ABSICertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1005"> <img src="assets/Images/FINSICertificateSign.png"
+                                            alt="" class="certificateimage"></div>
+                                    <div *ngIf="companyid==1006"> <img src="assets/Images/HQCertificateSign.png" alt=""
+                                            class="certificateimage"></div>
+                                 
+                                    <p class="certi" *ngIf="companyid==1001 || companyid==1002"><b>Juan Miguel M.
+                                            Tulay</b></p>
+                                    <p class="certi" *ngIf="companyid==1005"><b>Leah Marie M. Reyes</b></p>
+                                    <p class="certi" *ngIf="companyid==1006"><b>Marisol Apsay</b></p>
+                                    <br>
+                                    <br>
+                                    <p class="certi"><b>Human Resources Head</b></p>
+
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p class="cert">Printed on: {{todaydate|date:'MMMM d, y'}}</p>
+                                    <p class="cert">Printed by: {{username|uppercase}}</p>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p>This is a system generated document. No physical signature and dry seal required.
+                                    </p>
+                                    <hr>
+                                    <p>Disclaimer: Should you wish to verify the authenticity of the information stated
+                                        above, please e-mail everification@asticom.com.ph</p>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" *ngIf="companyid==1001">
+                            <p>15/F W Fifth Building, Bonifacio Global City, Taguig City, 1634, Metro Manila,
+                                Philippines
+                                Email: inquiry@asticom.com.ph | <img src="assets/Images/webicon.png"
+                                    style="height: 20px;width: 20px;"> www.asticom.com.ph</p>
+                        </div>
+                        <div class="modal-footer" *ngIf="companyid==1002">
+                            <p>7th Floor, Bayantel Building, Roosevelt Avenue, Quezon City, 1105, Metro Manila,
+                                Philippines
+                                Email: inquiry@absi.com.ph | <img src="assets/Images/webicon.png"
+                                    style="height: 20px;width: 20px;"> https://absi.ph | www.asticom.com.ph</p>
+                        </div>
+                        <div class="modal-footer" *ngIf="companyid==1005">
+                            <p>4/F Globe Telecom Plaza Tower 1, Madison corner Pioneer Streets, Bonifacio Avenue,
+                                Mandaluyong
+                                City, 1552, Metro Manila, Philippines
+                                Tel.No. (0917) 853 25 06 | <img src="assets/Images/webicon.png"
+                                    style="height: 20px;width: 20px;"> Email: inquiry@finsi.com.ph |
+                                https://www.finsi.com.ph |
+                                www.asticom.com.ph</p>
+                        </div>
+                        <div class="modal-footer" *ngIf="companyid==1006">
+                            <p>15/F W Fifth Building, Bonifacio Global City, Taguig City, 1634, Metro Manila,
+                                Philippines
+                                Email: inquiry@acquiro.com.ph | <img src="assets/Images/webicon.png"
+                                    style="height: 20px;width: 20px;"> https://acquiro.com.ph | www.asticom.com.ph</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="height: 600px;overflow-y: scroll;">
+            <div class="modal-header">
+                <h4 class="modal-title">CERTIFICATE OF EMPLOYMENT</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div><br>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                    </div>
+                    <div class="col-lg-6">
+                        <button class="CertifyEmploButn" (click)="convetToPDF1()">Generate COE Request
+                            <i class="fa fa-download" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <br>
+                <div id="downloadaplication" *ngFor="let item of stafflist"
+                    style="position:absolute;left:50%;margin-left:-306px;top:0px;width:612px;height:792px;border-style:outset;overflow:hidden;margin-top: 60px;background-color: white;">
+                    <div class="container-fluid padding">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <br><br>
+                                <img src="assets/Images/asticom.jfif" alt="" class="image">
+                            </div>
+                            <br><br>
+                            <div class="col-lg-10">
+                                <br><br>
+                                <h4 class="certificate">CERTIFICATE OF EMPLOYEMENT</h4>
+                            </div>
+                        </div><br><br>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p class="cert">This is to certify that <span class="bol">{{
+                                        username|uppercase}}</span> is
+                                    currently at <span class="bol"> Asticom </span> since <span
+                                        class="bol">{{item.joiningDate|date:'MMMM d, y'}}</span> with a position title
+                                    of <span class="bol">{{item.role}}</span>
+                                    <br>
+
+                                <p class="cert"> Futhermore, <span class="bol">{{ username|uppercase}}</span> is
+                                    receiving an
+                                    annual salary of <span class="bol">{{item.currentBMS*13}} </span>with 13th month
+                                    pay.</p>
+
+
+                                <p class="cert">This is certification was issued on <span
+                                        class="bol">{{todaydate|date:'MMMM d, y'}}</span> for <span
+                                        class="bol">CERTIFICATE OF
+                                        EMPLOYEMENT</span></p>
+                                <br>
+                                <br>
+                                <br>
+                                <p class="certi">Jim Tulay</p>
+                                <P class="certi">Human Resources Head</P>
+                                <P class="certi">Asticom Technology Inc</P>
+                                <p class="cert">No signature and dry seal required</p>
+                                <P class="cert">Serial Code:*|Serial Code|*</P>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-1">
+                </div>
+
+            </div>
+            <br>
+        </div>
+    </div>
+</div>

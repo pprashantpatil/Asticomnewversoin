@@ -8,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class HelpComponent implements OnInit {
 
   constructor() { }
+  roleid:any;
+  companyID:any;
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+      this.roleid = localStorage.getItem('roledid');
+      this.companyID = sessionStorage.getItem('companyid');
+    }
 
 }
