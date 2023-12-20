@@ -572,7 +572,7 @@ ul {
   
   .inputclass {
     color: #3247d5;
-    Font: 'Poppins';
+    font: 'Poppins';
     background-color: transparent;
     border: none;
   }
