@@ -20,13 +20,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModuleModule } from './Shared/shared-module/shared-module.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SidebarComponent,
     FooterComponent,
-  
   ],
   imports: [
     BrowserModule,
@@ -43,11 +43,11 @@ import { SharedModuleModule } from './Shared/shared-module/shared-module.module'
     SharedModuleModule,
     NgxPaginationModule,
     SharedModuleModule,
-    
+    TimepickerModule
   ],
   exports:[
     NgMultiSelectDropDownModule,
-    
+    TimepickerModule
   ],
 
 

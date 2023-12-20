@@ -1,0 +1,83 @@
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="Heading">My Account Settings</label>
+            <div class="card card-padding">
+                <div class="row">
+                 
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-5 Space">
+                                        <p> <span class="span">*
+                                            </span>Current Password</p>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input *ngIf="showpassword==0" type="password" class="form-control"
+                                            id="Currentpassword" name="Currentpassword" [(ngModel)]="Currentpassword"
+                                            placeholder="Current Password">
+                                        <input *ngIf="showpassword==1" type="text" class="form-control"
+                                            id="Currentpassword" name="Currentpassword" [(ngModel)]="Currentpassword"
+                                            placeholder="Current Password">
+                                        <span class="fa fa-fw fa-eye field-icon toggle-password"
+                                            style="color: #3247D5; margin-right: 64px; margin-top: -24px;"
+                                            (click)="Showhidepassword()"></span>
+                                        <span class="highlight"></span>
+
+                                        <span class="bar"></span>
+                                    </div>
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-lg-5 Space">
+                                        <p> <span class="span">*
+                                            </span>New Password</p>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" id="newpassword" name="newpassword" type="password"
+                                            [(ngModel)]="newpassword" placeholder="New Password">
+                                    </div>
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-lg-5 Space">
+                                        <p> <span class="span">*
+                                            </span>Confirm Password</p>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input type="password" class="form-control" id="confirmpassword"
+                                            name="confirmpassword" (keyup)="checkpassword($event)"
+                                            [(ngModel)]="confirmpassword" placeholder="Confirm Password"><br>
+                                        <span *ngIf="!passvaild" class="span">Password Doesn't Match</span>
+                                    </div>
+                                </div> <br>
+                            </div>
+                            <div class="col-lg-5 Paragraph">
+                                <p>
+                                    Password<br>- must be atleast 4 characters long<br> -can contain lower case
+                                    alphabets (a-z).
+                                    <br> - can contain upper case alphabets (A-Z).<br>
+                                    -can contain numbers (0-9).<br>
+                                    <br>
+                                    -Dont Include # in password<br>
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                    <button class="submit-button" (click)="Updatepassword()">Save</button>
+                        <button class="submit-button" (click)="Cancel()">Cancel</button>
+                </div>
+             
+            </div>
+        </div>
+
+
+        <div class="col-lg-1"></div>
+    </div>

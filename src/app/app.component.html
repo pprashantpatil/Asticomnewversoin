@@ -13,7 +13,7 @@
 
             <div class="col-6">
               <div class="align-head">
-                <span class="dash-heading" style="margin-left: -16%;">{{ pagename }}</span>
+                <!-- <span class="dash-heading" style="margin-left: -16%;">{{ pagename }}</span> -->
                 <!-- <div>
                   <div class="time1">
                     <p class="time">11<span class="sem"></span></p>
@@ -22,15 +22,15 @@
                     <p class="time">22<span class="sem"></span></p>
                   </div>
               </div> -->
-             
+
               </div>
             </div>
           </div>
         </div>
 
         <div class="col-6">
-       
-        
+
+
           <div class="header-class">
             <div class="topheader">
               <select class="form-control" id="companyid" name="companyid" [(ngModel)]="companyid"
@@ -110,9 +110,15 @@
             <div ngbDropdown placement="bottom-end" class="d-inline-block">
               <img src="assets/FigmaImg/person-01.png" id="dropdownBasic1" ngbDropdownToggle class="icon-alignment1" />
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="logoutmodal">
-                <button ngbDropdownItem>My Profile</button>
-                <button ngbDropdownItem>Account Settings</button>
-                <button ngbDropdownItem (click)="logout()">Logout</button>
+                <button class="defclrchange" ngbDropdownItem (click)="profile()">
+                  <img src="assets/Images/mt-pro.svg" >
+                  <span class="logoutlabel"> My
+                    Profile</span>
+                </button>
+                <button class="defclrchange" ngbDropdownItem (click)="accountsetting()"> <img src="assets/Images/setting.svg"
+                    ><span class="logoutlabel">Account Settings</span> </button>
+                <button class="defclrchange" ngbDropdownItem (click)="logout()"> <img src="assets/Images/exit.svg"
+                    class="img-set"><span class="logoutlabel">Logout</span> </button>
               </div>
             </div>
 

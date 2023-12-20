@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'Login', component: LoginComponent },
   { path: 'Manager', loadChildren: () => import('./Modules/manager/manager.module').then(m => m.ManagerModule), canActivate: [AuthguardGuard] },
   { path: 'Employee', loadChildren: () => import('./Modules/employee/employee.module').then(m => m.EmployeeModule), canActivate: [AuthguardGuard] },
+  { path: 'HR', loadChildren: () => import('./Modules/hr/hr.module').then(m => m.HrModule), canActivate: [AuthguardGuard] },
 
 ];
 

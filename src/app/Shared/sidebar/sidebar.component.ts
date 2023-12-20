@@ -65,9 +65,9 @@ export class SidebarComponent implements OnInit {
 
   public timeSheetRequest() {
     this.active = 3.2;
-    this.router.navigate(['/Employee/BuildingDash']);
+    this.router.navigate(['/Employee/TimesheetRequestDash']);
     localStorage.setItem('Pagename', 'Building');
-    this.data11.emit('Building');
+    this.data11.emit('Timesheet');
   }
 
   public locatorRequest() {
@@ -160,4 +160,7 @@ export class SidebarComponent implements OnInit {
     localStorage.setItem('Pagename', 'Payslip');
     this.data11.emit('Payslip');
   }
+
+
+  
 }
