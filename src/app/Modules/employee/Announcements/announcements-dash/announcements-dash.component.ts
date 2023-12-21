@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
 import Swal from 'sweetalert2';
-import { DatePipe, formatDate } from '@angular/common';
+import { DatePipe } from '@angular/common';
+
 import { AnnouncementsFormComponent } from '../announcements-form/announcements-form.component';
 
 @Component({
@@ -95,7 +96,7 @@ export class AnnouncementsDashComponent implements OnInit {
       confirmButtonText: 'Proceed'
     }).then((result) => {
       if (result.value == true) {
-        this.DigiofficecorehrService.DeleteHolidays(id)
+        this.DigiofficecorehrService.DeleteAnnouncement(id)
           .subscribe({
             next: data => {
               Swal.fire('Deleted Successfully');

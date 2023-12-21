@@ -1,0 +1,77 @@
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <p class="Heading">Loan Details</p>
+                <img src="assets/Images/revamp/cancle-icon.png" (click)="cancel()" class="closeicon">
+            </div>
+
+            <div class="popupcontent">
+                <div class="popupinputs">
+                    <p>Loan Type<span class="span">*</span></p>
+                    <div>
+                        <select class="form-control inputfield select" id="loanType" name="loanType"
+                            [(ngModel)]="loanType" (change)="getLoanType()">
+                            <option value="">Select Loan Type </option>
+                            <option value="{{loans.type}}" *ngFor="let loans of loanList">
+                                {{loans.type}} </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Loan Amount<span class="span">*</span></p>
+                    <div>
+                        <input *ngIf="loanType=='Ayala Coop'" [disabled]="true" type="number" class="form-control"
+                            placeholder="Loan Amount" [(ngModel)]="loanAmount" name="loanAmount" id="loanAmount">
+
+                        <input *ngIf="loanType!='Ayala Coop' && loanType!='Ayala Coop Contribution'" type="number"
+                            class="form-control" placeholder="Loan Amount" [(ngModel)]="loanAmount" name="loanAmount"
+                            id="loanAmount">
+
+                        <input *ngIf="loanType=='Ayala Coop Contribution'" type="number" class="form-control" placeholder="Contribution Amount" [(ngModel)]="loanAmount"
+                            name="loanAmount" id="loanAmount">
+                    </div>
+                </div>
+
+                <div class="popupinputs" *ngIf="loanType!='Ayala Coop Contribution'">
+                    <p>Tenure<span class="span">*</span></p>
+                    <div>
+                        <input type="number" class="form-control" placeholder="Tenure" [(ngModel)]="tenure" name="tenure"
+                            id="tenure">
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Comments<span class="span">*</span></p>
+                    <div>
+                        <textarea type="text" class="form-control" rows="4" placeholder="Comments"
+                            [(ngModel)]="comment" name="comment" id="comment"></textarea>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Attachment</p>
+                    <div>
+                        <ngx-dropzone accept=".png,.jpg,.jpeg" (change)="onSelect21($event)" class="dropFile">
+                            <img src="assets/Images/MicrosoftTeams-image.png" *ngIf="attachments21.length==0"
+                                class="img-set dropdowning">
+                            <ngx-dropzone-label>Drop files here<br>only jpg/png/jpeg (max 5mb)</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of attachments21" [removable]="true"
+                                (removed)="onRemove21(f)">
+                                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                        </ngx-dropzone>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                    <button class="close-button" (click)="cancel()">Cancel</button>
+                    <button class="submit-button" (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
