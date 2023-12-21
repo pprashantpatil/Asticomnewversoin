@@ -49,6 +49,8 @@ import { AnnouncementsFormComponent } from './Announcements/announcements-form/a
 import { TimesheetformComponent } from './Requests/timesheetform/timesheetform.component';
 import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-accountsetting-modify.component';
 import { EmployeeGraphDashComponent } from './Dashboard/employee-graph-dash/employee-graph-dash.component';
+import { LoanRequestFormComponent } from './Requests/loan-request-form/loan-request-form.component';
+import { EmployeeResignationFormComponent } from './Requests/employee-resignation-form/employee-resignation-form.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +94,8 @@ import { EmployeeGraphDashComponent } from './Dashboard/employee-graph-dash/empl
     TimesheetformComponent,
     MyAccountsettingModifyComponent,
     EmployeeGraphDashComponent,
+    LoanRequestFormComponent,
+    EmployeeResignationFormComponent,
   
   ],
   imports: [

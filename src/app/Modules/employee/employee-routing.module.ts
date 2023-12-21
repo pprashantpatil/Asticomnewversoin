@@ -56,8 +56,6 @@ const routes: Routes = [
   { path: 'PoliciesDash', component: PoliciesDashComponent },
   { path: 'ViewPolicyDash', component: ViewPolicyDashComponent },
   { path: 'ViewPolicyDash/:id', component: ViewPolicyDashComponent },
-  { path: 'HolidaysDash', component: HolidaysDashComponent },
-  { path: 'AnnouncementsDash', component: AnnouncementsDashComponent },
 
   { path: 'AttendanceCorrectionReport', component: AttendanceCorrectionReportComponent ,canActivate: [AuthguardGuard]},
   { path: 'AttendanceReport', component: AttendanceReportComponent ,canActivate: [AuthguardGuard]},

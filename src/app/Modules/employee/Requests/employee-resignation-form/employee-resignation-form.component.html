@@ -4,56 +4,32 @@
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between">
-                <p class="Heading">Announcement Details</p>
+                <p class="Heading">Resignation Details</p>
                 <img src="assets/Images/revamp/cancle-icon.png" (click)="cancel()" class="closeicon">
             </div>
 
             <div class="popupcontent">
                 <div class="popupinputs">
-                    <p>Announcement<span class="span">*</span></p>
+                    <p>Resignation Date<span class="span">*</span></p>
                     <div>
-                        <input type="text" class="form-control" placeholder="Announcement" [(ngModel)]="short" name="short"
-                            id="short">
+                        <input type="date" class="form-control" name="resignationDate" id="resignationDate" onkeydown="return false"
+                            [(ngModel)]="resignationDate">
                     </div>
                 </div>
 
                 <div class="popupinputs">
-                    <p>Announcement Description<span class="span">*</span></p>
+                    <p>Reason<span class="span">*</span></p>
                     <div>
-                        <textarea type="text" class="form-control" rows="4" placeholder="Announcement Description"
-                            [(ngModel)]="description" name="description" id="description"></textarea>
+                        <textarea type="text" class="form-control" rows="4" placeholder="Reason"
+                            [(ngModel)]="reason" name="reason" id="reason"></textarea>
                     </div>
                 </div>
 
                 <div class="popupinputs">
-                    <p>Link if any<span class="span">*</span></p>
+                    <p>Comments<span class="span">*</span></p>
                     <div>
-                        <input type="text" class="form-control" placeholder="Link" [(ngModel)]="link" name="link"
-                            id="link">
-                    </div>
-                </div>
-
-                <div class="popupinputs">
-                    <p>Announcement Start Date<span class="span">*</span></p>
-                    <div>
-                        <input type="date" class="form-control" name="date" id="date" onkeydown="return false"
-                            [(ngModel)]="startDate">
-                    </div>
-                </div>
-
-                <div class="popupinputs">
-                    <p>Announcement End Date<span class="span">*</span></p>
-                    <div>
-                        <input type="date" class="form-control" name="endDate" id="endDate" onkeydown="return false"
-                            [(ngModel)]="endDate">
-                    </div>
-                </div>
-
-                <div class="popupinputs">
-                    <p>Venue<span class="span">*</span></p>
-                    <div>
-                        <input type="text" class="form-control" placeholder="Venue" [(ngModel)]="venue" name="venue"
-                            id="venue">
+                        <textarea type="text" class="form-control" rows="4" placeholder="Comments"
+                            [(ngModel)]="comment" name="comment" id="comment"></textarea>
                     </div>
                 </div>
 
@@ -77,8 +53,7 @@
 
                 <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
                     <button class="close-button" (click)="cancel()">Cancel</button>
-                    <button *ngIf="ID==undefined" class="submit-button" (click)="submit()">Submit</button>
-                    <button *ngIf="ID!=undefined" class="submit-button" (click)="update()">Update</button>
+                    <button class="submit-button" (click)="submit()">Submit</button>
                 </div>
             </div>
         </div>

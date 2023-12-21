@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
 import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 import { AnnouncementsDashComponent } from '../announcements-dash/announcements-dash.component';
 
 @Component({
@@ -14,191 +14,187 @@ export class AnnouncementsFormComponent implements OnInit {
   loader: any;
   showPopup: number = 0;
   messageId: number = 0;
-  type: any;
   short: any;
   description: any;
   startDate: any;
-  allCity: any;
-  cityList: any;
-  city: any;
   public attachments21: any = [];
   public attachments: any = [];
   public attachmentsurl: any = [];
-  staffList: any;
-  holidayList: any;
-  attachment: any;
-  attachment1: any;
   link: any;
   endDate: any;
-venue: any;
+  venue: any;
+  announcementList: any;
+  attachment: any;
+  attachmentPath: any;
+  companyID: any;
 
-  constructor(public DigiofficecorehrService: DigiofficecorehrService, private datepipe: DatePipe, public dialogRef: MatDialogRef<AnnouncementsDashComponent>,
+  constructor(public DigiofficecorehrService: DigiofficecorehrService, public router: Router, public dialogRef: MatDialogRef<AnnouncementsDashComponent>,
     @Inject(MAT_DIALOG_DATA) public ID: any) { }
 
   ngOnInit(): void {
     debugger
-    this.type = "";
-    this.city = "";
+    this.companyID = sessionStorage.getItem('companyid');
     this.getData();
   }
 
   public getData() {
-    this.DigiofficecorehrService.GetCityType()
+    this.DigiofficecorehrService.GetAnnouncementsByBuildingID(56)
       .subscribe({
         next: data => {
           debugger
-          this.cityList = data;
+          this.announcementList = data.filter(x => x.id == this.ID);
           this.loader = false;
-        }
-      })
-
-    this.DigiofficecorehrService.GetHolidays()
-      .subscribe({
-        next: data => {
-          debugger
-          this.holidayList = data.filter(x => x.id == this.ID);
-          this.short = this.holidayList[0].holiday
-          this.description = this.holidayList[0].holidayDescription
-          this.startDate = this.datepipe.transform(this.holidayList[0].holidayDate, 'yyyy-MM-dd');
-          this.attachment = this.holidayList[0].attachment;
-          this.attachment1 = this.holidayList[0].attachment1;
-          this.type = this.holidayList[0].holidayCategory;
-          this.city = this.holidayList[0].region;
-          this.loader = false;
+          this.short = this.announcementList[0].name;
+          this.description = this.announcementList[0].description;
+          this.endDate = this.announcementList[0].time;
+          this.venue = this.announcementList[0].venue;
+          this.startDate = this.announcementList[0].dateTime
+          this.attachment = this.announcementList[0].attachment;
+          this.attachmentPath = this.announcementList[0].attachmentpath;
+          this.link = this.announcementList[0].reason;
         }
       })
   }
 
   public cancel() {
-    location.href = "#/Employee/HolidaysDash";
+    location.href = "#/Employee/AnnouncementsDash";
     this.loader = false;
     this.dialogRef.close(false);
   }
 
   public submit() {
     this.showPopup = 0;
+    debugger
     this.loader = true;
-    if (this.type == undefined || this.type == null || this.type == '' ||
-      this.type == 0 || this.short == null || this.short == '' || this.short == undefined ||
-      this.short == 0 || this.description == '' || this.description == undefined || this.description == null ||
-      this.startDate == '' || this.startDate == undefined || this.startDate == null || this.attachments21 == null || this.attachments21 == undefined
-      || this.attachments21 == "") {
+    if (this.attachments21.length == 0) {
       this.loader = false;
       this.showPopup = 1;
-      this.messageId = 7
-    } else {
+      this.messageId = 13;
+    }
+    else {
       this.DigiofficecorehrService.ProjectAttachments(this.attachments21)
         .subscribe({
           next: data => {
             debugger
             this.attachmentsurl.push(data);
-            this.attachments21.length = 0;
-            this.InsertHolidays();
+            this.attachments.length = 0;
+            this.InsertAnnouncement();
             this.loader = false;
           }
         })
     }
   }
 
-  public InsertHolidays() {
-    debugger;
-    this.showPopup = 0;
+  public InsertAnnouncement() {
     this.loader = true;
-    var entity = {
-      Holiday: this.short,
-      HolidayDescription: this.description,
-      HolidayDate: this.startDate,
-      Attachment: this.attachmentsurl[0],
-      HolidayCategory: this.type,
-      Region: this.city
+    this.showPopup = 0;
+    debugger
+    if (this.short == undefined || this.short == "" || this.description == undefined || this.description == "" || this.startDate == undefined || this.startDate == "" || this.endDate == undefined || this.endDate == "" || this.venue == undefined || this.venue == "") {
+      this.loader = false;
+      this.showPopup = 1;
+      this.messageId = 13;
     }
-    this.DigiofficecorehrService.InsertHolidays(entity)
+    else {
+      var eb = {
+        'Name': this.short,
+        'FloorID': 1071322,
+        'Description': this.description,
+        'Reason': this.link,
+        'DateTime': this.startDate,
+        'Time': this.endDate,
+        'Venue': this.venue,
+        'ModifiedBy': 'Admin',
+        'BuildingID': 56,
+        'Attachment': this.attachmentsurl[0],
+        'CityID': 0,
+
+      }
+      this.DigiofficecorehrService.InsertAnnouncements(eb)
+        .subscribe({
+          next: data => {
+            debugger
+            this.router.navigate(['/Employee/AnnouncementsDash']);
+            this.dialogRef.close(false);
+            this.InsertNotification();
+            this.loader = false;
+            this.showPopup = 1;
+            this.messageId = 8;
+          }
+        })
+    }
+  }
+
+  public InsertNotification() {
+    this.showPopup = 0
+    debugger
+    var entity = {
+      'Date': new Date(),
+      'Event': 'Announcement',
+      'FromUser': 'Admin',
+      'ToUser': this.companyID,
+      'Message': 'There is an Announcement From HR',
+      'Photo': 'Null',
+      'Building': 'Dynamics 1',
+      'UserID': localStorage.getItem('staffid'),
+      'NotificationTypeID': 15,
+      'VendorID': 0
+    }
+    this.DigiofficecorehrService.InsertNotification(entity)
       .subscribe({
         next: data => {
           debugger
           if (data != 0) {
-            this.saveEmployeeAttendanceHolidays();
-            Swal.fire("Saved Successfully")
-            this.loader = false;
-            this.showPopup = 1;
-            this.messageId = 8
-            this.dialogRef.close(false);
-            location.href = "#/Employee/HolidayDashboard";
           }
-        }
-      })
-  }
-
-  public saveEmployeeAttendanceHolidays() {
-    debugger
-    this.DigiofficecorehrService.GetAllStaffNew().
-      subscribe({
-        next: data => {
-          debugger
-          this.staffList = data.filter(x => x.payrollBit == 0);
-          for (let i = 0; i < this.staffList.length; i++) {
-            var obj = {
-              'EmployeeID': this.staffList[i].id,
-              'Date': this.startDate,
-              'Holidaytype': this.type
-            }
-            this.DigiofficecorehrService.InsertEmployeeAttendance_Holidays(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
-          }
+          this.loader = false;
+          this.showPopup = 1;
+          this.messageId = 8;
+          // location.reload();
+          this.loader = false;
         }
       })
   }
 
   public update() {
-    this.showPopup = 0;
-    if (this.type == undefined || this.type == null || this.type == '' ||
-      this.type == 0 || this.short == null || this.short == '' || this.short == undefined ||
-      this.short == 0 || this.description == '' || this.description == undefined || this.description == null ||
-      this.startDate == '' || this.startDate == undefined || this.startDate == null || this.attachment == undefined) {
-      this.loader = false;
-      this.showPopup = 1;
-      this.messageId = 7
-    } else {
-      this.loader = true;
-      this.DigiofficecorehrService.ProjectAttachments(this.attachments21)
-        .subscribe({
-          next: data => {
-            debugger
-            this.attachmentsurl.push(data);
-            this.attachments21.length = 0;
-            this.UpdateHolidays();
-            this.loader = false;
-          }
-        })
-    }
+    this.DigiofficecorehrService.ProjectAttachments(this.attachments21)
+    .subscribe({
+      next: data => {
+        debugger
+        this.attachmentsurl.push(data);
+        this.attachments.length = 0;
+        this.UpdateAnnouncement();
+        this.loader = false;
+      }
+    })
   }
 
-  public UpdateHolidays() {
-    debugger;
+  public UpdateAnnouncement() {
+    debugger
     this.showPopup = 0;
     this.loader = true;
-    var entity = {
-      ID: this.ID,
-      Holiday: this.short,
-      HolidayDescription: this.description,
-      HolidayDate: this.startDate,
-      Attachment: this.attachmentsurl[0] == "" ? this.attachment1 : this.attachmentsurl[0],
-      HolidayCategory: this.type,
-      Region: this.city
+    var eb = {
+      'ID': this.ID,
+      'Name': this.short,
+      'Description': this.description,
+      'Reason': this.link,
+      'DateTime': this.startDate,
+      'Venue': this.venue,
+      'Time': this.endDate,
+      'BuildingID': 56,
+      'FloorID': 1071322,
+      'CityID': 0,
+      'Attachment': this.attachmentsurl[0] == "" ? this.attachmentPath : this.attachmentsurl[0],
     }
-    this.DigiofficecorehrService.UpdateHolidays(entity)
+    this.DigiofficecorehrService.UpdateAnnouncements(eb)
       .subscribe({
         next: data => {
           debugger
-          location.href = "#/Employee/HolidayDashboard";
-          Swal.fire("Updated Successfully")
           this.loader = false;
           this.showPopup = 1;
-          this.messageId = 10
+          this.messageId = 10;
+          this.attachments.length = 0;
           this.dialogRef.close(false);
+          this.router.navigate(['/Employee/AnnouncementsDash']);
+          this.loader = false;
         }
       })
   }

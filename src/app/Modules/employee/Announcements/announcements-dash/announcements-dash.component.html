@@ -18,7 +18,7 @@
             </div>
 
             <div class="cardinputs" (click)="showDialog()" *ngIf="roleID==1||roleID==9||roleID==10||roleID==11">
-                <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Holiday</button>
+                <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Announcement</button>
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
                                         *ngIf="data.reason!=null">Link</button></a>
                                 <p *ngIf="data.reason==null">NA</p>
                             </td>
-                            <td>{{data.venue}}
+                            <td>{{data.venue}}</td>
                             <td class="onelinetext" *ngIf="roleID==9|| roleID==11"> <img class="dashedit-icon"
                                     (click)="edit(data.id)" src="assets/Images/Edit.svg">
                                 <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"

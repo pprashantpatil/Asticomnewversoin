@@ -1,1 +1,236 @@
-<p>loan-request-dash works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate($event)">
+            </div>
+
+            <div class="cardinputs">
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
+            </div>
+
+            <div class="cardinputs" (click)="showDialog()" *ngIf="roleID!=1">
+                <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add
+                    Loan</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-lg-12 dashbutton bttn">
+            <div class="tab-slider--nav">
+                <ul class="tab-slider--tabs">
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1"
+                        (click)="viewMode ='tab1'">
+                        New Request</li>
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2"
+                        (click)="viewMode ='tab2'">
+                        Approved</li>
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab3'" rel="tab3"
+                        (click)="viewMode ='tab3'">
+                        Rejected</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-slider--container" [ngSwitch]="viewMode">
+        <div *ngSwitchCase="'tab1'" id="tab1">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(loanPendingList|filter:search)?.length}} </span>RESULT(S)</p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                        <tr class="head">
+                            <th>Date</th>
+                            <th>Loan Type</th>
+                            <th>Loan Amount</th>
+                            <th>Comments</th>
+                            <th>Attachment</th>
+                            <th>Tenure</th>
+                            <th>Status</th>
+                            <th *ngIf="roleID!=1">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of loanPendingList|filter:search">
+                            <td>{{data.modifiedDate|date}}</td>
+                            <td>{{data.loanType}}</td>
+                            <td>{{data.loanAmount}}</td>
+                            <td>{{data.comments}}</td>
+                            <td>
+                                <img src="assets/Images/image.png" style="width:20px; height:20px"
+                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                            </td>
+                            <td>
+                                <p *ngIf="data.loanType=='Ayala Coop Contribution'">NA</p>
+                                <p *ngIf="data.loanType!='Ayala Coop Contribution'">{{data.period}}</p>
+                            </td>
+                            <td>
+                                <p *ngIf="data.status==null">Pending</p>
+                                <p *ngIf="data.status!=null">{{data.status}}</p>
+                            </td>
+                            <td *ngIf="roleID!=1">
+                                    <button class="btnstop"
+                                    *ngIf="data.loanType=='Ayala Coop Contribution' && data.stopbit!=1 &&this.roleID!=6"
+                                    (click)="stop(data.id)">Stop</button>
+                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                    src="assets/Images/Delete.svg">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+
+        <div *ngSwitchCase="'tab2'" id="tab2">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(loanApprovedList|filter:search)?.length}} </span>RESULT(S)</p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Date</th>
+                            <th>Loan Type</th>
+                            <th>Loan Amount</th>
+                            <th>Sanctioned Amount</th>
+                            <th>Tenure</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of loanApprovedList|filter:search">
+                            <td>{{data.modifiedDate|date}}</td>
+                            <td>{{data.loanType}}</td>
+                            <td>{{data.loanAmount}}</td>
+                            <td>{{data.sanctionAmount}}</td>
+                            <td>{{data.period}}</td>
+                            <td>{{data.comments}}</td>
+                            <td>
+                                <p *ngIf="data.status==null">Pending</p>
+                                <p *ngIf="data.status!=null">{{data.status}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+
+        <div *ngSwitchCase="'tab3'" id="tab3">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(loanRejectedList|filter:search)?.length}} </span>RESULT(S)</p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Date</th>
+                            <th>Loan Type</th>
+                            <th>Loan Amount</th>
+                            <th>Tenure</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of loanRejectedList|filter:search">
+                            <td>{{data.modifiedDate|date}}</td>
+                            <td>{{data.loanType}}</td>
+                            <td>{{data.loanAmount}}</td>
+                            <td>{{data.period}}</td>
+                            <td>{{data.comments}}</td>
+                            <td>
+                                <p *ngIf="data.status!='HR Approved'&& data.status!='HR Rejected'">
+                                    Manager Pending</p>
+                                <p *ngIf="data.status=='HR Approved'">HR
+                                    Approved</p>
+                                <p *ngIf="data.status=='HR Rejected'">HR
+                                    Rejected</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Related Attachments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4" *ngFor="let details of multipleAttachmentList">
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <img src="{{details.attachment}}" *ngIf="details.filetype=='Image'"
+                                    (click)="openAttachments(details.attachment)" style="width: 171px; height: 117px;">
+                                <img src="assets/Images/pdf.png" *ngIf="details.filetype=='Pdf'"
+                                    (click)="openAttachments(details.attachment)" style="width: 171px; height: 117px;">
+                                <img src="assets/Images/word.png" *ngIf="details.filetype=='Document'"
+                                    (click)="openAttachments(details.attachment)" style="width: 171px; height: 117px;">
+                                <img src="assets/Images/files.png" *ngIf="details.filetype=='Ppt'"
+                                    (click)="openAttachments(details.attachment)" style="width: 171px; height: 117px;">
+                                <p *ngIf="details.attachment==null">No Attachment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cancel" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
