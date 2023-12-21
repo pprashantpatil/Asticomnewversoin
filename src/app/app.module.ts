@@ -18,7 +18,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonalertpageComponent } from './Shared/commonalertpage/commonalertpage.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModuleModule } from './Shared/shared-module/shared-module.module';
-
+import { InterceptorServiceInterceptor } from './Shared/interceptor-service.interceptor';
 
 
 @NgModule({
@@ -50,10 +50,15 @@ import { SharedModuleModule } from './Shared/shared-module/shared-module.module'
     NgMultiSelectDropDownModule,
     TimepickerModule
   ],
-
-
-  providers: [DatePipe,
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorServiceInterceptor,
+      multi: true,
+    },
+    DatePipe,
     CookieService
+
   ],
   bootstrap: [AppComponent]
 })

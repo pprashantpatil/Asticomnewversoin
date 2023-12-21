@@ -1,0 +1,296 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .bgred {
+    background-color: #FFD7D7;
+    color: black;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    margin-left: 10px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #1125a9;
+    font-family: "Poppins";
+    font-weight: bold;
+    font-size: 20px !important;
+  }
+  
+  .active {
+    margin-right: -83px;
+    color: #1125a9;
+    float: right;
+    font-size: 15px;
+    font-weight: 700;
+    
+  }
+  
+  /* li a:hover {
+        text-decoration: 3px solid rgb(28, 32, 94) underline;
+      } */
+  
+  .requestbtn {
+    background-color: #4282be;
+    color: white;
+    font-family: 'Poppins';
+    font-weight: bold;
+    border-left: solid 1px #f5f5f5;
+    font-size: 15px;
+    line-height: 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  .leavelist {
+    margin-left: 70px !important;
+    padding: 0px 40px;
+  }
+  
+  .applyleavetxt {
+    padding: 0px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .line-border {
+    border: 3px solid #1125a9;
+    border-top-left-radius: 51px;
+    border-top-right-radius: 51px;
+    margin-top: -14px;
+  }
+  
+  
+  .show3res {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.5;
+    color: #777;
+    text-transform: uppercase;
+    padding: 10px 0 5px;
+  }
+  
+  .leavebalance {
+    padding-top: 10px;
+    padding-left: 10px;
+    font-weight: bold;
+    color: #404040;
+    font-size: 20px;
+  }
+
+
+  .inputfield {
+    background-color: rgb(238, 234, 234);
+    ;
+  }
+  
+ 
+  
+  .BackEnt {
+    margin-top: -10px;
+    font-size: x-large;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+
+  
+  .txt {
+    color: red;
+  }
+  
+  u {
+    /*     text-decoration-color: #2F87CC;
+      text-decoration-thickness: 0.1em;
+      text-decoration-thickness: 12px; */
+  /*   text-transform: uppercase; */
+    text-shadow: initial;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 3px;
+    float: right;
+    font-size: 15px;
+    width: auto;
+    background: #1125a9;
+    border-radius: 5px solid #1125a9;
+    border: 5px solid #1125a9;
+    text-decoration-color: #1125a9;
+  
+  }
+  
+
+
+  /* .filter {
+    position: absolute;
+    width: 56px;
+    height: 13px;
+    top: 30px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 13px;
+    color: #1125a9;
+    left: 35px;
+} */
+
+
+
+/* .filter-img {
+    position: absolute;
+    height: 18px;
+    left: 13.43%;
+    right: 81.6%;
+    top: 29px;
+} */
+
+.cardinputs {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 8px !important;
+  width: 235px;
+  justify-content: center;
+}
+
+input[type="bsdate"] {
+  min-width: 240px;
+  background-origin: content-box;
+}
+
+.select{
+  min-width: 100% !important;
+  font-size: 14px !important;
+}
+
+
+
+
+
+
+/* spinner code start */
+#spinner {
+
+  -webzit-animation: frames 1s infinite linear;
+
+  animation: frames 1s infinite linear;
+
+  background: transparent;
+
+  border: 0.5vw solid #FFF;
+
+  border-radius: 100%;
+
+  border-top-color:  #1125a9;
+
+
+  width: 6vw;
+
+  height: 6vw;
+
+  opacity: .6;
+
+  padding: 0;
+
+  /* position: absolute; */
+
+  z-index: 9999;
+
+  margin-top: 10px;
+
+  /* filter: blur(10px); */
+
+}
+
+
+@keyframes frames {
+0% {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+100% {
+  -webkit-transform: rotate(359deg);
+  transform: rotate(359deg);
+}
+}
+
+.modal-header { height: 100%!important;}
+
+#pause {
+  display: block;
+   width: 100%;
+  /* background-color: black; */
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+
+}
+
+.loadertext{
+position: absolute;
+width: 328px;
+height: 15px;
+left: 50px;
+top: 36px;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 600;
+font-size: 19px;
+line-height: 15px;
+/* identical to box height, or 79% */
+text-align: center;
+letter-spacing: 0.5px;
+color: #1125a9;
+}
+
+#loader{
+-webkit-animation: frames 1s infinite linear;
+  animation: frames 1s infinite linear;
+  background: transparent;
+  border: 1.75vw solid #FFF;
+  border-radius: 100%;
+  border-top-color:  #1125a9;
+  width: 3vw;
+  height: 3vw;
+  opacity: 1.6;
+  padding: 0;
+  position: absolute;
+  z-index: 9999;
+  top: 92px;
+  left: 174px;
+}
+
+.loading{
+position: absolute;
+width: 3vw;
+height: 3vw;
+top: 92px;
+left: 174px;
+/* background: #1125a9; */
+border-radius: 5px;
+transform: rotate(-92.19deg);
+}
+
+
+.loader-class
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:100%
+}
+
+
+
+/* end */
