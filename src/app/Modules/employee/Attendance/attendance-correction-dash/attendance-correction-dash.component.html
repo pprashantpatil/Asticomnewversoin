@@ -4,14 +4,18 @@
             <ul>
                 <li *ngIf="roleID==6"><a class="Heading" routerLink="/Employee/AttendanceCorrectionDash">
                         <p class="Heading"> My Attendance Correction</p>
-                    </a></li>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+
                 <li *ngIf="roleID==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
                         <p class="Heading"> Team Attendance Correction</p>
-                    </a></li>
+                    </a>
+                </li>
             </ul>
-
         </div>
     </div>
+
     <div class="card">
         <div class="d-flex flex-wrap">
             <div class="d-flex align-items-center">
@@ -92,14 +96,12 @@
                                 <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
                                     src="assets/Images/Delete.svg">
                             </td> -->
-                            <td class="actionpadding">
-                                <img class="dashedit-icon" [ngbTooltip]="tipContenteidt"   tooltipClass="my-custom-class"
+                            <td class="onelinetext">
+                                <img class="dashedit-icon" [ngbTooltip]="tipContenteidt" tooltipClass="my-custom-class"
                                     (click)="edit(data.id)" src="assets/Images/Edit.svg">
-                                <div class="arrangeIcon">
-                                    <img class="dashedit-icon" src="assets/Images/delete.svg"
+                                <img class="dashedit-icon" src="assets/Images/Delete.svg"
                                     (click)="openDeletePopUp(data.id)" [ngbTooltip]="tipContentCancel"
-                                        tooltipClass="my-custom-class">
-                                </div>
+                                    tooltipClass="my-custom-class">
                                 <div class="col-lg-2 Text p-0">
                                     <ng-template #tipContentCancel>
                                         <div>

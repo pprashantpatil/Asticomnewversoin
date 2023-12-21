@@ -1353,8 +1353,16 @@ select::-ms-expand {
   border: 3px solid #1125a9;
   border-top-left-radius: 51px;
   border-top-right-radius: 51px;
-  margin-top: 5px;
+  margin-top: -14px;
 }
+
+/* .line-border {
+  border: 3px solid #1125a9;
+  border-top-left-radius: 51px;
+  border-top-right-radius: 51px;
+  margin-top: -14px;
+  margin-left: -23px;
+} */
 
 .bttm-gap {
   color: #1125a9;

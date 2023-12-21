@@ -1,6 +1,22 @@
 <app-loader *ngIf="loader"></app-loader>
 <app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li *ngIf="roleID==6"><a class="Heading" routerLink="/Employee/ShiftDetailsDash">
+                        <p class="Heading">My Resignation Details</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+
+                <li *ngIf="roleID==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
+                        <p class="Heading">Team Resignation Details</p>
+                    </a></li>
+            </ul>
+        </div>
+    </div>
+
     <div class="card">
         <div class="d-flex flex-wrap">
             <div class="d-flex align-items-center">
@@ -57,7 +73,29 @@
                             </td>
                             <td *ngIf="roleID!=1">
                                 <img class="dashedit-icon" *ngIf="data.ownclearance!='1'"
-                                    (click)="openDeletePopUp(data.id)" src="assets/Images/Delete.svg">
+                                    (click)="openDeletePopUp(data.id)" src="assets/Images/Delete.svg"
+                                    [ngbTooltip]="tipContentCancel" tooltipClass="my-custom-class">
+
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentCancel>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Delete</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template #tipContenteidt>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Edit</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -89,8 +127,8 @@
                     <div class="col-lg-4" *ngFor="let details of multipleAttachmentList">
                         <div class="row">
                             <div class="col-lg-10">
-                                <img src="{{details.attachment}}" 
-                                    (click)="openAttachments(details.attachment)" style="width: 171px; height: 117px;">
+                                <img src="{{details.attachment}}" (click)="openAttachments(details.attachment)"
+                                    style="width: 171px; height: 117px;">
                             </div>
                         </div>
                     </div>

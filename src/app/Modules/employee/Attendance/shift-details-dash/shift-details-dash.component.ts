@@ -21,6 +21,8 @@ export class ShiftDetailsDashComponent implements OnInit {
   endDate: any;
   shiftFilter: any;
   roleID: any;
+  showPopup: number = 0;
+  messageId: number = 0;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
@@ -105,13 +107,16 @@ export class ShiftDetailsDashComponent implements OnInit {
     if (this.endDate < this.startDate) {
       Swal.fire("The end date should be greater than the start date")
       this.endDate = ""
+      this.loader = false;
     }
     else if (this.startDate == undefined) {
       Swal.fire("Please select the start date first")
       this.endDate = ""
+      this.loader = false;
     }
     else {
       this.shiftList = this.shiftFilter.filter((x: { staffID: any; filterdate: any; filterenddate: any; }) => x.staffID == this.staffID && (x.filterdate >= this.startDate && x.filterenddate <= this.endDate));
+      this.loader = false;
     }
   }
 }

@@ -202,7 +202,6 @@ export class ShiftDetailsFormComponent implements OnInit {
         next: data => {
           debugger
           this.attactments = [];
-          //Swal.fire('Password sent to your email.');
           this.loader = false;
         }
       })
@@ -295,7 +294,7 @@ export class ShiftDetailsFormComponent implements OnInit {
   public getEndDate() {
     this.showPopup = 0;
     if (this.endDate < this.startDate) {
-      this.loader = 0;
+      this.loader = false;
       this.showPopup = 1;
       this.messageId = 29;
       this.endDate = "";
@@ -303,6 +302,7 @@ export class ShiftDetailsFormComponent implements OnInit {
     if (new Date(this.jDate) > new Date(this.startDate)) {
       this.loader = false;
       Swal.fire('Sorry, Shift Date is prior the New Hire Date');
+      this.loader = false;
     }
     this.DigiofficecorehrService.GetCurrentPhTime(localStorage.getItem('staffid'), this.startDate, this.endDate)
       .subscribe({
@@ -310,7 +310,8 @@ export class ShiftDetailsFormComponent implements OnInit {
           debugger
           let temp: any = data;
           if (temp[0].overlappingshifts > 0) {
-            Swal.fire('Please choose another dates as these dates are overlapping with your existing shift')
+            Swal.fire('Please choose another dates as these dates are overlapping with your existing shift');
+            this.loader = false;
           }
         }
       })

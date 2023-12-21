@@ -7,13 +7,14 @@
             <ul>
                 <li *ngIf="roledid==6"><a class="Heading">
                         <p class="Heading">My Leave Details</p>
-                        <hr *ngIf="roledid==2||roledid==9" class="line-border">
+                        <hr class="line-border listForm">
+                    </a>
+                </li>
 
-                    </a></li>
-                <!-- <li *ngIf="roledid==6"><a class=" Heading"><u>My Leave Details</u>
-                    </a></li>&nbsp;&nbsp;&nbsp; -->
                 <li *ngIf="roledid==2"><a class="Heading" routerLink="/Manager/MyTeamLeaveDetails">My Team Leave
-                        Details</a></li>
+                        Details</a>
+                </li>
+
                 <li *ngIf="roledid==9||roledid==10"><a class="Heading " routerLink="/HR/HRLeaveRequest">Staff
                         Leave
                         Details</a>
@@ -34,10 +35,9 @@
                                     class="form-control" bsDaterangepicker [(ngModel)]="startdate"
                                     (ngModelChange)="getEndDate($event)" [bsConfig]="{ showWeekNumbers:false }">
                             </p>
-                           
+
                         </div>
-                        <input class="form-control search-icon" [(ngModel)]="term" type="search"
-                            placeholder="Search">
+                        <input class="form-control search-icon" [(ngModel)]="term" type="search" placeholder="Search">
                     </div>
 
                     <!-- <div class="leavetype">
@@ -90,7 +90,8 @@
                     </div>
 
                     <div class="row">
-                        <ngb-carousel #carousel [interval]="0" [showNavigationArrows]="false" [showNavigationIndicators]="true" >
+                        <ngb-carousel #carousel [interval]="0" [showNavigationArrows]="false"
+                            [showNavigationIndicators]="true">
 
                             <ng-template ngbSlide>
                                 <div class="alignment" *ngFor="let item of Staffleaveenitilment">
@@ -103,7 +104,7 @@
                                         <p class="align-text-smallcard"><b> Vacation Leave </b></p>
                                         <p><b class="number">{{item.vacation_Leaveremaining}}</b></p>
                                     </div>
-                                    <div class="small-card" >
+                                    <div class="small-card">
                                         <div class="Ellipse">
                                             <img src="assets/Images/revamp/Leave_Current Reserve VL 1.png"
                                                 class="Ellipse-img" />
@@ -119,7 +120,7 @@
                                         <p class="align-text-smallcard"><b> Service Incentive Leave</b></p>
                                         <p><b class="number">{{item.service_Incentive_Leaveremaining}}</b></p>
                                     </div>
-                                    
+
                                 </div>
                             </ng-template>
                             <ng-template ngbSlide>
@@ -132,7 +133,7 @@
                                         <p class="align-text-smallcard"><b>Maternity Leave</b></p>
                                         <p><b class="number">{{item.maternitityLeaveremaining}}</b></p>
                                     </div>
-                                    <div class="small-card" *ngIf="item.gender == 'Male' "> 
+                                    <div class="small-card" *ngIf="item.gender == 'Male' ">
                                         <div class="Ellipse">
                                             <img src="assets/Images/revamp/Leave_SickLeave 1.png" class="Ellipse-img" />
                                         </div>
@@ -140,7 +141,7 @@
                                         <p><b class="number">{{item.paternitityLeaveremaining}}</b></p>
                                     </div>
                                     <!-- as per BRD ALPI only staff has SL Accrual -->
-                                    <div class="small-card" >
+                                    <div class="small-card">
                                         <div class="Ellipse">
                                             <img src="assets/Images/revamp/Leave_Magna Carta of Women 1.png"
                                                 class="Ellipse-img" />
@@ -155,7 +156,7 @@
                             <ng-template ngbSlide>
                                 <div class="alignment" *ngFor="let item of Staffleaveenitilment">
 
-                                    <div class="small-card" >
+                                    <div class="small-card">
                                         <div class="Ellipse">
                                             <img src="assets/Images/revamp/Leave_Birthday 1.png" class="Ellipse-img" />
                                         </div>
@@ -180,16 +181,16 @@
                                 </div>
                             </ng-template>
 
-                          
 
-                         
+
+
 
                         </ngb-carousel>
                     </div>
                 </div>
 
-               
-                       
+
+
             </div>
 
 
