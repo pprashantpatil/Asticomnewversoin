@@ -1,4 +1,4 @@
-#spinner {
+/* #spinner {
     -webkit-animation: frames 1s infinite linear;
     animation: frames 1s infinite linear;
     filter: blur(10px);
@@ -87,4 +87,69 @@
     left: 174px;
     border-radius: 5px;
     transform: rotate(-92.19deg);
+} */
+
+
+#spinner {
+    -webkit-animation: frames 1s infinite linear;
+    animation: frames 1s infinite linear;
+
+    border: 1.75vw solid #ffffff;
+    border-radius: 100%;
+    border-top-color: #3247d5;
+    width: 12vw;
+    height: 12vw;
+    opacity: 1;
+    padding: 0;
+    left: 33%;
+    position: absolute;
+    z-index: 9999;
+}
+
+@keyframes frames {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+#pause {
+    display: block;
+    background: transparent;
+    /* width: 100%; */
+    /* height: 100%; */
+    /* background: url('/assets/Images/favicon.png') transparent; */
+    position: fixed;
+    /* box-shadow: 0 4px 8px 0 rgb(0 0 0); */
+    justify-content: center;
+    top: 33%;
+    background-color: #ffffff;
+    height: 214px;
+    border: 2px solid #1415151c;
+    width: 38%;
+    padding: 10px;
+    left: 33%;
+    border-radius: 20px;
+    /* border: 1px solid greay; */
+    z-index: 9999;
+}
+
+.labeltxt {
+    position: relative;
+    left: 38%;
+    font-size: 19px;
+    font-family: 'poppins';
+    font-weight: 600;
+} 
+
+.icon_align {
+    height: 20%;
+    position: relative;
+    top: 60%;
+    left: 10.5%;
 }
