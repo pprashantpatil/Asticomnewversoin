@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
   }
   public employeeDash() {
     this.active = 1;
-    this.router.navigate(['/Employee/EmployeeDash']);
+    this.router.navigate(['/Employee/EmployeeDashboard']);
     localStorage.setItem('Pagename', 'Dashboard');
     this.data11.emit('Dashboard');
   }

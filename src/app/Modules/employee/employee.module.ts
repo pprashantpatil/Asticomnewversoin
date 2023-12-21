@@ -48,6 +48,7 @@ import { HolidaysFormComponent } from './Holidays/holidays-form/holidays-form.co
 import { AnnouncementsFormComponent } from './Announcements/announcements-form/announcements-form.component';
 import { TimesheetformComponent } from './Requests/timesheetform/timesheetform.component';
 import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-accountsetting-modify.component';
+import { EmployeeGraphDashComponent } from './Dashboard/employee-graph-dash/employee-graph-dash.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-a
     AnnouncementsFormComponent,
     TimesheetformComponent,
     MyAccountsettingModifyComponent,
+    EmployeeGraphDashComponent,
   
   ],
   imports: [

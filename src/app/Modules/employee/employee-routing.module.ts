@@ -25,20 +25,22 @@ import { ViewPolicyDashComponent } from './Policies/view-policy-dash/view-policy
 import { TimesheetformComponent } from './Requests/timesheetform/timesheetform.component';
 import { AuthguardGuard } from '../../Services/authguard.guard';
 import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-accountsetting-modify.component';
+import { EmployeeGraphDashComponent } from './Dashboard/employee-graph-dash/employee-graph-dash.component';
 
 const routes: Routes = [
-  { path: 'Employeedashboard', component: EmployeeDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'EmployeeDashboard', component: EmployeeDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'EmployeeGraphDash', component: EmployeeGraphDashComponent ,canActivate: [AuthguardGuard]},
   
   { path: 'AttendanceCorrectionDash', component: AttendanceCorrectionDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'AttendanceDetailsDash', component: AttendanceDetailsDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'OverTimeDetailsDash', component: OverTimeDetailsDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'ShiftDetailsDash', component: ShiftDetailsDashComponent ,canActivate: [AuthguardGuard]},
 
-  { path: 'PoliciesDash', component: PoliciesDashComponent },
-  { path: 'ViewPolicyDash', component: ViewPolicyDashComponent },
-  { path: 'ViewPolicyDash/:id', component: ViewPolicyDashComponent },
-  { path: 'HolidaysDash', component: HolidaysDashComponent },
-  { path: 'AnnouncementsDash', component: AnnouncementsDashComponent },
+  { path: 'PoliciesDash', component: PoliciesDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'ViewPolicyDash', component: ViewPolicyDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'ViewPolicyDash/:id', component: ViewPolicyDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'HolidaysDash', component: HolidaysDashComponent ,canActivate: [AuthguardGuard]},
+  { path: 'AnnouncementsDash', component: AnnouncementsDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'EmployeeResignationDash', component: EmployeeResignationDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'LeaveRequestDash', component: LeaveRequestDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'NewLeaveRequest', component: NewLeaveRequestComponent ,canActivate: [AuthguardGuard]},
@@ -59,7 +61,7 @@ const routes: Routes = [
   { path: 'EmployeeCertificateDash', component: EmployeeCertificateDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'Help', component: HelpComponent ,canActivate: [AuthguardGuard]},
   { path: 'MyAccountSetting', component: MyAccountsettingModifyComponent ,canActivate: [AuthguardGuard]},
-  { path: 'Payslip', component: PayslipComponent }
+  { path: 'Payslip', component: PayslipComponent ,canActivate: [AuthguardGuard]}
 ];
 
 @NgModule({
