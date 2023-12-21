@@ -1,0 +1,368 @@
+.emplographcardcontent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  
+  .empgraphcardinputs {
+    width: 45%;
+    margin-left: 15px;
+  }
+  
+  .empgraphcard {
+    padding: 10px !important;
+    background: #ffffff;
+    border-radius: 12px;
+    width: 49%;
+    height: 121px;
+    /* border: 2px solid #8080803b; */
+    border-radius: 1px !important;
+    text-align: center;
+    margin: 4px;
+  }
+  
+  .changewidth {
+    width: 49% !important;
+    height: 121px;
+  }
+  
+  /* @media(min-width:1200px) {
+  
+    .changewidth,
+    .empgraphcard {
+      width: 48% !important;
+    }
+  } */
+  
+  .card-head {
+    width: 100%;
+    position: relative;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    color: black !important;
+    font-size: 16px !important;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  
+  
+  
+  .smallcard {
+    width: 33.33%;
+    height: 137px;
+    /* border: 1px solid grey; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    /* border: 2px solid #8080803b; */
+    margin: 5px;
+    background-color: #ffffff;
+  }
+  
+  .firstrow {
+    padding: 16px;
+    padding-bottom: 0px;
+  }
+  
+  .secondrow {
+    padding: 16px;
+    padding-top: 0px;
+  }
+  
+  
+  
+  .heading {
+    background-color: #3247d5 !important;
+    color: #ffffff;
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+    padding: 6px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .ytdtext {
+    position: relative;
+    top: 10px;
+    color: black;
+    font-weight: 400;
+  }
+  
+  
+  
+  .percent {
+    color: red !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+  }
+  
+  
+  .rejectedleave {
+    font-weight: 400;
+    font-size: 12px !important;
+  }
+  
+  
+  .cardbackground {
+    background-color: #1f1e1e0d;
+    border: none !important;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /* end */
+  hr {
+    border: 1px solid grey;
+    height: 30px;
+    width: 0px;
+  }
+  
+  
+  .hrgrapghdashcard {
+  
+    background: #fefefe;
+    border-radius: 12px;
+    width: 98%;
+    height: auto;
+    /* border: 1px solid #8080803b; */
+    border-radius: 1px !important;
+    text-align: center;
+  
+    font-size: 15px;
+    margin: 15px 12px 15px 28px;
+  }
+  
+  .hrgrapghdashcard2 {
+  
+    background: #fefefe;
+    border-radius: 12px;
+    width: 98%;
+    height: auto;
+    /* border: 1px solid #8080803b; */
+    border-radius: 1px !important;
+    text-align: center;
+  
+    font-size: 15px;
+    margin: 15px 12px 15px 28px;
+  }
+  
+  
+  .fristcard {
+  
+    background: #fefefe;
+    border-radius: 12px;
+    width: 98%;
+    height: 92px;
+    /* border: 1px solid #8080803b; */
+    border-radius: 1px !important;
+    text-align: center;
+  
+    font-size: 15px;
+  
+  }
+  
+  
+  .hrgrapghdashcard1 {
+  
+    background: #fefefe;
+    border-radius: 12px;
+    width: 98%;
+    height: 249px;
+    /* border: 2px solid #8080803b; */
+    border-radius: 1px !important;
+    text-align: center;
+    color: grey;
+    font-size: 15px;
+    margin: 5px;
+  
+  
+    /* margin: 14px 0px 12px 39px; */
+  }
+  
+  .unapproved-card {
+  
+    background: #fefefe;
+    border-radius: 12px;
+    width: 98%;
+    height: auto;
+    /* border: 1px solid #8080803b; */
+    border-radius: 1px !important;
+    text-align: center;
+    color: grey;
+    font-size: 15px;
+    margin: 14px 0px 7px 38px;
+  }
+  
+  .heading-card {
+    font-size: 15px;
+  
+    background: #ffffff;
+    border-radius: 12px;
+    width: 335px;
+    height: auto;
+    border: 1px solid #f7f6f63b;
+    border-radius: 1px !important;
+    text-align: center;
+    color: grey;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    font-size: 15px;
+  }
+  
+  p {
+    font-size: 15px !important;
+  
+  }
+  
+  span {
+    font-size: 15px !important;
+    font-weight: 500;
+  }
+  
+  .anuualtxt {
+    margin-bottom: 47px;
+  
+  }
+  
+  .annual-leavecount {
+    font-size: 30px;
+    color: black;
+    margin: 10px 10px 6px 20px;
+  }
+  
+  /* .logins-count {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+  
+  } */
+  
+  .count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 14px !important;
+    color: gray !important;
+  }
+  
+  h6 {
+    color: red;
+    font-weight: 700;
+  }
+  
+  h5 {
+    color: black !important;
+    font-weight: 600;
+    color: gray;
+  }
+  
+  
+  .countstyle {
+    font-weight: 700;
+    font-size: 27px !important;
+    color: #1125a9 !important;
+  
+  }
+  
+  .maincard {
+    background: #f2f2f2;
+  }
+  
+  .early {
+    margin-left: 11px;
+    margin-top: 26px;
+  }
+  
+  .late {
+    margin-left: 50px;
+    margin-top: 26px;
+  }
+  
+  .divider {
+    align-self: flex-start;
+    position: relative;
+    top: 18px;
+  }
+  
+  .selectmonth {
+    background-color: white;
+    margin-left: 20px;
+    width: 100px;
+  }
+  
+  .small-cards {
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 99%;
+    height: 122px;
+    border: 1px solid #8080803b;
+    border-radius: 1px !important;
+    text-align: center;
+    color: grey;
+    font-size: 15px;
+  
+  }
+  .bluediv {
+    background-color: #1125a9;
+    height: 25px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .label-name {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .small-card-content {
+    display: flex;
+    flex-direction: column;
+    /* gap: 8px; */
+  }
+  
+  .month {
+    font-size: 12px;
+    color: black !important;
+    margin-top: 5px;
+  }
+  
+  
+  .year {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: black !important;
+  
+  }
+  
+  
+  .sm-head {
+    font-size: 27px;
+    font-weight: 700;
+    color: #1125a9 !important
+  }

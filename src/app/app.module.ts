@@ -21,6 +21,7 @@ import { SharedModuleModule } from './Shared/shared-module/shared-module.module'
 import { InterceptorServiceInterceptor } from './Shared/interceptor-service.interceptor';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,6 @@ import { InterceptorServiceInterceptor } from './Shared/interceptor-service.inte
     SharedModuleModule,
     NgxPaginationModule,
     SharedModuleModule,
-    TimepickerModule,
     TimepickerModule.forRoot(),
   ],
   exports:[

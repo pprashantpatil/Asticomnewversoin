@@ -41,13 +41,14 @@ import { SharedModuleModule } from 'src/app/Shared/shared-module/shared-module.m
 import { NewLeaveRequestComponent } from './Requests/new-leave-request/new-leave-request.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { TimesheetformComponent } from './Requests/timesheetform/timesheetform.component';
-import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-accountsetting-modify.component';
 import { AttendanceCorrectionFormComponent } from './Attendance/attendance-correction-form/attendance-correction-form.component';
 import { ViewPolicyDashComponent } from './Policies/view-policy-dash/view-policy-dash.component';
 import { PoliciesFormComponent } from './Policies/policies-form/policies-form.component';
 import { HolidaysFormComponent } from './Holidays/holidays-form/holidays-form.component';
 import { AnnouncementsFormComponent } from './Announcements/announcements-form/announcements-form.component';
+import { TimesheetformComponent } from './Requests/timesheetform/timesheetform.component';
+import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-accountsetting-modify.component';
+import { EmployeeGraphDashComponent } from './Dashboard/employee-graph-dash/employee-graph-dash.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,9 @@ import { AnnouncementsFormComponent } from './Announcements/announcements-form/a
     PoliciesFormComponent,
     HolidaysFormComponent,
     AnnouncementsFormComponent,
+    TimesheetformComponent,
+    MyAccountsettingModifyComponent,
+    EmployeeGraphDashComponent,
   
   ],
   imports: [
@@ -99,6 +103,8 @@ import { AnnouncementsFormComponent } from './Announcements/announcements-form/a
     BsDatepickerModule.forRoot(),
     TimepickerModule,
     TimepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
+    TimepickerModule,
     NgbModule,
     NgxPaginationModule,
     SharedModuleModule,

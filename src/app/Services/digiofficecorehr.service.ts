@@ -3165,4 +3165,14 @@ export class DigiofficecorehrService {
     this.url = 'https://asticom.digiofficeapp.com/SupportAPI' + '/Master/UpdateCloseStatusSupportTickets';
     return this.http.post(this.url, data);
   }
+
+  public GetHRDashboard_HeadCountByGenderByEmployee(EmployeeID: any) {
+    return this.http.get<any[]>(
+      this.host + "/HR/GetHRDashboard_HeadCountByGenderByEmployee?EmployeeID=" + EmployeeID);
+  }
+
+  public GetHRDashboard_HeadCountByGenderByEmployeeByMonth(EmployeeID: any, Month: any) {
+    return this.http.get<any[]>(
+      this.host + "/HR/GetHRDashboard_HeadCountByGenderByEmployeeByMonth?EmployeeID=" + EmployeeID + "&Month=" + Month);
+  }
 }

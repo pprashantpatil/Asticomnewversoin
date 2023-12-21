@@ -34,18 +34,18 @@
                 </div>
 
                 <div class="popupinputs">
-                    <p>Holiday Date<span class="span">*</span></p>
+                    <p>Announcement Start Date<span class="span">*</span></p>
                     <div>
                         <input type="date" class="form-control" name="date" id="date" onkeydown="return false"
-                            [(ngModel)]="date">
+                            [(ngModel)]="startDate">
                     </div>
                 </div>
 
-                <div class="popupinputs" *ngIf="ID==undefined">
-                    <p>All City<span class="span">*</span></p>
+                <div class="popupinputs">
+                    <p>Announcement End Date<span class="span">*</span></p>
                     <div>
-                        <input type="text" class="form-control" placeholder="All City" [(ngModel)]="allCity"
-                            name="allCity" id="allCity">
+                        <input type="date" class="form-control" name="endDate" id="endDate" onkeydown="return false"
+                            [(ngModel)]="endDate">
                     </div>
                 </div>
 
@@ -58,6 +58,14 @@
                                 <option *ngFor="let role of cityList" value="{{role.id}}">{{role.short}}</option>
                             </select>
                         </div>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Venue<span class="span">*</span></p>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Venue" [(ngModel)]="venue" name="venue"
+                            id="venue">
                     </div>
                 </div>
 
