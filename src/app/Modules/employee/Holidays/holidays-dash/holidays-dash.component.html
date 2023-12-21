@@ -1,5 +1,17 @@
 <app-loader *ngIf="loader"></app-loader>
 <app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="row">
+    <div class="col-12">
+        <ul style="margin-left: 2%;">
+            <li *ngIf="roleID==6"><a class="Heading">
+                    <p class="Heading">Holidays</p>
+                </a>
+                <hr class="line-border listForm">
+            </li>
+        </ul>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="card">
         <div class="d-flex flex-wrap">
@@ -44,13 +56,35 @@
                             <td>{{data.holidayDate|date}}</td>
                             <td>
                                 <a href="{{data.attachment}}" target="_blank"> <img src="assets/Images/image.png"
-                                    style="width:20px; height:20px"
-                                    alt="data.img"></a>
+                                        style="width:20px; height:20px" alt="data.img"></a>
                             </td>
-                            <td class="onelinetext" *ngIf="roleID=='9'||roleID=='10'||roleID=='11'"> <img class="dashedit-icon" (click)="edit(data.id)"
-                                    src="assets/Images/Edit.svg">
+                            <td class="onelinetext" *ngIf="roleID=='9'||roleID=='10'||roleID=='11'"> <img
+                                    class="dashedit-icon" (click)="edit(data.id)" src="assets/Images/Edit.svg"
+                                    [ngbTooltip]="tipContenteidt" tooltipClass="my-custom-class">
                                 <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
-                                    src="assets/Images/Delete.svg">
+                                    src="assets/Images/Delete.svg" [ngbTooltip]="tipContentCancel"
+                                    tooltipClass="my-custom-class">
+
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentCancel>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Delete</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template #tipContenteidt>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Edit</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

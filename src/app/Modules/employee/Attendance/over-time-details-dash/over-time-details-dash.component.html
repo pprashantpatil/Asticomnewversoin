@@ -4,10 +4,14 @@
             <ul>
                 <li *ngIf="roleID==6"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
                         <p class="Heading"> My Overtime Details</p>
-                    </a></li>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+
                 <li *ngIf="roleID==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
                         <p class="Heading"> Team Overtime Details</p>
-                    </a></li>
+                    </a>
+                </li>
             </ul>
 
         </div>
@@ -93,8 +97,8 @@
                             <td>{{data.status}}</td>
                             <td class="actionpadding">
                                 <div class="arrangeIcon">
-                                    <img class="dashedit-icon" src="assets/Images/delete.svg"
-                                    (click)="openDeletePopUp(data.id)" [ngbTooltip]="tipContentCancel"
+                                    <img class="dashedit-icon" src="assets/Images/Delete.svg"
+                                        (click)="openDeletePopUp(data.id)" [ngbTooltip]="tipContentCancel"
                                         tooltipClass="my-custom-class">
                                 </div>
                                 <div class="col-lg-2 Text p-0">

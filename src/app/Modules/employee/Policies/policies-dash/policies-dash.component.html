@@ -1,6 +1,18 @@
 <app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
 <app-loader *ngIf="loader"></app-loader>
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li *ngIf="roleID==6"><a class="Heading" routerLink="/Employee/ShiftDetailsDash">
+                        <p class="Heading">Policy Dashboard</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <div class="card">
         <div class="d-flex flex-wrap">
             <div class="d-flex align-items-center">

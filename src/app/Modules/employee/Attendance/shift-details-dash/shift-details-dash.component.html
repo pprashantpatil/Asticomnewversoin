@@ -1,17 +1,22 @@
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <ul>
                 <li *ngIf="roleID==6"><a class="Heading" routerLink="/Employee/ShiftDetailsDash">
-                        <p class="Heading"> My Shift Details</p>
-                    </a></li>
+                        <p class="Heading">My Shift Details</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+
                 <li *ngIf="roleID==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
-                        <p class="Heading"> Team Shift Details</p>
+                        <p class="Heading">Team Shift Details</p>
                     </a></li>
             </ul>
-
         </div>
     </div>
+
     <div class="card">
         <div class="d-flex flex-wrap">
             <div class="d-flex align-items-center">
@@ -21,8 +26,7 @@
 
             <div class="cardinputs">
                 <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
-                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }"
-                    (ngModelChange)="getEndDate($event)">
+                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate($event)">
             </div>
 
             <div class="cardinputs" (click)="showDialog()">
@@ -73,9 +77,31 @@
                                 <p *ngIf="data.approve==2">Rejected</p>
                             </td>
                             <td class="onelinetext"> <img class="dashedit-icon" (click)="edit(data.id)"
-                                    src="assets/Images/Edit.svg" *ngIf="roleID==6 && data.approve==null">
+                                    src="assets/Images/Edit.svg" [ngbTooltip]="tipContenteidt"
+                                    tooltipClass="my-custom-class" *ngIf="roleID==6 && data.approve==null">
                                 <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
-                                    src="assets/Images/Delete.svg" *ngIf="data.approve==0">
+                                    src="assets/Images/Delete.svg" [ngbTooltip]="tipContentCancel"
+                                    tooltipClass="my-custom-class" *ngIf="data.approve==0">
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentCancel>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Delete</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template #tipContenteidt>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Edit</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

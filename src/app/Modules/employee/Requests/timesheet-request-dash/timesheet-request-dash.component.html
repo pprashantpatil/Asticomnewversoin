@@ -3,15 +3,19 @@
         <div class="col-12">
             <ul>
                 <li *ngIf="roleid==6"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
-                        <p class="Heading"> My Timesheet Details</p>
-                    </a></li>
-                <li *ngIf="roleid==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
-                        <p class="Heading"> Team Timesheet Details</p>
-                    </a></li>
-            </ul>
+                        <p class="Heading">My Timesheet Details</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
 
+                <li *ngIf="roleid==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
+                        <p class="Heading">Team Timesheet Details</p>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
+    
     <div class="card">
         <div class="d-flex flex-wrap">
             <div class="d-flex align-items-center">
@@ -82,9 +86,8 @@
                             <td>
                                 <p *ngIf="item.excelURL==null">No Attachment</p>
                                 <p *ngIf="item.excelURL=='0'">No Attachment</p>
-                                <a href="{{item.excelURL}}" target="_blank"> <img
-                                        *ngIf="item.excelURL!=null" src="assets/Images/attachment (1).png"
-                                        class="attachmentPin"></a>
+                                <a href="{{item.excelURL}}" target="_blank"> <img *ngIf="item.excelURL!=null"
+                                        src="assets/Images/attachment (1).png" class="attachmentPin"></a>
                             </td>
                             <td>
                                 <p *ngIf="item.comments==null">No Comments</p>
@@ -209,4 +212,3 @@
         </div>
     </div>
 </div>
-
