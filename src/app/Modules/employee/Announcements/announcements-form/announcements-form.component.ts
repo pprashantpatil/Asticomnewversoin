@@ -17,7 +17,7 @@ export class AnnouncementsFormComponent implements OnInit {
   type: any;
   short: any;
   description: any;
-  date: any;
+  startDate: any;
   allCity: any;
   cityList: any;
   city: any;
@@ -28,7 +28,9 @@ export class AnnouncementsFormComponent implements OnInit {
   holidayList: any;
   attachment: any;
   attachment1: any;
-link: any;
+  link: any;
+  endDate: any;
+venue: any;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private datepipe: DatePipe, public dialogRef: MatDialogRef<AnnouncementsDashComponent>,
     @Inject(MAT_DIALOG_DATA) public ID: any) { }
@@ -57,7 +59,7 @@ link: any;
           this.holidayList = data.filter(x => x.id == this.ID);
           this.short = this.holidayList[0].holiday
           this.description = this.holidayList[0].holidayDescription
-          this.date = this.datepipe.transform(this.holidayList[0].holidayDate, 'yyyy-MM-dd');
+          this.startDate = this.datepipe.transform(this.holidayList[0].holidayDate, 'yyyy-MM-dd');
           this.attachment = this.holidayList[0].attachment;
           this.attachment1 = this.holidayList[0].attachment1;
           this.type = this.holidayList[0].holidayCategory;
@@ -79,7 +81,7 @@ link: any;
     if (this.type == undefined || this.type == null || this.type == '' ||
       this.type == 0 || this.short == null || this.short == '' || this.short == undefined ||
       this.short == 0 || this.description == '' || this.description == undefined || this.description == null ||
-      this.date == '' || this.date == undefined || this.date == null || this.attachments21 == null || this.attachments21 == undefined
+      this.startDate == '' || this.startDate == undefined || this.startDate == null || this.attachments21 == null || this.attachments21 == undefined
       || this.attachments21 == "") {
       this.loader = false;
       this.showPopup = 1;
@@ -105,7 +107,7 @@ link: any;
     var entity = {
       Holiday: this.short,
       HolidayDescription: this.description,
-      HolidayDate: this.date,
+      HolidayDate: this.startDate,
       Attachment: this.attachmentsurl[0],
       HolidayCategory: this.type,
       Region: this.city
@@ -137,7 +139,7 @@ link: any;
           for (let i = 0; i < this.staffList.length; i++) {
             var obj = {
               'EmployeeID': this.staffList[i].id,
-              'Date': this.date,
+              'Date': this.startDate,
               'Holidaytype': this.type
             }
             this.DigiofficecorehrService.InsertEmployeeAttendance_Holidays(obj).subscribe(
@@ -155,7 +157,7 @@ link: any;
     if (this.type == undefined || this.type == null || this.type == '' ||
       this.type == 0 || this.short == null || this.short == '' || this.short == undefined ||
       this.short == 0 || this.description == '' || this.description == undefined || this.description == null ||
-      this.date == '' || this.date == undefined || this.date == null || this.attachment == undefined) {
+      this.startDate == '' || this.startDate == undefined || this.startDate == null || this.attachment == undefined) {
       this.loader = false;
       this.showPopup = 1;
       this.messageId = 7
@@ -182,7 +184,7 @@ link: any;
       ID: this.ID,
       Holiday: this.short,
       HolidayDescription: this.description,
-      HolidayDate: this.date,
+      HolidayDate: this.startDate,
       Attachment: this.attachmentsurl[0] == "" ? this.attachment1 : this.attachmentsurl[0],
       HolidayCategory: this.type,
       Region: this.city
