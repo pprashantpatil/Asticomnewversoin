@@ -2,12 +2,16 @@
     <div class="row">
         <div class="col-12">
             <ul>
-                <li *ngIf="roleID==6"><a class="Heading" routerLink="/Employee/AttendanceDetailsDash">
+                <li ><a class="Heading" routerLink="/Employee/AttendanceDetailsDash">
                         <p class="Heading"> My Attendance Details</p>
-                    </a></li>
-                <li *ngIf="roleID==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
+                    </a>
+                    <hr  class="line-border listForm">
+                </li>
+                <li *ngIf="roleID==2"><a class="Heading" routerLink="/Manager/MyTeamAttendence">
                         <p class="Heading"> Team Attendance Details</p>
-                    </a></li>
+                    </a>
+                   
+                </li>
             </ul>
 
         </div>

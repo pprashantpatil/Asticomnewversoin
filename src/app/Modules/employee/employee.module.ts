@@ -6,7 +6,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {  BsDatepickerModule  } from 'ngx-bootstrap/datepicker';
 
 
-import { EmployeeRoutingModule } from './employee-routing.module';
+
 import { EmployeeDashComponent } from './Dashboard/employee-dash/employee-dash.component';
 import { AttendanceDetailsDashComponent } from './Attendance/attendance-details-dash/attendance-details-dash.component';
 import { ShiftDetailsDashComponent } from './Attendance/shift-details-dash/shift-details-dash.component';
@@ -49,6 +49,7 @@ import { AnnouncementsFormComponent } from './Announcements/announcements-form/a
 import { TimesheetformComponent } from './Requests/timesheetform/timesheetform.component';
 import { MyAccountsettingModifyComponent } from './my-accountsetting-modify/my-accountsetting-modify.component';
 import { EmployeeGraphDashComponent } from './Dashboard/employee-graph-dash/employee-graph-dash.component';
+import { EmployeeRoutingModule } from './employee-routing.module';
 
 @NgModule({
   declarations: [
@@ -96,15 +97,12 @@ import { EmployeeGraphDashComponent } from './Dashboard/employee-graph-dash/empl
   ],
   imports: [
     CommonModule,
-    EmployeeRoutingModule,
     FormsModule,
+    EmployeeRoutingModule,
     NgxDropzoneModule,
     Ng2SearchPipeModule,
     BsDatepickerModule.forRoot(),
-    TimepickerModule,
     TimepickerModule.forRoot(),
-    TimepickerModule.forRoot(),
-    TimepickerModule,
     NgbModule,
     NgxPaginationModule,
     SharedModuleModule,
