@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
 import Swal from 'sweetalert2';
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { AnnouncementsFormComponent } from '../announcements-form/announcements-form.component';
 
 @Component({
@@ -36,6 +36,10 @@ export class AnnouncementsDashComponent implements OnInit {
     this.currentUrl = window.location.href;
     this.staffID = localStorage.getItem('staffid');
     this.roleID = localStorage.getItem('roledid');
+    const format = 'yyyy-MM-dd';
+    const myDate = new Date();
+    const locale = 'en-US';
+    this.todayDate = formatDate(myDate, format, locale);
     this.getData();
   }
 

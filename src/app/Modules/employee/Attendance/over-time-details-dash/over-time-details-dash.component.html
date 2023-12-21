@@ -91,9 +91,23 @@
                             </td>
                             <td>{{data.comments}}</td>
                             <td>{{data.status}}</td>
-                            <td class="onelinetext" *ngIf="roleID!=1">
-                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
-                                    src="assets/Images/Delete.svg">
+                            <td class="actionpadding">
+                                <div class="arrangeIcon">
+                                    <img class="dashedit-icon" src="assets/Images/delete.svg"
+                                    (click)="openDeletePopUp(data.id)" [ngbTooltip]="tipContentCancel"
+                                        tooltipClass="my-custom-class">
+                                </div>
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentCancel>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Delete</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

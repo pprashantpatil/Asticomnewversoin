@@ -142,23 +142,24 @@ export class ShiftDetailsFormComponent implements OnInit {
   }
 
   public submit() {
+    debugger
     this.showPopup = 0;
     // this.restDays = '';
     // for (let i = 0; i < this.restDaysArray1.length; i++) {
     //   this.restDays = this.restDays + this.restDaysArray1[i].name + ','
     // }
     if (this.startDate == undefined || this.shiftName == undefined || this.shiftName == "" ||
-      this.endDate == undefined || this.restDays == undefined || this.restDays == "" ||
+      this.endDate == undefined ||
       this.startTime == undefined || this.endTime == undefined) {
       this.loader = false;
       this.showPopup = 1;
       this.messageId = 7;
     }
     else {
-      this.restDays = '';
-      // for (let i = 0; i < this.restDaysArray1.length; i++) {
-      //   this.restDays = this.restDays + this.restDaysArray1[i].name + ',';
-      // }
+    
+      for (let i = 0; i < this.restDaysArray1.length; i++) {
+        this.restDays = this.restDays + this.restDaysArray1[i].name + ',';
+      }
       let entity = {
         'ShiftDate': this.startDate,
         'ShiftName': this.shiftName,

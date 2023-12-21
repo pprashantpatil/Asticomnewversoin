@@ -23,18 +23,7 @@
                             </div>
                             <br>
 
-                            <div class="">
-                                <label class="type-text">Work Type Details<span style="color: red">*</span></label>
-                            </div>
 
-                            <div class="d-flex drp-align" *ngIf="punchintime==null && punchouttime==null">
-                                <select class="drp-box select" [(ngModel)]="workType"
-                                    (change)="getpunchoutworktype($event)">
-                                    <option value="0" class="punch-text" disabled>Select Type</option>
-                                    <option value="1" class="punch-text">Work from Home</option>
-                                    <option value="2" class="punch-text">Work from Office</option>
-                                </select>
-                            </div>
 
                             <div class="d-flex drp-align" *ngIf="punchintime!=null">
                                 <div class="punch-in-card" (click)=" punchin()">
@@ -45,14 +34,13 @@
 
                             <div class="d-flex drp-align" *ngIf="punchintime!=null">
                                 <div class="punch-time-card">
-                                    <p class="text-punch-tym">Punched In at {{punchintime}}
-                                        {{workType1}} </p>
+                                    <p class="text-punch-tym">Punched In at {{punchintime|date:'HH:mm'}}
+                                    </p>
                                 </div>
                             </div>
 
                             <div class="d-flex drp-align" *ngIf="punchintime==null">
-                                <div class="punch-Out-card"
-                                    [ngClass]="{'bgred':this.workType == undefined || this.workType == null || this.workType == '0'}">
+                                <div class="punch-Out-card">
                                     <p class="text-punch" (click)="punchin()">Punch In</p>
                                 </div>
                             </div>
@@ -64,7 +52,7 @@
                             </div>
 
                             <div class="d-flex drp-align" *ngIf="punchouttime!=null">
-                                <div class="punch-in-card" (click)="punchout1()">
+                                <div class="punch-in-card" (click)="punchout()">
                                     <img src="assets/Images/revamp/status-icon.png" class="status-icon">
                                     <p class="text-punch1">Punched Out</p>
                                 </div>
@@ -72,16 +60,15 @@
 
                             <div class="d-flex drp-align" *ngIf="punchouttime!=null">
                                 <div class="punch-time-card">
-                                    <p class="text-punch-tym">Punched Out at {{punchouttime}}
+                                    <p class="text-punch-tym">Punched Out at {{punchouttime|date:'HH:mm'}}
                                         {{punchoutworkType1}}
                                     </p>
                                 </div>
                             </div>
 
                             <div class="d-flex drp-align" *ngIf="punchouttime==null">
-                                <div class="punch-Out-card"
-                                    [ngClass]="{'bgred':  punchintime==null || (this.punchoutworkType == undefined || this.punchoutworkType == null || this.punchoutworkType == '0')}">
-                                    <p class="text-punch" (click)="punchout1()">Punch Out</p>
+                                <div class="punch-Out-card">
+                                    <p class="text-punch" (click)="punchout()">Punch Out</p>
                                 </div>
                             </div>
 
@@ -94,96 +81,7 @@
                     </div>
                 </div>
 
-                <div class="card" *ngIf="(companyid==1003 || companyid==1002) && AttendanceEnable=='false'">
-                    <div class="row">
-                        <div class="col-12 d-flex flex-column" style="gap:4px;">
-                            <div>
-                                <p class="Top_heading">Attendance Tracker</p>
-                            </div>
-
-                            <div class="d-flex time-alignment">
-                                <p class="time">{{hh}}</p>
-                                <p class="time">:</p>
-                                <p class="time">{{mm}}</p>
-                                <p class="time">:</p>
-                                <p class="time">{{ampm}}</p>
-                            </div>
-
-                            <div class="d-flex">
-                                <p class="date-text">{{todaydate}}</p>
-                            </div>
-                            <br>
-
-                            <div class="">
-                                <label class="type-text">Work Type Details<span style="color: red">*</span></label>
-                            </div>
-
-                            <div class="d-flex drp-align">
-                                <select class="drp-box select" [(ngModel)]="workType"
-                                    (change)="getpunchoutworktype($event)">
-                                    <option value="0" class="punch-text" disabled>Select Type</option>
-                                    <option value="1" class="punch-text">Work from Home</option>
-                                    <option value="2" class="punch-text">Work from Office</option>
-                                </select>
-                            </div>
-
-                            <div class="d-flex drp-align" *ngIf="punchintime!=null">
-                                <div class="punch-in-card" (click)=" punchin()">
-                                    <img src="assets/Images/revamp/status-icon.png" class="status-icon">
-                                    <p class="text-punch1">Punched In</p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex drp-align" *ngIf="punchintime!=null">
-                                <div class="punch-time-card">
-                                    <p class="text-punch-tym">Punched In at {{punchintime}}
-                                        {{workType1}} </p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex drp-align" *ngIf="punchintime==null">
-                                <div class="punch-Out-card"
-                                    [ngClass]="{'bgred':this.workType == undefined || this.workType == null || this.workType == '0'}">
-                                    <p class="text-punch" (click)="punchin()">Punch In</p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex drp-align" *ngIf="punchintime==null">
-                                <div class="not-punch-card">
-                                    <p class="text-punch-tym1">No punch in yet</p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex drp-align" *ngIf="punchouttime!=null">
-                                <div class="punch-in-card" (click)="punchout1()">
-                                    <img src="assets/Images/revamp/status-icon.png" class="status-icon">
-                                    <p class="text-punch1">Punched Out</p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex drp-align" *ngIf="punchouttime!=null">
-                                <div class="punch-time-card">
-                                    <p class="text-punch-tym">Punched Out at {{punchouttime}}
-                                        {{punchoutworkType1}}
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex drp-align" *ngIf="punchouttime==null">
-                                <div class="punch-Out-card"
-                                    [ngClass]="{'bgred':  punchintime==null || (this.punchoutworkType == undefined || this.punchoutworkType == null || this.punchoutworkType == '0')}">
-                                    <p class="text-punch" (click)="punchout1()">Punch Out</p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex drp-align" *ngIf="punchouttime==null">
-                                <div class="not-punch-card">
-                                    <p class="text-punch-tym1">No punch out yet</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
 
             <div class="w-100">
@@ -219,10 +117,8 @@
                         </div>
 
                         <div class="update-info d-flex justify-content-between">
-                            <p class="content1" *ngIf="profilepercentage1!=0">
-                                {{profilepercentage1}} Steps to complete</p>
-                            <p class="content1" *ngIf="profilepercentage1==0">
-                                Completed</p>
+                            <p class="content1" (click)="Profilecompletion()">
+                            Complete
                         </div>
                     </div>
 
@@ -231,12 +127,12 @@
                             <p class="card-head-one">Announcements</p>
 
                             <img src="assets/Images/revamp/Annoucenment-white-img.png"
-                                *ngIf="annnounecemnetlist.length==0" class="annou-img" />
+                                *ngIf="annnounecemnetlist?.length==0" class="annou-img" />
 
-                            <p *ngIf="annnounecemnetlist.length==0" class="anno-text">No announcements <br> for
+                            <p *ngIf="annnounecemnetlist?.length==0" class="anno-text">No announcements <br> for
                                 today </p>
 
-                            <ngb-carousel #carousel [interval]="0" [showNavigationArrows]="true" class="carus">
+                            <ngb-carousel #carousel [interval]="0" [showNavigationArrows]="false" class="carus">
                                 <ng-template ngbSlide *ngFor="let item of annnounecemnetlist">
                                     <div>
                                         <img src="{{item.attachment}}" class="img-annouc"
@@ -248,15 +144,15 @@
                                     <p class="fest-name">{{ item?.dateTime }}</p>
                                 </ng-template>
 
-                            </ngb-carousel>
+                            </ngb-carousel> 
 
-                            <div class="row Started">
+                            <div class="row Started"  (click)="viewnotification()">
                                 <p class="view-txt-all" style="font-weight: 600;">View All</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="right-bottom" style="margin: 0px 0px 0px -21px;">
                     <div class="addedwidth">
                         <div class="card-content ">
@@ -267,7 +163,7 @@
                                 <img src="assets/Images/revamp/icon.png" class="icon-img" />
                                 <p class="card-paragraph">You have {{approvedcount1}} absents status this month</p>
                             </div>
-                            
+
                             <div class="card-attendance">
                                 <p class="text-attendance" (click)="AddCorrection()">Attendance Correction</p>
                             </div>
@@ -291,7 +187,7 @@
                             <div class="card-leave">
                                 <p class="text-attendance" (click)="AddLeave()">Apply Leave</p>
                             </div>
- 
+
                             <p class="view-text1" style="color: #1125a9 !important;font-weight: 600;">View Leave</p>
                         </div>
                     </div>
@@ -315,7 +211,7 @@
                         <div *ngIf="holidaylist1?.length!=0">
                             <img src="{{tpholidayattachment}}" class="holiday-img" />
                             <p class="holiday-text">
-                                {{ topholidayname.length > 20 ? topholidayname.substring(0,20)+"..." :
+                                {{ topholidayname?.length > 20 ? topholidayname?.substring(0,20)+"..." :
                                 topholidayname }}
                             </p>
                             <p class="holiday-text1">{{topholidaydate|date}}</p>
@@ -427,3 +323,4 @@
         </div>
     </div>
 </div>
+<app-loader *ngIf="loader"></app-loader>

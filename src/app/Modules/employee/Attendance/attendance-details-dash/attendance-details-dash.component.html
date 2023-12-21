@@ -1,4 +1,17 @@
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li *ngIf="roleID==6"><a class="Heading" routerLink="/Employee/AttendanceDetailsDash">
+                        <p class="Heading"> My Attendance Details</p>
+                    </a></li>
+                <li *ngIf="roleID==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
+                        <p class="Heading"> Team Attendance Details</p>
+                    </a></li>
+            </ul>
+
+        </div>
+    </div>
     <div class="card">
         <div class="d-flex flex-wrap">
             <div class="d-flex align-items-center">
