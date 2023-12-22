@@ -6,10 +6,12 @@ import { AddressDetailsWizardComponent } from './address-details-wizard/address-
 import { SharedModuleModule } from 'src/app/Shared/shared-module/shared-module.module';
 import { FormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { StaffdashboardComponent } from './staffdashboard/staffdashboard.component';
 
 @NgModule({
   declarations: [
-    AddressDetailsWizardComponent
+    AddressDetailsWizardComponent,
+    StaffdashboardComponent
   ],
   imports: [
     CommonModule,
