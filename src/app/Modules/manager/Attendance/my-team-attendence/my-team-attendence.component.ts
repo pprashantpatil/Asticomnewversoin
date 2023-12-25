@@ -11,6 +11,7 @@ import { ExportToCsv } from 'export-to-csv';
   styleUrls: ['./my-team-attendence.component.css']
 })
 export class MyTeamAttendenceComponent implements OnInit {
+search: any;
 
   constructor(public DigiofficeService: DigiofficecorehrService) { }
   roleid: any

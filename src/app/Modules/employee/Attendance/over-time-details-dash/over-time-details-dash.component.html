@@ -1,17 +1,25 @@
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <ul>
-                <li *ngIf="roleID==6"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
-                        <p class="Heading"> My Overtime Details</p>
+                <!-- *ngIf="otEligibility==1" -->
+                <li><a class="Heading">
+                        <p class="Heading">My Overtime Details</p>
                     </a>
                     <hr class="line-border listForm">
                 </li>
 
-                <li *ngIf="roleID==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
-                        <p class="Heading"> Team Overtime Details</p>
+                <li *ngIf="roleID==2"><a class="Heading" routerLink="/Manager/MyTeamOverTimeDetails">
+                        <p class="Heading">Team Overtime Details</p>
                     </a>
                 </li>
+
+                <li *ngIf="roleID==1||roleID==9||roleID==11||roleID==10"><a class="Heading" routerLink="/Manager/MyTeamOverTimeDetails">
+                    <p class="Heading">Team Overtime Details</p>
+                </a>
+            </li>
             </ul>
 
         </div>

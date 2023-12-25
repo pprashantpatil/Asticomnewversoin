@@ -1,8 +1,10 @@
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <ul>
-                <li *ngIf="roleid==6"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
+                <li><a class="Heading">
                         <p class="Heading">My Timesheet Details</p>
                     </a>
                     <hr class="line-border listForm">
@@ -12,6 +14,11 @@
                         <p class="Heading">Team Timesheet Details</p>
                     </a>
                 </li>
+
+                <li *ngIf="roleid==1||roleid==9||roleid==10||roleid==11"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
+                    <p class="Heading">Team Timesheet Details</p>
+                </a>
+            </li>
             </ul>
         </div>
     </div>

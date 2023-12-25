@@ -20,8 +20,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModuleModule } from './Shared/shared-module/shared-module.module';
 import { InterceptorServiceInterceptor } from './Shared/interceptor-service.interceptor';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

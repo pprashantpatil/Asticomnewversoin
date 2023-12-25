@@ -52,6 +52,9 @@ export class OverTimeDetailsDashComponent implements OnInit {
   overTimeRejectedList: any;
   overTimeRejectedFilter: any;
   overTimeApprovedFilter: any;
+  otEligibility: any;
+  showPopup: number = 0;
+  messageId: number = 0;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
@@ -60,6 +63,7 @@ export class OverTimeDetailsDashComponent implements OnInit {
     this.currentUrl = window.location.href;
     this.staffID = localStorage.getItem('staffid');
     this.roleID = localStorage.getItem('roledid');
+    this.otEligibility = localStorage.getItem('OTEligibility');
     this.getData();
   }
 
