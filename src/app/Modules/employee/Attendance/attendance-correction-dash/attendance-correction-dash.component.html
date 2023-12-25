@@ -95,8 +95,15 @@
                             <td>{{data.sDate|date}}</td>
                             <td>{{data.startTime}}</td>
                             <td>{{data.endTime}}</td>
-                            <td>{{data.comments}}</td>
-                            <td class="onelinetext" *ngIf="roleID!=1">
+                            <td>
+                                <p *ngIf="data.comment==null">No Comments</p>
+                                <p *ngIf="data.comment!=null">{{data.comment}}</p>
+                            </td>
+                            <!-- <td class="onelinetext" *ngIf="roleID!=1"> 
+                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                    src="assets/Images/delete.svg">
+                            </td> -->
+                            <td class="onelinetext">
                                 <img class="dashedit-icon" [ngbTooltip]="tipContenteidt" tooltipClass="my-custom-class"
                                     (click)="edit(data.id)" src="assets/Images/Edit.svg">
                                 <img class="dashedit-icon" src="assets/Images/delete.svg"

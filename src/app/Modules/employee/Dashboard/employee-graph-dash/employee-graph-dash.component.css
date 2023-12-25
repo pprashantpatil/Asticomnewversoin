@@ -42,13 +42,13 @@
     position: relative;
     font-family: "Poppins";
     font-style: normal;
-    font-weight: 600;
-    color: black !important;
+    color: #3247d5 !important;
     font-size: 16px !important;
     text-align: center;
     letter-spacing: 0.5px;
   }
-  
+
+   
   
   
   .smallcard {
@@ -285,7 +285,7 @@
   .countstyle {
     font-weight: 700;
     font-size: 27px !important;
-    color: #1125a9 !important;
+    color:#3247d5 !important;
   
   }
   
@@ -328,7 +328,7 @@
   
   }
   .bluediv {
-    background-color: #1125a9;
+    background-color:#3247d5;
     height: 25px;
     display: flex;
     text-align: center;
@@ -364,5 +364,5 @@
   .sm-head {
     font-size: 27px;
     font-weight: 700;
-    color: #1125a9 !important
+    color:#3247d5 !important
   }

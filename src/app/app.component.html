@@ -1,4 +1,4 @@
-<app-loader *ngIf="loader"></app-loader>
+<app-spinner *ngIf="loader"></app-spinner>
 <div class="container-fluid" *ngIf="!showMobileView">
   <div class="row app-overflow">
     <div class="col-12 dynamiccss">
@@ -46,8 +46,8 @@
             </div>
 
             <div class="noti">
-              <!-- <div class="sub-card">
-                <span class="notify-number">1</span>
+              <!-- <div class="sub-card" *ngIf="login!=undefined">
+                <span class="notify-number">{{notificationslist?.length}}</span>
               </div> -->
               <div ngbDropdown container="body" placement="bottom-start">
                 <img src="assets/Images/revamp/bell-icon-bg.png" class="icon-alignment" id="notificationmodal"
@@ -108,8 +108,8 @@
             </div>
 
             <p class="welcomename">Hi {{username}} !</p>
-            <div ngbDropdown placement="bottom-end" class="d-inline-block">
-              <img src="assets/FigmaImg/person-01.png" id="dropdownBasic1" ngbDropdownToggle class="icon-alignment1" />
+            <div ngbDropdown placement="bottom-end" class="d-inline-block" [autoClose]="true">
+              <img src="assets/Images/profile.png" id="dropdownBasic1"  ngbDropdownToggle class="icon-alignment1" />
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="logoutmodal">
                 <button class="defclrchange" ngbDropdownItem (click)="profile()">
                   <img src="assets/Images/mt-pro.svg">
@@ -153,5 +153,5 @@
     <div [ngClass]="!sidenav ? 'col-lg-12' : 'col-lg-12'" style="background: #e4ebf4">
       <app-footer (activate)="onActivate($event)"></app-footer>
     </div>
-  </div>
+  </div> 
 </div>

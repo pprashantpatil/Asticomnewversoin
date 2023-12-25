@@ -629,3 +629,20 @@ select {
   line-height: 15px;
   color: #3247D5 !important;
 }
+
+.empsss {
+  margin-left: 100x;
+  color: red;
+  font-size: 15px;
+}
+.passok {
+  margin-left: 238px;
+  color: green;
+  font-size: 15px;
+}
+
+.empsss1 {
+
+  color: red;
+  font-size: 15px;
+}

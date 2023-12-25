@@ -39,6 +39,7 @@ export class AppComponent {
     debugger;
     this.getScreenResolution();
     this.showTime();
+    this.showMenu=false
     this.staffID = localStorage.getItem('staffid');
     this.login = localStorage.getItem('roledid');
     this.EmployeeID = localStorage.getItem('EmployeeID');
@@ -75,6 +76,13 @@ export class AppComponent {
         ? 1001
         : sessionStorage.getItem('companyid');
   }
+
+  showMenu: boolean = false;
+
+closeMenu() {
+  let displayMenu = this.showMenu ? true : false;
+  return displayMenu;
+}
   getScreenResolution() {
     var w = window.innerWidth;
     var h = window.innerHeight;
