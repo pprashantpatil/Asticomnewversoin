@@ -108,7 +108,7 @@
             </div>
 
             <p class="welcomename">Hi {{username}} !</p>
-            <div ngbDropdown placement="bottom-end" class="d-inline-block" [autoClose]="true">
+            <div ngbDropdown placement="bottom-end" class="d-inline-block" [autoClose]="'outside'">
               <img src="assets/Images/profile.png" id="dropdownBasic1"  ngbDropdownToggle class="icon-alignment1" />
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="logoutmodal">
                 <button class="defclrchange" ngbDropdownItem (click)="profile()">
