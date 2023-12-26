@@ -1,56 +1,11 @@
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
 
-li {
-  float: left;
-}
 
-.butn-sadow {
-  width: 212px;
-  height: 41px;
-  font-family: 'Poppins';
-  font-style: normal;
-  font-size: 15px !important;
-  text-shadow: initial;
-  letter-spacing: 0.5px;
-  color: #ffffff;
-  border-radius: 5px;
-  padding: 3px;
-  float: right;
-  background-color: #3247d5 !important;
-  border-radius: 5px solid #3247d5 !important;
-  border: 5px solid #3247d5 !important;
-  text-transform: capitalize;
-  margin-top: 13px !important;
-}
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
 
-}
 
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
+/* li a:hover {
   text-decoration: 3px solid rgb(72, 83, 238) underline;
   color: rgb(72, 83, 238)
-}
+} */
 
 .card {
   background-color: white;
@@ -64,13 +19,6 @@ li a:hover {
   border-radius: 5px;
 }
 
-.Heading {
-  padding-left: 15px;
-  font-size: 14px;
-  font-weight: bold;
-  color: black;
-  text-decoration-line: underline;
-}
 
 .button {
   text-transform: uppercase;
@@ -442,13 +390,13 @@ div.cls_008 {
   margin-left: -70px;
 }
 
-hr {
+/* hr {
   border: none;
   height: 2px;
-  /* Set the hr color */
-  color: #333;  /* old IE */
-  background-color: #333;  /* Modern Browsers */
-}
+ 
+  color: #333; 
+  background-color: #333; 
+} */
 .CertifyEmploButn {
   text-transform: uppercase;
   font-weight: initial;
@@ -468,11 +416,7 @@ hr {
 
 }
 
-.butn-sadow {
-  position: relative;
-  width: 145px;
-  left: 225px;
-}
+
 
 @media (min-width: 1920px) and (max-width: 2560px) {
   .butn-sadow {
@@ -485,3 +429,34 @@ hr {
   text-align: center;
 }
 
+ 
+ 
+.butn-sadow {
+  width: 212px;
+  height: 41px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-size: 15px !important;
+  text-shadow: initial;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 3px;
+  float: right;
+  background-color: #3247d5 !important;
+  border-radius: 5px solid #3247d5 !important;
+  border: 5px solid #3247d5 !important;
+  text-transform: capitalize;
+  margin-top: 13px !important;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+ 
+li {
+  float: left;
+}
+ 

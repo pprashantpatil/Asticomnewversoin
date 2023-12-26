@@ -1,15 +1,32 @@
+<app-loader *ngIf="loader"></app-loader>
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li><a class="Heading">
+                        <p class="Heading">Certificate Of Employment</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <div class="card">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-12">
                 <p class="Heading1" style="text-align: center;">CERTIFICATE OF EMPLOYMENT</p>
-                <!-- <hr class="HrLine"> -->
                 <br>
             </div>
-        </div>
+        </div> -->
 
         <div class="row">
-         
+            <!-- <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div> -->
+
+            <!-- <div class="col-lg-3">
+                <p style="text-align: center;"> Select Start Month & Year</p>
+            </div> -->
 
             <div class="col-lg-3">
                 <p><b>COE Type</b></p>
@@ -26,7 +43,7 @@
                 </select>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <p><b>Reason for COE Request</b></p>
                 <select name="reason" id="reason" class="form-control" [(ngModel)]="reason">
                     <option value="0">Select Reason for COE Request</option>
@@ -49,6 +66,23 @@
                 <input type="text" class="form-control" placeholder="Country Name" [(ngModel)]="countryName"
                     name="countryName" id="countryName">
             </div>
+
+            <div class="col-lg-3">
+                <br>
+                <button class="butn-sadow" *ngIf="coeType=='COE Active Employee No Salary Details' && reason!='0'"
+                    data-toggle="modal" data-target="#modalCOEActiveEmployeeNoSalaryDetails"
+                    (click)="getempcert()">Download</button>
+                <button class="butn-sadow" *ngIf="coeType=='COE Active Employee with Compensation' && reason!='0'"
+                    data-toggle="modal" data-target="#modalCOEActiveEmployeeWithCompensation"
+                    (click)="getempcert()">Download</button>
+                <button class="butn-sadow" *ngIf="coeType=='Certificate of Deployment No Salary Details' && reason!='0'"
+                    data-toggle="modal" data-target="#modalCertificateOfDeploymentNoSalaryDetails"
+                    (click)="getempcert()">Download</button>
+                <button class="butn-sadow" *ngIf="coeType=='RAAWA/Security Pass No Salary Details' && reason!='0'"
+                    data-toggle="modal" data-target="#modalRAAWASecurityPassNoSalaryDetails"
+                    (click)="getempcert()">Download</button>
+            </div>
+            
         </div><br>
 
         <div class="row FilterClass fontheading">
@@ -63,33 +97,19 @@
                 </select> -->
             </div>
         </div>
-        <br />
-        <br />
+        <!-- <br />
+        <br /> -->
         <div class="row">
             <div class="col-lg-3"></div>
-            <div class="col-lg-4">
-                <!-- <button class="generate" (click)="showpdf()">GENERATE</button> -->
-                <button class="butn-sadow" *ngIf="coeType=='COE Active Employee No Salary Details' && reason!='0'"
-                    data-toggle="modal" data-target="#modalCOEActiveEmployeeNoSalaryDetails"
-                    (click)="getempcert()">Download</button>
-                <button class="butn-sadow" *ngIf="coeType=='COE Active Employee with Compensation' && reason!='0'"
-                    data-toggle="modal" data-target="#modalCOEActiveEmployeeWithCompensation"
-                    (click)="getempcert()">Download</button>
-                <button class="butn-sadow" *ngIf="coeType=='Certificate of Deployment No Salary Details' && reason!='0'"
-                    data-toggle="modal" data-target="#modalCertificateOfDeploymentNoSalaryDetails"
-                    (click)="getempcert()">Download</button>
-                <button class="butn-sadow" *ngIf="coeType=='RAAWA/Security Pass No Salary Details' && reason!='0'"
-                    data-toggle="modal" data-target="#modalRAAWASecurityPassNoSalaryDetails"
-                    (click)="getempcert()">Download</button>
-            </div>
+          
         </div>
     </div><br>
 
-
+<!-- 
     <br />
     <br />
     <br />
-    <br />
+    <br /> -->
 
     <div class="modal fade" id="modalCOEActiveEmployeeNoSalaryDetails" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -103,7 +123,7 @@
                         <div class="col-lg-6">
                         </div>
                         <div class="col-lg-6">
-                            <button class="CertifyEmploButn"
+                            <button class="butn-sadow"
                                 (click)="convertToPDFCOEActiveEmployeeNoSalaryDetails()">Generate COE Request
                                 <i class="fa fa-download" aria-hidden="true"></i></button>
                         </div>
@@ -185,7 +205,7 @@
                         </div>
                         <div class="modal-footer" *ngIf="companyid==1001">
                             <p>15/F W Fifth Building, Bonifacio Global City, Taguig City, 1634, Metro Manila,
-                                Philippines
+                                Philippines   
                                 Email: inquiry@asticom.com.ph | <img src="assets/Images/webicon.png"
                                     style="height: 20px;width: 20px;"> www.asticom.com.ph</p>
                         </div>
@@ -228,7 +248,7 @@
                         <div class="col-lg-6">
                         </div>
                         <div class="col-lg-6">
-                            <button class="CertifyEmploButn"
+                            <button class="butn-sadow"
                                 (click)="convertToCOEActiveEmployeeWithCompensation()">Generate COE Request
                                 <i class="fa fa-download" aria-hidden="true"></i></button>
                         </div>
@@ -259,8 +279,7 @@
                                 <div class="col-lg-12">
                                     <p class="cert">This is to certify that <span class="bol">{{username|uppercase}}
                                         </span> is currently employed at <span class="bol">
-                                            Asticom </span> since <span class="bol">{{item.joiningDate|date:'MMMM d,
-                                            y'}} ,</span>
+                                            {{companyName}} </span> since <span class="bol">{{item.joiningDate|date:'MMM d,y'}},</span>
                                         with a position title of <span class="bol">{{item.role}}.</span>
                                         <br>
                                     <p class="cert"> Futhermore, <span class="bol">{{ username|uppercase}}</span> is
@@ -273,9 +292,10 @@
                                     <p class="cert">This certification was issued on <span
                                             class="bol">{{todaydate|date:'MMMM d, y'}}</span> and is valid for 30 days
                                         from date of
-                                        issuance for <span class="bol">{{reason}}.</span>
-                                        <span *ngIf="reason=='Visa Application'" class="bol">To {{countryName}}.</span>
-                                    </p>
+                                        issuance for <span class="bol">{{reason}}. 
+                                            </span>
+                                            <span *ngIf="reason=='Visa Application'" class="bol">To {{countryName}}.</span>
+                                        </p>
                                     <br>
                                     <br>
                                     <p class="certi"><b>{{companyName}}</b></p>
@@ -354,7 +374,7 @@
                         <div class="col-lg-6">
                         </div>
                         <div class="col-lg-6">
-                            <button class="CertifyEmploButn"
+                            <button class="butn-sadow"
                                 (click)="convertToCertificateOfDeploymentNoSalaryDetails()">Generate COE Request
                                 <i class="fa fa-download" aria-hidden="true"></i></button>
                         </div>
@@ -385,14 +405,12 @@
                                 <div class="col-lg-12">
                                     <p class="cert">This is to certify that <span class="bol">{{
                                             username|uppercase}}</span> is an employee of <span class="bol">
-                                            Asticom </span> since <span class="bol">{{item.joiningDate|date:'MMMM d,
-                                            y'}}</span>
+                                            Asticom </span> since <span class="bol">{{item.joiningDate|date:'MMMM d,y'}}</span>
                                         deployed at <span class="bol">{{item.role}}</span>
                                         <br>
 
                                     <p class="cert">This certification is issued on <span
-                                            class="bol">{{todaydate|date:'MMMM d, y'}}</span> for work area verification
-                                        purposes only.
+                                            class="bol">{{todaydate}}</span> for work area verification purposes only.
                                     </p>
                                     <br>
                                     <br>
@@ -405,7 +423,7 @@
                                             alt="" class="certificateimage"></div>
                                     <div *ngIf="companyid==1006"> <img src="assets/Images/HQCertificateSign.png" alt=""
                                             class="certificateimage"></div>
-
+                                   
                                     <p class="certi" *ngIf="companyid==1001 || companyid==1002"><b>Juan Miguel M.
                                             Tulay</b></p>
                                     <p class="certi" *ngIf="companyid==1005"><b>Leah Marie M. Reyes</b></p>
@@ -471,7 +489,7 @@
                         <div class="col-lg-6">
                         </div>
                         <div class="col-lg-6">
-                            <button class="CertifyEmploButn"
+                            <button class="butn-sadow"
                                 (click)="convertToRAAWASecurityPassNoSalaryDetails()">Generate COE Request
                                 <i class="fa fa-download" aria-hidden="true"></i></button>
                         </div>
@@ -510,11 +528,9 @@
                                         <br>
 
                                     <p class="cert">This certification is issued on <span
-                                            class="bol">{{todaydate|date:'MMMM d, y'}}</span> as a requirement for the
-                                        <span class="bol">Restricted Area Access and Work Authorization (RAAWA) /
-                                            Security
-                                            Pass</span> purposes only.
-                                    </p>
+                                            class="bol">{{todaydate}}</span> as a requirement for the <span
+                                            class="bol">Restricted Area Access and Work Authorization (RAAWA) / Security
+                                            Pass</span> purposes only.</p>
                                     <br>
                                     <br>
                                     <p class="certi"><b>{{companyName}}</b></p>
@@ -526,7 +542,7 @@
                                             alt="" class="certificateimage"></div>
                                     <div *ngIf="companyid==1006"> <img src="assets/Images/HQCertificateSign.png" alt=""
                                             class="certificateimage"></div>
-
+                                 
                                     <p class="certi" *ngIf="companyid==1001 || companyid==1002"><b>Juan Miguel M.
                                             Tulay</b></p>
                                     <p class="certi" *ngIf="companyid==1005"><b>Leah Marie M. Reyes</b></p>
@@ -599,7 +615,7 @@
                     <div class="col-lg-6">
                     </div>
                     <div class="col-lg-6">
-                        <button class="CertifyEmploButn" (click)="convetToPDF1()">Generate COE Request
+                        <button class="butn-sadow" (click)="convetToPDF1()">Generate COE Request
                             <i class="fa fa-download" aria-hidden="true"></i></button>
                     </div>
                 </div>
