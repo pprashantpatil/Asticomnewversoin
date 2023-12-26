@@ -1,1 +1,281 @@
-<p>my-team-attendance-correction works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li><a class="Heading" routerLink="/Employee/AttendanceCorrectionDash">
+                        <p class="Heading">My Attendance Correction</p>
+                    </a>
+                </li>
+
+                <li *ngIf="roleID==2 ||  roleID==9"><a class="Heading">
+                        <p class="Heading">Team Attendance Correction</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+
+                <li *ngIf="roleID==10||roleID==11 ||  roleID==1"><a class="Heading">
+                        <p class="Heading">Company Attendance Correction</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate($event)">
+            </div>
+
+            <div class="cardinputs">
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-lg-12 dashbutton bttn">
+            <div class="tab-slider--nav">
+                <ul class="tab-slider--tabs">
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1"
+                        (click)="viewMode ='tab1'">
+                        Pending</li>
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2"
+                        (click)="viewMode ='tab2'">
+                        Approved</li>
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab3'" rel="tab3"
+                        (click)="viewMode ='tab3'">
+                        Rejected</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-slider--container" [ngSwitch]="viewMode">
+        <div *ngSwitchCase="'tab1'" id="tab1">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(attendanceCorrectionPendingList|filter:search)?.length}}
+                        </span>RESULT(S)</p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Submitted Date</th>
+                            <th>Correction Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Comments</th>
+                            <th *ngIf="roleID==2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of attendanceCorrectionPendingList|filter:search">
+                            <td>{{data.employeid}}</td>
+                            <td>{{data.staffname}}</td>
+                            <td>{{data.modifiedDate|date}}</td>
+                            <td>{{data.sDate|date}}</td>
+                            <td>{{data.startTime}}</td>
+                            <td>{{data.endTime}}</td>
+                            <td>
+                                <p *ngIf="data.comment==null">No Comments</p>
+                                <p *ngIf="data.comment!=null">{{data.comment}}</p>
+                            </td>
+                            <td class="onelinetext" *ngIf="roleID==2">
+                                <img class="dashedit-icon" src="assets/Images/accept-01.svg"
+                                    (click)="approveAttendanceCorrection(data)" [ngbTooltip]="tipContentApprove"
+                                    tooltipClass="my-custom-class" *ngIf="data.status==null">
+
+                                <img class="dashedit-icon" src="assets/Images/cancel-02.svg" data-toggle="modal"
+                                    data-target="#Reject" (click)="getID(data.id)" [ngbTooltip]="tipContentReject"
+                                    tooltipClass="my-custom-class" *ngIf="data.status=='Manager Pending HR Pending'||
+                                    data.status==null || data.status=='Manager Pending'">
+
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentApprove>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Approve</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
+
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentReject>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Reject</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+
+        <div *ngSwitchCase="'tab2'" id="tab2">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(attendanceCorrectionApprovedList|filter:search)?.length}}
+                        </span>RESULT(S)</p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Submitted Date</th>
+                            <th>Approved Date</th>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of attendanceCorrectionApprovedList|filter:search">
+                            <td>{{data.employeid}}</td>
+                            <td>{{data.staffname}}</td>
+                            <td>{{data.modifiedDate|date}}</td>
+                            <td>{{data.approvedDate|date}}</td>
+                            <td>{{data.sDate|date}}</td>
+                            <td>{{data.startTime}}</td>
+                            <td>{{data.endTime}}</td>
+                            <td>
+                                <p *ngIf="data.comment==null">No Comments</p>
+                                <p *ngIf="data.comment!=null">{{data.comment}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+
+        <div *ngSwitchCase="'tab3'" id="tab3">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(attendanceCorrectionRejectedList|filter:search)?.length}}
+                        </span>RESULT(S)</p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Submitted Date</th>
+                            <th>Date</th>
+                            <th>Rejected Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of attendanceCorrectionRejectedList|filter:search">
+                            <td>{{data.employeid}}</td>
+                            <td>{{data.staffname}}</td>
+                            <td>{{data.modifiedDate|date}}</td>
+                            <td>{{data.sDate|date}}</td>
+                            <td>{{data.approvedDate|date}}</td>
+                            <td>{{data.startTime}}</td>
+                            <td>{{data.endTime}}</td>
+                            <td>
+                                <p *ngIf="data.comment==null">No Comments</p>
+                                <p *ngIf="data.comment!=null">{{data.comment}}</p>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<div id="Reject" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h5>Reject Notes</h5>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body ">
+                <div class="container-fluid">
+                    <div class="row notes">
+                        <div class="col-lg-3">
+                            Notes
+                        </div>
+                        <div class="col-lg-7">
+                            <textarea rows="3" type="text" [(ngModel)]="notes" id="Notes" name="Notes"
+                                class="form-control" placeholder="Notes"></textarea>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row centeralign">
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-5">
+                            <button class="upload" (click)="rejectAttendanceCorrection()">Submit</button>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

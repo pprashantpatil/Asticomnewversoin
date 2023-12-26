@@ -21,8 +21,6 @@ import { SharedModuleModule } from './Shared/shared-module/shared-module.module'
 import { InterceptorServiceInterceptor } from './Shared/interceptor-service.interceptor';
 import { SpinnerComponent } from './Shared/spinner/spinner.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

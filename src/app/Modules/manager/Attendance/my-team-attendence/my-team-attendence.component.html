@@ -8,71 +8,73 @@
                         <li><a class="Heading" routerLink="/Employee/AttendanceDetailsDash">
                                 <p class="Heading"> My Attendance Details</p>
                             </a>
-                           
-                        </li> 
-                        <li *ngIf="roleid==2"><a class="Heading" routerLink="/Manager/MyTeamAttendence">
+
+                        </li>
+                        <li *ngIf="roleid==2"><a class="Heading">
                                 <p class="Heading"> Team Attendance Details</p>
                             </a>
-                            <hr *ngIf="roleid==2" class="line-border listForm"></li>
+                            <hr *ngIf="roleid==2" class="line-border listForm">
+                        </li>
                     </ul>
 
                 </div>
             </div>
 
             <div class="card">
-                <div class="w-100 d-flex flex-wrap ">
-                    <div class="d-flex align-items-center">
+                <div class="d-flex flex-wrap">
+                    <div class="d-flex justify-content-end filterby" style="margin-top: 3%;">
                         <img src="assets/Images/revamp/filter.svg" class="filter-img">
                         <p class="filter">Filter by:</p>
                     </div>
-                    <div class="cardinputs">
 
-                        <!-- <input type="bsdate" placeholder="mm/dd/yy-mm/dd/yy" class="form-control" bsDaterangepicker
-                                [(ngModel)]="startdate1" (ngModelChange)="getenddate($event)"> -->
-                        <p class="leavereq">Select Dates
-                            <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control"
-                                bsDaterangepicker [(ngModel)]="startdate1" (ngModelChange)="getenddate($event)"
-                                [bsConfig]="{ showWeekNumbers:false }">
-                        </p>
-                    </div>
-                    <!-- <div class="cardinputs">
+                    <div class="d-flex justify-content-start flex-wrap inputs">
+                        <div class="cardinputs">
+                            <input type="text" placeholder="Search" id="term" [(ngModel)]="search"
+                                class="form-control search-icon">
+                        </div>
 
-                        <select class="dropdown form-control select" [(ngModel)]="roleselectedItems"
-                            id="roleselectedItems" name="roleselectedItems" (change)="roleonItemSelect($event)">
-                            <option value="" disabled>Select Position</option>
-                            <option *ngFor="let Staff of dropdownRoleList" value="{{Staff.id}}">{{Staff.short}}
-                            </option>
-                        </select>
-                    </div> -->
+                        <div class="cardinputs">
+                            <p class="leavereq">Select Dates
+                                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control"
+                                    bsDaterangepicker [(ngModel)]="startdate1" (ngModelChange)="getenddate($event)"
+                                    [bsConfig]="{ showWeekNumbers:false }">
+                            </p>
+                        </div>
 
-                    <div class="cardinputs">
-                        <!-- <br> -->
-                        <!-- <p>Staff -->
-                        <!-- <ng-multiselect-dropdown [placeholder]="'Select Staff'" [settings]="dropdownSettings" 
+                        <div class="cardinputs">
+                            <select class="dropdown form-control select" [(ngModel)]="roleselectedItems"
+                                id="roleselectedItems" name="roleselectedItems" (change)="roleonItemSelect($event)">
+                                <option value="" disabled>Select Position</option>
+                                <option *ngFor="let Staff of dropdownRoleList" value="{{Staff.id}}">{{Staff.short}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="cardinputs">
+                            <!-- <p>Staff -->
+                            <!-- <ng-multiselect-dropdown [placeholder]="'Select Staff'" [settings]="dropdownSettings" 
                                 [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)">
                             </ng-multiselect-dropdown> -->
-                        <select class="dropdown form-control select" [(ngModel)]="selectedItems" id="selectedItems"
-                            name="selectedItems" (change)="onItemSelect($event)">
-                            <option value="" disabled>Select Staff</option>
-                            <option *ngFor="let Staff of dropdownList" value="{{Staff.id}}">{{Staff.fullname}}
-                            </option>
-                        </select>
-                    </div>
-                    <!-- <div class="col-lg-2" style="font-family: 'Poppins';">
-                        <p>Search
-                            <input class="form-control search-icon" type="search" id="term" name="term"
-                                [(ngModel)]="term" (ngModelChange)="Filterstaff()" placeholder="Search here...">
-                        </p>
-                    </div> -->
+                            <select class="dropdown form-control select" [(ngModel)]="selectedItems" id="selectedItems"
+                                name="selectedItems" (change)="onItemSelect($event)">
+                                <option value="" disabled>Select Staff</option>
+                                <option *ngFor="let Staff of dropdownList" value="{{Staff.id}}">{{Staff.fullname}}
+                                </option>
+                            </select>
+                        </div>
 
+                        <div class="cardinputs">
+                            <input type="text" placeholder="Search" id="term" [(ngModel)]="search"
+                                class="form-control search-icon">
+                        </div>
 
-                    <div class="cardinputs">
-                        <!-- <br> -->
-                        <button class="butn-sadow" type="button" (click)="exportexcel1()" data-toggle="modal"
-                            data-target="#exampleModalCenter">Download Attendance</button>
+                        <div class="cardinputs">
+                            <button class="butn-sadow" type="button" (click)="exportexcel1()">Export to Excel</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-10"></div>
             </div>
@@ -95,14 +97,10 @@
                                     <th>Staff Name</th>
                                     <th>Position</th>
                                     <th>Department</th>
-                                    <!-- <th>Sign In Type</th> -->
                                     <th>Expected In Time</th>
                                     <th>Punch In Time</th>
-                                    <!-- <th>Punch In Location/IP Address</th> -->
-                                    <!-- <th>Sign Out Type</th> -->
                                     <th>Expected Out Time</th>
                                     <th>Punch Out Time</th>
-                                    <!-- <th>Punch Out Location/IP Address</th> -->
                                     <th>Work Hours(HH:MM) </th>
                                     <th>UnderTime </th>
                                     <th>Late </th>
@@ -120,7 +118,7 @@
                                     <td>
                                         {{attendance.name1}}
                                     </td>
-    
+
                                     <td>
                                         {{attendance.role}}
                                     </td>

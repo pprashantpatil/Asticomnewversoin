@@ -1,15 +1,22 @@
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <ul>
-                <li *ngIf="roleID==6"><a class="Heading" routerLink="/Employee/AttendanceCorrectionDash">
-                        <p class="Heading"> My Attendance Correction</p>
+                <li><a class="Heading">
+                        <p class="Heading">My Attendance Correction</p>
                     </a>
                     <hr class="line-border listForm">
                 </li>
 
-                <li *ngIf="roleID==2"><a class="Heading" routerLink="/Employee/MyOverTimeDetails">
-                        <p class="Heading"> Team Attendance Correction</p>
+                <li *ngIf="roleID==2 ||  roleID==9"><a class="Heading" routerLink="/Manager/MyTeamAttendanceCorrection">
+                        <p class="Heading">Team Attendance Correction</p>
+                    </a>
+                </li>
+
+                <li *ngIf="roleID==10||roleID==11 ||  roleID==1"><a class="Heading">
+                        <p class="Heading">Company Attendance Correction</p>
                     </a>
                 </li>
             </ul>
@@ -152,7 +159,7 @@
                             <th>Employee Name</th>
                             <th>Submitted Date</th>
                             <th>Approved Date</th>
-                            <th>Date</th>
+                            <th>Correction Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
                             <th>Comments</th>
@@ -164,13 +171,10 @@
                             <td>{{data.staffname}}</td>
                             <td>{{data.modifiedDate|date}}</td>
                             <td>{{data.approvedDate|date}}</td>
-                            <td>{{data.sDate|date}}</td>
+                            <td>{{data.attendanceDate|date}}</td>
                             <td>{{data.startTime}}</td>
                             <td>{{data.endTime}}</td>
-                            <td>
-                                <p *ngIf="data.comment==null">No Comments</p>
-                                <p *ngIf="data.comment!=null">{{data.comment}}</p>
-                            </td>
+                            <td>{{data.comments}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -199,8 +203,7 @@
                             <th>Employee ID</th>
                             <th>Employee Name</th>
                             <th>Submitted Date</th>
-                            <th>Date</th>
-                            <th>Rejected Date</th>
+                            <th>Correction Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
                             <th>Comments</th>
@@ -218,7 +221,6 @@
                             <td>
                                 <p *ngIf="data.comment==null">No Comments</p>
                                 <p *ngIf="data.comment!=null">{{data.comment}}</p>
-
                             </td>
                         </tr>
                     </tbody>

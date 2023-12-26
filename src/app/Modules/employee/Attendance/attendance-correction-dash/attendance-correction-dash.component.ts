@@ -26,6 +26,8 @@ export class AttendanceCorrectionDashComponent implements OnInit {
   attendanceCorrectionApprovedFilter: any;
   attendanceCorrectionRejectedFilter: any;
   attendanceCorrectionRejectedList: any;
+  showPopup: number = 0;
+  messageId: number = 0;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 

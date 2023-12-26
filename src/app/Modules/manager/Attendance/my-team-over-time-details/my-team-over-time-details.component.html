@@ -1,1 +1,437 @@
-<p>my-team-over-time-details works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <!-- *ngIf="otEligibility==1" -->
+                <li><a class="Heading" routerLink="/Employee/OverTimeDetailsDash">
+                        <p class="Heading">My Overtime Details</p>
+                    </a>
+                </li>
+
+                <li *ngIf="roleID==2"><a class="Heading">
+                        <p class="Heading">Team Overtime Details</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+
+                <li *ngIf="roleID==1||roleID==9||roleID==11||roleID==10"><a class="Heading">
+                        <p class="Heading">Team Overtime Details</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate($event)">
+            </div>
+
+            <div class="cardinputs">
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
+            </div>
+
+            <div class="cardinputs">
+                <button class="butn-sadow" type="button" (click)="exportexcel()">Export to Excel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-lg-12 dashbutton bttn">
+            <div class="tab-slider--nav">
+                <ul class="tab-slider--tabs">
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1"
+                        (click)="viewMode ='tab1'">
+                        Pending</li>
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2"
+                        (click)="viewMode ='tab2'">
+                        Approved</li>
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab3'" rel="tab3"
+                        (click)="viewMode ='tab3'">
+                        Rejected</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-slider--container" [ngSwitch]="viewMode">
+        <div *ngSwitchCase="'tab1'" id="tab1">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(overTimePendingList|filter:search)?.length}} </span>RESULT(S)
+                    </p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Date</th>
+                            <th>Submit Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>OT Details</th>
+                            <th>Attachment</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                            <th *ngIf="roleID==2 || roleID!=1">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of overTimePendingList|filter:search">
+                            <td>{{data.employeID}}</td>
+                            <td>{{data.staffname}}</td>
+                            <td>{{data.date|date}}</td>
+                            <td>{{data.submitdate|date}}</td>
+                            <td>{{data.startTime|date:'HH:mm'}}</td>
+                            <td>{{data.endTime|date:'HH:mm'}}</td>
+                            <td>
+                                <button class="upload-det" data-toggle="modal" (click)="getOTDetails(data)"
+                                    data-target="#checkListStatusForm">Details
+                                </button>
+                            </td>
+                            <td>
+                                <img src="assets/Images/image.png" style="width:20px; height:20px"
+                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                            </td>
+                            <td>{{data.comments}}</td>
+                            <td>{{data.status}}</td>
+                            <td class="actionpadding" *ngIf="roleID==2  || roleID!=1">
+                                <img class="dashedit-icon" src="assets/Images/accept-01.svg"
+                                    (click)="managerOTApprove(data)" [ngbTooltip]="tipContentApprove"
+                                    tooltipClass="my-custom-class"
+                                    *ngIf="data.status=='Manager Pending HR Pending'|| data.status==null || data.status=='Manager Pending'">
+
+                                <img class="dashedit-icon" src="assets/Images/cancel-02.svg"
+                                    (click)="managerOTReject(data)" [ngbTooltip]="tipContentReject"
+                                    tooltipClass="my-custom-class" *ngIf="data.status=='Manager Pending HR Pending'||
+                                    data.status==null || data.status=='Manager Pending'">
+                                    
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentApprove>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Approve</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
+
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentReject>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Reject</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+
+        <div *ngSwitchCase="'tab2'" id="tab2">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(overTimeApprovedList|filter:search)?.length}} </span>RESULT(S)
+                    </p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Date</th>
+                            <th>Submit Date</th>
+                            <th>Approved Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>OT Details</th>
+                            <th>Attachment</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of overTimeApprovedList|filter:search">
+                            <td>{{data.employeID}}</td>
+                            <td>{{data.staffname}}</td>
+                            <td>{{data.date|date}}</td>
+                            <td>{{data.submitdate|date}}</td>
+                            <td>{{data.approvedDate|date}}</td>
+                            <td>{{data.startTime|date:'HH:mm'}}</td>
+                            <td>{{data.endTime|date:'HH:mm'}}</td>
+                            <td>
+                                <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
+                                    data-target="#checkListStatusForm">Details
+                                </button>
+                            </td>
+                            <td>
+                                <img src="assets/Images/image.png" style="width:20px; height:20px"
+                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                            <td>{{data.comments}}</td>
+                            <td>{{data.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+
+        <div *ngSwitchCase="'tab3'" id="tab3">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(overTimeRejectedList|filter:search)?.length}} </span>RESULT(S)
+                    </p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Date</th>
+                            <th>Submit Date</th>
+                            <th>Rejected Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>OT Details</th>
+                            <th>Attachment</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of overTimeRejectedList|filter:search">
+                            <td>{{data.employeID}}</td>
+                            <td>{{data.staffname}}</td>
+                            <td>{{data.date|date}}</td>
+                            <td>{{data.submitdate|date}}</td>
+                            <td>{{data.approvedDate|date}}</td>
+                            <td>{{data.startTime|date:'HH:mm'}}</td>
+                            <td>{{data.endTime|date:'HH:mm'}}</td>
+                            <td>
+                                <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
+                                    data-target="#checkListStatusForm">Details
+                                </button>
+                            </td>
+                            <td>
+                                <img src="assets/Images/image.png" style="width:20px; height:20px"
+                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                            </td>
+                            <td>{{data.comments}}</td>
+                            <td>{{data.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<div id="checkListStatusForm" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">OT Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>OT Type</th>
+                        <th>No of Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="noOfHours!='0:00' && noOfHours!='0'">
+                        <td>Normal OT </td>
+                        <td>{{noOfHours}}</td>
+                    </tr>
+                    <tr *ngIf="nightOT!='0:00' && nightOT!='0'">
+                        <td>Night OT </td>
+                        <td>{{nightOT}}</td>
+                    </tr>
+                    <tr *ngIf="exccessNightOT!='0:00' && exccessNightOT!='0'">
+                        <td> Excess Night OT </td>
+                        <td> {{exccessNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="exccessNormalOT!='0:00' && exccessNormalOT!='0'">
+                        <td> Excess Normal OT </td>
+                        <td> {{exccessNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="restNightOT!='0:00' && restNightOT!='0'">
+                        <td> Rest Night OT </td>
+                        <td> {{restNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="restNormalOT!='0:00' && restNormalOT!='0'">
+                        <td>Rest Normal OT </td>
+                        <td>{{restNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="exccessRestNormalOT!='0:00' && exccessRestNormalOT!='0'">
+                        <td> Excess Rest Normal OT </td>
+                        <td> {{exccessRestNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="restExccessNightOT!='0:00' && restExccessNightOT!='0'">
+                        <td> Rest Excess Night OT </td>
+                        <td> {{restExccessNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="legalNightOT!='0:00' && legalNightOT!='0'">
+                        <td> Legal Night OT </td>
+                        <td> {{legalNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="legalNormalOT!='0:00' && legalNormalOT!='0'">
+                        <td> Legal Normal OT </td>
+                        <td> {{legalNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="legalExccessNormalOT!='0:00' && legalExccessNormalOT!='0'">
+                        <td> Legal Excess Normal OT </td>
+                        <td> {{legalExccessNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="legalExccessNightOT!='0:00' && legalExccessNightOT!='0'">
+                        <td>Legal Excess Night OT </td>
+                        <td>{{legalExccessNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="specialNightOT!='0:00' && specialNightOT!='0'">
+                        <td> Special Night OT </td>
+                        <td> {{specialNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="specialNormalOT!='0:00' && specialNormalOT!='0'">
+                        <td> Special Normal OT </td>
+                        <td> {{specialNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="specialExccessNormalOT!='0:00' && specialExccessNormalOT!='0'">
+                        <td> Special Excess Normal OT </td>
+                        <td> {{specialExccessNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="specialExccessNightOT!='0:00' && specialExccessNightOT!='0'">
+                        <td> Special Excess Night OT </td>
+                        <td> {{specialExccessNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="specialRestNightOT!='0:00' && specialRestNightOT!='0'">
+                        <td> Special Rest Night OT </td>
+                        <td> {{specialRestNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="specialRestNormalOT!='0:00' && specialRestNormalOT!='0'">
+                        <td>Special Rest Normal OT </td>
+                        <td>{{specialRestNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="specialRestExccessNormalOT!='0:00' && specialRestExccessNormalOT!='0'">
+                        <td> Special Rest Excess Normal OT </td>
+                        <td> {{specialRestExccessNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="specialRestExccessNightOT!='0:00' && specialRestExccessNightOT!='0'">
+                        <td> Special Rest Excess Night OT </td>
+                        <td> {{specialRestExccessNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="legalRestNightOT!='0:00' && legalRestNightOT!='0'">
+                        <td> Legal Rest Night OT </td>
+                        <td> {{legalRestNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="legalRestNormalOT!='0:00' && legalRestNormalOT!='0'">
+                        <td> Legal Rest Normal OT </td>
+                        <td> {{legalRestNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="legalExccessRestNormalOT!='0:00' && legalExccessRestNormalOT!='0'">
+                        <td> Legal Excess Rest Normal OT </td>
+                        <td> {{legalExccessRestNormalOT}}</td>
+                    </tr>
+                    <tr *ngIf="legalExccessRestNightOT!='0:00' && legalExccessRestNightOT!='0'">
+                        <td> Legal Excess Rest Night OT </td>
+                        <td> {{legalExccessRestNightOT}}</td>
+                    </tr>
+                    <tr *ngIf="nSDRegular!='0:00' && nSDRegular!=null">
+                        <td> NSD Regular </td>
+                        <td> {{nSDRegular}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Related Attachments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4" *ngFor="let details of multipleAttachmentList">
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <img src="{{details.attachment}}" *ngIf="details.filetype=='Image'"
+                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                <img src="assets/Images/pdf.png" *ngIf="details.filetype=='Pdf'"
+                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                <img src="assets/Images/word.png" *ngIf="details.filetype=='Document'"
+                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                <img src="assets/Images/files.png" *ngIf="details.filetype=='Ppt'"
+                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                <p *ngIf="details.attachment==null">No Attachment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cancel" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
