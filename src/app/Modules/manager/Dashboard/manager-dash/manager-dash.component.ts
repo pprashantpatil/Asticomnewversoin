@@ -597,11 +597,7 @@ export class ManagerDashComponent implements OnInit {
   }
 
   public Profilecompletion() {
-    localStorage.setItem('Pagename', 'My Profile')
-    // this.router.navigate(['/HR/AddressDetailsWizard', this.staffID])
-    this.router.navigate(['/Employee/MyProfiletabs', this.staffID]);
-    // this.AliprojectService.saveData('value');
-
+    this.router.navigate(['/HR/AddressDetailsWizard', localStorage.getItem('EmployeeID')]);
   }
 
   public getDetails() {
@@ -1275,6 +1271,10 @@ export class ManagerDashComponent implements OnInit {
     this.router.navigate(['/Employee/LeaveRequestDash']);
   }
 
+  overtimeDash() {
+    this.router.navigate(['/Employee/OverTimeDetailsDash']);
+  }
+
   AddLeave() {
     let ID = undefined
 
@@ -1292,8 +1292,9 @@ export class ManagerDashComponent implements OnInit {
   }
 
   holiday() {
-    this.router.navigate(['/Employee/Holidaysdashboard']);
+    this.router.navigate(['/Employee/HolidaysDash']);
   }
+
   public ApplyLoan() {
 
     localStorage.setItem('Pagename', '');
