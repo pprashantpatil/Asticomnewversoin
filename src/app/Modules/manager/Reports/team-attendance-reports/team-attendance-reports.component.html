@@ -1,1 +1,156 @@
-<p>team-attendance-reports works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage *ngIf="loader"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li><a class="Heading" routerLink="/Employee/AttendanceReport">
+                        <p class="Heading">My Attendance Report</p>
+                    </a>
+                </li>
+
+                <li *ngIf="roleID==2"><a class="Heading">
+                        <p class="Heading">My Team Attendance Report</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+
+                <li *ngIf="roleID==9"><a class="Heading">
+                        <p class="Heading">My Team Attendance Report</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="d-flex flex-wrap ">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <p class="leavereq">Select Dates
+                    <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                        [(ngModel)]="startdate" (ngModelChange)="getenddate($event)"
+                        [bsConfig]="{showWeekNumbers:false }">
+            </div>
+
+            <div class="cardinputs">
+                <button class="butn-sadow" type="button" (click)="exportexcel()" data-toggle="modal"
+                    data-target="#exampleModalCenter">Export to Excel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1">
+        <div class="col-md-10">
+            <p class="show3res">SHOWING <span>{{(attendancelist|filter:term)?.length}}</span>
+                RESULTS
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+
+            <div class="listscroll">
+                <table class="table" id="lvs">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Staff Name</th>
+                            <th>Sign In Type</th>
+                            <th>Expected In Time</th>
+                            <th>Punch In Time</th>
+                            <th>Punch In Location/IP Address</th>
+                            <th>Expected Out Time</th>
+                            <th>Punch Out Time</th>
+                            <th>Punch Out Location/IP Address</th>
+                            <th>Work Hours(HH:MM) </th>
+                            <th>UnderTime </th>
+                            <th>Late </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let attendance of attendancelist">
+                            <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                {{attendance.signinDate|date}}
+                            </td>
+                            <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                {{attendance.staffname}}
+                            </td>
+                            <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                {{attendance.signInType}}</td>
+                            <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                <p *ngIf="attendance.expectedIn!=null"> {{attendance.expectedIn}}</p>
+                                <p *ngIf="attendance.expectedIn==null">10:00</p>
+                            </td>
+                            <td class="span"
+                                [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                {{attendance.signinDate|date:'HH:mm'}}</td>
+                            <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchinip}}</p>
+                                <p *ngIf="attendance.signInType!='Web Application'">{{attendance.signinLocation}}
+                                </p>
+                            </td>
+                            <!-- <td class="texttd"
+                                [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                5:00</td> -->
+                            <td class="texttd"
+                                [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                <p *ngIf="attendance.expectedOut!=null"> {{attendance.expectedOut}}</p>
+                                <p *ngIf="attendance.expectedOut==null">19:00</p>
+
+                            </td>
+                            <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                {{attendance.signoutDate|date:'HH:mm'}}</td>
+                            <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchoutip}}</p>
+                                <p *ngIf="attendance.signInType!='Web Application'">{{attendance.signoutLocation}}
+                                </p>
+                            </td>
+                            <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                {{attendance.hr1}}</td>
+                            <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                {{attendance.undertime}}</td>
+                            <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                {{attendance.latepunchin}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span class="NoResultShow" *ngIf="attendancelist?.length==0"><b>Sorry, we couldn't find any
+                        results.</b></span><br>
+            </div>
+
+        </div>
+        <div class="text-right" *ngIf="attendancelist?.length>count1">
+            <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                class="poppinns"></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="loader-class ">
+                    <span class="header-loading-attend" id="exampleModalLongTitle">Please wait while
+                        downloading...</span>
+                    <div id="pause" class="d-flex align-items-center justify-content-center">
+                        <!-- <div class="cardloader"> -->
+                        <!-- <label class="loadertext">Please wait while downloading...</label> -->
+                        <!-- <img src="assets/Images/Ellipse.png"> -->
+                        <div id="spinner"></div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

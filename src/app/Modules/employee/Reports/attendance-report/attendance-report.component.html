@@ -3,160 +3,121 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div>
-                <div>
-                    <ul>
-                        <!-- <li *ngIf=" roleid==9"><a class="active Heading" routerLink="/Employee/AttendanceReports"> 
-                            <p class="Heading" [style.color]="'#1125a9;'">My Attendance Report</p>
-                            <hr *ngIf="roleid==2 || roleid==9" class="line-border">
-                        
-                        </a></li> -->
+            <ul>
+                <li><a class="Heading">
+                        <p class="Heading">My Attendance Report</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
 
-                        <li *ngIf=" roleid==6"><a class="active Heading underlineHeading"
-                                routerLink="/Employee/AttendanceReports">
+                <li *ngIf="roleid==2"><a class="Heading" routerLink="/Manager/TeamAttendanceReports">
+                        <p class="Heading">My Team Attendance Report</p>
+                    </a>
+                </li>
 
-                                <p class="Heading" [style.color]="'#1125a9;'">My Attendance Report</p>
-                                <hr class="line-border listForm">
-                            </a></li>
+                <li *ngIf="roleid==9"><a class="Heading" routerLink="/Manager/TeamAttendanceReports">
+                        <p class="Heading">My Team Attendance Report</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-                        <li *ngIf="roleid==2"><a class="leavelist" routerLink="/Manager/TeamAttendanceReports">My Team
-                                Attendance
-                                Report</a>
-                        </li>
-                        <li *ngIf="roleid==9"><a class="leavelist" routerLink="/Manager/TeamAttendanceReports">Staff
-                                Attendance
-                                Report</a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="card">
+        <div class="d-flex flex-wrap ">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
             </div>
 
-            <div class="card">
-                <div class="d-flex flex-wrap ">
-                    <div class="d-flex align-items-center">
-                        <img src="assets/Images/revamp/filter.svg" class="filter-img">
-                        <p class="filter">Filter by:</p>
-                    </div>
-                    <div class="cardinputs">
-                        <p class="leavereq">Select Dates
-                            <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control"
-                                bsDaterangepicker [(ngModel)]="startdate1" (ngModelChange)="getenddate($event)"
-                                [bsConfig]="{showWeekNumbers:false }">
-                    </div>
-                    <!-- <div class="cardinputs" style="font-family: 'Poppins';">
-                        <p>Search
-                        <input class="form-control search-icon" type="search" id="term" name="term"
-                            [(ngModel)]="term" (ngModelChange)="Filterstaff()" placeholder="Search here...">
-                        </p>
-                    </div> -->
-                    <div class="cardinputs">
-                        <button class="butn-sadow" type="button" (click)="exportexcel()" data-toggle="modal"
-                            data-target="#exampleModalCenter">Download Attendance</button>
-                    </div>
-                    <!-- <div class="cardinputs">
-                        <p class="active">Count : {{attendancelist.length}}</p>
-                    </div> -->
-                    <!-- <div class="col-md-2">
-                        <p>Start Date
-                            <input type="date" onkeydown="return false"id="startdate" name="startdate" [(ngModel)]="startdate"
-                                class="form-control">
-                        </p>
-                    </div>
-                    <div class="col-md-2">
-                        <p>End Date
-                            <input type="date" onkeydown="return false"id="enddate" name="enddate" [(ngModel)]="enddate"
-                            (change)="getenddate($event)" class="form-control">
-                        </p>
-                    </div> -->
-
-
-
-
-                    <!-- <div class="d-flex flex-wrap">
-                        <div _ngcontent-eak-c218="" class="" style="width: 80px;"></div>
-                       
-                    </div> -->
-                </div>
+            <div class="cardinputs">
+                <p class="leavereq">Select Dates
+                    <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                        [(ngModel)]="startdate1" (ngModelChange)="getenddate($event)"
+                        [bsConfig]="{showWeekNumbers:false }">
             </div>
 
-            <div class="row mt-1">
-                <div class="col-md-10">
-                    <p class="show3res">SHOWING <span>{{(attendancelist|filter:term)?.length}}</span>
-                        RESULTS
-                    </p>
-                </div>
+            <div class="cardinputs">
+                <button class="butn-sadow" type="button" (click)="exportexcel()" data-toggle="modal"
+                    data-target="#exampleModalCenter">Export to Excel</button>
             </div>
+        </div>
+    </div>
 
+    <div class="row mt-1">
+        <div class="col-md-10">
+            <p class="show3res">SHOWING <span>{{(attendancelist|filter:term)?.length}}</span>
+                RESULTS
+            </p>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-12">
 
-            <div class="row">
-                <div class="col-12">
+            <div class="listscroll">
+                <table class="table" id="lvs">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Sign In Type</th>
+                            <th>Expected In Time</th>
+                            <th>Punch In Time</th>
+                            <th>Punch In Location/IP Address</th>
+                            <th>Expected Out Time</th>
+                            <th>Punch Out Time</th>
+                            <th>Punch Out Location/IP Address</th>
+                            <th>Work Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let attendance of attendancelist">
+                            <td>{{attendance.signinDate|date}}</td>
+                            <td>{{attendance.signInType}}</td>
+                            <td>
+                                <p *ngIf="attendance.expectedIn!=null"> {{attendance.expectedIn}}
+                                </p>
+                                <p *ngIf="attendance.expectedIn==null">NA</p>
+                            </td>
+                            <td class="numberblue">{{attendance.signinDate|date:'HH:mm'}}</td>
+                            <td>
+                                <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchinip}}</p>
+                                <p *ngIf="attendance.signInType!='Web Application'">
+                                    {{attendance.signinLocation}}
+                                </p>
+                            </td>
+                            <td>
+                                <p *ngIf="attendance.expectedOut!=null"> {{attendance.expectedOut}}
+                                </p>
+                                <p *ngIf="attendance.expectedOut==null">NA</p>
+                            </td>
 
-                    <div class="listscroll">
-                        <table class="table" id="lvs">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Sign In Type</th>
-                                    <th>Expected In Time</th>
-                                    <th>Punch In Time</th>
-                                    <th>Punch In Location/IP Address</th>
-                                    <th>Expected Out Time</th>
-                                    <th>Punch Out Time</th>
-                                    <th>Punch Out Location/IP Address</th>
-                                    <th>Work Hours</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let attendance of attendancelist">
-                                    <td>{{attendance.signinDate|date}}</td>
-                                    <td>{{attendance.signInType}}</td>
-                                    <td>
-                                        <p *ngIf="attendance.expectedIn!=null"> {{attendance.expectedIn}}
-                                        </p>
-                                        <p *ngIf="attendance.expectedIn==null">NA</p>
-                                    </td>
-                                    <td class="numberblue">{{attendance.signinDate|date:'HH:mm'}}</td>
-                                    <td>
-                                        <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchinip}}</p>
-                                        <p *ngIf="attendance.signInType!='Web Application'">
-                                            {{attendance.signinLocation}}
-                                        </p>
-                                    </td>
-                                    <td>
-                                        <p *ngIf="attendance.expectedOut!=null"> {{attendance.expectedOut}}
-                                        </p>
-                                        <p *ngIf="attendance.expectedOut==null">NA</p>
-                                    </td>
-
-                                    <td class="numberblue">{{attendance.signoutDate|date:'HH:mm'}}</td>
-                                    <td>
-                                        <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchoutip}}
-                                        </p>
-                                        <!-- <p *ngIf="attendance.signInType!='Web Application'">
+                            <td class="numberblue">{{attendance.signoutDate|date:'HH:mm'}}</td>
+                            <td>
+                                <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchoutip}}
+                                </p>
+                                <!-- <p *ngIf="attendance.signInType!='Web Application'">
                                             {{attendance.signoutLocation}}
                                         </p> -->
-                                        <p *ngIf="attendance.signInType=='Mobile' || attendance.signInType == 'mobile Application'">NA</p>
-                                    </td>
-                                    <td>{{attendance.hr1}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <span class="NoResultShow" *ngIf="attendancelist?.length==0"><b>Sorry, we couldn't find any
-                                results.</b></span><br>
-                    </div>
-
-                </div>
-                <div class="text-right" *ngIf="attendancelist?.length>count1">
-                    <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
-                        class="poppinns"></pagination-controls>
-                </div>
+                                <p
+                                    *ngIf="attendance.signInType=='Mobile' || attendance.signInType == 'mobile Application'">
+                                    NA</p>
+                            </td>
+                            <td>{{attendance.hr1}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span class="NoResultShow" *ngIf="attendancelist?.length==0"><b>Sorry, we couldn't find any
+                        results.</b></span><br>
             </div>
 
         </div>
+        <div class="text-right" *ngIf="attendancelist?.length>count1">
+            <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                class="poppinns"></pagination-controls>
+        </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
     <div class="modal-dialog modal-dialog-centered" role="document">
