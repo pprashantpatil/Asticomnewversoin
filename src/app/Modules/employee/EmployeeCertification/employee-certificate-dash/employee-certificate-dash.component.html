@@ -161,7 +161,9 @@
                                     <p class="cert">This certification was issued on <span
                                             class="bol">{{todaydate|date:'MMMM d, y'}}</span> and is valid for 30 days
                                         from the date of
-                                        issuance, for <span class="bol">{{reason}}.</span></p>
+                                        issuance, for <span class="bol">{{reason}}.</span>
+                                        <span *ngIf="reason=='Visa Application'" class="bol">To {{countryName}}.</span>
+                                    </p>
                                     <br>
                                     <br>
                                     <p class="certi"><b>{{companyName}}</b></p>
@@ -276,8 +278,7 @@
                                 <div class="col-lg-12">
                                     <p class="cert">This is to certify that <span class="bol">{{username|uppercase}}
                                         </span> is currently employed at <span class="bol">
-                                            Asticom </span> since <span class="bol">{{item.joiningDate|date:'MMMM d,
-                                            y'}} ,</span>
+                                            {{companyName}} </span> since <span class="bol">{{item.joiningDate|date:'MMM d,y'}},</span>
                                         with a position title of <span class="bol">{{item.role}}.</span>
                                         <br>
                                     <p class="cert"> Futhermore, <span class="bol">{{ username|uppercase}}</span> is
@@ -290,7 +291,10 @@
                                     <p class="cert">This certification was issued on <span
                                             class="bol">{{todaydate|date:'MMMM d, y'}}</span> and is valid for 30 days
                                         from date of
-                                        issuance for <span class="bol">{{reason}}.</span></p>
+                                        issuance for <span class="bol">{{reason}}. 
+                                            </span>
+                                            <span *ngIf="reason=='Visa Application'" class="bol">To {{countryName}}.</span>
+                                        </p>
                                     <br>
                                     <br>
                                     <p class="certi"><b>{{companyName}}</b></p>
@@ -400,8 +404,7 @@
                                 <div class="col-lg-12">
                                     <p class="cert">This is to certify that <span class="bol">{{
                                             username|uppercase}}</span> is an employee of <span class="bol">
-                                            Asticom </span> since <span class="bol">{{item.joiningDate|date:'MMMM d,
-                                            y'}}</span>
+                                            Asticom </span> since <span class="bol">{{item.joiningDate|date:'MMMM d,y'}}</span>
                                         deployed at <span class="bol">{{item.role}}</span>
                                         <br>
 
