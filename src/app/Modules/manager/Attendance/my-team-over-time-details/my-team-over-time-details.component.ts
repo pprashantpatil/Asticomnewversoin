@@ -4,6 +4,8 @@ import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.servi
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
 import * as XLSX from 'xlsx';
+import { ExportToCsv } from 'export-to-csv';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-team-over-time-details',
@@ -11,208 +13,244 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./my-team-over-time-details.component.css']
 })
 export class MyTeamOverTimeDetailsComponent implements OnInit {
+  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router,public datePipe:DatePipe) { }
   viewMode = 'tab1';
+  viewMode1 = 'tab11';
+  viewMode2 = 'tab111';
+  selecallbtn: any;
+  projectlist: any;
+  attendancelist: any;
+  RoleTypeList: any;
+  Departmentlist: any;
+  roleid: any;
+  sdate: any;
+  RoleType: any;
+  Department: any;
+  count: any;
+  p: any = 1;
+  count1: any = 10;
+  TransportationType: any;
+  Date: any;
+  dropdownList: any = [];
+  selectedItems: any = [];
+  dropdownSettings: any = {};
+  StaffID: any;
+  OTlist: any;
+  Supervisor: any;
+  Name: any;
+  Project: any;
+  Destination: any;
+  Purpose: any;
+  ContactPerson: any;
+  ContactPhNo: any;
+  TimeOfDeparture: any;
+  TimeOfReturn: any;
+  noofhours: any;
+  Comments: any;
+  type: any;
+  day: any
+  attendancelistcopy: any;
+  timedetails: any;
+  timedetails1: any;
+  timedetails2: any;
+  timedetails3: any;
   currentUrl: any;
-  overTimePendingList: any;
-  search: any;
-  loader: any;
-  staffID: any;
-  date: any;
-  startDate: any;
-  endDate: any;
-  overTimePendingFilter: any;
-  roleID: any;
-  noOfHours: any;
+  edate: any;
+  temp: any;
+  term: any;
+  id: any;
+  sdte: any;
+  Notes: any;
+  fulldate:any;
+  month: any;
+  payperiod: any;
+  payrolltype: any;
+  Otdetails: any;
   nightOT: any;
   restNormalOT: any;
   specialNormalOT: any;
-  exccessNightOT: any;
-  exccessNormalOT: any;
-  restNightOT: any;
-  exccessRestNormalOT: any;
-  restExccessNightOT: any;
-  legalNightOT: any;
-  legalNormalOT: any;
-  legalExccessNormalOT: any;
-  legalExccessNightOT: any;
-  specialNightOT: any;
-  specialExccessNormalOT: any;
-  specialExccessNightOT: any;
-  specialRestNightOT: any;
-  specialRestNormalOT: any;
-  specialRestExccessNormalOT: any;
-  specialRestExccessNightOT: any;
-  legalRestNightOT: any;
-  legalRestNormalOT: any;
-  legalExccessRestNormalOT: any;
-  legalExccessRestNightOT: any;
-  nSDRegular: any;
-  multipleAttachmentList: any;
-  overTimeApprovedList: any;
-  overTimeRejectedList: any;
-  overTimeRejectedFilter: any;
-  overTimeApprovedFilter: any;
-  otEligibility: any;
-  filename: any;
+  ExccessNightOt: any;
+  ExccessNormalOt: any;
+  RestNightOt: any;
+  RestNormalOT: any;
+  ExccessRestNormalOt: any;
+  RestExccessNightOt: any;
+  LegalNightOt: any;
+  LegalNormalOT: any;
+  LegalExccessNormalOt: any;
+  LegalExccessNightOt: any;
+  SpecialNightOt: any;
+  SpecialNormalOT: any;
+  SpecialExccessNormalOt: any;
+  SpecialExccessNightOt: any;
+  SpecialRestNightOt: any;
+  SpecialRestNormalOT: any;
+  SpecialRestExccessNormalOt: any;
+  SpecialRestExccessNightOt: any;
+  LegalRestNightOt: any;
+  LegalRestNormalOT: any;
+  LegalExccessRestNormalOt: any;
+  LegalExccessRestNightOt: any;
+  loader: any;
+  companyName: any;
+  OTEligibility: any;
   showPopup: number = 0;
   messageId: number = 0;
-  month: any;
-  day: any;
-  payrollType: any;
-
-  constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
-
   ngOnInit(): void {
-    this.loader = true;
     this.currentUrl = window.location.href;
-    this.staffID = localStorage.getItem('staffid');
-    this.roleID = localStorage.getItem('roledid');
-    this.otEligibility = localStorage.getItem('OTEligibility');
+    this.loader = true;
+    this.Department = "";
+    this.RoleType = "";
+    this.roleid = sessionStorage.getItem('roledid');
+    this.StaffID = localStorage.getItem('staffid');
+    this.companyName = sessionStorage.getItem('companyName');
+    this.OTEligibility = localStorage.getItem('OTEligibility');
+
+    if (this.roleid == 2) {
+      this.GetMyOverTimeDetailsByManager();
+    } else {
+      this.GetMyOverTimeDetails();
+    }
+
+
     let date = new Date()
     this.day = date.getDate();
     this.month = new Date().getMonth() + 1;
+
     if ((this.day <= 15 && this.day >= 1)) {
-      this.payrollType = 1
+      this.payrolltype = 1
     }
     else {
-      this.payrollType = 2
+      this.payrolltype = 2
     }
-    this.getData();
   }
-
-  public getData() {
-    this.DigiofficecorehrService.GetStaffOverTimeDetailsByDate('2023-01-01', '2023-01-10').subscribe(
-      res => {
-        debugger;
-        this.overTimePendingList = res.filter(x => x.status == 'Manager Pending' || x.status == 'Manager Pending HR Pending');
-        this.overTimePendingFilter = res.filter(x => x.status == 'Manager Pending' || x.status == 'Manager Pending HR Pending');
-
-        this.overTimeApprovedList = res.filter(x => (x.status == 'Manager Approved' || x.status == 'Manager Approved HR Pending'));
-        this.overTimeApprovedFilter = res.filter(x => (x.status == 'Manager Approved' || x.status == 'Manager Approved HR Pending'));
-
-        this.overTimeRejectedList = res.filter(x => x.status == 'Manager Rejected');
-        this.overTimeRejectedFilter = res.filter(x => x.status == 'Manager Rejected');
-        this.loader = false;
-      })
-  }
-
-  public openDeletePopUp(id: any) {
-    Swal.fire({
-      title: 'Delete record',
-      text: "Are you sure you want to delete it?",
-      showCloseButton: true,
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Proceed'
-    }).then((result) => {
-      if (result.value == true) {
-        this.DigiofficecorehrService.DeleteStaffOverTimeDetails(id)
-          .subscribe({
-            next: data => {
-              Swal.fire('Deleted Successfully');
-              this.ngOnInit();
-            }, error: (err) => {
-              Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-              this.loader = false;
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-            }
-          })
-      }
-    });
-  }
-
-  public getEndDate(event: any) {
+  public GetMyOverTimeDetails() {
     debugger
-    this.startDate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
-    this.endDate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
-    if (this.endDate < this.startDate) {
-      Swal.fire("The end date should be greater than the start date")
-      this.endDate = ""
-    }
-    else if (this.startDate == undefined) {
-      Swal.fire("Please select the start date first")
-      this.endDate = ""
-    }
-    else {
-      this.overTimePendingList = this.overTimePendingFilter.filter((x: { submitdate: any; date: any; }) => (x.submitdate >= this.startDate && x.submitdate <= this.endDate) || (x.date >= this.startDate && x.date <= this.endDate));
-      this.overTimeApprovedList = this.overTimeApprovedFilter.filter((x: { submitdate: any; date: any; }) => (x.submitdate >= this.startDate && x.submitdate <= this.endDate) || (x.date >= this.startDate && x.date <= this.endDate));
-      this.overTimeRejectedList = this.overTimeRejectedFilter.filter((x: { submitdate: any; date: any; }) => (x.submitdate >= this.startDate && x.submitdate <= this.endDate) || (x.date >= this.startDate && x.date <= this.endDate));
-    }
-  }
-
-  public getOTDetails(time: any) {
-    this.loader = true;
-    this.DigiofficecorehrService.GetStaffOverTimeDetailsByID(time.id)
+    this.DigiofficeService.GetStaffOverTimeDetailsByDate('2023-01-01', '2023-01-10')
       .subscribe({
         next: data => {
           debugger
-          let temp: any = data;
-          this.noOfHours = temp[0].noofhours;
-          this.nightOT = temp[0].nightOT;
-          this.restNormalOT = temp[0].restNormalOT;
-          this.specialNormalOT = temp[0].specialNormalOT;
-          this.exccessNightOT = temp[0].exccessNightOt;
-          this.exccessNormalOT = temp[0].exccessNormalOt;
-          this.restNightOT = temp[0].restNightOt;
-          this.exccessRestNormalOT = temp[0].exccessRestNormalOt;
-          this.restExccessNightOT = temp[0].restExccessNightOt;
-          this.legalNightOT = temp[0].legalNightOt;
-          this.legalNormalOT = temp[0].legalNormalOT;
-          this.legalExccessNormalOT = temp[0].legalExccessNormalOt;
-          this.legalExccessNightOT = temp[0].legalExccessNightOt;
-          this.specialNightOT = temp[0].specialNightOt;
-          this.specialExccessNormalOT = temp[0].specialExccessNormalOt;
-          this.specialExccessNightOT = temp[0].specialExccessNightOt;
-          this.specialRestNightOT = temp[0].specialRestNightOt;
-          this.specialRestNormalOT = temp[0].specialRestNormalOT;
-          this.specialRestExccessNormalOT = temp[0].specialRestExccessNormalOt;
-          this.specialRestExccessNightOT = temp[0].specialRestExccessNightOt;
-          this.legalRestNightOT = temp[0].legalRestNightOt;
-          this.legalRestNormalOT = temp[0].legalRestNormalOT;
-          this.legalExccessRestNormalOT = temp[0].legalExccessRestNormalOt;
-          this.legalExccessRestNightOT = temp[0].legalExccessRestNightOt;
-          this.nSDRegular = temp[0].nSD_REGULAR;
+          this.timedetails = data;
           this.loader = false;
+          this.timedetails1 = data.filter(x => x.status == 'Manager Pending' || x.status == 'Manager Pending HR Pending');
+          this.timedetails2 = data.filter(x => (x.status == 'Manager Approved' || x.status == 'Manager Approved HR Pending'))
+          this.timedetails3 = data.filter(x => x.status == 'Manager Rejected');
+
+          this.count = this.timedetails.length
+        }, error: (err) => {
+          // Swal.fire('Issue in Getting Staff Over Time Details');
+          // Insert error in Db Here//
+          var obj = {
+            'PageName': this.currentUrl,
+            'ErrorMessage': err.error.message
+          }
+          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+            data => {
+              debugger
+            },
+          )
+        }
+      })
+  }
+  public GetMyOverTimeDetailsByManager() {
+    debugger
+    this.DigiofficeService.GetStaffOverTimeDetailsByManagerID(localStorage.getItem('staffid'), '2022-01-01', '2025-12-01')
+      .subscribe({
+        next: data => {
+          debugger
+          this.timedetails = data;
+          this.loader = false;
+          this.timedetails1 = data.filter(x => (x.status == 'Manager Pending' || x.status == 'Manager Pending HR Pending'));
+          this.timedetails2 = data.filter(x => (x.status == 'Manager Approved' || x.status == 'Manager Approved HR Pending'))
+          this.timedetails3 = data.filter(x => x.status == 'Manager Rejected');
+          this.count = this.timedetails.length
+        }, error: (err) => {
+          // Swal.fire('Issue in Getting Staff Over Time Details');
+          // Insert error in Db Here//
+          var obj = {
+            'PageName': this.currentUrl,
+            'ErrorMessage': err.error.message
+          }
+          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+            data => {
+              debugger
+            },
+          )
         }
       })
   }
 
-  image(id: any) {
+  public FilterAttendence() {
     debugger
-    this.DigiofficecorehrService.GetStaffOverTimeDetailsAttachment().subscribe(
-      data => {
+    let searchCopy = this.term.toLowerCase();
+    this.attendancelist = this.timedetails.filter((x: { name: string }) =>
+      x.name.toLowerCase().includes(searchCopy));
+    this.count = this.attendancelist.length;
+    this.loader = false;
+  }
+
+
+
+  public filterdate() {
+
+    debugger
+    if (this.edate == "") {
+      this.ngOnInit();
+    } else {
+      this.DigiofficeService.GetStaffOverTimeDetailsByDate(this.sdate, this.edate).subscribe(data => {
         debugger
-        this.multipleAttachmentList = data.filter(x => x.overTimeID == id);
+
         this.loader = false;
+        if (this.roleid == 2) {
+         
+          this.timedetails1 = data.filter(x => x.supervisor == localStorage.getItem('staffid') && (x.status == 'Manager Pending'));
+          this.timedetails2 = data.filter(x => x.supervisor == localStorage.getItem('staffid') && (x.status == 'Manager Approved'));
+          this.timedetails3 = data.filter(x => x.supervisor == localStorage.getItem('staffid') && x.status == 'Manager Rejected');
+        }
+        else {
+          this.timedetails = data;
+          this.timedetails1 = data.filter(x => x.status == 'Manager Pending');
+          this.timedetails2 = data.filter(x => (x.status == 'Manager Approved'))
+          this.timedetails3 = data.filter(x => x.status == 'Manager Rejected');
+        }
+
+
+        this.count = this.timedetails.length
       })
+    }
   }
 
-  openAttchments(photo: any) {
-    window.open(photo, '_blank');
+  selectALL(checked: boolean) { // pass true or false to check or uncheck all
+    this.selecallbtn = true;
+    var inputs = document.getElementsByTagName("input");
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].type == "checkbox") {
+        inputs[i].checked = checked;
+        // This way it won't flip flop them and will set them all to the same value which is passed into the function
+      }
+    }
   }
 
-  exportexcel(): void {
-    this.filename = "Tenant Inventory Report.xlsx"
-    /* table id is passed over here */
-    let element = document.getElementById('document');
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-    /* generate workbook and add the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    /* save to file */
-    XLSX.writeFile(wb, this.filename);
+  public Approveall() {
+    this.showPopup = 1;
+    debugger
+    this.selecallbtn = false;
+    this.loader = false;
+    this.messageId = 73;
+    /*   Swal.fire('Approved Successfully'); */
+    var inputs = document.getElementsByTagName("input");
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].type == "checkbox") {
+        inputs[i].checked = false;
+        // This way it won't flip flop them and will set them all to the same value which is passed into the function
+      }
+    }
   }
 
-  public managerOTApprove(time: any) {
+  public ManagerOTApprove(time: any) {
     this.showPopup = 0;
     debugger
-    if (this.payrollType != time.payrolltype && this.month == time.month || this.month == time.month - 1) {
+    if (this.payrolltype != time.payrolltype && this.month == time.month || this.month == time.month - 1) {
       var entity = {
         'ID': time.id,
         'Status': 'Manager Approved',
@@ -227,14 +265,27 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
         confirmButtonText: 'Yes, Approve it!'
       }).then((result) => {
         if (result.value == true) {
-          this.DigiofficecorehrService.UpdateOtFromManager(entity)
+          this.DigiofficeService.UpdateOtFromManager(entity)
             .subscribe({
               next: data => {
                 debugger
+                /*     Swal.fire("Approved Successfully"); */
                 this.ngOnInit();
                 this.loader = false;
                 this.showPopup = 1;
                 this.messageId = 73;
+              }, error: (err) => {
+                // Swal.fire('Issue in Updating OT Approve From Manager');
+                // Insert error in Db Here//
+                var obj = {
+                  'PageName': this.currentUrl,
+                  'ErrorMessage': err.error.message
+                }
+                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                  data => {
+                    debugger
+                  },
+                )
               }
             })
         }
@@ -255,22 +306,39 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
         confirmButtonText: 'Yes, Approve it!'
       }).then((result) => {
         if (result.value == true) {
-          this.DigiofficecorehrService.UpdateOtFromManager(entity)
+          this.DigiofficeService.UpdateOtFromManager(entity)
             .subscribe({
               next: data => {
                 debugger
+                /* Swal.fire("Approved Successfully"); */
                 this.ngOnInit();
                 this.loader = false;
                 this.showPopup = 1;
                 this.messageId = 73;
+              }, error: (err) => {
+                // Swal.fire('Issue in Updating OT From Manager');
+                // Insert error in Db Here//
+                var obj = {
+                  'PageName': this.currentUrl,
+                  'ErrorMessage': err.error.message
+                }
+                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                  data => {
+                    debugger
+                  },
+                )
               }
             })
         }
       })
     }
+
   }
 
-  public managerOTReject(id: any) {
+
+
+
+  public ManagerOTReject(id: any) {
     this.showPopup = 0;
     debugger
     var entity = {
@@ -278,15 +346,200 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
       'Status': 'Manager Rejected',
       'previouspaybit': 0
     }
-    this.DigiofficecorehrService.UpdateOtFromManager(entity)
+    this.DigiofficeService.UpdateOtFromManager(entity)
       .subscribe({
         next: data => {
           debugger
+          /*  Swal.fire("Rejected Successfully"); */
           this.ngOnInit();
           this.loader = false;
           this.showPopup = 1;
           this.messageId = 75;
+        }, error: (err) => {
+          // Swal.fire('Issue in Updating OT Reject From Manager');
+          // Insert error in Db Here//
+          var obj = {
+            'PageName': this.currentUrl,
+            'ErrorMessage': err.error.message
+          }
+          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+            data => {
+              debugger
+            },
+          )
         }
       })
   }
+
+  NSD_REGULAR: any;
+  multipleattachmentlist: any;
+  image(id: any) {
+    debugger
+    this.DigiofficeService.GetStaffOverTimeDetailsAttachment().subscribe(
+      data => {
+        debugger
+        this.multipleattachmentlist = data.filter(x => x.overTimeID == id);
+        this.loader = false;
+      }
+    )
+
+  }
+
+  public GetOTDetails(time: any) {
+    this.DigiofficeService.GetStaffOverTimeDetailsByID(time.id)
+      .subscribe({
+        next: data => {
+          debugger
+          this.loader = false;
+          let temp: any = data;
+          this.noofhours = temp[0].noofhours;
+          this.nightOT = temp[0].nightOT;
+          this.restNormalOT = temp[0].restNormalOT;
+          this.specialNormalOT = temp[0].specialNormalOT;
+          this.ExccessNightOt = temp[0].exccessNightOt;
+          this.ExccessNormalOt = temp[0].exccessNormalOt;
+          this.RestNightOt = temp[0].restNightOt;
+          this.RestNormalOT = temp[0].restNormalOT;
+          this.ExccessRestNormalOt = temp[0].exccessRestNormalOt;
+          this.RestExccessNightOt = temp[0].restExccessNightOt;
+          this.LegalNightOt = temp[0].legalNightOt;
+          this.LegalNormalOT = temp[0].legalNormalOT;
+          this.LegalExccessNormalOt = temp[0].legalExccessNormalOt;
+          this.LegalExccessNightOt = temp[0].legalExccessNightOt;
+          this.SpecialNightOt = temp[0].specialNightOt;
+          this.SpecialNormalOT = temp[0].specialNormalOT;
+          this.SpecialExccessNormalOt = temp[0].specialExccessNormalOt;
+          this.SpecialExccessNightOt = temp[0].specialExccessNightOt;
+          this.SpecialRestNightOt = temp[0].specialRestNightOt;
+          this.SpecialRestNormalOT = temp[0].specialRestNormalOT;
+          this.SpecialRestExccessNormalOt = temp[0].specialRestExccessNormalOt;
+          this.SpecialRestExccessNightOt = temp[0].specialRestExccessNightOt;
+          this.LegalRestNightOt = temp[0].legalRestNightOt;
+          this.LegalRestNormalOT = temp[0].legalRestNormalOT;
+          this.LegalExccessRestNormalOt = temp[0].legalExccessRestNormalOt;
+          this.LegalExccessRestNightOt = temp[0].legalExccessRestNightOt;
+          this.NSD_REGULAR = temp[0].nSD_REGULAR;
+        }, error: (err) => {
+          // Swal.fire('Issue in Getting Staff Over Time Details');
+          // Insert error in Db Here//
+          var obj = {
+            'PageName': this.currentUrl,
+            'ErrorMessage': err.error.message
+          }
+          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+            data => {
+              debugger
+            },
+          )
+        }
+      })
+  }
+
+
+  sequenceNumber1: any;
+  public exportexcel1() {
+    debugger
+
+    var ExportData = [];
+    this.sequenceNumber1 = 0;
+    for (let i = 0; i < this.timedetails2.length; i++) {
+      //debugger;
+      this.sequenceNumber1 = i + 1;
+      let singleData = {
+        SequenceNumber: String,
+        companyName: String,
+        EmployeeName: String,
+        date: String,
+        ActualStartTime: String,
+        ActualEndTime: String,
+        normalOT: String,
+        exccessNightOt: String,
+        exccessNormalOt: String,
+        exccessRestNormalOt: String,
+        legalExccessNightOt: String,
+        legalExccessNormalOt: String,
+        legalExccessRestNightOt: String,
+        legalExccessRestNormalOt: String,
+        legalNightOt: String,
+        legalNormalOT: String,
+        legalRestNightOt: String,
+        legalRestNormalOT: String,
+        nightOT: String,
+        restExccessNightOt: String,
+        restNightOt: String,
+        restNormalOT: String,
+        specialExccessNightOt: String,
+        specialExccessNormalOt: String,
+        specialNightOt: String,
+        specialNormalOT: String,
+        specialRestExccessNightOt: String,
+        specialRestExccessNormalOt: String,
+        specialRestNightOt: String,
+        specialRestNormalOT: String,
+
+      }
+      singleData.SequenceNumber = this.sequenceNumber1;
+      singleData.EmployeeName = this.timedetails2[i].staffname;
+      singleData.date = this.timedetails2[i].date;
+
+      singleData.ActualStartTime = this.timedetails2[i].startTime;
+      singleData.ActualEndTime = this.timedetails2[i].endTime;
+      singleData.normalOT = this.timedetails2[i].noofhours;
+      singleData.exccessNightOt = this.timedetails2[i].exccessNightOt;
+      singleData.exccessNormalOt = this.timedetails2[i].exccessNormalOt;
+      singleData.exccessRestNormalOt = this.timedetails2[i].exccessRestNormalOt;
+      singleData.legalExccessNightOt = this.timedetails2[i].legalExccessNightOt;
+      singleData.legalExccessNormalOt = this.timedetails2[i].legalExccessNormalOt;
+      singleData.legalExccessRestNightOt = this.timedetails2[i].legalExccessRestNightOt;
+      singleData.legalExccessRestNormalOt = this.timedetails2[i].legalExccessRestNormalOt;
+      singleData.legalNightOt = this.timedetails2[i].legalNightOt;
+      singleData.legalNormalOT = this.timedetails2[i].legalNormalOT;
+      singleData.legalRestNightOt = this.timedetails2[i].legalRestNightOt;
+      singleData.legalRestNormalOT = this.timedetails2[i].legalRestNormalOT;
+      singleData.nightOT = this.timedetails2[i].nightOT;
+      singleData.restExccessNightOt = this.timedetails2[i].restExccessNightOt;
+      singleData.restNightOt = this.timedetails2[i].restNightOt;
+      singleData.restNormalOT = this.timedetails2[i].restNormalOT;
+      singleData.specialExccessNightOt = this.timedetails2[i].specialExccessNightOt;
+      singleData.specialExccessNormalOt = this.timedetails2[i].specialExccessNormalOt;
+      singleData.specialNightOt = this.timedetails2[i].specialNightOt;
+      singleData.specialNormalOT = this.timedetails2[i].specialNormalOT;
+      singleData.specialRestExccessNightOt = this.timedetails2[i].specialRestExccessNightOt;
+      singleData.specialRestExccessNormalOt = this.timedetails2[i].specialRestExccessNormalOt;
+      singleData.specialRestNightOt = this.timedetails2[i].specialRestNightOt;
+      singleData.specialRestNormalOT = this.timedetails2[i].specialRestNormalOT;
+      singleData.companyName = this.companyName;
+      ExportData.push(singleData);
+      //debugger
+    }
+    const Export_to_excel_options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalSeparator: '.',
+      showLabels: true,
+      showTitle: true,
+      title: 'GENERATE REPORT',
+      useTextFile: false,
+      useBom: true,
+      useKeysAsHeaders: true,
+      filename: 'Employee_OverTime_report'
+    };
+    const csvExporter = new ExportToCsv(Export_to_excel_options);
+    //debugger
+    csvExporter.generateCsv(ExportData);
+
+
+
+  }
+
+  openAttchments(photo: any) {
+    window.open(photo, '_blank');
+  }
+
+  public getEndDate(event: any) {
+    this.showPopup = 0;
+    this.sdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.edate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
+  }
+
 }

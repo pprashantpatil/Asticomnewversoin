@@ -6,6 +6,7 @@ import { MyTeamWeeklyShiftComponent } from './Attendance/my-team-weekly-shift/my
 import { MyTeamOverTimeDetailsComponent } from './Attendance/my-team-over-time-details/my-team-over-time-details.component';
 import { MyTeamAttendanceCorrectionComponent } from './Attendance/my-team-attendance-correction/my-team-attendance-correction.component';
 import { MyTeamLeaveDetailsComponent } from './Requests/my-team-leave-details/my-team-leave-details.component';
+import { ExitformalityformdashComponent } from './Requests/exitformalityformdash/exitformalityformdash.component';
 
 const routes: Routes = [
   { path: 'MyTeamAttendence', component: MyTeamAttendenceComponent ,canActivate: [AuthguardGuard]},
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'MyTeamOverTimeDetails', component: MyTeamOverTimeDetailsComponent ,canActivate: [AuthguardGuard]},
   { path: 'MyTeamAttendanceCorrection', component: MyTeamAttendanceCorrectionComponent ,canActivate: [AuthguardGuard]},
   { path: 'MyTeamLeaveDetails', component: MyTeamLeaveDetailsComponent ,canActivate: [AuthguardGuard]},
+  { path: 'Exitformalityformdash', component: ExitformalityformdashComponent ,canActivate: [AuthguardGuard]},
 ];
 
 @NgModule({
