@@ -77,6 +77,7 @@ export class LoanRequestDashComponent implements OnInit {
       .subscribe(result => {
         console.log('Result' + result);
         this.ngOnInit();
+        this.loader = false;
       });
   }
 
@@ -90,6 +91,7 @@ export class LoanRequestDashComponent implements OnInit {
       .subscribe(result => {
         console.log('Result' + result);
         this.ngOnInit();
+        this.loader = false;
       });
   }
 
@@ -110,13 +112,7 @@ export class LoanRequestDashComponent implements OnInit {
             next: data => {
               Swal.fire('Deleted Successfully');
               this.ngOnInit();
-            }, error: (err) => {
-              Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
               this.loader = false;
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
             }
           })
       }
@@ -130,15 +126,18 @@ export class LoanRequestDashComponent implements OnInit {
     if (this.endDate < this.startDate) {
       Swal.fire("The end date should be greater than the start date")
       this.endDate = ""
+      this.loader = false;
     }
     else if (this.startDate == undefined) {
       Swal.fire("Please select the start date first")
       this.endDate = ""
+      this.loader = false;
     }
     else {
       this.loanPendingList = this.loanPendingFilter.filter((x: { modifiedDate: any; }) => (x.modifiedDate >= this.startDate && x.modifiedDate <= this.endDate));
       this.loanApprovedList = this.loanApprovedFilter.filter((x: { modifiedDate: any; }) => (x.modifiedDate >= this.startDate && x.modifiedDate <= this.endDate));
       this.loanRejectedList = this.loanRejectedFilter.filter((x: { modifiedDate: any; }) => (x.modifiedDate >= this.startDate && x.modifiedDate <= this.endDate));
+      this.loader = false;
     }
   }
 

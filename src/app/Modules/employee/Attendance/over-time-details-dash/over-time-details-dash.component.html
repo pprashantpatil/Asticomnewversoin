@@ -387,13 +387,13 @@
                         <div class="row">
                             <div class="col-lg-10">
                                 <img src="{{details.attachment}}" *ngIf="details.filetype=='Image'"
-                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                    (click)="openAttachments(details.attachment)" style="width: 171px; height: 117px;">
                                 <img src="assets/Images/pdf.png" *ngIf="details.filetype=='Pdf'"
-                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                    (click)="openAttachments(details.attachment)" style="width: 171px; height: 117px;">
                                 <img src="assets/Images/word.png" *ngIf="details.filetype=='Document'"
-                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                    (click)="openAttachments(details.attachment)" style="width: 171px; height: 117px;">
                                 <img src="assets/Images/files.png" *ngIf="details.filetype=='Ppt'"
-                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                    (click)="openAttachments(details.attachment)" style="width: 171px; height: 117px;">
                                 <p *ngIf="details.attachment==null">No Attachment</p>
                             </div>
                         </div>
