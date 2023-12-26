@@ -56,7 +56,7 @@ export class EmployeeResignationDashComponent implements OnInit {
       .subscribe(result => {
         console.log('Result' + result);
         this.ngOnInit();
-        this.loader=false;
+        this.loader = false;
       });
   }
 
@@ -77,7 +77,7 @@ export class EmployeeResignationDashComponent implements OnInit {
             next: data => {
               Swal.fire('Deleted Successfully');
               this.ngOnInit();
-              this.loader=false;
+              this.loader = false;
             }
           })
       }
@@ -101,6 +101,6 @@ export class EmployeeResignationDashComponent implements OnInit {
 
   openAttachments(photo: any) {
     window.open(photo, '_blank');
-    this.loader=false;
+    this.loader = false;
   }
 }

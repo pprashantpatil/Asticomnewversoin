@@ -2,7 +2,6 @@
     <div class="row">
         <div class="col-12 d-flex">
             <div class="left-part" style="padding: 0px 20px 0px 0px;">
-                <!-- *ngIf="companyid==1001 && (AttendanceEnable=='false'||Band=='10023')" -->
                 <div class="card p-5">
                     <div class="row">
                         <div class="col-12 d-flex flex-column" style="gap:4px;">
@@ -22,8 +21,6 @@
                                 <p class="date-text">{{todaydate}}</p>
                             </div>
                             <br>
-
-
 
                             <div class="d-flex drp-align" *ngIf="punchintime!=null">
                                 <div class="punch-in-card" (click)=" punchin()">
@@ -80,8 +77,6 @@
                         </div>
                     </div>
                 </div>
-
-               
             </div>
 
             <div class="w-100">
@@ -117,8 +112,7 @@
                         </div>
 
                         <div class="update-info d-flex justify-content-between">
-                            <p class="content1" (click)="Profilecompletion()">
-                            Complete
+                            <p class="content1" (click)="Profilecompletion()">Complete
                         </div>
                     </div>
 
@@ -168,8 +162,7 @@
                                 <p class="text-attendance" (click)="AddCorrection()">Attendance Correction</p>
                             </div>
 
-                            <p class="view-text1" style="color: #1125a9 !important;font-weight: 600;">View
-                                Attendance</p>
+                            <p class="view-text1" style="color: #1125a9 !important;font-weight: 600;" (click)="attendance()">View Attendance</p>
                         </div>
                     </div>
 
@@ -188,7 +181,7 @@
                                 <p class="text-attendance" (click)="AddLeave()">Apply Leave</p>
                             </div>
 
-                            <p class="view-text1" style="color: #1125a9 !important;font-weight: 600;">View Leave</p>
+                            <p class="view-text1" style="color: #1125a9 !important;font-weight: 600;" (click)="leaveDashboard()">View Leave</p>
                         </div>
                     </div>
                 </div>
@@ -235,7 +228,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="view-all-text" style="color: #1125a9 !important;font-weight: 600;">View
+                <p class="view-all-text" style="color: #1125a9 !important;font-weight: 600;" (click)="holiday()">View
                     All</p>
             </div>
 
@@ -254,7 +247,7 @@
                             <p class="text-attendance"  (click)="AddOvertime()">Apply Overtime</p>
                         </div>
 
-                        <p class="view-text1" style="color: #1125a9 !important;font-weight: 600;">
+                        <p class="view-text1" style="color: #1125a9 !important;font-weight: 600;" (click)="overtimeDash()">
                             View Overtime</p>
                     </div>
                 </div>
@@ -274,7 +267,7 @@
                             </p>
                         </div>
 
-                        <p class="view-text1" style="color: #1125a9 !important;font-weight: 600;">
+                        <p class="view-text1" style="color: #1125a9 !important;font-weight: 600;" (click)="loanDash()">
                             View Loans</p>
                     </div>
                 </div>

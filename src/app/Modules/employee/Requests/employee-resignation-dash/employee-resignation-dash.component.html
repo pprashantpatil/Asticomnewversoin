@@ -34,11 +34,16 @@
         </div>
     </div> -->
 
-    <!-- <div class="row">
-        <div class="col-md-10">
-            <p class="show3res">SHOWING <span>{{(resignationList|filter:search)?.length}} </span>RESULT(S)</p>
+    <div class="row">
+        <div class="col-9">
         </div>
-    </div> -->
+
+        <div class="col-3">
+            <button class="butn-sadow" (click)="showDialog()" *ngIf="roleID !=1 && resignationList?.length == 0"> <img src="assets/Images/plus.svg"
+                    class="plus-icon">Add Resignation</button>
+        </div>
+    </div>
+    <br>
 
     <div class="row">
         <div class="col-12">

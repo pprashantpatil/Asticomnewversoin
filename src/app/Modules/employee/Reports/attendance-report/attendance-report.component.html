@@ -39,8 +39,8 @@
                     </div>
                     <div class="cardinputs">
                         <p class="leavereq">Select Dates
-                            <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
-                                [(ngModel)]="startdate1" (ngModelChange)="getenddate($event)"
+                            <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control"
+                                bsDaterangepicker [(ngModel)]="startdate1" (ngModelChange)="getenddate($event)"
                                 [bsConfig]="{showWeekNumbers:false }">
                     </div>
                     <!-- <div class="cardinputs" style="font-family: 'Poppins';">
@@ -112,25 +112,31 @@
                                     <td>{{attendance.signinDate|date}}</td>
                                     <td>{{attendance.signInType}}</td>
                                     <td>
-                                        <p *ngIf="attendance.expectedIn!=null"> {{attendance.expectedIn|date:'HH:mm'}}</p>
+                                        <p *ngIf="attendance.expectedIn!=null"> {{attendance.expectedIn}}
+                                        </p>
                                         <p *ngIf="attendance.expectedIn==null">NA</p>
                                     </td>
                                     <td class="numberblue">{{attendance.signinDate|date:'HH:mm'}}</td>
                                     <td>
                                         <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchinip}}</p>
-                                        <p *ngIf="attendance.signInType!='Web Application'">{{attendance.signinLocation}}
+                                        <p *ngIf="attendance.signInType!='Web Application'">
+                                            {{attendance.signinLocation}}
                                         </p>
                                     </td>
                                     <td>
-                                        <p *ngIf="attendance.expectedOut!=null"> {{attendance.expectedOut|date:'HH:mm'}}</p>
+                                        <p *ngIf="attendance.expectedOut!=null"> {{attendance.expectedOut}}
+                                        </p>
                                         <p *ngIf="attendance.expectedOut==null">NA</p>
                                     </td>
-    
+
                                     <td class="numberblue">{{attendance.signoutDate|date:'HH:mm'}}</td>
                                     <td>
-                                        <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchoutip}}</p>
-                                        <p *ngIf="attendance.signInType!='Web Application'">{{attendance.signoutLocation}}
+                                        <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchoutip}}
                                         </p>
+                                        <!-- <p *ngIf="attendance.signInType!='Web Application'">
+                                            {{attendance.signoutLocation}}
+                                        </p> -->
+                                        <p *ngIf="attendance.signInType=='Mobile' || attendance.signInType == 'mobile Application'">NA</p>
                                     </td>
                                     <td>{{attendance.hr1}}</td>
                                 </tr>

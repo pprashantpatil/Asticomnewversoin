@@ -9,7 +9,7 @@ li {
   float: left;
 }
 
-@media (min-width: 1920px) and (max-width: 2560px) {
+/* @media (min-width: 1920px) and (max-width: 2560px) {
   .butn-sadow {
     position: relative;
     width: 145px;
@@ -21,4 +21,28 @@ li {
   position: relative;
   width: 145px;
   left: 390px;
+} */
+
+.butn-sadow {
+  /* position: absolute; */
+  width: 212px;
+  height: 41px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-size: 15px !important;
+  text-shadow: initial;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  border-radius: 5px;
+  /* border: none; */
+  padding: 3px;
+  float: right;
+  /* margin-right: 15px; */
+  /* font-weight: bold; */
+  /* background: #1125a9; */
+  background-color: #3247d5 !important;
+  border-radius: 5px solid #3247d5 !important;
+  border: 5px solid #3247d5 !important;
+  text-transform: capitalize;
+  margin-top: 13px !important;
 }

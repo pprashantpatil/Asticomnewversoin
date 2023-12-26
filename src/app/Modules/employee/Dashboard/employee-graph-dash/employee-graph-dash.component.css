@@ -144,15 +144,12 @@
   
   
   .hrgrapghdashcard {
-  
     background: #fefefe;
     border-radius: 12px;
     width: 98%;
     height: auto;
-    /* border: 1px solid #8080803b; */
     border-radius: 1px !important;
     text-align: center;
-  
     font-size: 15px;
     margin: 15px 12px 15px 28px;
   }
@@ -188,20 +185,15 @@
   
   
   .hrgrapghdashcard1 {
-  
     background: #fefefe;
     border-radius: 12px;
     width: 98%;
-    height: 249px;
-    /* border: 2px solid #8080803b; */
+    height: 378px;
     border-radius: 1px !important;
     text-align: center;
     color: grey;
     font-size: 15px;
     margin: 5px;
-  
-  
-    /* margin: 14px 0px 12px 39px; */
   }
   
   .unapproved-card {
