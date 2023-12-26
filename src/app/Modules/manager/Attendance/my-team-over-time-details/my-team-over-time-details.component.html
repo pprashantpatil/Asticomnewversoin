@@ -100,8 +100,8 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <button class="upload-det" data-toggle="modal" (click)="GetOTDetails(data)"
-                                    data-target="#checkListStatusForm">Details
+                                <button class="edit-btn" (click)="GetOTDetails(data)" data-toggle="modal"
+                                    data-target="#otdetailsmodal">Details
                                 </button>
                             </td>
                             <td>
@@ -120,7 +120,7 @@
                                     (click)="ManagerOTReject(data)" [ngbTooltip]="tipContentReject"
                                     tooltipClass="my-custom-class" *ngIf="data.status=='Manager Pending HR Pending'||
                                     data.status==null || data.status=='Manager Pending'">
-                                    
+
                                 <div class="col-lg-2 Text p-0">
                                     <ng-template #tipContentApprove>
                                         <div>
@@ -193,8 +193,8 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <button class="edit-btn" data-toggle="modal" (click)="GetOTDetails(data)"
-                                    data-target="#checkListStatusForm">Details
+                                <button class="edit-btn" (click)="GetOTDetails(data)" data-toggle="modal"
+                                    data-target="#otdetailsmodal">Details
                                 </button>
                             </td>
                             <td>
@@ -250,8 +250,8 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <button class="edit-btn" data-toggle="modal" (click)="GetOTDetails(data)"
-                                    data-target="#checkListStatusForm">Details
+                                <button class="edit-btn" (click)="GetOTDetails(data)" data-toggle="modal"
+                                    data-target="#otdetailsmodal">Details
                                 </button>
                             </td>
                             <td>
@@ -275,8 +275,8 @@
     </div>
 </div>
 
-<div id="CheckListStatusform" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="otdetailsmodal" tabindex="-1" role="dialog" aria-labelledby="CheckListStatusform" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">OT Details</h5>
