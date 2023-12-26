@@ -1,0 +1,238 @@
+h6 {
+    color: red;
+    font-weight: 700;
+}
+
+h3 {
+    font-weight: 900;
+    color: black !important;
+}
+
+.small-cards {
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 99%;
+    height: 110px;
+    border: 1px solid #8080803b;
+    border-radius: 1px !important;
+    text-align: center;
+    color: grey;
+    font-size: 15px;
+
+}
+
+.small-card-content {
+    display: flex;
+    flex-direction: column;
+    /* gap: 8px; */
+}
+
+.label-name {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.month {
+    font-size: 12px;
+    color: black !important;
+    margin-top: 5px;
+}
+
+.count {
+    color: green !important;
+    font-size: 35px;
+}
+
+.year {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: black !important;
+
+}
+
+.attrition-persentagetxt {
+    font-size: 12px;
+    font-weight: 600;
+    color: red;
+    margin-bottom: 5px;
+
+}
+
+.new-hirescard {
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 49%;
+    height: 222px;
+    border: 1px solid #8080803b;
+    border-radius: 1px !important;
+    text-align: center;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+}
+
+
+.grapghdashinputs {
+    width: 50%;
+    height: 100%;
+}
+
+.grapghdashcard {
+    padding: 5px !important;
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 98%;
+    height: 121px;
+    border: 1px solid #8080803b;
+    border-radius: 1px !important;
+    text-align: center;
+    font-size: 15px;
+}
+
+.card {
+    background-color: #1f1e1e0d !important;
+    border: none !important;
+}
+
+.hrgrapghdashcardr2 {
+    background-color: #FFFFFF !important;
+    height: 110px;
+    color: black !important;
+
+}
+
+.headCount-card {
+    background-color: #FFFFFF !important;
+    color: black !important;
+    padding: 5px !important;
+    border-radius: 12px;
+    width: 100%;    
+    min-height: 222px;
+    border: 1px solid #8080803b;
+    border-radius: 1px !important;
+    text-align: center;
+    color: grey;
+    font-size: 15px;
+
+}
+
+.headcount-card1 {
+    padding: 5px !important;
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 100%;
+    min-height: 250px;
+    position: relative;
+    right: 5%;
+    border: 1px solid #8080803b;
+    border-radius: 1px !important;
+    text-align: center;
+    color: grey;
+    font-size: 15px;
+}
+
+.pendingapproval-card {
+    padding: 5px !important;
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 98%;
+    height: 121px;
+    border: 1px solid #8080803b;
+    border-radius: 1px !important;
+    text-align: center;
+    color: grey;
+    font-size: 15px;
+}
+
+.leave-chart-card {
+    padding: 5px !important;
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 100%;
+    height: 250px;
+    position: relative;
+    right: 5%;
+    border: 1px solid #8080803b;
+    border-radius: 1px !important;
+    text-align: center;
+    color: grey;
+    font-size: 15px;
+}
+
+.greendiv {
+    background-color: green;
+    height: 25px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.percent {
+    color: red !important;
+    font-size: 14px !important;
+    /* font-weight: 400 !important; */
+}
+
+.percent1 {
+    color: red !important;
+    font-size: 14px !important;
+    /* font-weight: 400 !important; */
+}
+
+.card-head {
+    width: 100%;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.5px;
+
+}
+
+.sm-head {
+    font-size: 27px;
+    font-weight: 700;
+    color: #1125a9 !important
+}
+
+.card-head {
+    width: 100%;
+    height: 10px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    color: black
+}
+.card-head1 {
+    width: 100%;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    color: black
+}
+.graph-label-head{
+    width: 100%;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color:  #3247d5;;
+}
+
+.selectmonth {
+    background-color: white;
+    /* margin-left: 20px; */
+    width: 100px;
+  }

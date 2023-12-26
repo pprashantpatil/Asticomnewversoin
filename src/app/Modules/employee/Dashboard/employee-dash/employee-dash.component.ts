@@ -215,19 +215,6 @@ export class EmployeeDashComponent implements OnInit {
           this.pendingloancount1 = temp1[0].pendingcount;
           this.approvedloancount1 = temp1[0].approvedcount;
           this.Rejectedloancount1 = temp1[0].rejectedcount;
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -245,19 +232,6 @@ export class EmployeeDashComponent implements OnInit {
           // this.punchoutworkTypecheck=this.attendancelistforcount[0].punchoutWorkType
 
           this.loader = false;
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-                
-            },
-          )
         }
       })
   }
@@ -286,18 +260,6 @@ export class EmployeeDashComponent implements OnInit {
           this.rejectedloancount = temp[0].rejectedcount;
           this.cancelledloancount = temp[0].cancelcount;
           this.loader = false;
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-                
-            },
-          )
         }
       })
   }
@@ -324,70 +286,11 @@ export class EmployeeDashComponent implements OnInit {
           this.newexpensecount = this.projectlist.filter((x: { approvalStatus: string; }) => x.approvalStatus = 'Manager Pending Finance Pending').length
           this.approvedexpensecount = this.projectlist.filter((x: { approvalStatus: string; }) => x.approvalStatus == 'Manager Approved Finance Approved' || x.approvalStatus == 'Manager Approved Finance Pending').length
           this.cancelledexpensecount = this.projectlist.filter((x: { approvalStatus: string; }) => x.approvalStatus == 'Manager Rejected Finance Pending' || x.approvalStatus == 'Manager Approved Finance Rejected').length
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
 
   public GetStaffOverTimeDetails() {
-      
-    // this.DigiofficecorehrService.GetStaffOTCountForDashboard(localStorage.getItem('staffid'), "01-01-2020", "01-01-2025")
-    //   .subscribe({
-    //     next: data => {
-            
-    //       this.myovertime = data;
-    //       let tempot = this.myovertime
-    //       this.pendingotcount = tempot[0].pendingotcount
-    //       this.approvedotcount = tempot[0].approvedotcount
-    //       this.rejectedotcount = tempot[0].rejectedotcount
-    //       this.loader = false;
-    //     }, error: (err) => {
-    //       Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-    //      var obj = {
-    //         'PageName': this.currentUrl,
-    //         'ErrorMessage': err.error.message,
-    //         'StaffID':localStorage.getItem('staffid')
-    //       }
-    //       this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-    //         data => {
-                
-    //         },
-    //       )
-    //     }
-    //   })
-
-    // this.DigiofficecorehrService.GetStaffOverTimeDetails()
-    //   .subscribe({
-    //     next: data => {
-    //       this.timedetails = data.filter(x => x.supervisor == this.staffID);
-    //       this.pendingotcount = this.timedetails.filter((x: { status: string; }) => x.status == 'Manager Pending').length
-    //       this.approvedotcount = this.timedetails.filter((x: { status: string; }) => x.status == 'Manager Approved').length
-    //       this.Rejectedotcount = this.timedetails.filter((x: { status: string; }) => x.status == 'Manager Rejected').length
-    //     }, error: (err) => {
-    //       Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-    //       var obj = {
-    //         'PageName': this.currentUrl,
-    //         'ErrorMessage': err.error.message
-    //       }
-    //       this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-    //         data => {
-    //         },
-    //       )
-    //     }
-    //   })
   }
 
   public GetAllStaffNew() {
@@ -474,19 +377,6 @@ export class EmployeeDashComponent implements OnInit {
           this.profilepercentage1 = 8-temp[0].steps;
 
           this.loader = false;
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            _data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -505,19 +395,6 @@ export class EmployeeDashComponent implements OnInit {
           this.approvedcount1 = temp1[0].approvedcount;
           this.Rejectedcount1 = temp1[0].rejectedcount;
           this.CancelledCount = temp1[0].cancelcount;
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -531,19 +408,6 @@ export class EmployeeDashComponent implements OnInit {
           this.pendingteamexpensecount = teamexpnes.filter((x: { status: string; }) => x.status == 'Manager Pending Finance Pending' || x.status == null).length;
           this.Rejectedteamexpnesecount = teamexpnes.filter((x: { status: string; }) => x.status == 'Rejected' || x.status == 'Manager Rejected' || x.status == 'Manager Approved Finance Rejected').length;
           this.approvedteamexpnescount = teamexpnes.filter((x: { status: string; }) => x.status == 'Manager Approved Finance Approved' || x.status == 'Manager Approved Finance Pending' || x.status == 'Manager Rejected' || x.status == 'Manager Approved Finance Rejected').length;
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -556,19 +420,6 @@ export class EmployeeDashComponent implements OnInit {
           let teamregularization: any = data.filter(x => x.supervisor == this.staffID);
           this.pendingreg = teamregularization.filter((x: { approve: number; }) => x.approve != 1).length;
           this.approevedreg = teamregularization.filter((x: { approve: number; }) => x.approve == 1).length;
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -584,71 +435,9 @@ export class EmployeeDashComponent implements OnInit {
           let temap: any = data
           this.ipaddress = temap.ip
           this.loader = false;
-        }, error: (err) => {
-          //Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
-
-  // public getstaffleaves1() {
-  //   if (this.roleid == 2) {
-  //     this.DigiofficecorehrService.GetCancelledStaffLeaves(10331, 1, "01-01-2020", "01-01-2025")
-  //       .subscribe({
-  //         next: data => {
-  //           this.staffleaves1 = data.filter((x: { supervisor: string | null; status: string | null; }) => x.supervisor == localStorage.getItem('staffid') && x.status == 'Manager Pending HR Pending');
-  //           let temp: any = data.filter((x: { supervisor: string }) => x.supervisor == localStorage.getItem('staffid'));
-  //           this.pendingcount = temp.filter((x: { status: string; }) => x.status == 'Manager Pending HR Pending' || x.status == 'Manager Pending').length;
-  //           this.Rejectedcount = temp.filter((x: { status: string; }) => x.status == 'Rejected' || x.status == 'Manager Rejected HR Pending').length;
-  //           this.approvedcount = (data.filter((x: { supervisor: string, status: string; }) => x.supervisor == localStorage.getItem('staffid') && x.status == 'Manager Approved HR Approved' || x.status == 'Manager Approved' || x.status == 'Manager Approved HR Pending').length) - 2;;
-  //           this.CancelledCount = temp.filter((x: { status: string; }) => x.status == 'Cancelled').length;
-  //         }, error: (err) => {
-  //          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-  //           var obj = {
-  //             'PageName': this.currentUrl,
-  //             'ErrorMessage': err.error.message
-  //           }
-  //           this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-  //             data => {
-  //             },
-  //           )
-  //         }
-  //       })
-  //   }
-  //   else {
-  //     this.DigiofficecorehrService.GetCancelledStaffLeaves(10331, 1, "01-01-2020", "01-01-2025")
-  //       .subscribe({
-  //         next: data => {
-  //           this.staffleaves1 = data.filter((x: { supervisor: string | null; status: string | null; }) => x.status == 'Manager Approved HR Pending');
-  //           let temp: any = data;
-  //           this.pendingcount = temp.filter((x: { status: string; }) => x.status == 'Manager Approved HR Pending' || x.status == 'HR Pending').length;
-  //           this.Rejectedcount = temp.filter((x: { status: string; }) => x.status == 'Rejected' || x.status == 'Manager Approved HR Rejected').length;
-  //           this.approvedcount = temp.filter((x: { status: string; }) => x.status == 'Manager Approved HR Approved' || x.status == 'Manager Approved HR Rejected').length;
-  //           this.CancelledCount = temp.filter((x: { status: string; }) => x.status == 'Cancelled').length;
-  //         }, error: (err) => {
-  //          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-  //           var obj = {
-  //             'PageName': this.currentUrl,
-  //             'ErrorMessage': err.error.message
-  //           }
-  //           this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-  //             data => {
-  //             },
-  //           )
-  //         }
-  //       })
-  //   }
-  // }
 
   public GetExpensesListweb() {
     //  
@@ -657,19 +446,6 @@ export class EmployeeDashComponent implements OnInit {
         next: data => {
           //  
           this.projectlist = data.filter(x => x.supervisor == this.staffID && (x.status == 'Manager Pending Finance Pending' || x.status == null));
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -691,19 +467,6 @@ export class EmployeeDashComponent implements OnInit {
           this.middle_Name = this.Anniverserylist1[0].middle_Name
           this.mobile = this.Anniverserylist1[0].mobile
           this.emailID = this.Anniverserylist1[0].emailID
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -722,19 +485,6 @@ export class EmployeeDashComponent implements OnInit {
           this.middle_Name = this.Anniverserylist2[0].middle_Name
           this.mobile = this.Anniverserylist2[0].mobile
           this.emailID = this.Anniverserylist2[0].emailID
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -816,41 +566,9 @@ export class EmployeeDashComponent implements OnInit {
           // this.attendancelist1 = data;
           // this.Band = this.attendancelist1[0].bandID
           this.count = this.attendancelist.length
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
-
-  // public getstaffleaves() {
-  //   this.DigiofficecorehrService.GetStaffLeaves(10331, 1, "01-01-2020", "01-01-2025")
-  //     .subscribe({
-  //       next: data => {
-  //         this.staffleaves = data.filter(x => x.id == this.staffID);
-  //       }, error: (err) => {
-  //         Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-  //         var obj = {
-  //           'PageName': this.currentUrl,
-  //           'ErrorMessage': err.error.message
-  //         }
-  //         this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-  //           data => {
-  //           },
-  //         )
-  //       }
-  //     })
-  // }
 
   firstAttachment: any;
   Name: any;
@@ -885,18 +603,6 @@ export class EmployeeDashComponent implements OnInit {
             }
           }
           
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -929,19 +635,6 @@ export class EmployeeDashComponent implements OnInit {
               this.BoosterName = null,
               this.BoosterDoseDate = null
           }
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -968,19 +661,6 @@ export class EmployeeDashComponent implements OnInit {
               this.loader = false;
             }
           }
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-                    this.loader = false;
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-                
-            },
-          )
         }
       })
   }
@@ -1586,17 +1266,6 @@ export class EmployeeDashComponent implements OnInit {
           if (data != 0) {
             this.ngOnInit();
           }
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-          var obj = {
-            'PageName': 'Loan Page',
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-                
-            },
-          )
         }
       })
   }
@@ -1632,20 +1301,6 @@ export class EmployeeDashComponent implements OnInit {
           this.mobile = this.Anniverserylist[0].mobile
           this.emailID = this.Anniverserylist[0].emailID
 
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-          this.loader = false
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -1657,19 +1312,6 @@ export class EmployeeDashComponent implements OnInit {
           //  
           this.Anniverserylist = data.filter(x => x.date_Of_Marriage == this.myDate + "T00:00:00");
           this.loader = false
-        }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              //  
-            },
-          )
         }
       })
   }
@@ -1691,19 +1333,6 @@ export class EmployeeDashComponent implements OnInit {
                 this.attachmentsurl.push(data);
                 this.loader = false;
               }
-            }, error: (err) => {
-              Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-              this.loader = false;
-
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  //  
-                },
-              )
             }
           })
       }
@@ -1749,19 +1378,6 @@ export class EmployeeDashComponent implements OnInit {
           // Swal.fire("Saved Successfully");
           this.ngOnInit();
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-          this.loader = false;
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-            data => {
-                
-            },
-          )
         }
       })
   }

@@ -99,13 +99,6 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
             next: data => {
               Swal.fire('Deleted Successfully');
               this.ngOnInit();
-            }, error: (err) => {
-              Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-              this.loader = false;
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
             }
           })
       }
