@@ -13,10 +13,28 @@ export class SidebarComponent implements OnInit {
   companyid: any;
   sidenav: any;
   active: any;
-
+  login: any;
+  UserName: any;
+  company_name: any;
+  role: any;
+  temp: any;
+  show: any;
+  temp1: any
+  home: any;
+  roleid: any;
+  StaffID: any;
   constructor(public router: Router) { }
 
   ngOnInit(): void {
+    this.login = sessionStorage.getItem('roledid');
+    this.temp1 = sessionStorage.getItem('temp');
+
+    this.active = 0;
+    this.companyid = sessionStorage.getItem('companyid');
+    this.UserName = sessionStorage.getItem('UserName');
+    this.role = sessionStorage.getItem('role');
+    this.roleid = sessionStorage.getItem('roledid');
+    this.StaffID = localStorage.getItem('staffid');
   }
   public getvalues(val: any) {
     this.mini = val;
@@ -28,6 +46,75 @@ export class SidebarComponent implements OnInit {
     this.data11.emit('Dashboard');
   }
 
+  public StaffDash() {
+    this.active = 15;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'Staff');
+    this.data11.emit('Staff');
+  }
+  public LICENCEDETAILS() {
+    this.active = 16;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'LICENCE DETAILS');
+    this.data11.emit('LICENCE DETAILS');
+  }
+  public INACTIVESTAFFDETAILS() {
+    this.active = 17;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'INACTIVE STAFF DETAILS');
+    this.data11.emit('INACTIVE STAFF DETAILS');
+  }
+  public PayslipTrigger() {
+    this.active = 18;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'Payslip Trigger');
+    this.data11.emit('Payslip Trigger');
+  }
+
+  public PRELIMINARYREPORT() {
+    this.active = 19.1;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'PRELIMINARY REPORT');
+    this.data11.emit('PRELIMINARY REPORT');
+  }
+  public PAYROLLREPORT() {
+    this.active = 19.2;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'PAYROLL REPORT');
+    this.data11.emit('PAYROLL REPORT');
+  }
+  public LEAVECONFIGURATION() {
+    this.active = 20.1;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'LEAVE CONFIGURATION');
+    this.data11.emit('LEAVE CONFIGURATION');
+  }
+  public LOANCONFIGURATION() {
+    this.active = 20.2;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'LOAN CONFIGURATION');
+    this.data11.emit('LOAN CONFIGURATION');
+  }
+  public BULKUPLOADMISSINGSTAFF() {
+    this.active = 20.3;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'BULKUPLOADMISSINGSTAFF');
+    this.data11.emit('BULKUPLOADMISSINGSTAFF');
+  }
+  public UPLOADATTENDANCE() {
+    this.active = 20.4;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'UPLOAD ATTENDANCE');
+    this.data11.emit('UPLOAD ATTENDANCE');
+  }
+  public LEAVEUPLOAD() {
+    this.active = 20.5;
+    this.router.navigate(['/HR/Staffdashboard']);
+    localStorage.setItem('Pagename', 'LEAVE UPLOAD');
+    this.data11.emit('LEAVE UPLOAD');
+  }
+  
+  
   public attendanceDetails() {
     this.active = 2.1;
     this.router.navigate(['/Employee/AttendanceDetailsDash']);

@@ -1,5 +1,5 @@
 <div id="mySidebar" class="sidebarss">
-    <a (click)="employeeDash()" data-toggle="collapse" data-target="#home"
+    <a (click)="employeeDash()" data-toggle="collapse"
         [ngClass]="active == 1 && !mini ? 'menu1' : active == 1 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
             <img *ngIf="active == 1 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
@@ -8,6 +8,153 @@
             <p class="icon-text" *ngIf="!mini">Home</p>
         </div>
     </a>
+
+    <a (click)="StaffDash()" data-toggle="collapse" *ngIf="login==9||login==11 || login==10 || login==1 "
+        [ngClass]="active == 15 && !mini ? 'menu1' : active == 15 && mini ? 'menu-mini' : 'menu'">
+        <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+            <img *ngIf="active == 15 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active != 15" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active == 15 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
+            <p class="icon-text" *ngIf="!mini">Staff</p>
+        </div>
+    </a>
+
+    <a (click)="LICENCEDETAILS()" data-toggle="collapse" *ngIf="login==11 ||login==9 "
+        [ngClass]="active == 16 && !mini ? 'menu1' : active == 16 && mini ? 'menu-mini' : 'menu'">
+        <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+            <img *ngIf="active == 16 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active != 16" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active == 16 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
+            <p class="icon-text" *ngIf="!mini">LICENCE DETAILS</p>
+        </div>
+    </a>
+    <a (click)="INACTIVESTAFFDETAILS()" data-toggle="collapse" *ngIf="login==11||login==9 "
+        [ngClass]="active == 17 && !mini ? 'menu1' : active == 17 && mini ? 'menu-mini' : 'menu'">
+        <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+            <img *ngIf="active == 17 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active != 17" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active == 17 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
+            <p class="icon-text" *ngIf="!mini">INACTIVE STAFF DETAILS</p>
+        </div>
+    </a>
+    <a (click)="PayslipTrigger()" data-toggle="collapse" *ngIf="login==11||login==9 "
+        [ngClass]="active == 18 && !mini ? 'menu1' : active == 18 && mini ? 'menu-mini' : 'menu'">
+        <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+            <img *ngIf="active == 18 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active != 18" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active == 18 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
+            <p class="icon-text" *ngIf="!mini">Payslip Trigger</p>
+        </div>
+    </a>
+
+    <a data-toggle="collapse" data-target="#Payroll"
+        [ngClass]="active == 19 && !mini ? 'menu1' : active == 19 && mini ? 'menu-mini' : 'menu'">
+        <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+            <img *ngIf="active == 19 && !mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
+            <img *ngIf="active != 19" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
+            <img *ngIf="active == 19 && mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
+            <p class="icon-text d-flex" *ngIf="!mini">Payroll</p>
+        </div>
+    </a>
+
+    <div id="Payroll" class="collapse" [ngClass]="mini ? '' : ' sub-collapse'">
+        <a (click)="PRELIMINARYREPORT()" class="nonactive" [ngClass]="active == 19.1 && !mini ? 'menu1' : active == 19.1 && mini ? 'menu-mini'
+        : 'menu'">
+            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+                <img *ngIf="active == 19.1 && !mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <img *ngIf="active != 19.1" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                <img *ngIf="active == 19.1 && mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <p class="icon-text d-flex" *ngIf="!mini">PRELIMINARY REPORT</p>
+            </div>
+        </a>
+
+        <a (click)="PAYROLLREPORT()" class="nonactive" [ngClass]="active == 19.2 && !mini ? 'menu1' : active == 19.2 && mini ? 'menu-mini'
+        : 'menu'">
+            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+                <img *ngIf="active == 19.2 && !mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <img *ngIf="active != 19.2" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                <img *ngIf="active == 19.2 && mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <p class="icon-text d-flex" *ngIf="!mini">PAYROLL REPORT</p>
+            </div>
+        </a>
+
+    </div>
+
+    <a data-toggle="collapse" data-target="#CONFIGURATION"
+        [ngClass]="active == 20 && !mini ? 'menu1' : active == 20 && mini ? 'menu-mini' : 'menu'">
+        <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+            <img *ngIf="active == 20 && !mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
+            <img *ngIf="active != 20" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
+            <img *ngIf="active == 20 && mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
+            <p class="icon-text d-flex" *ngIf="!mini">CONFIGURATION</p>
+        </div>
+    </a>
+
+
+    <div id="CONFIGURATION" class="collapse" [ngClass]="mini ? '' : ' sub-collapse'">
+        <a (click)="LEAVECONFIGURATION()" class="nonactive" [ngClass]="active == 20.1 && !mini ? 'menu1' : active == 20.1 && mini ? 'menu-mini'
+        : 'menu'">
+            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+                <img *ngIf="active == 20.1 && !mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <img *ngIf="active != 20.1" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                <img *ngIf="active == 20.1 && mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <p class="icon-text d-flex" *ngIf="!mini">LEAVE CONFIGURATION</p>
+            </div>
+        </a>
+
+        <a (click)="LOANCONFIGURATION()" class="nonactive" [ngClass]="active == 20.2 && !mini ? 'menu1' : active == 20.2 && mini ? 'menu-mini'
+        : 'menu'">
+            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+                <img *ngIf="active == 20.2 && !mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <img *ngIf="active != 20.2" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                <img *ngIf="active == 20.2 && mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <p class="icon-text d-flex" *ngIf="!mini">LOAN CONFIGURATION</p>
+            </div>
+        </a>
+
+        <a (click)="BULKUPLOADMISSINGSTAFF()" class="nonactive" [ngClass]="active == 20.3 && !mini ? 'menu1' : active == 20.3 && mini ? 'menu-mini'
+        : 'menu'">
+            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+                <img *ngIf="active == 20.3 && !mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <img *ngIf="active != 20.3" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                <img *ngIf="active == 20.3 && mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <p class="icon-text d-flex" *ngIf="!mini"> BULK UPLOAD MISSING STAFF</p>
+            </div>
+        </a>
+
+        <a (click)="UPLOADATTENDANCE()" class="nonactive" [ngClass]="active == 20.4 && !mini ? 'menu1' : active == 20.4 && mini ? 'menu-mini'
+        : 'menu'">
+            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+                <img *ngIf="active == 20.4 && !mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <img *ngIf="active != 20.4" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                <img *ngIf="active == 20.4 && mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <p class="icon-text d-flex" *ngIf="!mini">UPLOAD ATTENDANCE</p>
+            </div>
+        </a>
+        <a (click)="LEAVEUPLOAD()" class="nonactive" [ngClass]="active == 20.5 && !mini ? 'menu1' : active == 20.5 && mini ? 'menu-mini'
+        : 'menu'">
+            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+                <img *ngIf="active == 20.5 && !mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <img *ngIf="active != 20.5" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                <img *ngIf="active == 20.5 && mini" class="icon"
+                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                <p class="icon-text d-flex" *ngIf="!mini">LEAVE UPLOAD</p>
+            </div>
+        </a>
+    </div>
 
     <a data-toggle="collapse" data-target="#attendance"
         [ngClass]="active == 2 && !mini ? 'menu1' : active == 2 && mini ? 'menu-mini' : 'menu'">
