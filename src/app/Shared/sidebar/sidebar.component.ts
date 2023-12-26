@@ -39,11 +39,18 @@ export class SidebarComponent implements OnInit {
   public getvalues(val: any) {
     this.mini = val;
   }
-  public employeeDash() {
+  public dashboard() {
     this.active = 1;
-    this.router.navigate(['/Employee/EmployeeDashboard']);
-    localStorage.setItem('Pagename', 'Dashboard');
-    this.data11.emit('Dashboard');
+    if (this.roleid == 6) {
+      this.router.navigate(['/Employee/EmployeeDashboard']);
+      localStorage.setItem('Pagename', 'Dashboard');
+      this.data11.emit('Dashboard');
+    }
+    else if (this.roleid == 2) {
+      this.router.navigate(['/Manager/ManagerDashboard']);
+      localStorage.setItem('Pagename', 'Dashboard');
+      this.data11.emit('Dashboard');
+    }
   }
 
   public StaffDash() {
@@ -113,8 +120,8 @@ export class SidebarComponent implements OnInit {
     localStorage.setItem('Pagename', 'LEAVE UPLOAD');
     this.data11.emit('LEAVE UPLOAD');
   }
-  
-  
+
+
   public attendanceDetails() {
     this.active = 2.1;
     this.router.navigate(['/Employee/AttendanceDetailsDash']);
@@ -249,5 +256,5 @@ export class SidebarComponent implements OnInit {
   }
 
 
-  
+
 }

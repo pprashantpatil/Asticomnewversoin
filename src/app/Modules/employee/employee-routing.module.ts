@@ -51,8 +51,6 @@ const routes: Routes = [
   { path: 'TimesheetRequestDash', component: TimesheetRequestDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'Timesheetform', component: TimesheetformComponent ,canActivate: [AuthguardGuard]},
   { path: 'PoliciesDash', component: PoliciesDashComponent ,canActivate: [AuthguardGuard]},
-  { path: 'HolidaysDash', component: HolidaysDashComponent ,canActivate: [AuthguardGuard]},
-  { path: 'AnnouncementsDash', component: AnnouncementsDashComponent ,canActivate: [AuthguardGuard]},
 
   { path: 'AttendanceCorrectionReport', component: AttendanceCorrectionReportComponent ,canActivate: [AuthguardGuard]},
   { path: 'AttendanceReport', component: AttendanceReportComponent ,canActivate: [AuthguardGuard]},

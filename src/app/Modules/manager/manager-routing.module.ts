@@ -10,8 +10,10 @@ import { ExitformalityformdashComponent } from './Requests/exitformalityformdash
 import { TeamAttendanceReportsComponent } from './Reports/team-attendance-reports/team-attendance-reports.component';
 import { TeamAttendanceCorrectionReportsComponent } from './Reports/team-attendance-correction-reports/team-attendance-correction-reports.component';
 import { TeamLeaveReportsComponent } from './Reports/team-leave-reports/team-leave-reports.component';
+import { ManagerDashComponent } from './Dashboard/manager-dash/manager-dash.component';
 
 const routes: Routes = [
+  { path: 'ManagerDashboard', component: ManagerDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'MyTeamAttendence', component: MyTeamAttendenceComponent ,canActivate: [AuthguardGuard]},
   { path: 'MyTeamWeeklyShift', component: MyTeamWeeklyShiftComponent ,canActivate: [AuthguardGuard]},
   { path: 'MyTeamOverTimeDetails', component: MyTeamOverTimeDetailsComponent ,canActivate: [AuthguardGuard]},

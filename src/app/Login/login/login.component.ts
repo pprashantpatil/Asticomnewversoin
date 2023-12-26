@@ -271,12 +271,11 @@ export class LoginComponent implements OnInit {
                               localStorage.setItem('OTEligibility', temp[0].ot);
                               sessionStorage.setItem('temp23', '1');
                               this.InsertLogActivity();
-                              this.router.navigate(['/Manager/MyTeamAttendence']).then(() => {
+                              this.router.navigate(['/Manager/ManagerDashboard']).then(() => {
                                 this.loader = false;
                                 location.reload();
                               });
                             })
-
                           }
                         }, error: (err) => {
                           // Swal.fire('Issue in Getting My Details For Login');

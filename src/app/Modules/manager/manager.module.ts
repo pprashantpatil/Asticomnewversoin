@@ -26,6 +26,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModuleModule } from 'src/app/Shared/shared-module/shared-module.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ManagerRoutingModule } from './manager-routing.module';
+import { ManagerDashComponent } from './Dashboard/manager-dash/manager-dash.component';
+import { ManagerGraphDashComponent } from './Dashboard/manager-graph-dash/manager-graph-dash.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { ManagerRoutingModule } from './manager-routing.module';
     TeamAttendanceCorrectionReportsComponent,
     TeamLeaveReportsComponent,
     TeamTimesheetReportsComponent,
+    ManagerDashComponent,
+    ManagerGraphDashComponent,
   ],
   imports: [
     CommonModule,
