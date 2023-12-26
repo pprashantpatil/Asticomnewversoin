@@ -53,9 +53,6 @@ const routes: Routes = [
   { path: 'PoliciesDash', component: PoliciesDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'HolidaysDash', component: HolidaysDashComponent ,canActivate: [AuthguardGuard]},
   { path: 'AnnouncementsDash', component: AnnouncementsDashComponent ,canActivate: [AuthguardGuard]},
-  { path: 'PoliciesDash', component: PoliciesDashComponent },
-  { path: 'ViewPolicyDash', component: ViewPolicyDashComponent },
-  { path: 'ViewPolicyDash/:id', component: ViewPolicyDashComponent },
 
   { path: 'AttendanceCorrectionReport', component: AttendanceCorrectionReportComponent ,canActivate: [AuthguardGuard]},
   { path: 'AttendanceReport', component: AttendanceReportComponent ,canActivate: [AuthguardGuard]},

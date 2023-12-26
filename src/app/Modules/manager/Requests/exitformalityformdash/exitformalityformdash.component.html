@@ -9,7 +9,7 @@
                     </a>
                 </li>
 
-                <li *ngIf="roledid==2"><a class="Heading" routerLink="/Manager/Exitformalityformdash">
+                <li *ngIf="roleID==2"><a class="Heading">
                         <p class="Heading">Team Resignation Details</p>
                     </a>
                     <hr class="line-border listForm">
@@ -29,7 +29,23 @@
                 <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
             </div>
 
-
+            <div class="cardinputs">
+                <select class="form-control inputfield select" id="month" name="month" [(ngModel)]="month" (change)="getchangemonth($event)">
+                    <option value="">Select Month</option>
+                    <option value="1">January</option>
+                    <option value="2">Febuary</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -81,13 +97,13 @@
                             <td>
                                 <div class="row">
 
-                                    <button *ngIf="roledid==9 && list.hRclearance==0 && list.ownclearance==0"
+                                    <button *ngIf="roleID==9 && list.hRclearance==0 && list.ownclearance==0"
                                         class="edit-btn" (click)="hrupdate(list.id)" data-toggle="modal"
                                         data-target="#exampleModal">Clear</button>
 
 
 
-                                    <button *ngIf="roledid==9 && list.hRclearance==0 && list.ownclearance==1"
+                                    <button *ngIf="roleID==9 && list.hRclearance==0 && list.ownclearance==1"
                                         class="edit-btn" (click)="hrupdate(list.id)" data-toggle="modal"
                                         data-target="#exampleModal">Clear</button>
 
@@ -95,26 +111,26 @@
                                     class="upload" (click)="RetainEmployeee1(list)" data-toggle="modal"
                                     data-target="#Reject">Retain</button> -->
 
-                                    <button *ngIf="roledid==2 && list.hRclearance==1 && list.ownclearance!=2"
+                                    <button *ngIf="roleID==2 && list.hRclearance==1 && list.ownclearance!=2"
                                         class="edit-btn" (click)="getmanagerid(list)" data-toggle="modal"
                                         data-target="#Accept">Clear</button><br><br />
 
 
 
-                                    <button *ngIf="roledid==2 && list.ownclearance==0 && list.lastworkingdate==null"
-                                        class="edit-btn" (click)="getmanagerid(list)" data-toggle="modal" [ngbTooltip]="tipContentApprove"
-                                        data-target="#Accept">Accept</button><br /><br>
+                                    <button *ngIf="roleID==2 && list.ownclearance==0 && list.lastworkingdate==null"
+                                        class="edit-btn" (click)="getmanagerid(list)" data-toggle="modal"
+                                        [ngbTooltip]="tipContentApprove" data-target="#Accept">Accept</button><br /><br>
                                     &nbsp;&nbsp;&nbsp;
 
                                     <img class="dashedit-icon" src="assets/Images/accept-01.svg"
                                         (click)="getmanagerid(list)" [ngbTooltip]="tipContentApprove"
                                         tooltipClass="my-custom-class" data-toggle="modal" data-target="#Accept"
-                                        *ngIf="roledid==2 && list.hRclearance==0 && list.ownclearance==0">
+                                        *ngIf="roleID==2 && list.hRclearance==0 && list.ownclearance==0">
 
                                     <img class="dashedit-icon" src="assets/Images/cancel-02.svg"
-                                    (click)="RetainEmployeee1(list)" data-toggle="modal"
-                                    data-target="#Reject" [ngbTooltip]="tipContentReject"
-                                        tooltipClass="my-custom-class" *ngIf="roledid==2 && list.hRclearance==0 && list.ownclearance==0">
+                                        (click)="RetainEmployeee1(list)" data-toggle="modal" data-target="#Reject"
+                                        [ngbTooltip]="tipContentReject" tooltipClass="my-custom-class"
+                                        *ngIf="roleID==2 && list.hRclearance==0 && list.ownclearance==0">
 
                                     <div class="col-lg-2 Text p-0">
                                         <ng-template #tipContentApprove>
@@ -176,7 +192,8 @@
                         <div class="col-lg-4">
                         </div>
                         <div class="col-lg-5">
-                            <button class="submit-button" (click)="RetainEmployeee()" data-dismiss="modal">Reject</button>
+                            <button class="submit-button" (click)="RetainEmployeee()"
+                                data-dismiss="modal">Reject</button>
                         </div>
                     </div>
                     <br />
@@ -243,7 +260,8 @@
                         <div class="col-lg-4">
                         </div>
                         <div class="col-lg-5">
-                            <button  class="submit-button"(click)="lastworkingdate1()" data-dismiss="modal">Save</button>
+                            <button class="submit-button" (click)="lastworkingdate1()"
+                                data-dismiss="modal">Save</button>
                         </div>
                     </div>
                     <br />

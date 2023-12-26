@@ -12,10 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./exitformalityformdash.component.css']
 })
 export class ExitformalityformdashComponent implements OnInit {
+month: any;
+  roleID: any;
+  staffID: any;
 
   constructor(public DigiofficeService: DigiofficecorehrService, public router: Router) { }
   annnounecemnetlist: any;
-  roledid: any;
   loader: any;
   annnounecemnetlist1: any
   viewMode = 'tab1';
@@ -39,8 +41,10 @@ export class ExitformalityformdashComponent implements OnInit {
   ngOnInit(): void {
     debugger
     this.currentUrl = window.location.href;
+    this.month = "";
     this.loader = true;
-    this.roledid = localStorage.getItem('roledid');
+    this.roleID = localStorage.getItem('roledid');
+    this.staffID = localStorage.getItem('staffid');
     this.GetStaffExitFormality();
     this.GetMyDetails();
     this.GetMyDetailsByStaffID();
@@ -93,12 +97,12 @@ export class ExitformalityformdashComponent implements OnInit {
       .subscribe({
         next: data => {
           debugger
-          if (this.roledid == 6) {
+          if (this.roleID == 6) {
             this.loader = false;
             this.annnounecemnetlist = data.filter(x => x.staffID == localStorage.getItem('staffid') || x.adminclearance != 1 || x.hRclearance != 1 && x.financeclearance != 1 || x.financeclearance != 1 || x.ownclearance != 1);
             this.annnounecemnetlist1 = data.filter(x => x.staffID == localStorage.getItem('staffid') || x.adminclearance == 1 && x.hRclearance == 1 && x.financeclearance == 1 && x.financeclearance == 1 && x.ownclearance == 1)
           }
-          else if (this.roledid == 2) {
+          else if (this.roleID == 2) {
             this.loader = false;
             this.annnounecemnetlist = data.filter(x => x.supervisor == localStorage.getItem('staffid') && (x.adminclearance != 1 || x.hRclearance != 1 && x.financeclearance != 1 || x.financeclearance != 1 || x.ownclearance != 1) && x.hRclearance == 0
               || ((x.adminclearance == 1 || x.financeclearance == 1 && x.financeclearance == 1 || x.ownclearance != 1) && x.hRclearance == 1));
@@ -621,5 +625,24 @@ export class ExitformalityformdashComponent implements OnInit {
     this.L1Manager=item.id;
   }
 
-
+  getchangemonth(event: any) {
+    this.month = event.target.value;
+    if (this.month != 0) {
+      this.DigiofficeService.GetStaffExitFormality()
+        .subscribe({
+          next: data => {
+            debugger
+            if (this.roleID == 2) {
+              this.annnounecemnetlist = data.filter(x => (x.supervisor == this.staffID || x.employeeID == this.staffID) && x.lastdateWorkigDateMonth == this.month);
+              this.loader = false;
+            }
+            else {
+              this.annnounecemnetlist = data.filter(x => x.employeeID == this.staffID && x.lastdateWorkigDateMonth == this.month);
+              this.loader = false;
+            }
+          }
+        })
+      this.loader = false;
+    }
+  }
 }
