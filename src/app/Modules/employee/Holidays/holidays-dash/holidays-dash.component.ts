@@ -23,12 +23,15 @@ export class HolidaysDashComponent implements OnInit {
   file: any;
   showPopup: number = 0;
   messageId: number = 0;
+  holidayFilter: any;
+year: any;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.loader = true;
     this.currentUrl = window.location.href;
+    this.year = "";
     this.staffID = localStorage.getItem('staffid');
     this.roleID = localStorage.getItem('roledid');
     this.getData();
@@ -39,6 +42,7 @@ export class HolidaysDashComponent implements OnInit {
       res => {
         debugger;
         this.holidayList = res;
+        this.holidayFilter = res;
         this.loader = false;
       })
   }
@@ -103,5 +107,22 @@ export class HolidaysDashComponent implements OnInit {
   public getAttachmentURL(file: any) {
     debugger
     this.file = file;
+  }
+
+  public getEndDate(event: any) {
+    debugger
+    this.startDate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.endDate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
+    if (this.endDate < this.startDate) {
+      Swal.fire("The end date should be greater than the start date")
+      this.endDate = ""
+    }
+    else if (this.startDate == undefined) {
+      Swal.fire("Please select the start date first")
+      this.endDate = ""
+    }
+    else {
+      this.holidayList = this.holidayFilter.filter((x: { holidayDate: any; }) => (x.holidayDate >= this.startDate && x.holidayDate <= this.endDate));
+    }
   }
 }

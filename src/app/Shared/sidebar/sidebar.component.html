@@ -9,7 +9,7 @@
         </div>
     </a>
 
-    <a data-toggle="collapse"  data-target="#attendance"
+    <a data-toggle="collapse" data-target="#attendance"
         [ngClass]="active == 2 && !mini ? 'menu1' : active == 2 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
             <img *ngIf="active == 2 && !mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
@@ -218,7 +218,7 @@
             </div>
         </a>
 
-        <a (click)="timesheetReport()" class="nonactive" [ngClass]="active == 7.4 && !mini ? 'menu1' : active == 7.4 && mini ? 'menu-mini'
+        <!-- <a (click)="timesheetReport()" class="nonactive" [ngClass]="active == 7.4 && !mini ? 'menu1' : active == 7.4 && mini ? 'menu-mini'
 : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 7.4 && !mini" class="icon"
@@ -228,7 +228,7 @@
                     src="assets/Images/sidebaricons/building_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Timesheet Report</p>
             </div>
-        </a>
+        </a> -->
     </div>
 
     <a (click)="employeeCertification()" data-toggle="collapse" data-target="#home"
@@ -241,16 +241,6 @@
         </div>
     </a>
 
-    <a (click)="help()" data-toggle="collapse" data-target="#home"
-        [ngClass]="active == 9 && !mini ? 'menu1' : active == 9 && mini ? 'menu-mini' : 'menu'">
-        <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 9 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active != 9" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active == 9 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
-            <p class="icon-text" *ngIf="!mini">Help</p>
-        </div>
-    </a>
-
     <a (click)="payslip()" data-toggle="collapse" data-target="#home"
         [ngClass]="active == 10 && !mini ? 'menu1' : active == 10 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
@@ -258,6 +248,16 @@
             <img *ngIf="active != 10" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
             <img *ngIf="active == 10 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
             <p class="icon-text" *ngIf="!mini">Payslip</p>
+        </div>
+    </a>
+
+    <a (click)="help()" data-toggle="collapse" data-target="#home"
+        [ngClass]="active == 9 && !mini ? 'menu1' : active == 9 && mini ? 'menu-mini' : 'menu'">
+        <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
+            <img *ngIf="active == 9 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active != 9" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active == 9 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
+            <p class="icon-text" *ngIf="!mini">Help</p>
         </div>
     </a>
 </div>

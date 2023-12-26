@@ -1,29 +1,41 @@
 <app-loader *ngIf="loader"></app-loader>
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul style="margin-left: 2%;">
+                <li><a class="Heading">
+                        <p class="Heading">Payslip</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <div class="card">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-12">
                 <p class="Heading1" style="text-align: center;">Payslip</p>
                 <hr class="HrLine">
             </div>
-        </div>
+        </div> -->
         <div class="row">
-            <div class="col-lg-2"></div>
+            <!-- <div class="col-lg-2"></div> -->
             <div class="col-lg-3">
                 <p style="text-align: center;"> Select Start Year & Month</p>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
                 <select name="Year" id="Year" class="form-control" [(ngModel)]="Year">
-                    <option value="0">Select</option>
+                    <option value="0">Select Year</option>
                     <option value="2023">2023</option>
                     <option value="2022">2022</option>
                     <option value="2021">2021</option>
                     <option value="2020">2020</option>
                 </select>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
                 <select name="Month" id="Month" class="form-control" [(ngModel)]="Month">
-                    <option value="0">Select</option>
+                    <option value="0">Select Month</option>
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>
@@ -38,7 +50,7 @@
                     <option value="12">December</option>
                 </select>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
                 <select name="Payperiod" id="Payperiod" class="form-control" [(ngModel)]="Payperiod"
                     (change)="getpayperiod()">
                     <option value="0">Select Pay period</option>
@@ -51,17 +63,19 @@
         <div class="row FilterClass fontheading">
             <div class="col-lg-3"></div>
             <div class="col-lg-2">
-                <!-- <p style="text-align: center;">Signatory Person</p> -->
+                
             </div>
+            <!-- <p style="text-align: center;">Signatory Person</p> -->
             <div class="col-lg-2">
-                <!-- <select name="cars" id="Month" class="form-control" [(ngModel)]="sign" (change)="getsign()">
+               
+            </div>
+             <!-- <select name="cars" id="Month" class="form-control" [(ngModel)]="sign" (change)="getsign()">
                     <option value="0">Select</option>
                     <option value="HR">HR</option>
                 </select> -->
-            </div>
         </div>
-        <br />
-        <br />
+        <!-- <br />
+        <br /> -->
         <!-- <div class="row">
             <div class="col-lg-3"></div>
             <div class="col-lg-4">
@@ -72,10 +86,10 @@
     </div><br>
 
 
+    <!-- <br />
     <br />
     <br />
-    <br />
-    <br />
+    <br /> -->
     <div>
         <iframe *ngIf="showpdf" id="id_description_iframe" name="iframeName" (load)="oniFrameLoad($event)"
             [src]='payslip' onerror="onError()" type="application/pdf" style="width: 1299px;

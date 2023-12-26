@@ -7,8 +7,11 @@ import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.servi
   styleUrls: ['./leave-report.component.css']
 })
 export class LeaveReportComponent implements OnInit {
+  staffApprovedLeaves: any;
+  staffRejectedLeaves: any;
 
   constructor(public DigiofficeService: DigiofficecorehrService) { }
+  viewMode = 'tab1';
   roledid: any;
   p: any = 1;
   count1: any = 10;
@@ -18,7 +21,7 @@ export class LeaveReportComponent implements OnInit {
   startdate: any;
   enddate: any
   currentUrl: any;
-  staffleaves: any;
+  staffPendingLeaves: any;
   loader: any;
   fileName = 'Leave Report.xlsx';
   showPopup: number = 0;
@@ -60,7 +63,9 @@ export class LeaveReportComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            this.staffleaves = data.filter(x => (x.filterdate >= this.startdate && x.filterdate <= this.enddate) && x.staffID == localStorage.getItem('staffid'));
+            this.staffPendingLeaves = data.filter(x => (x.filterdate >= this.startdate && x.filterdate <= this.enddate) && x.staffID == localStorage.getItem('staffid') && x.status == 'Manager Pending');
+            this.staffApprovedLeaves = data.filter(x => (x.filterdate >= this.startdate && x.filterdate <= this.enddate) && x.staffID == localStorage.getItem('staffid') && x.status == 'Manager Approved');
+            this.staffRejectedLeaves = data.filter(x => (x.filterdate >= this.startdate && x.filterdate <= this.enddate) && x.staffID == localStorage.getItem('staffid') && x.status == 'Rejected');
             this.loader = false;
           }, error: (err) => {
             // Swal.fire('Issue in Getting Staff Leaves');
@@ -98,7 +103,9 @@ export class LeaveReportComponent implements OnInit {
       .subscribe({
         next: data => {
           debugger
-          this.staffleaves = data.filter(x => x.staffID == localStorage.getItem('staffid'));
+          this.staffPendingLeaves = data.filter(x => x.staffID == localStorage.getItem('staffid') && x.status == 'Manager Pending');
+          this.staffApprovedLeaves = data.filter(x => x.staffID == localStorage.getItem('staffid') && x.status == 'Manager Approved');
+          this.staffRejectedLeaves = data.filter(x => x.staffID == localStorage.getItem('staffid') && x.status == 'Rejected');
           this.loader = false;
         }, error: (err) => {
           // Swal.fire('Issue in Getting Staff Leaves');

@@ -192,7 +192,7 @@ export class OverTimeDetailsDashComponent implements OnInit {
       })
   }
 
-  openAttchments(photo: any) {
+  openAttachments(photo: any) {
     window.open(photo, '_blank');
   }
 }

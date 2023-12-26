@@ -24,6 +24,7 @@ export class EmployeeResignationDashComponent implements OnInit {
   showPopup: number = 0;
   messageId: number = 0;
   multipleAttachmentList: any;
+  type: any;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
@@ -55,6 +56,7 @@ export class EmployeeResignationDashComponent implements OnInit {
       .subscribe(result => {
         console.log('Result' + result);
         this.ngOnInit();
+        this.loader=false;
       });
   }
 
@@ -75,6 +77,7 @@ export class EmployeeResignationDashComponent implements OnInit {
             next: data => {
               Swal.fire('Deleted Successfully');
               this.ngOnInit();
+              this.loader=false;
             }
           })
       }
@@ -98,5 +101,6 @@ export class EmployeeResignationDashComponent implements OnInit {
 
   openAttachments(photo: any) {
     window.open(photo, '_blank');
+    this.loader=false;
   }
 }

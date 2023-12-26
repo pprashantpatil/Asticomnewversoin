@@ -21,6 +21,23 @@
             </div>
 
             <div class="cardinputs">
+                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate($event)">
+            </div>
+
+            <div class="cardinputs">
+                <select class="form-control inputfield select" id="year" name="year"
+                    [(ngModel)]="year">
+                    <option value=""> Select Year</option>
+                    <option value="2019"> 2019</option>
+                    <option value="2020"> 2020</option>
+                    <option value="2021"> 2021</option>
+                    <option value="2022"> 2022</option>
+                    <option value="2023"> 2023</option>
+                </select>
+            </div>
+
+            <div class="cardinputs">
                 <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
             </div>
 
@@ -42,18 +59,18 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
+                            <th>Holiday Date</th>
                             <th>Holiday</th>
                             <th>Holiday Description</th>
-                            <th>Holiday Date</th>
                             <th>Attachment</th>
                             <th *ngIf="roleID=='9'||roleID=='10'||roleID=='11'">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let data of holidayList|filter:search">
+                            <td>{{data.holidayDate|date}}</td>
                             <td>{{data.holiday}}</td>
                             <td>{{data.holidayDescription}}</td>
-                            <td>{{data.holidayDate|date}}</td>
                             <td>
                                 <a href="{{data.attachment}}" target="_blank"> <img src="assets/Images/image.png"
                                         style="width:20px; height:20px" alt="data.img"></a>
