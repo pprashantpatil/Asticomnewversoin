@@ -37,7 +37,7 @@ export class LoanRequestDashComponent implements OnInit {
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    this.loader = true;
+  
     this.currentUrl = window.location.href;
     this.staffID = localStorage.getItem('staffid');
     this.roleID = localStorage.getItem('roledid');

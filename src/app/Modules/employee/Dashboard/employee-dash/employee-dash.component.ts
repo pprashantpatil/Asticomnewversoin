@@ -8,6 +8,8 @@ import { NgbCarousel, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
 import { AttendanceCorrectionFormComponent } from 'src/app/Modules/employee/Attendance/attendance-correction-form/attendance-correction-form.component';
 import { NewLeaveRequestComponent } from 'src/app/Modules/employee/Requests/new-leave-request/new-leave-request.component';
+import { OverTimeDetailsFormComponent } from '../../Attendance/over-time-details-form/over-time-details-form.component';
+import { LoanRequestFormComponent } from '../../Requests/loan-request-form/loan-request-form.component';
 // import { ApplyPreApprovalOTComponent } from '../../hr/Attendance/apply-pre-approval-ot/apply-pre-approval-ot.component';
 // import { ApplyloansComponent } from '../Requests/applyloans/applyloans.component';
  
@@ -1856,7 +1858,34 @@ export class EmployeeDashComponent implements OnInit {
       .subscribe(result => {
       });
   }
-
+  
+  AddOvertime() {
+    debugger
+    let ID = undefined
+    this.matDialog.open(OverTimeDetailsFormComponent, {
+      data: ID,
+      width: '100%',
+      maxHeight: '80vh'
+    }).afterClosed()
+      .subscribe(result => {
+        console.log('Result' + result);
+        this.ngOnInit();
+      });
+  }
+  AddLoanRequest() {
+    debugger
+    let ID = undefined
+    this.matDialog.open(LoanRequestFormComponent, {
+      data: ID,
+      width: '100%',
+      maxHeight: '80vh'
+    }).afterClosed()
+      .subscribe(result => {
+        console.log('Result' + result);
+        this.ngOnInit();
+        this.loader = false;
+      });
+  }
   currenttime: any;
   resettime: any;
   public CheckpunchInReset() {
