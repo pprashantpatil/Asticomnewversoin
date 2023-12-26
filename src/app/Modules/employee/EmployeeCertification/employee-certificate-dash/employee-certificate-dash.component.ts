@@ -78,7 +78,7 @@ export class EmployeeCertificateDashComponent implements OnInit {
     this.staffid=localStorage.getItem('staffid')
     this.roleid = sessionStorage.getItem('roledid');
     debugger
-  //  this.GetAllStaffNew();
+   this.GetAllStaffNew();
   }
 
   getempcert(){
@@ -86,10 +86,10 @@ export class EmployeeCertificateDashComponent implements OnInit {
     StaffID: localStorage.getItem('staffid'),
     Date: new Date(),
   }
-  this.DigiofficeService.InsertGeneratedCoeDetails(entity).subscribe(data => {
+  // this.DigiofficeService.InsertGeneratedCoeDetails(entity).subscribe(data => {
    
     
-  })
+  // })
 
   }
 
@@ -320,12 +320,12 @@ export class EmployeeCertificateDashComponent implements OnInit {
 
   public GetAllStaffNew() {
     debugger
-    this.DigiofficeService.GetAllStaffNew()
+    this.DigiofficeService.GetAllStaffNewByEmployeID(localStorage.getItem('EmployeeID'))
       .subscribe({
         next: data => {
           debugger
         
-          this.stafflist = data.filter(x=>x.id==this.staffid);
+          this.stafflist = data;
         }, error: (err) => {
           // Swal.fire('Issue in Getting Role Type');
           // Insert error in Db Here//

@@ -35,8 +35,8 @@
                                     class="form-control" bsDaterangepicker [(ngModel)]="startdate"
                                     (ngModelChange)="getEndDate($event)" [bsConfig]="{ showWeekNumbers:false }">
                             </p>
-
                         </div>
+                        
                         <input class="form-control search-icon" [(ngModel)]="term" type="search" placeholder="Search">
                     </div>
 
@@ -327,14 +327,14 @@
                                             </td>
                                             <td>{{list.leaveReason}}<br>
                                             <td>{{list.noOfDays}}<br>
-                                            <td>
+                                            <td> 
                                                 <p
                                                     *ngIf="list.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
                                                     No Attachment</p>
                                                 <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
                                                 <a href="{{list.medicalUrl}}" target="_blank">
                                                     <img *ngIf="list.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
-                                                        src="assets/Images/attachment (1).svg" alt="pdf.img"
+                                                        src="assets/Images/image.png"  alt="pdf.img"
                                                         class="attachmentPin"></a>
 
                                                 <!-- <img *ngIf="list.medicalUrl!=null && list.filetype!='pdf' && list.filetype!='docx'
@@ -437,7 +437,7 @@
                                                     No Attachment</p>
                                                 <a href="{{list.medicalUrl}}" target="_blank">
                                                     <img *ngIf="list.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
-                                                        src="assets/Images/attachment (1).svg" alt="pdf.img"
+                                                        src="assets/Images/image.png" alt="pdf.img"
                                                         class="attachmentPin"></a>
                                                 <!-- <img *ngIf="list.medicalUrl!=null && list.filetype!='pdf'"
                                                 src="{{list.medicalUrl}}" (click)="getmedicalurl(list)" alt="medical.img"
@@ -503,7 +503,7 @@
                                                     No Attachment</p>
                                                 <a href="{{list.medicalUrl}}" target="_blank">
                                                     <img *ngIf="list.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
-                                                        src="assets/Images/attachment (1).svg" alt="pdf.img"
+                                                        src="assets/Images/image.png" alt="pdf.img"
                                                         class="attachmentPin"></a>
 
                                                 <!-- <img *ngIf="list.medicalUrl!=null && list.filetype!='pdf'"
@@ -563,7 +563,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Leave Details</h5>
+                <!-- <h5 class="modal-title">Leave Balance Details</h5> -->
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -625,7 +625,7 @@
 
                             <div class="small-card1">
                                 <div class="Ellipse">
-                                    <img src="assets/Images/revamp/Leave_Birthday 1.png" class="Ellipse-img" />
+                                    <img src="assets/Images/revamp/Leave_SickLeave 1.png" class="Ellipse-img" />
                                 </div>
                                 <p class="align-text-smallcard"><b>Leave without Pay - VL</b></p>
                                 <p><b class="number">{{item.leave_without_PayVLremaining}}</b></p>
