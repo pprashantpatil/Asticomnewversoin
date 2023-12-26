@@ -87,6 +87,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('companyid', this.companyid);
           sessionStorage.setItem('companycode', temp.companycode);
           sessionStorage.setItem('companyName', temp.companyName);
+          this.freezeScreen();
         }
       },
       error: (err) => {
@@ -1002,4 +1003,17 @@ export class LoginComponent implements OnInit {
 
   }
 
+
+   freezeScreen() {
+    // Add a class to the body to apply CSS styles for freezing the screen
+this.loader=true;
+  
+    // After 2 seconds, remove the class to unfreeze the screen
+    setTimeout(() => {
+      this.loader=false;
+    }, 1000); // 2000 milliseconds = 2 seconds
+  }
+  
+
+  
 }
