@@ -11,7 +11,7 @@
                     <p *ngIf="annnounecemnetlist==0" class="anno-text">No announcements <br> for
                         today </p>
 
-                    <ngb-carousel #carousel [interval]="0" [showNavigationArrows]="true" class="carus">
+                    <ngb-carousel #carousel [interval]="0" [showNavigationArrows]="false" class="carus">
 
                         <ng-template ngbSlide *ngFor="let item of annnounecemnetlist">
                             <div>
