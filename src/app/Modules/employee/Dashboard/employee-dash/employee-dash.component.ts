@@ -772,9 +772,9 @@ export class EmployeeDashComponent implements OnInit {
     this.router.navigate(['/MyTeamLeaveDetails']);
   }
 
-  public leavedashbaord() {
+  public leaveDashboard() {
     //  
-    this.router.navigate(['/LeaveListDashboard']);
+    this.router.navigate(['Employee/LeaveRequestDash']);
   }
 
   public Regularization() {
@@ -782,9 +782,20 @@ export class EmployeeDashComponent implements OnInit {
     this.router.navigate(['/MyTeamAttendenceRegularisation']);
   }
 
-  public Regularization1() {
-    //  
-    this.router.navigate(['/AttendanceView']);
+  public attendance() {  
+    this.router.navigate(['Employee/AttendanceDetailsDash']);
+  }
+
+  public holiday() {  
+    this.router.navigate(['Employee/HolidaysDash']);
+  }
+
+  public overtimeDash() {  
+    this.router.navigate(['Employee/OverTimeDetailsDash']);
+  }
+
+  public loanDash() {  
+    this.router.navigate(['Employee/LoanRequestDash']);
   }
 
   public goprofile() {
@@ -1031,18 +1042,6 @@ export class EmployeeDashComponent implements OnInit {
                         this.loader = false;
                       })
                     }
-                  }, error: (err) => {
-                    // Swal.fire('Issue in Inserting Attendance Web');
-                    // Insert error in Db Here//
-                    var obj = {
-                      'PageName': this.currentUrl,
-                      'ErrorMessage': err.error.message
-                    }
-                    this.DigiofficecorehrService.InsertExceptionLogs(obj).subscribe(
-                      data => {
-                        debugger
-                      },
-                    )
                   }
                 })
             }

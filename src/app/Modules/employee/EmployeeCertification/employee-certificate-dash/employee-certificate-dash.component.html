@@ -43,7 +43,7 @@
                 </select>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <p><b>Reason for COE Request</b></p>
                 <select name="reason" id="reason" class="form-control" [(ngModel)]="reason">
                     <option value="0">Select Reason for COE Request</option>
@@ -66,6 +66,22 @@
                 <input type="text" class="form-control" placeholder="Country Name" [(ngModel)]="countryName"
                     name="countryName" id="countryName">
             </div>
+
+            <div class="col-lg-3">
+                <br>
+                <button class="butn-sadow" *ngIf="coeType=='COE Active Employee No Salary Details' && reason!='0'"
+                    data-toggle="modal" data-target="#modalCOEActiveEmployeeNoSalaryDetails"
+                    (click)="getempcert()">Download</button>
+                <button class="butn-sadow" *ngIf="coeType=='COE Active Employee with Compensation' && reason!='0'"
+                    data-toggle="modal" data-target="#modalCOEActiveEmployeeWithCompensation"
+                    (click)="getempcert()">Download</button>
+                <button class="butn-sadow" *ngIf="coeType=='Certificate of Deployment No Salary Details' && reason!='0'"
+                    data-toggle="modal" data-target="#modalCertificateOfDeploymentNoSalaryDetails"
+                    (click)="getempcert()">Download</button>
+                <button class="butn-sadow" *ngIf="coeType=='RAAWA/Security Pass No Salary Details' && reason!='0'"
+                    data-toggle="modal" data-target="#modalRAAWASecurityPassNoSalaryDetails"
+                    (click)="getempcert()">Download</button>
+            </div>
         </div><br>
 
         <div class="row FilterClass fontheading">
@@ -84,21 +100,7 @@
         <br /> -->
         <div class="row">
             <div class="col-lg-3"></div>
-            <div class="col-lg-4">
-                <!-- <button class="generate" (click)="showpdf()">GENERATE</button> -->
-                <button class="butn-sadow" *ngIf="coeType=='COE Active Employee No Salary Details' && reason!='0'"
-                    data-toggle="modal" data-target="#modalCOEActiveEmployeeNoSalaryDetails"
-                    (click)="getempcert()">Download</button>
-                <button class="butn-sadow" *ngIf="coeType=='COE Active Employee with Compensation' && reason!='0'"
-                    data-toggle="modal" data-target="#modalCOEActiveEmployeeWithCompensation"
-                    (click)="getempcert()">Download</button>
-                <button class="butn-sadow" *ngIf="coeType=='Certificate of Deployment No Salary Details' && reason!='0'"
-                    data-toggle="modal" data-target="#modalCertificateOfDeploymentNoSalaryDetails"
-                    (click)="getempcert()">Download</button>
-                <button class="butn-sadow" *ngIf="coeType=='RAAWA/Security Pass No Salary Details' && reason!='0'"
-                    data-toggle="modal" data-target="#modalRAAWASecurityPassNoSalaryDetails"
-                    (click)="getempcert()">Download</button>
-            </div>
+          
         </div>
     </div><br>
 
