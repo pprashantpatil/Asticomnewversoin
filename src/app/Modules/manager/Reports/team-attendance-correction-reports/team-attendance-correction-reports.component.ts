@@ -49,6 +49,8 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
   dropdownSettings: any = {};
   dropdownList: any = [];
   selectedItems: any = [];
+  showPopup: number = 0;
+  messageId: number = 0;
 
   ngOnInit(): void {
     debugger

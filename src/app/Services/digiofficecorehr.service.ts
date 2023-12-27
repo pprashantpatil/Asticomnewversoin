@@ -3175,4 +3175,14 @@ export class DigiofficecorehrService {
     return this.http.get<any[]>(
       this.host + "/HR/GetHRDashboard_HeadCountByGenderByEmployeeByMonth?EmployeeID=" + EmployeeID + "&Month=" + Month);
   }
+
+  public GetHRDashboard_HeadCountByGenderByManager(ManagerID: any) {
+    return this.http.get<any[]>(
+      this.host + "/HR/GetHRDashboard_HeadCountByGenderByManager?ManagerID=" + ManagerID);
+  }
+
+  public GetHRDashboard_HeadCountByGenderByManagerByMonth(ManagerID: any, Month: any) {
+    return this.http.get<any[]>(
+      this.host + "/HR/GetHRDashboard_HeadCountByGenderByManagerByMonth?ManagerID=" + ManagerID + "&Month=" + Month);
+  }
 }
