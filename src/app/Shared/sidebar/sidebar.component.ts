@@ -59,23 +59,24 @@ export class SidebarComponent implements OnInit {
     localStorage.setItem('Pagename', 'Staff');
     this.data11.emit('Staff');
   }
-  public LICENCEDETAILS() {
+  
+  public licenceDetails() {
     this.active = 16;
-    this.router.navigate(['/HR/Staffdashboard']);
+    this.router.navigate(['/HR/LicenceDetails']);
     localStorage.setItem('Pagename', 'LICENCE DETAILS');
     this.data11.emit('LICENCE DETAILS');
   }
-  public INACTIVESTAFFDETAILS() {
+  public inactiveStaffDetails() {
     this.active = 17;
-    this.router.navigate(['/HR/Staffdashboard']);
-    localStorage.setItem('Pagename', 'INACTIVE STAFF DETAILS');
-    this.data11.emit('INACTIVE STAFF DETAILS');
+    this.router.navigate(['/HR/InactiveStaffDetails']);
+    localStorage.setItem('Pagename', 'Inactive Staff Details');
+    this.data11.emit('Inactive Staff Details');
   }
-  public PayslipTrigger() {
+  public PayrollTrigger() {
     this.active = 18;
-    this.router.navigate(['/HR/Staffdashboard']);
-    localStorage.setItem('Pagename', 'Payslip Trigger');
-    this.data11.emit('Payslip Trigger');
+    this.router.navigate(['/HR/PayrollTriggerDash']);
+    localStorage.setItem('Pagename', 'Payroll Trigger');
+    this.data11.emit('Payroll Trigger');
   }
 
   public PRELIMINARYREPORT() {

@@ -9,7 +9,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { StaffdashboardComponent } from './staffdashboard/staffdashboard.component';
 import { LicenceDetailsComponent } from './licence-details/licence-details.component';
 import { InactivestaffDetailsComponent } from './inactivestaff-details/inactivestaff-details.component';
-import { PayrollTrigggerComponent } from './Payroll/payroll-triggger/payroll-triggger.component';
 import { GeneratePreliminaryReportComponent } from './Payroll/generate-preliminary-report/generate-preliminary-report.component';
 import { GenerateCsvfilesComponent } from './Payroll/generate-csvfiles/generate-csvfiles.component';
 import { LeaveConfigurationdashComponent } from './Configuration/leave-configurationdash/leave-configurationdash.component';
@@ -21,6 +20,7 @@ import { LoadattedanceComponent } from './Configuration/loadattedance/loadatteda
 import { LeaveUploadComponent } from './Configuration/leave-upload/leave-upload.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PayrollTriggerDashComponent } from './Payroll/payroll-trigger-dash/payroll-trigger-dash.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     StaffdashboardComponent,
     LicenceDetailsComponent,
     InactivestaffDetailsComponent,
-    PayrollTrigggerComponent,
     GeneratePreliminaryReportComponent,
     GenerateCsvfilesComponent,
     LeaveConfigurationdashComponent,
@@ -37,7 +36,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     LoanConfigurationMasterComponent,
     StaffBulkUploadExceptionsComponent,
     LoadattedanceComponent,
-    LeaveUploadComponent
+    LeaveUploadComponent,
+    PayrollTriggerDashComponent
   ],
   imports: [
     CommonModule,

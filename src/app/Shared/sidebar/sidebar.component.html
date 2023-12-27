@@ -2,7 +2,7 @@
     <a (click)="dashboard()" data-toggle="collapse"
         [ngClass]="active == 1 && !mini ? 'menu1' : active == 1 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 1 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
+            <img *ngIf="active == 1 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg">
             <img *ngIf="active != 1" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
             <img *ngIf="active == 1 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
             <p class="icon-text" *ngIf="!mini">Home</p>
@@ -19,31 +19,32 @@
         </div>
     </a>
 
-    <a (click)="LICENCEDETAILS()" data-toggle="collapse" *ngIf="login==11 ||login==9 "
+    <a (click)="licenceDetails()" data-toggle="collapse" *ngIf="login==11 ||login==9 "
         [ngClass]="active == 16 && !mini ? 'menu1' : active == 16 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
             <img *ngIf="active == 16 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
             <img *ngIf="active != 16" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
             <img *ngIf="active == 16 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
-            <p class="icon-text" *ngIf="!mini">LICENCE DETAILS</p>
+            <p class="icon-text" *ngIf="!mini">Licence Details</p>
         </div>
     </a>
-    <a (click)="INACTIVESTAFFDETAILS()" data-toggle="collapse" *ngIf="login==11||login==9 "
+    
+    <a (click)="inactiveStaffDetails()" data-toggle="collapse" *ngIf="login==11||login==9 "
         [ngClass]="active == 17 && !mini ? 'menu1' : active == 17 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
             <img *ngIf="active == 17 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
             <img *ngIf="active != 17" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
             <img *ngIf="active == 17 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
-            <p class="icon-text" *ngIf="!mini">INACTIVE STAFF DETAILS</p>
+            <p class="icon-text" *ngIf="!mini">Inactive Staff Details</p>
         </div>
     </a>
-    <a (click)="PayslipTrigger()" data-toggle="collapse" *ngIf="login==11||login==9 "
+    <a (click)="PayrollTrigger()" data-toggle="collapse" *ngIf="login==11||login==9 "
         [ngClass]="active == 18 && !mini ? 'menu1' : active == 18 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
             <img *ngIf="active == 18 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
             <img *ngIf="active != 18" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
             <img *ngIf="active == 18 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
-            <p class="icon-text" *ngIf="!mini">Payslip Trigger</p>
+            <p class="icon-text" *ngIf="!mini">Payroll Trigger</p>
         </div>
     </a>
 
@@ -159,9 +160,9 @@
     <a data-toggle="collapse" data-target="#attendance"
         [ngClass]="active == 2 && !mini ? 'menu1' : active == 2 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 2 && !mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
-            <img *ngIf="active != 2" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
-            <img *ngIf="active == 2 && mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
+            <img *ngIf="active == 2 && !mini" class="icon" src="assets/Images/sidebaricons/attendance_icon_white.svg" />
+            <img *ngIf="active != 2" class="icon" src="assets/Images/sidebaricons/attendance_icon_blue.svg" />
+            <img *ngIf="active == 2 && mini" class="icon" src="assets/Images/sidebaricons/attendance_icon_white.svg" />
             <p class="icon-text d-flex" *ngIf="!mini">Attendance</p>
         </div>
     </a>
@@ -171,10 +172,10 @@
         : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 2.1 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 2.1" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                    src="assets/Images/sidebaricons/attendance_details_icon_white.svg">
+                <img *ngIf="active != 2.1" class="icon" src="assets/Images/sidebaricons/attendance_details_icon_blue.svg" />
                 <img *ngIf="active == 2.1 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                    src="assets/Images/sidebaricons/attendance_details_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Attendance Details</p>
             </div>
         </a>
@@ -183,10 +184,10 @@
         : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 2.2 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 2.2" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                    src="assets/Images/sidebaricons/shift_details_icon_white.svg" />
+                <img *ngIf="active != 2.2" class="icon" src="assets/Images/sidebaricons/shift_details_icon_blue.svg" />
                 <img *ngIf="active == 2.2 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                    src="assets/Images/sidebaricons/shift_details_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Shift Details</p>
             </div>
         </a>
@@ -195,10 +196,10 @@
         : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 2.3 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 2.3" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                    src="assets/Images/sidebaricons/overtime_details_icon_white.svg" />
+                <img *ngIf="active != 2.3" class="icon" src="assets/Images/sidebaricons/overtime_details_icon_blue.svg" />
                 <img *ngIf="active == 2.3 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                    src="assets/Images/sidebaricons/overtime_details_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Over Time Details</p>
             </div>
         </a>
@@ -207,10 +208,10 @@
         : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 2.4 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 2.4" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                    src="assets/Images/sidebaricons/attendance_correction_icon_white.svg" />
+                <img *ngIf="active != 2.4" class="icon" src="assets/Images/sidebaricons/attendance_correction_icon_blue.svg" />
                 <img *ngIf="active == 2.4 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                    src="assets/Images/sidebaricons/attendance_correction_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Attendance Correction</p>
             </div>
         </a>
@@ -219,9 +220,9 @@
     <a data-toggle="collapse" data-target="#requests"
         [ngClass]="active == 2 && !mini ? 'menu1' : active == 2 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 2 && !mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
-            <img *ngIf="active != 2" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
-            <img *ngIf="active == 2 && mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
+            <img *ngIf="active == 2 && !mini" class="icon" src="assets/Images/sidebaricons/request_icon_white.svg" />
+            <img *ngIf="active != 2" class="icon" src="assets/Images/sidebaricons/request_icon_blue.svg" />
+            <img *ngIf="active == 2 && mini" class="icon" src="assets/Images/sidebaricons/request_icon_white.svg" />
             <p class="icon-text d-flex" *ngIf="!mini">Requests</p>
         </div>
     </a>
@@ -231,46 +232,22 @@
     : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 3.1 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 3.1" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                    src="assets/Images/sidebaricons/leave_request_icon_white.svg" />
+                <img *ngIf="active != 3.1" class="icon" src="assets/Images/sidebaricons/leave_request_icon_blue.svg" />
                 <img *ngIf="active == 3.1 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                    src="assets/Images/sidebaricons/leave_request_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Leave Request</p>
             </div>
         </a>
-
-        <!-- <a (click)="timeSheetRequest()" class="nonactive" [ngClass]="active == 3.2 && !mini ? 'menu1' : active == 3.2 && mini ? 'menu-mini'
-    : 'menu'">
-            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-                <img *ngIf="active == 3.2 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 3.2" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
-                <img *ngIf="active == 3.2 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <p class="icon-text d-flex" *ngIf="!mini">Timesheet Request</p>
-            </div>
-        </a> -->
-
-        <!-- <a (click)="locatorRequest()" class="nonactive" [ngClass]="active == 3.3 && !mini ? 'menu1' : active == 3.3 && mini ? 'menu-mini'
-    : 'menu'">
-            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-                <img *ngIf="active == 3.3 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 3.3" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
-                <img *ngIf="active == 3.3 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <p class="icon-text d-flex" *ngIf="!mini">Locator Request</p>
-            </div>
-        </a> -->
 
         <a (click)="loanRequest()" class="nonactive" [ngClass]="active == 3.4 && !mini ? 'menu1' : active == 3.4 && mini ? 'menu-mini'
     : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 3.4 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 3.4" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                    src="assets/Images/sidebaricons/loan_request_icon_white.svg" />
+                <img *ngIf="active != 3.4" class="icon" src="assets/Images/sidebaricons/loan_request_icon_blue.svg" />
                 <img *ngIf="active == 3.4 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                    src="assets/Images/sidebaricons/loan_request_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Loan Request</p>
             </div>
         </a>
@@ -279,31 +256,21 @@
     : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 3.5 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 3.5" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                    src="assets/Images/sidebaricons/resignation_icon_white.svg" />
+                <img *ngIf="active != 3.5" class="icon" src="assets/Images/sidebaricons/resignation_icon_blue.svg" />
                 <img *ngIf="active == 3.5 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                    src="assets/Images/sidebaricons/resignation_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Employee Resignation</p>
             </div>
         </a>
     </div>
 
-    <!-- <a (click)="policies()" data-toggle="collapse" data-target="#home"
-        [ngClass]="active == 4 && !mini ? 'menu1' : active == 4 && mini ? 'menu-mini' : 'menu'">
-        <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 4 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active != 4" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active == 4 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
-            <p class="icon-text" *ngIf="!mini">Policies</p>
-        </div>
-    </a> -->
-
     <a (click)="holidays()" data-toggle="collapse" data-target="#home"
         [ngClass]="active == 5 && !mini ? 'menu1' : active == 5 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 5 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active != 5" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active == 5 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
+            <img *ngIf="active == 5 && !mini" class="icon" src="assets/Images/sidebaricons/holiday_icon_white.svg" />
+            <img *ngIf="active != 5" class="icon" src="assets/Images/sidebaricons/holiday_icon_blue.svg" />
+            <img *ngIf="active == 5 && mini" class="icon" src="assets/Images/sidebaricons/holiday_icon_white.svg" />
             <p class="icon-text" *ngIf="!mini">Holidays</p>
         </div>
     </a>
@@ -311,9 +278,9 @@
     <a (click)="announcements()" data-toggle="collapse" data-target="#home"
         [ngClass]="active == 6 && !mini ? 'menu1' : active == 6 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 6 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active != 6" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active == 6 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
+            <img *ngIf="active == 6 && !mini" class="icon" src="assets/Images/sidebaricons/announcement_icon_white.svg" />
+            <img *ngIf="active != 6" class="icon" src="assets/Images/sidebaricons/announcement_icon_blue.svg" />
+            <img *ngIf="active == 6 && mini" class="icon" src="assets/Images/sidebaricons/announcement_icon_white.svg" />
             <p class="icon-text" *ngIf="!mini">Announcements</p>
         </div>
     </a>
@@ -321,9 +288,9 @@
     <a data-toggle="collapse" data-target="#reports"
         [ngClass]="active == 7 && !mini ? 'menu1' : active == 7 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 7 && !mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
-            <img *ngIf="active != 7" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
-            <img *ngIf="active == 7 && mini" class="icon" src="assets/Images/sidebaricons/buildings_icon_blue.svg" />
+            <img *ngIf="active == 7 && !mini" class="icon" src="assets/Images/sidebaricons/reports_icon_white.svg" />
+            <img *ngIf="active != 7" class="icon" src="assets/Images/sidebaricons/reports_icon_blue.svg" />
+            <img *ngIf="active == 7 && mini" class="icon" src="assets/Images/sidebaricons/reports_icon_white.svg" />
             <p class="icon-text d-flex" *ngIf="!mini">Reports</p>
         </div>
     </a>
@@ -333,10 +300,10 @@
 : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 7.1 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 7.1" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                    src="assets/Images/sidebaricons/attendance_report_icon_white.svg" />
+                <img *ngIf="active != 7.1" class="icon" src="assets/Images/sidebaricons/attendance_report_icon_blue.svg" />
                 <img *ngIf="active == 7.1 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                    src="assets/Images/sidebaricons/attendance_report_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Attendance Report</p>
             </div>
         </a>
@@ -345,10 +312,10 @@
 : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 7.2 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 7.2" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                    src="assets/Images/sidebaricons/attendance_correction_report_vector_white.svg" />
+                <img *ngIf="active != 7.2" class="icon" src="assets/Images/sidebaricons/attendance_correction_report_vector_blue.svg" />
                 <img *ngIf="active == 7.2 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                    src="assets/Images/sidebaricons/attendance_correction_report_vector_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Attendance Correction Report</p>
             </div>
         </a>
@@ -357,33 +324,21 @@
 : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 7.3 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 7.3" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
+                    src="assets/Images/sidebaricons/leave_report_icon_white.svg" />
+                <img *ngIf="active != 7.3" class="icon" src="assets/Images/sidebaricons/leave_report_icon_blue.svg" />
                 <img *ngIf="active == 7.3 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
+                    src="assets/Images/sidebaricons/leave_report_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Leave Report</p>
             </div>
         </a>
-
-        <!-- <a (click)="timesheetReport()" class="nonactive" [ngClass]="active == 7.4 && !mini ? 'menu1' : active == 7.4 && mini ? 'menu-mini'
-: 'menu'">
-            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-                <img *ngIf="active == 7.4 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <img *ngIf="active != 7.4" class="icon" src="assets/Images/sidebaricons/building_icon_blue.svg" />
-                <img *ngIf="active == 7.4 && mini" class="icon"
-                    src="assets/Images/sidebaricons/building_icon_white.svg" />
-                <p class="icon-text d-flex" *ngIf="!mini">Timesheet Report</p>
-            </div>
-        </a> -->
     </div>
 
     <a (click)="employeeCertification()" data-toggle="collapse" data-target="#home"
         [ngClass]="active == 8 && !mini ? 'menu1' : active == 8 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 8 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active != 8" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active == 8 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
+            <img *ngIf="active == 8 && !mini" class="icon" src="assets/Images/sidebaricons/employee_certification_icon_white.svg" />
+            <img *ngIf="active != 8" class="icon" src="assets/Images/sidebaricons/employee_certification_icon_blue.svg" />
+            <img *ngIf="active == 8 && mini" class="icon" src="assets/Images/sidebaricons/employee_certification_icon_white.svg" />
             <p class="icon-text" *ngIf="!mini">Employee Certification</p>
         </div>
     </a>
@@ -391,9 +346,9 @@
     <a (click)="payslip()" data-toggle="collapse" data-target="#home"
         [ngClass]="active == 10 && !mini ? 'menu1' : active == 10 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 10 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active != 10" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active == 10 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
+            <img *ngIf="active == 10 && !mini" class="icon" src="assets/Images/sidebaricons/payslip_icon_white.svg" />
+            <img *ngIf="active != 10" class="icon" src="assets/Images/sidebaricons/payslip_icon_blue.svg" />
+            <img *ngIf="active == 10 && mini" class="icon" src="assets/Images/sidebaricons/payslip_icon_white.svg" />
             <p class="icon-text" *ngIf="!mini">Payslip</p>
         </div>
     </a>
@@ -401,9 +356,9 @@
     <a (click)="help()" data-toggle="collapse" data-target="#home"
         [ngClass]="active == 9 && !mini ? 'menu1' : active == 9 && mini ? 'menu-mini' : 'menu'">
         <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-            <img *ngIf="active == 9 && !mini" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active != 9" class="icon" src="assets/Images/sidebaricons/home_icon_blue.svg" />
-            <img *ngIf="active == 9 && mini" class="icon" src="assets/Images/sidebaricons/home_icon_white.svg" />
+            <img *ngIf="active == 9 && !mini" class="icon" src="assets/Images/sidebaricons/help_icon_white.svg" />
+            <img *ngIf="active != 9" class="icon" src="assets/Images/sidebaricons/help_icon_blue.svg" />
+            <img *ngIf="active == 9 && mini" class="icon" src="assets/Images/sidebaricons/help_icon_white.svg" />
             <p class="icon-text" *ngIf="!mini">Help</p>
         </div>
     </a>
