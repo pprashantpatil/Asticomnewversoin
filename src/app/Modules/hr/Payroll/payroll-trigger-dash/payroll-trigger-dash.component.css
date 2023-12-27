@@ -1,0 +1,30 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+.butn-sadow {
+    width: 212px;
+    height: 41px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 15px !important;
+    text-shadow: initial;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 3px;
+    float: right;
+    background-color: #3247d5 !important;
+    border-radius: 5px solid #3247d5 !important;
+    border: 5px solid #3247d5 !important;
+    text-transform: capitalize;
+    margin-top: 35px !important;
+    margin-left: 45% !important;
+}
