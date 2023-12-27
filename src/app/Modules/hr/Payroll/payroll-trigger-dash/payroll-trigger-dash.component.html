@@ -1,1 +1,67 @@
-<p>payroll-trigger-dash works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li><a class="Heading">
+                        <p class="Heading">Payroll Trigger</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <p class="filter">Select Start Year & Month</p>
+            </div>
+
+            <div class="cardinputs">
+                <select class="form-control inputfield select" id="shiftName" name="shiftName" [(ngModel)]="year">
+                    <option value="" disabled selected>Select Year</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                </select>
+            </div>
+
+            <div class="cardinputs">
+                <select class="form-control inputfield select" id="shiftName" name="shiftName" [(ngModel)]="month">
+                    <option value="" disabled selected>Select Month</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+
+            <div class="cardinputs">
+                <select class="form-control inputfield select" id="shiftName" name="shiftName" [(ngModel)]="payPeriod">
+                    <option value="" disabled selected>Select Pay period</option>
+                    <option value="1">1st Pay Period</option>
+                    <option value="2">2nd Pay Period</option>
+                </select>
+            </div>
+
+            <div class="cardinputs"></div>
+            <div class="cardinputs"></div>
+            <div class="cardinputs"></div>
+            
+
+            <div class="cardinputs">
+                <button class="butn-sadow" (click)="payrollTrigger()"> <img src="assets/Images/plus.svg"
+                    class="plus-icon">Trigger </button>
+            </div>
+        </div>
+    </div>
+</div>

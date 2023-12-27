@@ -82,44 +82,44 @@ export class SidebarComponent implements OnInit {
   public PRELIMINARYREPORT() {
     this.active = 19.1;
     this.router.navigate(['/HR/Staffdashboard']);
-    localStorage.setItem('Pagename', 'PRELIMINARY REPORT');
-    this.data11.emit('PRELIMINARY REPORT');
+    localStorage.setItem('Pagename', 'Preliminary Report');
+    this.data11.emit('Preliminary Report');
   }
   public PAYROLLREPORT() {
     this.active = 19.2;
     this.router.navigate(['/HR/Staffdashboard']);
-    localStorage.setItem('Pagename', 'PAYROLL REPORT');
-    this.data11.emit('PAYROLL REPORT');
+    localStorage.setItem('Pagename', 'Payroll Report');
+    this.data11.emit('Payroll Report');
   }
   public LEAVECONFIGURATION() {
     this.active = 20.1;
     this.router.navigate(['/HR/Staffdashboard']);
-    localStorage.setItem('Pagename', 'LEAVE CONFIGURATION');
-    this.data11.emit('LEAVE CONFIGURATION');
+    localStorage.setItem('Pagename', 'Leave Configuration');
+    this.data11.emit('Leave Configuration');
   }
   public LOANCONFIGURATION() {
     this.active = 20.2;
     this.router.navigate(['/HR/Staffdashboard']);
-    localStorage.setItem('Pagename', 'LOAN CONFIGURATION');
-    this.data11.emit('LOAN CONFIGURATION');
+    localStorage.setItem('Pagename', 'Loan Configuration');
+    this.data11.emit('Loan Configuration');
   }
   public BULKUPLOADMISSINGSTAFF() {
     this.active = 20.3;
     this.router.navigate(['/HR/Staffdashboard']);
-    localStorage.setItem('Pagename', 'BULKUPLOADMISSINGSTAFF');
-    this.data11.emit('BULKUPLOADMISSINGSTAFF');
+    localStorage.setItem('Pagename', 'Bulk Upload Missing Staff');
+    this.data11.emit('Bulk Upload Missing Staff');
   }
   public UPLOADATTENDANCE() {
     this.active = 20.4;
     this.router.navigate(['/HR/Staffdashboard']);
-    localStorage.setItem('Pagename', 'UPLOAD ATTENDANCE');
-    this.data11.emit('UPLOAD ATTENDANCE');
+    localStorage.setItem('Pagename', 'Upload Attendance');
+    this.data11.emit('Upload Attendance');
   }
   public LEAVEUPLOAD() {
     this.active = 20.5;
     this.router.navigate(['/HR/Staffdashboard']);
-    localStorage.setItem('Pagename', 'LEAVE UPLOAD');
-    this.data11.emit('LEAVE UPLOAD');
+    localStorage.setItem('Pagename', 'Leave Upload');
+    this.data11.emit('Leave Upload');
   }
 
 
