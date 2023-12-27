@@ -37,16 +37,7 @@
     }
   } */
   
-  .card-head {
-    width: 100%;
-    position: relative;
-    font-family: "Poppins";
-    font-style: normal;
-    color: #3247d5 !important;
-    font-size: 16px !important;
-    text-align: center;
-    letter-spacing: 0.5px;
-  }
+ 
 
    
   
@@ -275,11 +266,13 @@
   
   
   .countstyle {
-    font-weight: 700;
-    font-size: 27px !important;
-    color:#3247d5 !important;
+    font-size: 27px  !important;
+    font-weight: 600;
+    color: #4f4f4f !important
   
   }
+
+
   
   .maincard {
     background: #f2f2f2;
@@ -352,9 +345,20 @@
   
   }
   
-  
   .sm-head {
     font-size: 27px;
-    font-weight: 700;
-    color:#3247d5 !important
-  }
+    font-weight: 600;
+    color: #4f4f4f !important
+}
+
+.card-head {
+    width: 100%;
+    font-weight: 600;
+    position: relative;
+    font-family: "Poppins";
+    font-style: normal;
+    color: #1125a9 !important;
+    font-size: 16px !important;
+    text-align: center;
+    letter-spacing: 0.5px;
+}

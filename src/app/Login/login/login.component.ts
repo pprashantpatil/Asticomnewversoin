@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('companyid', this.companyid);
           sessionStorage.setItem('companycode', temp.companycode);
           sessionStorage.setItem('companyName', temp.companyName);
-          this.freezeScreen();
+         // this.freezeScreen();
         }
       },
       error: (err) => {
