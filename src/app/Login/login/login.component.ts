@@ -1012,7 +1012,7 @@ this.loader=true;
     setTimeout(() => {
       this.loader=false;
     }, 1000); // 2000 milliseconds = 2 seconds
-    this.loader=false;
+    
   }
   
 

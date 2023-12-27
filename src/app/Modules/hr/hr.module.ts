@@ -19,6 +19,8 @@ import { LoanConfigurationMasterComponent } from './Configuration/loan-configura
 import { StaffBulkUploadExceptionsComponent } from './Configuration/staff-bulk-upload-exceptions/staff-bulk-upload-exceptions.component';
 import { LoadattedanceComponent } from './Configuration/loadattedance/loadattedance.component';
 import { LeaveUploadComponent } from './Configuration/leave-upload/leave-upload.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -41,8 +43,10 @@ import { LeaveUploadComponent } from './Configuration/leave-upload/leave-upload.
     CommonModule,
     FormsModule,
     HrRoutingModule,
+    Ng2SearchPipeModule,
     SharedModuleModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    NgxPaginationModule
   ]
 })
 export class HrModule { }
