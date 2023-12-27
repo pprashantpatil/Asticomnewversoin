@@ -1,1 +1,73 @@
-<p>licence-details works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li><a class="Heading">
+                        <p class="Heading">Asticom Licence Details</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <select class="form-control inputfield select" id="shiftName" name="shiftName" [(ngModel)]="companyID"
+                    (change)="getCompanyDetails()">
+                    <option value="1">Select All Company</option>
+                    <option value="1001">Asticom Main</option>
+                    <option value="1002">Asticom ABSI (ABSI)</option>
+                    <option value="1005">Asticom FINSI</option>
+                    <option value="1003">Asticom BRAD</option>
+                    <option value="1004">Asticom HCX</option>
+                    <option value="1006">Asticom HQ</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="card10">
+        <div class="row">
+            <div class="col-lg-3" *ngIf="companyID==1">
+                <div class="card1">
+                    <h6>Total Licence</h6>
+                    <h5>5600</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card1">
+                    <a href="#/HR/Staffdashboard">
+                        <h6>Active Licence</h6>
+                        <h5>{{activeStaff}}</h5>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card1">
+                    <a href="#/HR/InactiveStaffDetails">
+                        <h6>InActive Licence</h6>
+                        <h5>{{inactiveStaff}}</h5>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3" *ngIf="companyID==1">
+                <div class="card1">
+                    <h6>Remaining Licence</h6>
+                    <h5>{{remaining}} </h5>
+                </div>
+            </div>
+        </div>
+    </div>
