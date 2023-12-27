@@ -38,8 +38,8 @@ export class AppComponent {
   ngOnInit(): void {
     debugger;
     this.getScreenResolution();
-    this.showTime();
-    this.showMenu=false
+    //this.showTime();
+    this.showMenu = false;
     this.staffID = localStorage.getItem('staffid');
     this.login = localStorage.getItem('roledid');
     this.EmployeeID = localStorage.getItem('EmployeeID');
@@ -55,7 +55,7 @@ export class AppComponent {
         'Your session will expire in the next five (5) minutes. You may CONTINUE by logging in again.'
       );
     }, 1.5e6);
-    this.GetNotification();
+   
 
     // interval(1000).subscribe(((_x: any) => {
     //   let cokie: any = this.CookieService.get('xsrf-token');
@@ -70,6 +70,7 @@ export class AppComponent {
     this.temp1 = sessionStorage.getItem('temp');
     this.login = localStorage.getItem('roledid');
     this.username = localStorage.getItem('UserName');
+    this.staffID && this.GetNotification();
     this.Comapnayname = sessionStorage.getItem('companycode');
     this.companyid =
       sessionStorage.getItem('companyid') == undefined
@@ -79,10 +80,10 @@ export class AppComponent {
 
   showMenu: boolean = false;
 
-closeMenu() {
-  let displayMenu = this.showMenu ? true : false;
-  return displayMenu;
-}
+  closeMenu() {
+    let displayMenu = this.showMenu ? true : false;
+    return displayMenu;
+  }
   getScreenResolution() {
     var w = window.innerWidth;
     var h = window.innerHeight;
@@ -95,7 +96,6 @@ closeMenu() {
 
   public GetNotification() {
     debugger;
-
     this.DigiofficeService.GetNotification(this.staffID).subscribe(
       (data: any) => {
         debugger;
@@ -225,46 +225,38 @@ closeMenu() {
       });
     });
   }
-  public showTime(){
+  public showTime() {
     var date = new Date();
-    var h:any = date.getHours(); // 0 - 23
-    var m:any = date.getMinutes(); // 0 - 59
-    var s:any = date.getSeconds(); // 0 - 59
-    var session = "AM";
-    
-    if(h == 0){
-        h = 12;
+    var h: any = date.getHours(); // 0 - 23
+    var m: any = date.getMinutes(); // 0 - 59
+    var s: any = date.getSeconds(); // 0 - 59
+    var session = 'AM';
+
+    if (h == 0) {
+      h = 12;
     }
-    
-    if(h > 12){
-        h = h - 12;
-        session = "PM";
+
+    if (h > 12) {
+      h = h - 12;
+      session = 'PM';
     }
-    
-    h = (h < 10) ? "0" + h : h;
-    m = (m < 10) ? "0" + m : m;
-    s = (s < 10) ? "0" + s : s;
-    
-    var time = h + ":" + m + ":" + s + " " + session;
-    const ele=document.getElementById("MyClockDisplay");
-    if(ele!=null){
+
+    h = h < 10 ? '0' + h : h;
+    m = m < 10 ? '0' + m : m;
+    s = s < 10 ? '0' + s : s;
+
+    var time = h + ':' + m + ':' + s + ' ' + session;
+    const ele = document.getElementById('MyClockDisplay');
+    if (ele != null) {
       ele.innerText = time;
     }
-    const ele1=document.getElementById("MyClockDisplay");
-    if(ele1!=null){
+    const ele1 = document.getElementById('MyClockDisplay');
+    if (ele1 != null) {
       ele1.textContent = time;
     }
 
     setInterval(() => {
-      this.showTime()
-      
+      this.showTime();
     }, 1000);
-
-   
-    
+  }
 }
-
-
-}
-
-
