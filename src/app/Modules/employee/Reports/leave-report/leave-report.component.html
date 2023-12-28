@@ -15,6 +15,11 @@
                         <p class="Heading">All Staff Leave Report</p>
                     </a>
                 </li>
+
+                <li *ngIf="roledid==9||roledid==10||roledid==11||roledid==1"><a class="Heading" routerLink="/Manager/TeamLeaveReports">
+                    <p class="Heading">All Company Leave Report</p>
+                </a>
+            </li>
             </ul>
         </div>
     </div>

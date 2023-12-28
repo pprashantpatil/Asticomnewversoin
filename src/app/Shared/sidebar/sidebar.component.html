@@ -147,7 +147,7 @@
             </div>
         </a>
 
-        <a (click)="UPLOADATTENDANCE()" class="nonactive" [ngClass]="active == 20.4 && !mini ? 'menu1' : active == 20.4 && mini ? 'menu-mini'
+        <a (click)="UploadAttendance()" class="nonactive" [ngClass]="active == 20.4 && !mini ? 'menu1' : active == 20.4 && mini ? 'menu-mini'
         : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 20.4 && !mini" class="icon"
@@ -159,7 +159,7 @@
                 <p class="icon-text d-flex" *ngIf="!mini">Upload Attendance</p>
             </div>
         </a>
-        <a (click)="LEAVEUPLOAD()" class="nonactive" [ngClass]="active == 20.5 && !mini ? 'menu1' : active == 20.5 && mini ? 'menu-mini'
+        <a (click)="leaveUpload()" class="nonactive" [ngClass]="active == 20.5 && !mini ? 'menu1' : active == 20.5 && mini ? 'menu-mini'
         : 'menu'">
             <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
                 <img *ngIf="active == 20.5 && !mini" class="icon"
@@ -255,18 +255,6 @@
                 <img *ngIf="active == 3.1 && mini" class="icon"
                     src="assets/Images/sidebaricons/leave_request_icon_white.svg" />
                 <p class="icon-text d-flex" *ngIf="!mini">Leave Request</p>
-            </div>
-        </a>
-
-        <a (click)="loanRequest()" class="nonactive" [ngClass]="active == 3.4 && !mini ? 'menu1' : active == 3.4 && mini ? 'menu-mini'
-    : 'menu'">
-            <div class="test_case" [ngClass]="mini?'justify-content-center': ''">
-                <img *ngIf="active == 3.4 && !mini" class="icon"
-                    src="assets/Images/sidebaricons/loan_request_icon_white.svg" />
-                <img *ngIf="active != 3.4" class="icon" src="assets/Images/sidebaricons/loan_request_icon_blue.svg" />
-                <img *ngIf="active == 3.4 && mini" class="icon"
-                    src="assets/Images/sidebaricons/loan_request_icon_white.svg" />
-                <p class="icon-text d-flex" *ngIf="!mini">Loan Request</p>
             </div>
         </a>
 

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <ul>
-                <li><a class="Heading" routerLink="/Employee/ShiftDetailsDash">
+                <li *ngIf="roleID!=11"><a class="Heading" routerLink="/Employee/ShiftDetailsDash">
                         <p class="Heading">My Shift Details</p>
                     </a>
                     <hr class="line-border listForm">
@@ -12,6 +12,10 @@
 
                 <li *ngIf="roleID==2"><a class="Heading" routerLink="/Manager/MyTeamWeeklyShift">
                         <p class="Heading">Team Shift Details</p>
+                    </a></li>
+
+                <li *ngIf="roleID==1||roleID==9||roleID==11||roleID==10"><a class="Heading" routerLink="/Manager/MyTeamWeeklyShift">
+                        <p class="Heading">Company Weekly Shift</p>
                     </a></li>
             </ul>
         </div>

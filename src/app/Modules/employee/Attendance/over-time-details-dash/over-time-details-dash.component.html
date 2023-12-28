@@ -5,7 +5,7 @@
         <div class="col-12">
             <ul>
                 <!-- *ngIf="otEligibility==1" -->
-                <li><a class="Heading">
+                <li><a class="Heading" *ngIf="otEligibility==1">
                         <p class="Heading">My Overtime Details</p>
                     </a>
                     <hr class="line-border listForm">
@@ -17,7 +17,7 @@
                 </li>
 
                 <li *ngIf="roleID==1||roleID==9||roleID==11||roleID==10"><a class="Heading" routerLink="/Manager/MyTeamOverTimeDetails">
-                    <p class="Heading">Team Overtime Details</p>
+                    <p class="Heading">Company Overtime Details</p>
                 </a>
             </li>
             </ul>

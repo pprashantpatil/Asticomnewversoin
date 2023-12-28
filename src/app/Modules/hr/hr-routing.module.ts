@@ -22,6 +22,8 @@ import { BarangaymasterComponent } from './Master/barangaymaster/barangaymaster.
 import { DepartmentmasterdashComponent } from './Master/departmentmasterdash/departmentmasterdash.component';
 import { OtratesdashComponent } from './Master/otratesdash/otratesdash.component';
 import { RoleMasterDashComponent } from './Master/role-master-dash/role-master-dash.component';
+import { LoadattedanceComponent } from './Configuration/loadattedance/loadattedance.component';
+import { LeaveUploadComponent } from './Configuration/leave-upload/leave-upload.component';
 
 const routes: Routes = [
   { path: 'AddressDetailsWizard', component: AddressDetailsWizardComponent  ,canActivate: [AuthguardGuard]},
@@ -46,6 +48,8 @@ const routes: Routes = [
   { path: 'Otratesdash', component: OtratesdashComponent  ,canActivate: [AuthguardGuard]},
   { path: 'RoleMasterDash', component: RoleMasterDashComponent  ,canActivate: [AuthguardGuard]},
 
+  { path: 'LoadAttendance', component: LoadattedanceComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'LeaveUpload', component: LeaveUploadComponent  ,canActivate: [AuthguardGuard]},
 ];
 
 @NgModule({

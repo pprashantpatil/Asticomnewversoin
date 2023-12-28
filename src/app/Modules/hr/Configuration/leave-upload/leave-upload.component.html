@@ -1,1 +1,67 @@
-<p>leave-upload works!</p>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-lg-11">
+                    <p class="Heading1">Leave Upload</p>
+                    <hr class="line-border listForm">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="row leavereq">
+            <div class="col-md-3">
+                <p>Employee<span class="span">*</span></p>
+            </div>
+            <div class="col-md-3">
+                <p>Leave Type<span class="span">*</span></p>
+            </div>
+            <div class="col-md-3">
+                <p>Leave Entitlement<span class="span">*</span></p>
+            </div>
+            <div class="col-md-3">
+                <p>Leave Taken<span class="span">*</span></p>
+            </div>
+        </div>
+        <div class="row leavereq">
+            <div class="col-md-3">
+                <div class="dropdown">
+                    <ng-multiselect-dropdown [placeholder]="'Select Staff'" [settings]="dropdownSettings"
+                        [data]="Stafflist" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                        (onDeSelect)="onItemDeSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select class="form-control" id="LeaveType" name="LeaveType" [(ngModel)]="LeaveType">
+                    <option value="">Select Leave type</option>
+                    <option value="{{leavetype.id}}" *ngFor="let leavetype of LeaveTypeList">
+                        {{leavetype.short}} </option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="number" class="form-control" id="LeaveEntitlement" name="LeaveEntitlement"
+                    [(ngModel)]="LeaveEntitlement" placeholder="Leave Entitlement">
+            </div>
+            <div class="col-md-3">
+                <input type="number" class="form-control" id="LeaveTaken" name="LeaveTaken" [(ngModel)]="LeaveTaken"
+                    placeholder="Leave Taken">
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-10"></div>
+            <div class="col-lg-1">
+                <button class="clo-btn" (click)="cancel()">Cancel</button>
+            </div>
+            <div class="col-lg-1">
+                <button class="butn-sadow" *ngIf="ID==undefined" (click)="Save()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

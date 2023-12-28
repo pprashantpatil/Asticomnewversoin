@@ -1,1 +1,129 @@
-<p>loadattedance works!</p>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-lg-11">
+                    <p class="Heading1">Upload Attendance</p>
+                    <hr class="line-border listForm">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col-12">
+            <ul style="margin-left: 2%;">
+                <li><a class="Heading">
+                        <p class="Heading">Upload Attendance</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div> -->
+
+    <div class="card">
+        <div class="row leavereq">
+            <div class="col-md-3">
+                <label>Department<span class="span">*</span></label>
+            </div>
+
+            <div class="col-md-3">
+                <label>Position<span class="span"></span></label>
+            </div>
+
+            <div class="col-md-3">
+                <label>Employee<span class="span">*</span></label>
+            </div>
+
+            <div class="col-md-3">
+                <p>Start Date<span class="span">*</span></p>
+            </div>
+        </div>
+
+        <div class="row leavereq">
+            <div class="col-md-3">
+                <ng-multiselect-dropdown [placeholder]="'Select Department'" [settings]="deptdropdownSettings"
+                    [data]="dropdownDeptList" [(ngModel)]="deptselectedItems" (onSelect)="deptonItemSelect($event)">
+                </ng-multiselect-dropdown>
+            </div>
+
+            <div class="col-md-3">
+                <div *ngIf="loader" class="spinner-border"></div>
+                <ng-multiselect-dropdown [placeholder]="'Select Position'" [settings]="roledropdownSettings"
+                    [data]="dropdownRoleList" [(ngModel)]="roleselectedItems" (onSelect)="roleonItemSelect($event)">
+                </ng-multiselect-dropdown>
+            </div>
+
+            <div class="col-md-3">
+                <div *ngIf="loader" class="spinner-border"></div>
+                <ng-multiselect-dropdown [placeholder]="'Select Staff'" [settings]="dropdownSettings"
+                    [data]="dropdownList2" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onItemSelect($event)">
+                </ng-multiselect-dropdown>
+            </div>
+
+            <div class="col-md-3"> <input type="date" class="form-control" placeholder="Leave Code" name="startdate"
+                    [(ngModel)]="startdate" id="startdate"></div>
+        </div>
+        <br>
+
+        <div class="row leavereq">
+            <div class="col-md-3">
+                <p>End Date<span class="span">*</span></p>
+            </div>
+
+            <div class="col-md-3">
+                <label>Week Off Days<span class="span">*</span></label>
+            </div>
+
+            <div class="col-md-3">
+                <label>Start Time<span class="span">*</span></label>
+            </div>
+
+            <div class="col-md-3">
+                <label>End Time<span class="span">*</span></label>
+            </div>
+        </div>
+
+        <div class="row leavereq">
+            <div class="col-md-3">
+                <input type="date" class="form-control" placeholder="Leave Code" name="enddate" [(ngModel)]="enddate"
+                    id="enddate">
+            </div>
+
+            <div class="col-md-3">
+                <ng-multiselect-dropdown [placeholder]="'Select Week off Days'" [settings]="dropdownSettings1"
+                    [data]="dropdownList1" [(ngModel)]="selectedItems1" (onSelect)="onItemSelect1($event)">
+                </ng-multiselect-dropdown>
+            </div>
+
+            <div class="col-md-3">
+                <input type="time" class="form-control" placeholder="Leave Code" name="starttime"
+                    [(ngModel)]="starttime" id="starttime">
+            </div>
+
+            <div class="col-md-3">
+                <input type="time" class="form-control" placeholder="Leave Code" name="endtime" [(ngModel)]="endtime"
+                    id="endtime">
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-10"></div>
+            <div class="col-lg-1">
+                <button class="clo-btn" (click)="cancel()">Cancel</button>
+            </div>
+
+            <div class="col-lg-1">
+                <button type="button" class="butn-sadow" *ngIf="ID!=undefined"
+                    (click)="UpdateHolidays()">Update</button>
+                <button type="button" class="butn-sadow" *ngIf="ID==undefined" (click)="Save()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</div>

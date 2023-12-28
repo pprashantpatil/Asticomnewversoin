@@ -8,15 +8,20 @@
                         <li><a class="Heading" routerLink="/Employee/AttendanceDetailsDash">
                                 <p class="Heading"> My Attendance Details</p>
                             </a>
-
                         </li>
+
                         <li *ngIf="roleid==2"><a class="Heading">
                                 <p class="Heading"> Team Attendance Details</p>
                             </a>
                             <hr *ngIf="roleid==2" class="line-border listForm">
                         </li>
-                    </ul>
 
+                        <li *ngIf="roleid==1||roleid==9||roleid==11||roleid==10"><a class="Heading">
+                            <p class="Heading">Company Attendance Details</p>
+                        </a>
+                        <hr *ngIf="roleid==1||roleid==9||roleid==11||roleid==10" class="line-border listForm">
+                    </li>
+                    </ul>
                 </div>
             </div>
 

@@ -4,8 +4,13 @@
     <div class="row">
         <div class="col-12">
             <ul>
-                <li><a class="Heading" routerLink="/Employee/EmployeeResignationDash">
+                <li *ngIf="roleID==6"><a class="Heading" routerLink="/Employee/EmployeeResignationDash">
                         <p class="Heading">My Resignation Details</p>
+                    </a>
+                </li>
+
+                <li *ngIf="roleID==11"><a class="Heading" routerLink="/Employee/EmployeeResignationDash">
+                        <p class="Heading">Employee Resignation</p>
                     </a>
                 </li>
 
@@ -30,7 +35,8 @@
             </div>
 
             <div class="cardinputs">
-                <select class="form-control inputfield select" id="month" name="month" [(ngModel)]="month" (change)="getchangemonth($event)">
+                <select class="form-control inputfield select" id="month" name="month" [(ngModel)]="month"
+                    (change)="getchangemonth($event)">
                     <option value="">Select Month</option>
                     <option value="1">January</option>
                     <option value="2">Febuary</option>
