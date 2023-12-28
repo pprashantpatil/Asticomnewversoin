@@ -85,30 +85,35 @@ export class SidebarComponent implements OnInit {
     localStorage.setItem('Pagename', 'Preliminary Report');
     this.data11.emit('Preliminary Report');
   }
+  
   public PAYROLLREPORT() {
     this.active = 19.2;
     this.router.navigate(['/HR/Staffdashboard']);
     localStorage.setItem('Pagename', 'Payroll Report');
     this.data11.emit('Payroll Report');
   }
+
   public leaveConfiguration() {
     this.active = 20.1;
     this.router.navigate(['/HR/LeaveConfigurationDash']);
     localStorage.setItem('Pagename', 'Leave Configuration');
     this.data11.emit('Leave Configuration');
   }
+
   public loanConfiguration() {
     this.active = 20.2;
     this.router.navigate(['/HR/LoanConfigurationDash']);
     localStorage.setItem('Pagename', 'Loan Configuration');
     this.data11.emit('Loan Configuration');
   }
-  public BULKUPLOADMISSINGSTAFF() {
+
+  public bulkUploadMissingStaff() {
     this.active = 20.3;
-    this.router.navigate(['/HR/Staffdashboard']);
+    this.router.navigate(['/HR/StaffBulkUploadExceptions']);
     localStorage.setItem('Pagename', 'Bulk Upload Missing Staff');
     this.data11.emit('Bulk Upload Missing Staff');
   }
+
   public UPLOADATTENDANCE() {
     this.active = 20.4;
     this.router.navigate(['/HR/Staffdashboard']);
