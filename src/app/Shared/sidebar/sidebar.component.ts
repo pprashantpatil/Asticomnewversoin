@@ -319,7 +319,7 @@ export class SidebarComponent implements OnInit {
   }
 
   public payslip() {
-    this.active = 10;
+    this.active = 21;
     this.router.navigate(['/Employee/Payslip']);
     localStorage.setItem('Pagename', 'Payslip');
     this.data11.emit('Payslip');
