@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <ul>
-                <li><a class="Heading" routerLink="/Employee/AttendanceReport">
+                <li *ngIf="roleID!=11"><a class="Heading" routerLink="/Employee/AttendanceReport">
                         <p class="Heading">My Attendance Report</p>
                     </a>
                 </li>
@@ -15,8 +15,8 @@
                     <hr class="line-border listForm">
                 </li>
 
-                <li *ngIf="roleID==9"><a class="Heading">
-                        <p class="Heading">My Team Attendance Report</p>
+                <li *ngIf="roleID==9|| roleID==11 ||  roleID==10 ||  roleID==1"><a class="Heading">
+                        <p class="Heading">All Company Attendance Report</p>
                     </a>
                     <hr class="line-border listForm">
                 </li>

@@ -23,6 +23,8 @@ export class MyTeamWeeklyShiftComponent implements OnInit {
   roleID: any;
   showPopup: number = 0;
   messageId: number = 0;
+  p: any = 1;
+  count1: any = 10;
   employeeID: any;
   id: any;
   notes: any;

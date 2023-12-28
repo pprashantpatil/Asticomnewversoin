@@ -4,13 +4,18 @@
     <div class="row">
         <div class="col-12">
             <ul>
-                <li><a class="Heading" routerLink="/Employee/ShiftDetailsDash">
+                <li *ngIf="roleID!=11"><a class="Heading" routerLink="/Employee/ShiftDetailsDash">
                         <p class="Heading">My Shift Details</p>
                     </a>
                 </li>
 
                 <li *ngIf="roleID==2"><a class="Heading">
                         <p class="Heading">Team Shift Details</p>
+                        <hr class="line-border listForm">
+                    </a></li>
+
+                <li *ngIf="roleID==1||roleID==9||roleID==11||roleID==10"><a class="Heading">
+                        <p class="Heading">Company Weekly Shift</p>
                         <hr class="line-border listForm">
                     </a></li>
             </ul>
@@ -66,7 +71,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of shiftList|filter:search">
+                        <tr
+                            *ngFor="let data of shiftList|filter:search|paginate: { itemsPerPage: count1, currentPage: p }">
                             <td>{{data.employeID}}</td>
                             <td>{{data.name}}</td>
                             <td>{{data.last_Name}}</td>
@@ -80,8 +86,9 @@
                             <td>{{data.restdays}}</td>
                             <td *ngIf="roleID!=1">
                                 <p *ngIf="roleID==2 && data.approve==0">
-                                    <img class="dashedit-icon" src="assets/Images/accept-01.svg" (click)="ApproveTimeSheet(data)"
-                                        [ngbTooltip]="tipContentApprove" tooltipClass="my-custom-class">
+                                    <img class="dashedit-icon" src="assets/Images/accept-01.svg"
+                                        (click)="ApproveTimeSheet(data)" [ngbTooltip]="tipContentApprove"
+                                        tooltipClass="my-custom-class">
 
                                     <img class="dashedit-icon" src="assets/Images/cancel-02.svg"
                                         (click)="getid(data.id)" data-toggle="modal" data-target="#Reject"
@@ -117,14 +124,14 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(shiftList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+            <div class="text-right" *ngIf="(shiftList).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

@@ -14,6 +14,11 @@
                         <p class="Heading"> Team Attendance Details</p>
                     </a>
                 </li>
+
+                <li *ngIf="roleID==1||roleID==9||roleID==11||roleID==10"><a class="Heading" routerLink="/Manager/MyTeamAttendence">
+                        <p class="Heading">Company Attendance Details</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -63,17 +68,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of attendanceList|filter:search" >
-                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.signinDate|date}}</td>
-                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.signInType}}</td>
-                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.expectedIn}}</td>
-                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.stime}}</td>
+                        <tr *ngFor="let data of attendanceList|filter:search">
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
+                                {{data.signinDate|date}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
+                                {{data.signInType}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
+                                {{data.expectedIn}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.stime}}
+                            </td>
                             <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
                                 <p *ngIf="data.signInType=='Web Application'">{{data.punchinip}}</p>
                                 <p *ngIf="data.signInType!='Web Application'">{{data.signinLocation}}</p>
                             </td>
-                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.expectedOut}}</td>
-                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.etime}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
+                                {{data.expectedOut}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.etime}}
+                            </td>
                             <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
                                 <p *ngIf="data.signOutTypeID==2">{{data.punchoutip}}</p>
                                 <p *ngIf="data.signOutTypeID==1">{{data.signoutLocation}}</p>
@@ -83,8 +94,10 @@
                                 <p *ngIf="data.signOutTypeID==1">Mobile</p>
                             </td>
                             <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.hr1}}</td>
-                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.undertime}}</td>
-                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.latepunchin}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
+                                {{data.undertime}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
+                                {{data.latepunchin}}</td>
                         </tr>
                     </tbody>
                 </table>

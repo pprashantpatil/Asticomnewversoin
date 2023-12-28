@@ -114,15 +114,16 @@ export class SidebarComponent implements OnInit {
     this.data11.emit('Bulk Upload Missing Staff');
   }
 
-  public UPLOADATTENDANCE() {
+  public UploadAttendance() {
     this.active = 20.4;
-    this.router.navigate(['/HR/Staffdashboard']);
+    this.router.navigate(['/HR/LoadAttendance']);
     localStorage.setItem('Pagename', 'Upload Attendance');
     this.data11.emit('Upload Attendance');
   }
-  public LEAVEUPLOAD() {
+
+  public leaveUpload() {
     this.active = 20.5;
-    this.router.navigate(['/HR/Staffdashboard']);
+    this.router.navigate(['/HR/LeaveUpload']);
     localStorage.setItem('Pagename', 'Leave Upload');
     this.data11.emit('Leave Upload');
   }
@@ -137,16 +138,30 @@ export class SidebarComponent implements OnInit {
 
   public shiftDetails() {
     this.active = 2.2;
-    this.router.navigate(['/Employee/ShiftDetailsDash']);
-    localStorage.setItem('Pagename', 'Shift Details');
-    this.data11.emit('Shift Details');
+    if(this.roleid==11){
+      this.router.navigate(['/Manager/MyTeamWeeklyShift']);
+      localStorage.setItem('Pagename', 'Shift Details');
+      this.data11.emit('Shift Details');
+    }
+    else{
+      this.router.navigate(['/Employee/ShiftDetailsDash']);
+      localStorage.setItem('Pagename', 'Shift Details');
+      this.data11.emit('Shift Details');
+    }
   }
 
   public overTimeDetails() {
     this.active = 2.3;
-    this.router.navigate(['/Employee/OverTimeDetailsDash']);
-    localStorage.setItem('Pagename', 'Over Time Details');
-    this.data11.emit('Over Time Details');
+    if(this.roleid==11){
+      this.router.navigate(['/Employee/MyTeamOverTimeDetails']);
+      localStorage.setItem('Pagename', 'Over Time Details');
+      this.data11.emit('Over Time Details');
+    }
+    else{
+      this.router.navigate(['/Employee/OverTimeDetailsDash']);
+      localStorage.setItem('Pagename', 'Over Time Details');
+      this.data11.emit('Over Time Details');
+    }
   }
 
   public attendanceCorrection() {
@@ -214,9 +229,16 @@ export class SidebarComponent implements OnInit {
 
   public attendanceReport() {
     this.active = 7.1;
-    this.router.navigate(['/Employee/AttendanceReport']);
-    localStorage.setItem('Pagename', 'Attendance Report');
-    this.data11.emit('Attendance Report');
+    if(this.roleid==11){
+      this.router.navigate(['/Manager/TeamAttendanceReports']);
+      localStorage.setItem('Pagename', 'Attendance Report');
+      this.data11.emit('Attendance Report');
+    }
+    else{
+      this.router.navigate(['/Employee/AttendanceReport']);
+      localStorage.setItem('Pagename', 'Attendance Report');
+      this.data11.emit('Attendance Report');
+    }
   }
 
   public attendanceCorrectionReport() {

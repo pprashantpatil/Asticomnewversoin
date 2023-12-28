@@ -4,8 +4,14 @@
     <div class="row">
         <div class="col-12">
             <ul>
-                <li><a class="Heading">
+                <li *ngIf="roleID==2"><a class="Heading">
                         <p class="Heading">My Resignation Details</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+
+                <li *ngIf="roleID==11"><a class="Heading">
+                        <p class="Heading">Employee Resignation</p>
                     </a>
                     <hr class="line-border listForm">
                 </li>
@@ -39,8 +45,8 @@
         </div>
 
         <div class="col-3">
-            <button class="butn-sadow" (click)="showDialog()" *ngIf="roleID !=1 && resignationList?.length == 0"> <img src="assets/Images/plus.svg"
-                    class="plus-icon">Add Resignation</button>
+            <button class="butn-sadow" (click)="showDialog()" *ngIf="roleID !=1 && resignationList?.length == 0"> <img
+                    src="assets/Images/plus.svg" class="plus-icon">Add Resignation</button>
         </div>
     </div>
     <br>
