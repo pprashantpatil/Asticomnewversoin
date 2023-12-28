@@ -394,7 +394,7 @@ export class LoginComponent implements OnInit {
                               localStorage.setItem('OTEligibility', temp[0].ot);
                               sessionStorage.setItem('temp23', '1');
                               this.InsertLogActivity();
-                              this.router.navigate(['/HR/HRDashboard']).then(() => {
+                              this.router.navigate(['/HR/Staffdashboard']).then(() => {
                                 this.loader = false;
                                 location.reload();
                               });
