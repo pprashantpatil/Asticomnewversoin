@@ -8,6 +8,7 @@ import * as XLSX from 'xlsx';
 import { ExportToCsv } from 'export-to-csv';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
+declare var require: any
 @Component({
   selector: 'app-generate-preliminary-report',
   templateUrl: './generate-preliminary-report.component.html',
@@ -21,6 +22,7 @@ export class GeneratePreliminaryReportComponent implements OnInit {
     this.bsRangeValue = [this.bsValue, this.maxDate];
   }
   public attachments01: any = [];
+
   currentUrl: any;
   viewMode = 'tab1';
   legalOTRegularHrs: any;
