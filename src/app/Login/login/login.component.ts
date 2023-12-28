@@ -40,10 +40,13 @@ export class LoginComponent implements OnInit {
   messageId: number = 0;
   id: any;
   public arrayofimages:any=[
-    'https://media.geeksforgeeks.org/wp-content/uploads/20200316135008/red7.png',
-    'https://media.geeksforgeeks.org/wp-content/uploads/20200316135014/yellow3.png',
-    'https://media.geeksforgeeks.org/img-practice/MaskGroup58@2x-min-1637846347.png',
-    'https://media.geeksforgeeks.org/img-practice/banner/dsa-self-paced-course-overview-image.png'
+    '../../../assets/Images/sidebaricons/images-01.png',
+    '../../../assets/Images/sidebaricons/images-02.png',
+    '../../../assets/Images/sidebaricons/images-03.png',
+    '../../../assets/Images/sidebaricons/images-04.png',
+    '../../../assets/Images/sidebaricons/images-05.png',
+    '../../../assets/Images/sidebaricons/images-06.png',
+    '../../../assets/Images/sidebaricons/images-07.png',
   ]
 
 
