@@ -211,7 +211,71 @@ export class SidebarComponent implements OnInit {
     localStorage.setItem('Pagename', 'Announcements');
     this.data11.emit('Announcements');
   }
+  public LeaveType() {
+    this.active = 10.1;
+    this.router.navigate(['/HR/LeaveTypeDashboard']);
+    localStorage.setItem('Pagename', 'Leave Type');
+    this.data11.emit('Leave Type');
+  }
 
+  public LoanType() {
+    this.active = 10.2;
+    this.router.navigate(['/HR/LoanMasterDash']);
+    localStorage.setItem('Pagename', 'Loan Type');
+    this.data11.emit('Loan Type');
+  }
+  public ShiftMaster() {
+    this.active = 10.3;
+    this.router.navigate(['/HR/ShiftMasterDash']);
+    localStorage.setItem('Pagename', 'Shift Master');
+    this.data11.emit('Shift Master');
+  }
+  public CountryMaster() {
+    this.active = 10.4;
+    this.router.navigate(['/HR/CountryMasterDash']);
+    localStorage.setItem('Pagename', 'Country Master');
+    this.data11.emit('Country Master');
+  }
+  public ProvinceMaster() {
+    this.active = 10.5;
+    this.router.navigate(['/HR/StateMasterDash']);
+    localStorage.setItem('Pagename', 'Province Master');
+    this.data11.emit('Province Master');
+  }
+
+  public CityMaster() {
+    this.active = 10.6;
+    this.router.navigate(['/HR/CityMasterDash']);
+    localStorage.setItem('Pagename', 'City Master');
+    this.data11.emit('City Master');
+  }
+  public BarangayMaster() {
+    this.active = 10.7;
+    this.router.navigate(['/HR/Barangaymaster']);
+    localStorage.setItem('Pagename', 'Barangay Master');
+    this.data11.emit('Barangay Master');
+  }
+
+  public DepartmentMaster() {
+    this.active = 10.8;
+    this.router.navigate(['/HR/Departmentmasterdash']);
+    localStorage.setItem('Pagename', 'Department Master');
+    this.data11.emit('Department Master');
+  }
+
+  public OTMaster() {
+    this.active = 10.9;
+    this.router.navigate(['/HR/Departmentmasterdash']);
+    localStorage.setItem('Pagename', 'OT Master');
+    this.data11.emit('Ot Master');
+  }
+  public PositionMaster() {
+    this.active = 10.10;
+    this.router.navigate(['/HR/RoleMasterDash']);
+    localStorage.setItem('Pagename', 'Position Master');
+    this.data11.emit('Ot Master');
+  }
+  
   public attendanceReport() {
     this.active = 7.1;
     this.router.navigate(['/Employee/AttendanceReport']);

@@ -13,6 +13,15 @@ import { StaffBulkUploadExceptionsComponent } from './Configuration/staff-bulk-u
 import { LeaveConfigurationComponent } from './Configuration/leave-configuration/leave-configuration.component';
 import { LeaveConfigurationdashComponent } from './Configuration/leave-configurationdash/leave-configurationdash.component';
 import { LoanConfigurationDashComponent } from './Configuration/loan-configuration-dash/loan-configuration-dash.component';
+import { LoanMasterDashComponent } from './Master/loan-master-dash/loan-master-dash.component';
+import { ShiftMasterDashComponent } from './Master/shift-master-dash/shift-master-dash.component';
+import { CountryMasterDashComponent } from './Master/country-master-dash/country-master-dash.component';
+import { StateMasterDashComponent } from './Master/state-master-dash/state-master-dash.component';
+import { CityMasterDashComponent } from './Master/city-master-dash/city-master-dash.component';
+import { BarangaymasterComponent } from './Master/barangaymaster/barangaymaster.component';
+import { DepartmentmasterdashComponent } from './Master/departmentmasterdash/departmentmasterdash.component';
+import { OtratesdashComponent } from './Master/otratesdash/otratesdash.component';
+import { RoleMasterDashComponent } from './Master/role-master-dash/role-master-dash.component';
 
 const routes: Routes = [
   { path: 'AddressDetailsWizard', component: AddressDetailsWizardComponent  ,canActivate: [AuthguardGuard]},
@@ -28,6 +37,16 @@ const routes: Routes = [
 
   { path: 'LeaveConfigurationDash', component: LeaveConfigurationdashComponent  ,canActivate: [AuthguardGuard]},
   { path: 'LoanConfigurationDash', component: LoanConfigurationDashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'LoanMasterDash', component: LoanMasterDashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'ShiftMasterDash', component: ShiftMasterDashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'CountryMasterDash', component: CountryMasterDashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'StateMasterDash', component: StateMasterDashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'CityMasterDash', component: CityMasterDashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'Barangaymaster', component: BarangaymasterComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'Departmentmasterdash', component: DepartmentmasterdashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'Otratesdash', component: OtratesdashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'RoleMasterDash', component: RoleMasterDashComponent  ,canActivate: [AuthguardGuard]},
+
 ];
 
 @NgModule({
