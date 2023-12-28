@@ -6,6 +6,8 @@ import { StaffdashboardComponent } from './staffdashboard/staffdashboard.compone
 import { LicenceDetailsComponent } from './licence-details/licence-details.component';
 import { InactivestaffDetailsComponent } from './inactivestaff-details/inactivestaff-details.component';
 import { PayrollTriggerDashComponent } from './Payroll/payroll-trigger-dash/payroll-trigger-dash.component';
+import { GeneratePreliminaryReportComponent } from './Payroll/generate-preliminary-report/generate-preliminary-report.component';
+import { GenerateCsvfilesComponent } from './Payroll/generate-csvfiles/generate-csvfiles.component';
 
 const routes: Routes = [
   { path: 'AddressDetailsWizard', component: AddressDetailsWizardComponent  ,canActivate: [AuthguardGuard]},
@@ -14,6 +16,9 @@ const routes: Routes = [
   { path: 'LicenceDetails', component: LicenceDetailsComponent  ,canActivate: [AuthguardGuard]},
   { path: 'InactiveStaffDetails', component: InactivestaffDetailsComponent  ,canActivate: [AuthguardGuard]},
   { path: 'PayrollTriggerDash', component: PayrollTriggerDashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'GeneratePreliminaryReport', component: GeneratePreliminaryReportComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'GenerateCsvfiles', component:   GenerateCsvfilesComponent,canActivate: [AuthguardGuard]},
+  
 ];
 
 @NgModule({

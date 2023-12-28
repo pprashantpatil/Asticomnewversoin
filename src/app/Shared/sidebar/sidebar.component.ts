@@ -81,13 +81,13 @@ export class SidebarComponent implements OnInit {
 
   public PRELIMINARYREPORT() {
     this.active = 19.1;
-    this.router.navigate(['/HR/Staffdashboard']);
+    this.router.navigate(['/HR/GeneratePreliminaryReport']);
     localStorage.setItem('Pagename', 'Preliminary Report');
     this.data11.emit('Preliminary Report');
   }
   public PAYROLLREPORT() {
     this.active = 19.2;
-    this.router.navigate(['/HR/Staffdashboard']);
+    this.router.navigate(['/HR/GenerateCsvfiles']);
     localStorage.setItem('Pagename', 'Payroll Report');
     this.data11.emit('Payroll Report');
   }

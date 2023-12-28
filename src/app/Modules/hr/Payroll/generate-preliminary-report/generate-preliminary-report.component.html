@@ -1,1 +1,198 @@
-<p>generate-preliminary-report works!</p>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li><a class="Heading">
+                        <p class="Heading">Preliminary Report</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <div class="row card card1">
+        <div class="row">
+            <div class="col-lg-2">
+                <label>Start Date</label>
+                <input class="form-control" type="date" placeholder="startdate" id="startdate" name="startdate"
+                    [(ngModel)]="startdate">
+            </div>
+            <div class=" col-lg-2">
+                <label>End Date</label>
+                <input class="form-control" type="date" placeholder="enddate" id="enddate" name="enddate"
+                    [(ngModel)]="enddate" (change)="getdate($event)">
+            </div>
+            <div class=" col-lg-2">
+                <label>Cut-Off Date</label>
+                <input class="form-control" type="date" placeholder="cutoffdate" id="cutoffdate" name="cutoffdate"
+                    [(ngModel)]="cutoffdate">
+            </div>
+            <div class="col-lg-2">
+                <br />
+                <button class="butn-sadow" data-toggle="collapse" data-target="#employee"
+                    (click)="getemployeedetails()">Fetch
+                    Employees</button>
+            </div>
+            <div class=" col-lg-2">
+                <label>Search</label>
+                <input class="form-control" (ngModelChange)="FilterPayroll()" placeholder="Search" type="text"
+                    [(ngModel)]="Search">
+            </div>
+            <div class="col-lg-2">
+                <label>Position</label>
+                <div class="dropdown">
+                    <!-- <select class="form-control  " id="Year" name="Year" [(ngModel)]="Role"
+                    (click)="Rolefilter()"><br />
+                        <option class="rolefiltr" value="Select">Select Position </option>
+                        <option *ngFor="let item of RoleTypeList" value="{{item.short}}">{{item.short}}
+                    </select> -->
+
+                    <ng-multiselect-dropdown style="height: 30px;" [placeholder]="'Select Position'"
+                        [settings]="roledropdownSettings" [data]="dropdownRoleList" [(ngModel)]="roleselectedItems"
+                        (onSelect)="roleonItemSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <label>Department</label>
+                <div class="dropdown">
+                    <!-- <select class="form-control  " id="Year" name="Year" [(ngModel)]="department_name"
+                    (click)="Departmentfilter()"><br />
+                        <option class="rolefiltr" value="Select">Select Department</option>
+                        <option *ngFor="let item of result" value="{{item.department_name}}">{{item.department_name}}
+                    </select> -->
+
+                    <ng-multiselect-dropdown style="height: 30px;" [placeholder]="'Select Department'"
+                        [settings]="deptdropdownSettings" [data]="dropdownDeptList" [(ngModel)]="deptselectedItems"
+                        (onSelect)="deptonItemSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+            </div>
+        </div>
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+            <br />
+            <button *ngIf="seleconebtn" (click)="getpayrolldata()" class="button btnwd" type="button"
+                id="btn_button">Generate
+                Payroll Data</button>
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-5">
+        </div>
+        <div class="col-lg-3">
+            <p>Total Count: {{uniquelist?.length}} </p>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row rowht" id="employee">
+        <div class="col-lg-12">
+            <table class="table table-bordered fonttxt tableht" id="downloadaplication"
+                *ngIf="(uniquelist |paginate: { itemsPerPage: count1, currentPage: p})?.length > 0 ;">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" (click)="selectALL($event)"></th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Employee Id</th>
+                        <th>Employee Name</th>
+                        <!-- <th>Department</th>
+                        <th>Role</th> -->
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Weekend Days</th>
+                        <th>No Of Days Worked</th>
+                        <th>Total Days</th>
+                        <th>Leave Days</th>
+                        <th>Lop</th>
+                        <th>Date Of Joining</th>
+                        <th>Manager</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of uniquelist|filter:Search|paginate: { itemsPerPage: count1, currentPage: p}">
+                        <td>
+                            <input type="checkbox" [(ngModel)]="item.checked" [value]="item.value"
+                                (click)="getCheckbocdetails(item,$event)">&nbsp;
+                        </td>
+                        <td>{{startdate|date}}</td>
+                        <td>{{enddate|date}}</td>
+                        <td>{{item.employeID}}</td>
+                        <td>{{item.name}}</td>
+                        <!-- <td>{{item.department_name}}</td>
+                        <td>{{item.role}}</td> -->
+                        <td>{{item.mobile}}</td>
+                        <td>{{item.emailID}}</td>
+                        <td>{{item.weekenddays}}</td>
+                        <td>{{item.daysworked}}</td>
+                        <td>{{item.workingdays}}</td>
+                        <td>{{item.leavedays}}</td>
+                        <td>{{item.lopdays}}</td>
+                        <td>{{item.joiningDate|date}}</td>
+                        <td>
+                            <p *ngIf="item.manager==null">
+                                NA
+                            </p>
+                            <p *ngIf="item.manager!=null">
+                                {{item.manager}}
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="text-right">
+            <br>
+            <pagination-controls (pageChange)="p = $event" class="poppinns"></pagination-controls>
+        </div> -->
+        <div class="text-right" >
+            <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                class="poppinns"></pagination-controls>
+        </div>
+
+    </div>
+    <!-- <div class="row rowht" id="employee">
+        <div class="col-lg-12">
+            <table class="table table-bordered fonttxt tableht" id="downloadaplication"
+                *ngIf="(FilesDetails |paginate: { itemsPerPage: count1, currentPage: p})?.length > 0">
+                <thead>
+                    <tr>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Payroll Run Date</th>
+                        <th>Payroll Run Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let item of FilesDetails|filter:Search|paginate: { itemsPerPage: count1, currentPage: p}">
+
+                        <td>{{item.startDate|date}}</td>
+                        <td>{{item.endDate|date}}</td>
+                        <td>{{item.modifieddate|date}}</td>
+                        <td>{{item.time}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+    </div> -->
+    <app-loader *ngIf="loader"></app-loader>
