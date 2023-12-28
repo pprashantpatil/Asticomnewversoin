@@ -8,6 +8,7 @@ import { InactivestaffDetailsComponent } from './inactivestaff-details/inactives
 import { PayrollTriggerDashComponent } from './Payroll/payroll-trigger-dash/payroll-trigger-dash.component';
 import { GeneratePreliminaryReportComponent } from './Payroll/generate-preliminary-report/generate-preliminary-report.component';
 import { GenerateCsvfilesComponent } from './Payroll/generate-csvfiles/generate-csvfiles.component';
+import { LeaveTypeDashboardComponent } from './Master/leave-type-dashboard/leave-type-dashboard.component';
 
 const routes: Routes = [
   { path: 'AddressDetailsWizard', component: AddressDetailsWizardComponent  ,canActivate: [AuthguardGuard]},
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: 'PayrollTriggerDash', component: PayrollTriggerDashComponent  ,canActivate: [AuthguardGuard]},
   { path: 'GeneratePreliminaryReport', component: GeneratePreliminaryReportComponent  ,canActivate: [AuthguardGuard]},
   { path: 'GenerateCsvfiles', component:   GenerateCsvfilesComponent,canActivate: [AuthguardGuard]},
-  
+  { path: 'LeaveTypeDashboard', component:   LeaveTypeDashboardComponent,canActivate: [AuthguardGuard]},
 ];
 
 @NgModule({

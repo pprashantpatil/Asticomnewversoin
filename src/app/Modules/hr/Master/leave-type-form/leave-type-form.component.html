@@ -1,1 +1,32 @@
-<p>leave-type-form works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <p class="Heading">Leave Details</p>
+                <img src="assets/Images/revamp/cancle-icon.png" (click)="cancel()" class="closeicon">
+            </div>
+            <div class="popupcontent">
+                <div class="popupinputs">
+                    <p>Leave Type<span class="span">*</span></p>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Leave Type" [(ngModel)]="Short"
+                            name="Short" id="Short" (change)="ShortValidation($event)">
+                    </div>
+                </div>
+                <div class="popupinputs">
+                    <p>Leave Description<span class="span">*</span></p>
+                    <div>
+                        <textarea rows="3" type="text" class="form-control" placeholder="Leave Description"
+                            placeholder="Description" [(ngModel)]="Description" name="Description" id="Description"
+                            (change)="DescriptionValidation($event)"></textarea>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                    <button class="close-button" (click)="cancel()">Cancel</button>
+                    <button class="submit-button" *ngIf="ID!=undefined" (click)="UpdateLeaveType()">Save Changes</button>
+                    <button class="submit-button" *ngIf="ID==undefined" (click)="InsertLeaveTypeMaster()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
