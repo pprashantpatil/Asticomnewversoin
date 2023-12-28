@@ -153,7 +153,7 @@ export class SidebarComponent implements OnInit {
   public overTimeDetails() {
     this.active = 2.3;
     if(this.roleid==11){
-      this.router.navigate(['/Employee/MyTeamOverTimeDetails']);
+      this.router.navigate(['/Manager/MyTeamOverTimeDetails']);
       localStorage.setItem('Pagename', 'Over Time Details');
       this.data11.emit('Over Time Details');
     }
