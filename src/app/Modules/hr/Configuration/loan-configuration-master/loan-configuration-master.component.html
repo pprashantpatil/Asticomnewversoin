@@ -1,1 +1,58 @@
-<p>loan-configuration-master works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <p class="Heading">Loan Configuration Details</p>
+                <img src="assets/Images/revamp/cancle-icon.png" (click)="cancel()" class="closeicon">
+            </div>
+
+            <div class="popupcontent">
+                <div class="popupinputs">
+                    <p>Loan Category<span class="span">*</span></p>
+                    <div>
+                        <div class="dropdown">
+                            <select class="form-control inputfield select" id="LoanCategory" name="LoanCategory"
+                                [(ngModel)]="LoanCategory">
+                                <option value="">Select Loan Category</option>
+                                <option value="{{leavetype.id}}" *ngFor="let leavetype of leavelist">
+                                    {{leavetype.type}} </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Applied Amount Capital-Employee:<span class="span">*</span></p>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Applied Amount Capital-Employee:"
+                            [(ngModel)]="EmployeeApply" name="EmployeeApply" id="EmployeeApply">
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Applied Amount Capital-Manager:<span class="span">*</span></p>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Applied Amount Capital-Manager:"
+                            [(ngModel)]="ManagerApply" name="ManagerApply" id="ManagerApply">
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Applied Amount Capital-Other Position:<span class="span">*</span></p>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Applied Amount Capital-Other Position:"
+                            [(ngModel)]="OtherRolesApply" name="OtherRolesApply" id="OtherRolesApply">
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                    <button class="close-button" (click)="cancel()">Cancel</button>
+                    <button *ngIf="ID==undefined" class="submit-button" (click)="InsertLoanConfiguration()">Submit</button>
+                    <button *ngIf="ID!=undefined" class="submit-button" (click)="UpdateLoanConfiguration()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

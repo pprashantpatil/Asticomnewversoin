@@ -9,6 +9,10 @@ import { PayrollTriggerDashComponent } from './Payroll/payroll-trigger-dash/payr
 import { GeneratePreliminaryReportComponent } from './Payroll/generate-preliminary-report/generate-preliminary-report.component';
 import { GenerateCsvfilesComponent } from './Payroll/generate-csvfiles/generate-csvfiles.component';
 import { LeaveTypeDashboardComponent } from './Master/leave-type-dashboard/leave-type-dashboard.component';
+import { StaffBulkUploadExceptionsComponent } from './Configuration/staff-bulk-upload-exceptions/staff-bulk-upload-exceptions.component';
+import { LeaveConfigurationComponent } from './Configuration/leave-configuration/leave-configuration.component';
+import { LeaveConfigurationdashComponent } from './Configuration/leave-configurationdash/leave-configurationdash.component';
+import { LoanConfigurationDashComponent } from './Configuration/loan-configuration-dash/loan-configuration-dash.component';
 
 const routes: Routes = [
   { path: 'AddressDetailsWizard', component: AddressDetailsWizardComponent  ,canActivate: [AuthguardGuard]},
@@ -20,6 +24,10 @@ const routes: Routes = [
   { path: 'GeneratePreliminaryReport', component: GeneratePreliminaryReportComponent  ,canActivate: [AuthguardGuard]},
   { path: 'GenerateCsvfiles', component:   GenerateCsvfilesComponent,canActivate: [AuthguardGuard]},
   { path: 'LeaveTypeDashboard', component:   LeaveTypeDashboardComponent,canActivate: [AuthguardGuard]},
+  { path: 'StaffBulkUploadExceptions', component: StaffBulkUploadExceptionsComponent  ,canActivate: [AuthguardGuard]},
+
+  { path: 'LeaveConfigurationDash', component: LeaveConfigurationdashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'LoanConfigurationDash', component: LoanConfigurationDashComponent  ,canActivate: [AuthguardGuard]},
 ];
 
 @NgModule({

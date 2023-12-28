@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DigiofficecorehrService } from '../../../Services/digiofficecorehr.service';
-import { jsPDF } from "jspdf";
-import html2canvas from 'html2canvas';
-import * as JSZip from 'jszip';
 import Swal from 'sweetalert2';
-import { ExportToCsv } from 'export-to-csv';
 import * as XLSX from 'xlsx';
+import { ExportToCsv } from 'export-to-csv';
+import { MatDialog } from '@angular/material/dialog';
+import { DatePipe, formatDate } from '@angular/common';
+import { AddressDetailsWizardComponent } from '../address-details-wizard/address-details-wizard.component';
 
 @Component({
   selector: 'app-staffdashboard',
@@ -14,10 +14,16 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./staffdashboard.component.css']
 })
 export class StaffdashboardComponent implements OnInit {
+  startDate: any;
+  endDate: any;
+search: any;
+  staffFilter: any;
+nonStaffList: any;
+  nonStaffFilter: any;
 
-  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router) { }
+  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router, private datePipe: DatePipe, private matDialog: MatDialog) { }
   viewMode = 'tab1';
-  stafflist: any;
+  staffList: any;
   term: any;
   p: any = 1;
   count1: any = 10;
@@ -210,7 +216,6 @@ export class StaffdashboardComponent implements OnInit {
     this.getDepartment();
   }
   payrollBit: any;
-  stafflist1: any;
   stafflistCopy1: any;
   stafflist123:any;
   public GetStaff() {
@@ -218,12 +223,13 @@ export class StaffdashboardComponent implements OnInit {
       subscribe({
         next: data => {
           debugger
-          // this.stafflist = data;
           this.stafflist123=data;
-          this.stafflist = data.filter(x => x.payrollBit == 0 || x.payrollBit == null);
-          this.stafflistCopy = this.stafflist;
-          this.stafflist1 = data.filter(x => x.payrollBit == 1);
-          this.stafflistCopy1 = this.stafflist1;
+          this.staffList = data.filter(x => x.payrollBit == 0 || x.payrollBit == null);
+          this.staffFilter = data.filter(x => x.payrollBit == 0 || x.payrollBit == null);
+          this.stafflistCopy = this.staffList;
+          this.nonStaffList = data.filter(x => x.payrollBit == 1);
+          this.nonStaffFilter = data.filter(x => x.payrollBit == 1);
+          this.stafflistCopy1 = this.nonStaffList;
           this.loader = false;
         }, error: (err) => {
           // Swal.fire('Issue in Getting All Staff');
@@ -249,7 +255,7 @@ export class StaffdashboardComponent implements OnInit {
       subscribe({
         next: data => {
           debugger
-          this.stafflist = data.filter(x => x.filterdate == this.date);
+          this.staffList = data.filter(x => x.filterdate == this.date);
         }, error: (err) => {
           // Swal.fire('Issue in Filtering Data');
           // Insert error in Db Here//
@@ -271,9 +277,6 @@ export class StaffdashboardComponent implements OnInit {
   public Filterstaff() {
     debugger
     let searchCopy = this.term.toLowerCase();
-    // this.stafflist = this.stafflistCopy.filter((x: { employeID: string; role: string }) =>
-    //   x.employeID.toLowerCase().includes(searchCopy));
-    // this.count = this.stafflist.length;
     if (searchCopy.length == 0) {
       this.GetStaff();
     } else {
@@ -281,11 +284,10 @@ export class StaffdashboardComponent implements OnInit {
         subscribe({
           next: data => {
             debugger
-            // this.stafflist = data;
-            this.stafflist = data.filter(x => x.payrollBit == 0 || x.payrollBit == null);
-            this.stafflistCopy = this.stafflist;
-            this.stafflist1 = data.filter(x => x.payrollBit == 1);
-            this.stafflistCopy1 = this.stafflist1;
+            this.staffList = data.filter(x => x.payrollBit == 0 || x.payrollBit == null);
+            this.stafflistCopy = this.staffList;
+            this.nonStaffList = data.filter(x => x.payrollBit == 1);
+            this.stafflistCopy1 = this.nonStaffList;
             this.loader = false;
           }, error: (err) => {
             // Swal.fire('Issue in Getting All Staff');
@@ -359,54 +361,135 @@ export class StaffdashboardComponent implements OnInit {
   //   });;
   // }
 
-
-  public DeleteStaff(list: any) {
-    debugger;
+  public openDeletePopUp(id: any) {
     this.showPopup = 0;
     Swal.fire({
-      title: 'Delete Record',
-      text: 'Are you sure you want to delete it?',
-      type: 'warning',
+      title: 'Delete record',
+      text: "Are you sure you want to delete it?",
+      showCloseButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Yes, Delete it!',
-      cancelButtonText: 'No, keep it'
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Proceed'
     }).then((result) => {
       if (result.value == true) {
-        this.DigiofficeService.DeleteBuildingStaff(list.id)
+        this.DigiofficeService.DeleteBuildingStaff(id)
           .subscribe({
             next: data => {
-              debugger
-              /*    Swal.fire('Deleted Successfully') */
-              this.loader = false;
-              this.showPopup = 1;
-              this.messageId = 11;
+              Swal.fire('Deleted Successfully');
               this.ngOnInit();
-            }, error: (err) => {
-              // Swal.fire('Issue in Deleting Staff');
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
       }
-    })
+    });
   }
-
-
 
 
 
   public urls: any = [];
 
 
+  public downloadzip(application: any) {
+    debugger
 
+    this.urls = [];
+    this.DigiofficeService.GetEmployeeDocuments().
+      subscribe({
+        next: data => {
+          debugger
+          let filearray: any = data.filter(x => x.staffId == 10429);
+          //this.urls.push(filearray[0].lease_control_sheet);
+          if (filearray[0].employee_Application_form != null) {
+            this.urls.push(filearray[0].employee_Application_form);
+          }
+          if (filearray[0].offer_letter != null) {
+            this.urls.push(filearray[0].offer_letter)
+          }
+          if (filearray[0].resume != null) {
+            this.urls.push(filearray[0].resume)
+          }
+          if (filearray[0].certificates_From_Previous_Employer != null) {
+            this.urls.push(filearray[0].certificates_From_Previous_Employer)
+          }
+          if (filearray[0].medical_Examination_Report != null) {
+            this.urls.push(filearray[0].medical_Examination_Report)
+          }
+
+          if (filearray[0].birth_Certificates != null) {
+            this.urls.push(filearray[0].birth_Certificates)
+          }
+          if (filearray[0].marriage_Certificates != null) {
+            this.urls.push(filearray[0].marriage_Certificates)
+          }
+          if (filearray[0].sss_e1Form != null) {
+            this.urls.push(filearray[0].sss_e1Form)
+          }
+          if (filearray[0].sss_loanvoucher != null) {
+            this.urls.push(filearray[0].sss_loanvoucher)
+          }
+          if (filearray[0].hdmf_form != null) {
+            this.urls.push(filearray[0].hdmf_form)
+          }
+
+          if (filearray[0].hdmf_loanvoucher != null) {
+            this.urls.push(filearray[0].hdmf_loanvoucher)
+          }
+
+
+          if (filearray[0].phic_reg != null) {
+            this.urls.push(filearray[0].phic_reg)
+          }
+          if (filearray[0].bir_form_1902 != null) {
+            this.urls.push(filearray[0].bir_form_1902)
+          }
+          if (filearray[0].bir_form_2305 != null) {
+            this.urls.push(filearray[0].bir_form_2305)
+          }
+          if (filearray[0].bir_form_2316 != null) {
+            this.urls.push(filearray[0].bir_form_2316)
+          }
+          if (filearray[0].bir_form_1905 != null) {
+            this.urls.push(filearray[0].bir_form_1905)
+          }
+          if (filearray[0].dependts_birth_certificates != null) {
+            this.urls.push(filearray[0].dependts_birth_certificates)
+          }
+          if (filearray[0].attendance_sheet_dtr != null) {
+            this.urls.push(filearray[0].attendance_sheet_dtr)
+          }
+
+
+          if (filearray[0].promotion_doc != null) {
+            this.urls.push(filearray[0].promotion_doc)
+          }
+          if (filearray[0].incident_report != null) {
+            this.urls.push(filearray[0].incident_report)
+          }
+          if (filearray[0].clearnce_form != null) {
+            this.urls.push(filearray[0].clearnce_form)
+          }
+          if (filearray[0].resignation_form != null) {
+            this.urls.push(filearray[0].resignation_form)
+          }
+          if (filearray[0].employee_201report != null) {
+            this.urls.push(filearray[0].employee_201report)
+          }
+          // this.createzip();
+        }, error: (err) => {
+          // Swal.fire('Issue in Getting Depandent Details');
+          // Insert error in Db Here//
+          var obj = {
+            'PageName': this.currentUrl,
+            'ErrorMessage': err.error.message
+          }
+          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+            data => {
+              debugger
+            },
+          )
+        }
+      })
+  }
 
 
 
@@ -422,9 +505,9 @@ export class StaffdashboardComponent implements OnInit {
 
     this.clikedid = item.employeID;
   }
-  public Edit() {
-    this.router.navigate(['/HR/AddressDetailsWizard', this.clikedid]);
-
+  
+  public Edit(id:any) {
+    this.router.navigate(['/HR/AddressDetailsWizard', id]);
   }
 
   public Upload() {
@@ -433,7 +516,38 @@ export class StaffdashboardComponent implements OnInit {
   }
 
   showbtn: any;
+  // public createzip() {
+  //   debugger
 
+  //   let count = 0;
+  //   const zip = new JSZip();
+
+  //   this.urls.forEach((url: any) => {
+  //     const filename = url.split('/')[url.split('/').length - 1].split('/')[0].split('/')[0].slice(41);
+
+  //     JSZipUtils.getBinaryContent(url, (err: any, data: string | number[] | Uint8Array | ArrayBuffer | Blob | NodeJS.ReadableStream | Promise<string | number[] | Uint8Array | ArrayBuffer | Blob | NodeJS.ReadableStream>) => {
+  //       if (err) {
+  //         throw err;
+  //       }
+
+  //       zip.file(filename, data, { binary: true });
+  //       count++;
+
+  //       if (count === this.urls.length) {
+  //         zip.generateAsync({ type: 'blob' }).then((content) => {
+  //           const objectUrl: string = URL.createObjectURL(content);
+  //           const link: any = document.createElement('a');
+
+  //           link.download = 'Employee201Report.zip';
+  //           link.href = objectUrl;
+  //           link.click();
+
+  //         });
+  //       }
+  //     });
+  //   })
+
+  // }
 
   // public cretezip(){
   //   var Minizip = require('minizip-asm.js')
@@ -960,287 +1074,14 @@ export class StaffdashboardComponent implements OnInit {
   role:any;
   roleid:any;
   ID:any;
-  //   public Upload_file() {
-  //     debugger
-  //     if (this.exceldata == undefined) {
-  //       Swal.fire('Choose a File');
-  //     } else {
-  //       let apiarray = [];
-
-  //        for (let i = 0; i < this.exceldata.length; i++) {
-  //        this.staflis= this.stafflist.filter((x: {  employeID : any; })=>x.employeID==this.exceldata[i].Manage
-
-  //                )
-  //                if(this.staflis.length!=0){
-  //                 this.ID = this.staflis[0].id
-  //                }
-  //                else{
-  //                 this.ID = 'NA'
-  //               }
-
-  //               // this.RoleTypeList2=this.dropdownRoleList.filter((x: {  short : any; })=>x.short==this.exceldata[i].Positiontitle             )
-  //               // if(this.RoleTypeList2.length!=0){
-  //               //   this.roleid=this.RoleTypeList2[0].id
-  //               //  }
-  //               //  else{
-  //               //   this.roleid = 0
-  //               // }
-
-
-
-
-
-  //               var eb1 = {
-
-
-  //           'ID': this.exceldata[i].LeavewithPay,
-  //           'Short': this.exceldata[i].EMPLID,
-  //           'Description': this.exceldata[i].TIN,
-
-
-  //         }
-
-
-  //   // var entity = {
-  //   //   'ID':1,
-  //   //   'Notes': this.exceldata[i].EMPLID,
-  //   //   'Status': this.exceldata[i].COMPRATE,
-  //   //   ApproveBit: 1
-  //   // }
-  //  // this.DigiofficeService.ApproveTimeSheet(entity)
-
-  //        this.DigiofficeService.UpdateRoleType(eb1)
-  //           .subscribe({
-  //             next: data => {
-  //               debugger
-  //               Swal.fire('Updated Successfully')
-  //               this.ngOnInit();
-  //             }, error: (err) => {
-  //               // Swal.fire('Issue in Updating Department');
-  //               // Insert error in Db Here//
-  //               var obj = {
-  //                 'PageName': this.currentUrl,
-  //                 'ErrorMessage': err.error.message
-  //               }
-  //               this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-  //                 data => {
-  //                   debugger
-  //                 },
-  //               )
-  //             }
-  //           })
-  //       }
-  //     }
-  //   }
-
-  // staflis: any;
-  // supervisor:any;
-  // role:any;
-  // loanlist1:any;
-  // LoanType:any;
-  // public Upload_file() {
-  //   debugger
-  //   if (this.exceldata == undefined) {
-  //     Swal.fire('Choose a File');
-  //   } else {
-  //     let apiarray = [];
-
-  //     for (let i = 0; i < this.exceldata.length; i++) {
-
-  //       this.staflis= this.stafflist.filter((x: {  employeID : any; })=>x.employeID==this.exceldata[i].Emplid
-  //              )
-  //              if(this.staflis.length!=0){
-  //               this.StaffID = this.staflis[0].id
-  //              }
-  //              else{
-  //               this.StaffID = 0
-  //             }
-
-
-  //             this.loanlist1= this.loanlist.filter((x: {  type : any; })=>x.type===this.exceldata[i].LOANTYPE
-  //             )
-  //             if(this.loanlist1.length!=0){
-  //              this.LoanType = this.loanlist1[0].id
-  //             }
-  //             else{
-  //              this.LoanType = 'NA'
-  //            }
-
-
-
-
-  // var entity = {
-
-  //   'StaffID': this.StaffID,
-  //   'LoanType': this.LoanType,
-  //   'LoanAmount': 0,
-  //   'Period': this.exceldata[i].NoofRemainingPayrolls,
-  //   'EmiAmount' : this.exceldata[i].deductionamount,
-  //   'StartDate' : this.exceldata[i].StartDeduction.slice(1, -1),
-  //   'status': 'HR Approved'
-
-
-
-  // }
-  //       this.DigiofficeService.InsertEmployeeLoans(entity)
-  //         .subscribe({
-  //           next: data => {
-  //             debugger
-  //             Swal.fire('Updated Successfully')
-  //             this.ngOnInit();
-  //           }, error: (err) => {
-  //             Swal.fire('Issue in Updating Department');
-  //             // Insert error in Db Here//
-  //             var obj = {
-  //               'PageName': this.currentUrl,
-  //               'ErrorMessage': err.error.message
-  //             }
-  //             this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-  //               data => {
-  //                 debugger
-  //               },
-  //             )
-  //           }
-  //         })
-  //     }
-  //   }
-  // }
-
-  // ExtensionEndDate: any;
-  // ProbationEndDate: any;
-  // ProbationStartDate: any;
-  // StaffID1: any;
-  // stafflist2: any;
   CityID: any;
   Citylist1: any;
   StateID: any;
   public attachmentsurl: any = [];
-  // public Upload_file() {
-  //   debugger
-  //   if (this.exceldata == undefined) {
-  //     Swal.fire('Choose a File');
-  //   } else {
-  //     let apiarray = [];
-
-  //   for (let i = 0; i < this.exceldata.length; i++) {
-  //     this.stafflist2 =  this.leavelist23.filter((x: { short: any; })=>x.short==this.exceldata[i].City);
-
-  //     if(this.stafflist2.length!=0){
-  //       this.CityID=this.stafflist2[0].id
-  //     }
-  //     else{
-  //       this.CityID=0
-  //     }
-
-  //       this.Citylist1= this.leavelist.filter((x: { short: any; })=>x.short===this.exceldata[i].Province );
-  //       if(this.Citylist1.length!=0){
-  //         this.StateID=this.Citylist1[0].id
-  //       }
-  //       else{
-  //         this.StateID=0
-  //       }
-
-
-  //      var eb1 = {
-
-  //             'id': this.StaffID1,
-  //             'CountryID' : 5 ,
-  //             'ProvinceID' : this.StateID,
-  //             'CityID' : this.CityID,
-  //             'Name':this.exceldata[i].Barangay ,
-  //             'Description' : this.exceldata[i].Barangay 
-  //           }
-
-  //           this.DigiofficeService.InsertBarangayMaster(eb1).subscribe(
-
-  //             data => {
-  //               debugger
-
-  //              Swal.fire('Saved Successfully')
-
-  //             },
-  //           )
-  //           }
-  //         }
-  //       }
-  //     //this.stafflist2 =  this.stafflist.filter((x: { employeID: any; })=>x.employeID==this.exceldata[i].EmployeeNo);
-
-  //     if(this.stafflist2.length!=0){
-  //       this.StaffID1=this.stafflist2[0].id
-  //     }
-  //     else{
-  //       this.StaffID1=0
-  //     }
-
-  //           var eb = {
-  //             // 'StaffID': localStorage.getItem('staffid'),
-  //             // 'LoanType': this.exceldata[i].POSITIONNAME,
-  //             // 'LoanAmount': this.exceldata[i].POSITIONNAME,
-  //             // 'Comments': this.exceldata[i].POSITIONNAME,
-  //             // 'Status': 'HR Approved',
-  //             // 'period': this.exceldata[i].POSITIONNAME,
-  //             // 'Attachment': this.attachmentsurl[0],
-
-
-  //             'StaffID' : this.StaffID1,
-  //             'LoanType' : this.exceldata[i].LOANTYPE,
-  //             'LoanAmount' : this.exceldata[i].PrincipalAmount,
-  //             'LoanAmountWithInterest'  : this.exceldata[i].PrincipalAmount,
-  //             'Period' : this.exceldata[i].Period,
-  //             'Attachment' : this.attachmentsurl[0],
-  //             'Comments' : this.exceldata[i].Comments,
-  //             'Status' : 'HR Approved',
-  //             'Interest' : this.exceldata[i].InterestAmount,
-  //             'Reason' : 'NA',
-  //             'EmiAmount' : this.exceldata[i].MonthlyAmort,
-  //             'startdate' : this.exceldata[i].StartDeduction.slice(1, -1) == " " ? "1990-01-01 00:00:00.000" : this.exceldata[i].StartDeduction.slice(1, -1) ,
-  //             'enddate' : this.exceldata[i].StartDeduction.slice(1, -1) == " " ? "1990-01-01 00:00:00.000" : this.exceldata[i].StartDeduction.slice(1, -1) ,
-  //             'paidamount' : this.exceldata[i].TotalDeductions,
-  //             'EndingBalance' : this.exceldata[i].EndingBalance,
-  //             'ApprovedDate' : this.exceldata[i].DateGranted.slice(1, -1) == " " ? "1990-01-01 00:00:00.000" : this.exceldata[i].DateGranted.slice(1, -1) ,  
-
-
-  //           }
-  //           this.DigiofficeService.InsertEmployeeLoans(eb)
-  //             .subscribe({
-  //               next: data => {
-  //                 debugger
-  //                 Swal.fire('Saved Successfully.');
-  //                 location.href = "#/Employee/Employeeloandash";
-  //                 this.loader = false;
-  //               }, error: (err) => {
-  //                 Swal.fire('Issue in Inserting Employee Loans');
-  //                 // Insert error in Db Here//
-  //                 var obj = {
-  //                   'PageName': this.currentUrl,
-  //                   'ErrorMessage': err.error.message
-  //                 }
-  //                 this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-  //                   data => {
-  //                     debugger
-  //                   },
-  //                 )
-  //               }
-  //             })
-  //         }
-
-  //     }
-  //   }
-
-
-
+ 
   public Upload_file_leavebalance() {
     debugger
     for (let i = 0; i < this.exceldata.length; i++) {
-
-    //  this.stafflist2 = this.stafflist.filter((x: { employeID: any; }) => x.employeID == this.exceldata[i].Manage);
-
-      // if (this.stafflist2.length != 0) {
-      //   this.StaffID1 = this.stafflist2[0].id
-      // }
-      // else {
-      //   this.StaffID1 = 0
-      // }
       var eb = {
         'ID':this.exceldata[i].entitlement,
         'Short': this.exceldata[i].bal,
@@ -1280,8 +1121,8 @@ export class StaffdashboardComponent implements OnInit {
           next: data => {
             debugger
             debugger
-            this.stafflist = data;
-            this.stafflistCopy = this.stafflist
+            this.staffList = data;
+            this.stafflistCopy = this.staffList
           }, error: (err) => {
             // Swal.fire('Issue in Getting Data');
             // Insert error in Db Here//
@@ -1302,8 +1143,8 @@ export class StaffdashboardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            this.stafflist = data.filter(x => x.assignedCompany == this.AssignedCompany);
-            this.stafflistCopy = this.stafflist
+            this.staffList = data.filter(x => x.assignedCompany == this.AssignedCompany);
+            this.stafflistCopy = this.staffList
           }, error: (err) => {
             // Swal.fire('Issue in Getting Data');
             // Insert error in Db Here//
@@ -1327,8 +1168,8 @@ export class StaffdashboardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            this.stafflist = data;
-            this.stafflistCopy = this.stafflist
+            this.staffList = data;
+            this.stafflistCopy = this.staffList
           }, error: (err) => {
             // Swal.fire('Issue in Getting Data');
             // Insert error in Db Here//
@@ -1349,8 +1190,8 @@ export class StaffdashboardComponent implements OnInit {
           next: data => {
             debugger
             debugger
-            this.stafflist = data.filter(x => x.department == this.Department);
-            this.stafflistCopy = this.stafflist
+            this.staffList = data.filter(x => x.department == this.Department);
+            this.stafflistCopy = this.staffList
           }, error: (err) => {
             // Swal.fire('Issue in Getting Data');
             // Insert error in Db Here//
@@ -1375,8 +1216,8 @@ export class StaffdashboardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            this.stafflist = data;
-            this.stafflistCopy = this.stafflist
+            this.staffList = data;
+            this.stafflistCopy = this.staffList
           }, error: (err) => {
             // Swal.fire('Issue in Filtering Hoilday');
             // Insert error in Db Here//
@@ -1397,8 +1238,8 @@ export class StaffdashboardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            this.stafflist = data.filter(x => x.levelid == this.level);
-            this.stafflistCopy = this.stafflist
+            this.staffList = data.filter(x => x.levelid == this.level);
+            this.stafflistCopy = this.staffList
           }, error: (err) => {
             // Swal.fire('Issue in Getting Hoilday');
             // Insert error in Db Here//
@@ -1424,8 +1265,8 @@ export class StaffdashboardComponent implements OnInit {
           next: data => {
             debugger
             debugger
-            this.stafflist = data;
-            this.stafflistCopy = this.stafflist
+            this.staffList = data;
+            this.stafflistCopy = this.staffList
           }, error: (err) => {
             // Swal.fire('Issue in Filtering Role Type');
             // Insert error in Db Here//
@@ -1446,8 +1287,8 @@ export class StaffdashboardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            this.stafflist = data.filter(x => x.type == this.roleID);
-            this.stafflistCopy = this.stafflist
+            this.staffList = data.filter(x => x.type == this.roleID);
+            this.stafflistCopy = this.staffList
           }, error: (err) => {
             // Swal.fire('Issue in Filtering Data');
             // Insert error in Db Here//
@@ -1541,12 +1382,12 @@ export class StaffdashboardComponent implements OnInit {
   failedarray: any = [];
   passedarray: any = [];
   sequenceNumber1: any;
-  public exportexcel1() {
+  public exportexcel() {
     debugger
     this.loader = true;
     var ExportData = [];
     this.sequenceNumber1 = 0;
-    for (let i = 0; i < this.stafflist.length; i++) {
+    for (let i = 0; i < this.staffList.length; i++) {
       //debugger;
       this.sequenceNumber1 = i + 1;
       let singleData = {
@@ -1564,16 +1405,16 @@ export class StaffdashboardComponent implements OnInit {
 
       }
       singleData.SequenceNumber = this.sequenceNumber1;
-      singleData.EmployeeID = this.stafflist[i].employeID;
-      singleData.EmployeeName = this.stafflist[i].name;
-      singleData.LastName = this.stafflist[i].last_Name;
-      singleData.Department = this.stafflist[i].department_name;
-      singleData.Gender = this.stafflist[i].gender;
-      singleData.Position = this.stafflist[i].role;
-      singleData.PhoneNumber = this.stafflist[i].mobile;
-      singleData.Email = this.stafflist[i].emailID;
-      singleData.Date_Of_Joining = this.stafflist[i].joiningDate;
-      singleData.Manager = this.stafflist[i].manager == null ? 'NA' : this.stafflist[i].manager;
+      singleData.EmployeeID = this.staffList[i].employeID;
+      singleData.EmployeeName = this.staffList[i].name;
+      singleData.LastName = this.staffList[i].last_Name;
+      singleData.Department = this.staffList[i].department_name;
+      singleData.Gender = this.staffList[i].gender;
+      singleData.Position = this.staffList[i].role;
+      singleData.PhoneNumber = this.staffList[i].mobile;
+      singleData.Email = this.staffList[i].emailID;
+      singleData.Date_Of_Joining = this.staffList[i].joiningDate;
+      singleData.Manager = this.staffList[i].manager == null ? 'NA' : this.staffList[i].manager;
       ExportData.push(singleData);
       //debugger
     }
@@ -1593,22 +1434,37 @@ export class StaffdashboardComponent implements OnInit {
     //debugger
     csvExporter.generateCsv(ExportData);
     this.loader = false;
-
-
-
   }
 
+  public getEndDate(event: any) {
+    debugger
+    this.startDate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.endDate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
+    if (this.endDate < this.startDate) {
+      Swal.fire("The end date should be greater than the start date")
+      this.endDate = ""
+    }
+    else if (this.startDate == undefined) {
+      Swal.fire("Please select the start date first")
+      this.endDate = ""
+    }
+    else {
+      this.staffList = this.staffFilter.filter((x: { dateTime: any; time: any; }) => (x.dateTime >= this.startDate && x.dateTime <= this.endDate) || (x.time >= this.startDate && x.time <= this.endDate));
+      this.nonStaffList = this.nonStaffFilter.filter((x: { dateTime: any; }) => (x.dateTime >= this.startDate && x.dateTime <= this.endDate ));
+    }
+  }
 
+  showDialog() {
+    debugger
+    let ID = undefined
+    this.matDialog.open(AddressDetailsWizardComponent, {
+      data: ID,
+      width: '100%',
+      maxHeight: '80vh'
+    }).afterClosed()
+      .subscribe(result => {
+        console.log('Result' + result);
+        this.ngOnInit();
+      });
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
