@@ -77,10 +77,10 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th>Employee ID</th>
-                            <th>Employee Name</th>
+                            <th>Staff ID</th>
+                            <th>Staff Name</th>
+                            <th>Correction Date</th>
                             <th>Submitted Date</th>
-                            <th>Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
                             <th>Comments</th>
@@ -91,8 +91,8 @@
                         <tr *ngFor="let data of attendanceCorrectionPendingList|filter:search">
                             <td>{{data.employeid}}</td>
                             <td>{{data.staffname}}</td>
+                            <td>{{data.attendanceDate|date}}</td>
                             <td>{{data.modifiedDate|date}}</td>
-                            <td>{{data.sDate|date}}</td>
                             <td>{{data.startTime}}</td>
                             <td>{{data.endTime}}</td>
                             <td>
@@ -155,11 +155,12 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th>Employee ID</th>
-                            <th>Employee Name</th>
+                            <th>Staff ID</th>
+                            <th>Staff Name</th>
+                            <th>Correction Date</th>
                             <th>Submitted Date</th>
                             <th>Approved Date</th>
-                            <th>Correction Date</th>
+                           
                             <th>Start Time</th>
                             <th>End Time</th>
                             <th>Comments</th>
@@ -169,9 +170,9 @@
                         <tr *ngFor="let data of attendanceCorrectionApprovedList|filter:search">
                             <td>{{data.employeid}}</td>
                             <td>{{data.staffname}}</td>
+                            <td>{{data.attendanceDate|date}}</td>
                             <td>{{data.modifiedDate|date}}</td>
                             <td>{{data.approvedDate|date}}</td>
-                            <td>{{data.attendanceDate|date}}</td>
                             <td>{{data.startTime}}</td>
                             <td>{{data.endTime}}</td>
                             <td>{{data.comments}}</td>
@@ -200,10 +201,10 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th>Employee ID</th>
-                            <th>Employee Name</th>
-                            <th>Submitted Date</th>
+                            <th>Staff ID</th>
+                            <th>Staff Name</th>
                             <th>Correction Date</th>
+                            <th>Submitted Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
                             <th>Comments</th>
@@ -213,15 +214,12 @@
                         <tr *ngFor="let data of attendanceCorrectionRejectedList|filter:search">
                             <td>{{data.employeid}}</td>
                             <td>{{data.staffname}}</td>
+                            <td>{{data.attendanceDate|date}}</td>
                             <td>{{data.modifiedDate|date}}</td>
-                            <td>{{data.sDate|date}}</td>
                             <td>{{data.approvedDate|date}}</td>
                             <td>{{data.startTime}}</td>
                             <td>{{data.endTime}}</td>
-                            <td>
-                                <p *ngIf="data.comment==null">No Comments</p>
-                                <p *ngIf="data.comment!=null">{{data.comment}}</p>
-                            </td>
+                            <td>{{data.comments}}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -63,10 +63,7 @@
                             </select>
                         </div>
 
-                        <div class="cardinputs">
-                            <input type="text" placeholder="Search" id="term" [(ngModel)]="search"
-                                class="form-control search-icon">
-                        </div>
+                      
 
                         <div class="cardinputs">
                             <button class="butn-sadow" type="button" (click)="exportexcel1()">Export to Excel</button>
@@ -93,7 +90,7 @@
                             <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>Employee ID</th>
+                                    <th>Staff ID</th>
                                     <th>Staff Name</th>
                                     <th>Position</th>
                                     <th>Department</th>
@@ -109,28 +106,28 @@
                             <tbody>
                                 <tr
                                     *ngFor="let attendance of attendancelist | paginate: { itemsPerPage: count1, currentPage: p }|filter:term">
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.signinDate|date}}
                                     </td>
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.employeID}}
                                     </td>
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.name1}}
                                     </td>
 
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.role}}
                                     </td>
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.department_name}}
                                     </td>
                                     <!-- <td>
                                         {{attendance.signInType}}</td> -->
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.expectedIn}}
                                     </td>
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.stime}}</td>
                                     <!-- <td>
                                         <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchinip}}</p>
@@ -141,24 +138,24 @@
                                         <p *ngIf="attendance.signOutTypeID==2">Web Application</p>
                                         <p *ngIf="attendance.signOutTypeID==1">Mobile</p>
                                     </td> -->
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.expectedOut}}
                                         <!-- <p *ngIf="attendance.expectedOut!=null"> </p>
                                         <p *ngIf="attendance.expectedOut==null">NA</p> -->
                                     </td>
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.etime}}</td>
                                     <!-- <td>
                                         <p *ngIf="attendance.signOutTypeID==2">{{attendance.punchoutip}}</p>
                                         <p *ngIf="attendance.signOutTypeID==1">{{attendance.signoutLocation}}
                                         </p>
                                     </td> -->
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.hr1}}</td>
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.undertime}}
                                     </td>
-                                    <td>
+                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.latepunchin}}</td>
                                 </tr>
                             </tbody>

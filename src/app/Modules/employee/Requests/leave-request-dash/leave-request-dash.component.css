@@ -647,6 +647,7 @@ th {
 .alignment {
   display: flex;
   flex-wrap: wrap;
+  padding-bottom: 65px;
 }
 
 

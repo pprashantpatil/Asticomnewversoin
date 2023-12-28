@@ -118,4 +118,13 @@ year: any;
       this.holidayList = this.holidayFilter.filter((x: { holidayDate: any; }) => (x.holidayDate >= this.startDate && x.holidayDate <= this.endDate));
     }
   }
+
+  public getYear(){
+    if(this.year==''){
+      this.ngOnInit();
+    }else{
+      this.holidayList = this.holidayFilter.filter((x: { year: any; })=>x.year==this.year)
+
+    }
+  }
 }

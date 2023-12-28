@@ -130,17 +130,17 @@
                     <thead>
                         <tr class="head">
                             <th><input type="checkbox" (click)="selectALL($event)"></th>
-                            <th>Employee ID</th>
-                            <th>Employee Name</th>
+                            <th>Staff ID</th>
+                            <th>Staff Name</th>
                             <th>Submitted Date</th>
                             <th>From Date</th>
                             <th>To Date</th>
                             <th>Leave Type</th>
-                            <th>HalfDay Type</th>
+                            <th>HalfDay</th>
                             <th>Leave Reason</th>
                             <th>Leave Days Count</th>
                             <th>Attachment</th>
-                            <th>Stage & Status</th>
+                           
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -158,21 +158,16 @@
                             <td>{{data.leaveReason}}</td>
                             <td>{{data.noOfDays}}</td>
                             <td>
-                                <img src="assets/Images/image.png" style="width:20px; height:20px"
-                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
-                                <!-- <p *ngIf="data.medicalUrl==null">No Attachment</p>
-                            <a *ngIf="data.filetype=='pdf' && data.medicalUrl!=null"
-                                href="{{data.medicalUrl}}" target="_blank"> <img
-                                    src="assets/Images/pdf.png" alt="pdf.img" class="image"></a>
-                            <img *ngIf="data.medicalUrl!=null && data.filetype!='pdf'"
-                                src="{{data.medicalUrl}}" (click)="getmedicalUrl(data.medicalUrl)"
-                                alt="medical.img" data-toggle="modal" data-target="#Allocate"
-                                class="attachmentimg"> -->
+                                <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
+                                <p
+                                    *ngIf="data.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
+                                    No Attachment</p>
+                                <a href="{{data.medicalUrl}}" target="_blank">
+                                    <img *ngIf="data.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
+                                        src="assets/Images/image.png" alt="pdf.img"
+                                        class="attachmentPin"></a>
                             </td>
-                            <td>
-                                <p *ngIf="data.status==null">Manager Pending</p>
-                                {{data.status}}
-                            </td>
+                          
                             <td class="onelinetext" *ngIf="roleID==2">
                                 <img class="dashedit-icon" src="assets/Images/accept-01.svg"
                                     (click)="ManagerLeaveApprove(data)" [ngbTooltip]="tipContentApprove"
@@ -233,18 +228,18 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th>Employee ID</th>
-                            <th>Employee Name</th>
+                            <th>Staff ID</th>
+                            <th>Staff Name</th>
                             <th>From Date</th>
                             <th>To Date</th>
                             <th>Submitted Date</th>
                             <th>Approved Date</th>
                             <th>Leave Type</th>
-                            <th>HalfDay Type</th>
+                            <th>HalfDay</th>
                             <th>Leave Reason</th>
                             <th>Leave Days Count</th>
                             <th>Attachment</th>
-                            <th>Stage & Status</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -260,21 +255,16 @@
                             <td>{{data.leaveReason}}</td>
                             <td>{{data.noOfDays}}</td>
                             <td>
-                                <!-- <p *ngIf="data.medicalUrl==null">No Attachment</p>
-                                                <a *ngIf="data.filetype=='pdf' && data.medicalUrl!=null"
-                                                    href="{{data.medicalUrl}}" target="_blank"> <img
-                                                        src="assets/Images/pdf.png" alt="pdf.img" class="image"></a>
-                                                <img *ngIf="data.medicalUrl!=null && data.filetype!='pdf'"
-                                                    src="{{data.medicalUrl}}" (click)="getmedicalUrl(data.medicalUrl)"
-                                                    alt="medical.img" data-toggle="modal" data-target="#Allocate"
-                                                    class="attachmentimg"> -->
-                                <img src="assets/Images/image.png" style="width:20px; height:20px"
-                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                                <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
+                                <p
+                                    *ngIf="data.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
+                                    No Attachment</p>
+                                <a href="{{data.medicalUrl}}" target="_blank">
+                                    <img *ngIf="data.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
+                                        src="assets/Images/image.png" alt="pdf.img"
+                                        class="attachmentPin"></a>
                             </td>
-                            <td>
-                                <p *ngIf="data.status==null">Manager Pending HR Pending</p>
-                                {{data.status}}
-                            </td>
+                        
                         </tr>
                     </tbody>
                 </table>
@@ -300,18 +290,18 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th>Employee ID</th>
-                            <th>Employee Name</th>
+                            <th>Staff ID</th>
+                            <th>Staff Name</th>
                             <th>From Date</th>
                             <th>To Date</th>
                             <th>Submitted Date</th>
                             <th>Approved Date</th>
                             <th>Leave Type</th>
-                            <th>HalfDay Type</th>
+                            <th>HalfDay </th>
                             <th>Leave Reason</th>
                             <th>Leave Days Count</th>
                             <th>Attachment</th>
-                            <th>Stage & Status</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
@@ -327,20 +317,14 @@
                             <td>{{data.leaveReason}}</td>
                             <td>{{data.noOfDays}}</td>
                             <td>
-                                <img src="assets/Images/image.png" style="width:20px; height:20px"
-                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
-                                <!-- <p *ngIf="data.medicalUrl==null">No Attachment</p>
-                                                <a *ngIf="data.filetype=='pdf' && data.medicalUrl!=null"
-                                                    href="{{data.medicalUrl}}" target="_blank"> <img
-                                                        src="assets/Images/pdf.png" alt="pdf.img" class="image"></a>
-                                                <img *ngIf="data.medicalUrl!=null && data.filetype!='pdf'"
-                                                    src="{{data.medicalUrl}}" (click)="getmedicalUrl(data.medicalUrl)"
-                                                    alt="medical.img" data-toggle="modal" data-target="#Allocate"
-                                                    class="attachmentimg"> -->
-                            </td>
-                            <td>
-                                <p *ngIf="data.status==null">Manager Pending HR Pending</p>
-                                {{data.status}}
+                                <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
+                                <p
+                                    *ngIf="data.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
+                                    No Attachment</p>
+                                <a href="{{data.medicalUrl}}" target="_blank">
+                                    <img *ngIf="data.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
+                                        src="assets/Images/image.png" alt="pdf.img"
+                                        class="attachmentPin"></a>
                             </td>
                         </tr>
                     </tbody>

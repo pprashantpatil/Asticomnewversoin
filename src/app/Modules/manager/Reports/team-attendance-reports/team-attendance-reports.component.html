@@ -80,7 +80,7 @@
                                 {{attendance.signinDate|date}}
                             </td>
                             <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
-                                {{attendance.staffname}}
+                                {{attendance.name}}
                             </td>
                             <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                 {{attendance.signInType}}</td>

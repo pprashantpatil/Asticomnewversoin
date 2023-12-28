@@ -52,10 +52,10 @@
                             <th>Sign In Type</th>
                             <th>Expected In Time</th>
                             <th>Punch In Time</th>
-                            <th>Punch In Location/IP Address</th>
+                            <th>Punch In Location</th>
                             <th>Expected Out Time</th>
                             <th>Punch Out Time</th>
-                            <th>Punch Out Location/IP Address</th>
+                            <th>Punch Out Location</th>
                             <th>Sign Out Type</th>
                             <th>Work Hours(HH:MM)</th>
                             <th>UnderTime</th>
@@ -63,28 +63,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of attendanceList|filter:search">
-                            <td>{{data.signinDate|date}}</td>
-                            <td>{{data.signInType}}</td>
-                            <td>{{data.expectedIn}}</td>
-                            <td>{{data.stime}}</td>
-                            <td>
+                        <tr *ngFor="let data of attendanceList|filter:search" >
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.signinDate|date}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.signInType}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.expectedIn}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.stime}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
                                 <p *ngIf="data.signInType=='Web Application'">{{data.punchinip}}</p>
                                 <p *ngIf="data.signInType!='Web Application'">{{data.signinLocation}}</p>
                             </td>
-                            <td>{{data.expectedOut}}</td>
-                            <td>{{data.etime}}</td>
-                            <td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.expectedOut}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.etime}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
                                 <p *ngIf="data.signOutTypeID==2">{{data.punchoutip}}</p>
                                 <p *ngIf="data.signOutTypeID==1">{{data.signoutLocation}}</p>
                             </td>
-                            <td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
                                 <p *ngIf="data.signOutTypeID==2">Web Application</p>
                                 <p *ngIf="data.signOutTypeID==1">Mobile</p>
                             </td>
-                            <td>{{data.hr1}}</td>
-                            <td>{{data.undertime}}</td>
-                            <td>{{data.latepunchin}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.hr1}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.undertime}}</td>
+                            <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">{{data.latepunchin}}</td>
                         </tr>
                     </tbody>
                 </table>

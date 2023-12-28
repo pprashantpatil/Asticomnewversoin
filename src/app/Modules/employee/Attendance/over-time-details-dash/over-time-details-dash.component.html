@@ -73,7 +73,7 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th>Employee ID</th>
+                            <th>Staff ID</th>
                             <th>Date</th>
                             <th>Submit Date</th>
                             <th>Start Time</th>
@@ -81,7 +81,7 @@
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
-                            <th>Status</th>
+                            
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -98,11 +98,12 @@
                                 </button>
                             </td>
                             <td>
-                                <img src="assets/Images/image.png" style="width:20px; height:20px"
+                                <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
+                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png" style="width:20px; height:20px"
                                     (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-                            <td>{{data.status}}</td>
+                            
                             <td class="actionpadding">
                                 <div class="arrangeIcon">
                                     <img class="dashedit-icon" src="assets/Images/delete.svg"
@@ -146,7 +147,7 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th>Employee ID</th>
+                            <th>Staff ID</th>
                             <th>Date</th>
                             <th>Submit Date</th>
                             <th>Approved Date</th>
@@ -155,7 +156,6 @@
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -172,11 +172,11 @@
                                 </button>
                             </td>
                             <td>
-                                <img src="assets/Images/image.png" style="width:20px; height:20px"
+                                <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
+                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png" style="width:20px; height:20px"
                                     (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-                            <td>{{data.status}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -202,7 +202,7 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th>Employee ID</th>
+                            <th>Staff ID</th>
                             <th>Date</th>
                             <th>Submit Date</th>
                             <th>Rejected Date</th>
@@ -211,7 +211,6 @@
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -228,11 +227,11 @@
                                 </button>
                             </td>
                             <td>
-                                <img src="assets/Images/image.png" style="width:20px; height:20px"
+                                <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
+                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png" style="width:20px; height:20px"
                                     (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-                            <td>{{data.status}}</td>
                         </tr>
                     </tbody>
                 </table>

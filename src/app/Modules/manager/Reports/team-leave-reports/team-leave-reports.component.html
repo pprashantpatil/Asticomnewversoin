@@ -74,22 +74,25 @@
                 <table class="table" id="lvs">
                     <thead>
                         <tr class="head">
+                            <th>Staff ID</th>
+                            <th>Staff Name</th>
                             <th>From Date</th>
                             <th>To Date</th>
                             <th>Leave Type </th>
                             <th>Leave Reason</th>
                             <th>Leave Days Count</th>
-                            <th>Stage & Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let list of staffPendingLeaves">
+                            <td>{{list.employeID}} </td>
+                            <td>{{list.staffName}} </td>
                             <td>{{list.sDateOfLeave}} </td>
                             <td>{{list.eDateOfLeave}} </td>
                             <td>{{list.leavetype}}<br>
                             <td>{{list.leaveReason}}<br>
                             <td class="numberblue">{{list.noOfDays}}<br>
-                            <td>{{list.status}}</td>
+                            
                         </tr>
                     </tbody>
                 </table>
@@ -118,22 +121,26 @@
                 <table class="table" id="lvs">
                     <thead>
                         <tr class="head">
+                            <th>Staff ID</th>
+                            <th>Staff Name</th>
                             <th>From Date</th>
                             <th>To Date</th>
                             <th>Leave Type </th>
                             <th>Leave Reason</th>
                             <th>Leave Days Count</th>
-                            <th>Stage & Status</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let list of staffApprovedLeaves">
+                            <td>{{list.employeID}} </td>
+                            <td>{{list.staffName}} </td>
                             <td>{{list.sDateOfLeave}} </td>
                             <td>{{list.eDateOfLeave}} </td>
                             <td>{{list.leavetype}}<br>
                             <td>{{list.leaveReason}}<br>
                             <td class="numberblue">{{list.noOfDays}}<br>
-                            <td>{{list.status}}</td>
+                           
                         </tr>
                     </tbody>
                 </table>
@@ -162,22 +169,26 @@
                 <table class="table" id="lvs">
                     <thead>
                         <tr class="head">
+                            <th>Staff ID</th>
+                            <th>Staff Name</th>
                             <th>From Date</th>
                             <th>To Date</th>
                             <th>Leave Type </th>
                             <th>Leave Reason</th>
                             <th>Leave Days Count</th>
-                            <th>Stage & Status</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let list of staffRejectedLeaves">
+                            <td>{{list.employeID}} </td>
+                            <td>{{list.staffName}} </td>
                             <td>{{list.sDateOfLeave}} </td>
                             <td>{{list.eDateOfLeave}} </td>
                             <td>{{list.leavetype}}<br>
                             <td>{{list.leaveReason}}<br>
                             <td class="numberblue">{{list.noOfDays}}<br>
-                            <td>{{list.status}}</td>
+                           
                         </tr>
                     </tbody>
                 </table>
