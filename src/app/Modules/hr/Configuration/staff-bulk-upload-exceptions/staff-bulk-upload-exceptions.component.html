@@ -1,1 +1,94 @@
-<p>staff-bulk-upload-exceptions works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="row">
+    <div class="col-12">
+        <ul style="margin-left: 2%;">
+            <li><a class="Heading">
+                    <p class="Heading">Bulk Upload Exception Log Report</p>
+                </a>
+                <hr class="line-border listForm">
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="cardinputs">
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
+            </div>
+
+            <div class="cardinputs">
+                <button class="butn-sadow" type="button" (click)="exportexcel()">Export to Excel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <p class="show3res">SHOWING <span>{{(exceptionList|filter:search)?.length}} </span>RESULT(S)</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="listscroll">
+                <table class="table" id="document">
+                    <thead>
+                        <tr class="head">
+                            <th>Sr.No</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>PageName</th>
+                            <th>Error Message</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of exceptionList|filter:search">
+                            <td>{{data.id}}</td>
+                            <td>{{data.modifiedDate}}</td>
+                            <td>{{data.timee}}</td>
+                            <td>{{data.employeeID}}</td>
+                            <td>{{data.name}}</td>
+                            <td>{{data.pageName}}</td>
+                            <td>{{data.errorMessage}}</td>
+                            <td class="onelinetext">
+                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                    src="assets/Images/delete.svg" [ngbTooltip]="tipContentCancel"
+                                    tooltipClass="my-custom-class">
+
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentCancel>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Delete</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span class="NoResultShow" *ngIf="(exceptionList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
+            </div>
+            <div class="text-right" *ngIf="(exceptionList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

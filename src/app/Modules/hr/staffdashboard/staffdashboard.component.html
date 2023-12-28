@@ -1,0 +1,284 @@
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li><a class="Heading">
+                        <p class="Heading">Staff Dashboard</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex justify-content-end filterby">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+
+            <div class="d-flex justify-content-start flex-wrap inputs">
+                <div class="cardinputs">
+                    <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                        [(ngModel)]="date" (ngModelChange)="getEndDate($event)">
+                </div>
+
+                <div class="cardinputs">
+                    <input type="text" placeholder="Search" id="term" [(ngModel)]="search"
+                        class="form-control search-icon">
+                </div>
+
+                <div class="cardinputs">
+                    <ng-multiselect-dropdown [placeholder]="'Select Department'" [settings]="deptdropdownSettings"
+                        [data]="dropdownDeptList" [(ngModel)]="deptselectedItems" (onSelect)="deptonItemSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+
+                <div class="cardinputs">
+                    <ng-multiselect-dropdown [placeholder]="'Select Position'" [settings]="roledropdownSettings"
+                        [data]="dropdownRoleList" [(ngModel)]="roleselectedItems" (onSelect)="roleonItemSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+
+                <div class="cardinputs" data-toggle="modal" data-target="#import">
+                    <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Upload
+                        Staff</button>
+                </div>
+
+                <div class="cardinputs" routerLink="/HR/StaffBulkUploadExceptions">
+                    <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Bulk Upload
+                        Exception</button>
+                </div>
+
+                <div class="cardinputs">
+                    <button class="butn-sadow" type="button" (click)="exportexcel()">Export to Excel</button>
+                </div>
+
+                <div class="cardinputs" routerLink="/HR/AddressDetailsWizard" *ngIf="login!=1">
+                    <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add
+                        Staff</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-lg-12 dashbutton bttn">
+            <div class="tab-slider--nav">
+                <ul class="tab-slider--tabs">
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1"
+                        (click)="viewMode ='tab1'">Standard Shift</li>
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2"
+                        (click)="viewMode ='tab2'">Non Standard Shift</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-slider--container" [ngSwitch]="viewMode">
+        <div *ngSwitchCase="'tab1'" id="tab1">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(staffList|filter:search)?.length}} </span>RESULT(S)</p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Employee Id</th>
+                            <th>Employee Name</th>
+                            <th>Last Name</th>
+                            <th>Department</th>
+                            <th>Gender</th>
+                            <th>Position</th>
+                            <th>Phone Number</th>
+                            <th>Email</th>
+                            <th>Date Of Joining</th>
+                            <th>Manager</th>
+                            <th *ngIf="login!=1">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let data of staffList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
+                            <td>{{data.employeID}}</td>
+                            <td>{{data.name}}</td>
+                            <td>{{data.last_Name}}</td>
+                            <td>{{data.department_name}}</td>
+                            <td>{{data.gender}}</td>
+                            <td>{{data.role}}</td>
+                            <td>{{data.mobile}}</td>
+                            <td>{{data.emailID}}</td>
+                            <td>{{data.joiningDate|date}}</td>
+                            <td>
+                                <p *ngIf="data.manager==null">
+                                    NA
+                                </p>
+                                <p *ngIf="data.manager!=null">
+                                    {{data.manager}}
+                                </p>
+                            </td>
+                            <td class="onelinetext" *ngIf="login!=1">
+                                    <img class="dashedit-icon" (click)="Edit(data.id)"
+                                    src="assets/Images/Edit.svg" [ngbTooltip]="tipContenteidt"
+                                    tooltipClass="my-custom-class">
+                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                    src="assets/Images/delete.svg" [ngbTooltip]="tipContentCancel"
+                                    tooltipClass="my-custom-class">
+
+                                <img src="assets/Images/disable.svg" *ngIf="data.payrollBit==0 ||data.payrollBit==null "
+                                    (click)="Enable_PayrollBit(data.id)" style="width: 40px;">
+
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentCancel>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Delete</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template #tipContenteidt>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Edit</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span class="NoResultShow" *ngIf="(staffList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
+            </div>
+            <div class="text-right" *ngIf="(staffList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'tab2'" id="tab2">
+            <div class="row">
+                <div class="col-md-10">
+                    <p class="show3res">SHOWING <span>{{(nonStaffList|filter:search)?.length}} </span>RESULT(S)</p>
+                </div>
+            </div>
+
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Employee Id</th>
+                            <th>Employee Name</th>
+                            <th>Department</th>
+                            <th>Gender</th>
+                            <th>Position</th>
+                            <th>Phone Number</th>
+                            <th>Email</th>
+                            <th>Date Of Joining</th>
+                            <th>Manager</th>
+                            <th *ngIf="login!=1">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let data of nonStaffList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
+                            <td>{{data.employeID}}</td>
+                            <td>{{data.name}}</td>
+                            <td>{{data.department_name}}</td>
+                            <td>{{data.gender}}</td>
+                            <td>{{data.role}}</td>
+                            <td>{{data.mobile}}</td>
+                            <td>{{data.emailID}}</td>
+                            <td>{{data.joiningDate|date}}</td>
+                            <td>
+                                <p *ngIf="data.manager==null">
+                                    NA
+                                </p>
+                                <p *ngIf="data.manager!=null">
+                                    {{data.manager}}
+                                </p>
+                            </td>
+                            <td class="onelinetext" *ngIf="login!=1">
+                                <img src="assets/Images/enable.svg" *ngIf="data.payrollBit==0 ||data.payrollBit==null"
+                                (click)="Disable_PayrollBit(data.id)" style="width: 40px;">
+                                <img class="dashedit-icon" (click)="Edit(data.id)"
+                                src="assets/Images/Edit.svg" [ngbTooltip]="tipContenteidt"
+                                tooltipClass="my-custom-class">
+                            <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                src="assets/Images/delete.svg" [ngbTooltip]="tipContentCancel"
+                                tooltipClass="my-custom-class">
+
+                            <div class="col-lg-2 Text p-0">
+                                <ng-template #tipContentCancel>
+                                    <div>
+                                        <div class="d-flex">
+                                            <div class="flex-column mt-2">
+                                                <p class="tooltip-txtForIcons">Delete</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template #tipContenteidt>
+                                    <div>
+                                        <div class="d-flex">
+                                            <div class="flex-column mt-2">
+                                                <p class="tooltip-txtForIcons">Edit</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span class="NoResultShow" *ngIf="(nonStaffList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
+            </div>
+            <div class="text-right" *ngIf="(nonStaffList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="import" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Upload Staff</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input type="file" accept=".xls,.xlsx" style="display: inline-block;"
+                            (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button type="button" class="button" style="width: 70%;" data-dismiss="modal"
+                            (click)="Upload_file()">Upload
+                            Staff</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

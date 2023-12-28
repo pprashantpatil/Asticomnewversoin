@@ -1,1 +1,86 @@
-<p>leave-configuration works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <p class="Heading">Leave Configuration Details</p>
+                <img src="assets/Images/revamp/cancle-icon.png" (click)="cancel()" class="closeicon">
+            </div>
+
+            <div class="popupcontent">
+                <div class="popupinputs">
+                    <p>Leave Category<span class="span">*</span></p>
+                    <div>
+                        <div class="dropdown">
+                            <select class="form-control inputfield select" id="LeaveCategory" name="LeaveCategory"
+                                [(ngModel)]="LeaveCategory">
+                                <option value="0">Select Leave Category</option>
+                                <option value="{{leavetype.id}}" *ngFor="let leavetype of LeaveTypeList">
+                                    {{leavetype.description}} </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Description<span class="span">*</span></p>
+                    <div>
+                        <textarea type="text" class="form-control" rows="4" placeholder="Description"
+                            [(ngModel)]="Description" name="Description" id="Description"></textarea>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Gender<span class="span">*</span></p>
+                    <div>
+                        <div class="dropdown">
+                            <select class="form-control inputfield select" id="Gender" name="Gender"
+                                [(ngModel)]="Gender">
+                                <option value="0">Select Gender</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                                <option value="3">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Marital Status<span class="span">*</span></p>
+                    <div>
+                        <div class="dropdown">
+                            <select class="form-control inputfield select" id="MaritalStatus" name="MaritalStatus"
+                                [(ngModel)]="MaritalStatus">
+                                <option value="0">Select Marital Status</option>
+                                <option value="1">Married</option>
+                                <option value="2">UnMarried</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Entitlement per Year<span class="span">*</span></p>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Entitlement per Year"
+                            [(ngModel)]="YearlyLimit" name="YearlyLimit" id="YearlyLimit">
+                    </div>
+                </div>
+
+                <div class="popupinputs">
+                    <p>Is encashable<span class="span">*</span></p>
+                    <div>
+                        <input type="checkbox" id="IsCashable" name="IsCashable" value="0" [(ngModel)]="IsCashable">
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                    <button class="close-button" (click)="cancel()">Cancel</button>
+                    <button *ngIf="ID==undefined" class="submit-button" (click)="InsertLeaveConfiguration()">Submit</button>
+                    <button *ngIf="ID!=undefined" class="submit-button" (click)="UpdateLeaveConfiguration()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

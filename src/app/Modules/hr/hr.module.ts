@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {  BsDatepickerModule  } from 'ngx-bootstrap/datepicker';
 
 import { HrRoutingModule } from './hr-routing.module';
 import { AddressDetailsWizardComponent } from './address-details-wizard/address-details-wizard.component';
@@ -46,7 +48,9 @@ import { PayrollTriggerDashComponent } from './Payroll/payroll-trigger-dash/payr
     Ng2SearchPipeModule,
     SharedModuleModule,
     NgMultiSelectDropDownModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModule,
+    BsDatepickerModule.forRoot(),
   ]
 })
 export class HrModule { }

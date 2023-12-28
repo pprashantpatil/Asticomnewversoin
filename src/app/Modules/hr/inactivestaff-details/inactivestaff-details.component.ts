@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
-import { timeStamp } from 'console';
 import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
 

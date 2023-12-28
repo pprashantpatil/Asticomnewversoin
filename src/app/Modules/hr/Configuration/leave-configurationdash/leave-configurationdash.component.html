@@ -1,1 +1,87 @@
-<p>leave-configurationdash works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul>
+                <li><a class="Heading">
+                        <p class="Heading">Leave Configuration</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-2" (click)="showDialog()">
+            <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Leave</button>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="listscroll">
+                <table class="table">
+                    <thead>
+                        <tr class="head">
+                            <th>Leave</th>
+                            <th>Gender</th>
+                            <th>Maritial Status</th>
+                            <th>Yearly Limit</th>
+                            <th>Is Cashable</th>
+                            <th *ngIf="login!=1">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of leaveList">
+                            <td>{{data.leavetype}}</td>
+                            <td>{{data.gender1}}</td>
+                            <td>{{data.maritalStatus1}}</td>
+                            <td>{{data.yearlyLimit}}</td>
+                            <td>{{data.isCashable1}}</td>
+                            <td class="onelinetext" *ngIf="login!=1"> <img
+                                    class="dashedit-icon" src="assets/Images/Edit.svg" (click)="edit(data.id)"
+                                    [ngbTooltip]="tipContenteidt" tooltipClass="my-custom-class">
+                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                    src="assets/Images/delete.svg" [ngbTooltip]="tipContentCancel"
+                                    tooltipClass="my-custom-class">
+
+                                <div class="col-lg-2 Text p-0">
+                                    <ng-template #tipContentCancel>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Delete</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template #tipContenteidt>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">Edit</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+            </div>
+            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+                <br>
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="poppinns"></pagination-controls>
+            </div> -->
+        </div>
+    </div>
+</div>
