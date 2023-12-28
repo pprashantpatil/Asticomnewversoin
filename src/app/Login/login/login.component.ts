@@ -39,14 +39,27 @@ export class LoginComponent implements OnInit {
   showPopup: number = 0;
   messageId: number = 0;
   id: any;
+  public arrayofimages:any=[
+    'https://media.geeksforgeeks.org/wp-content/uploads/20200316135008/red7.png',
+    'https://media.geeksforgeeks.org/wp-content/uploads/20200316135014/yellow3.png',
+    'https://media.geeksforgeeks.org/img-practice/MaskGroup58@2x-min-1637846347.png',
+    'https://media.geeksforgeeks.org/img-practice/banner/dsa-self-paced-course-overview-image.png'
+  ]
+
 
   ngOnInit(): void {
     this.currentUrl = window.location.href;
     this.showpassword = 0;
+    this.getimagefordash()
     if (sessionStorage.getItem('temp') == '1') {
       localStorage.clear();
       location.reload();
     }
+  }
+  imgurl:any
+  public getimagefordash(){
+    var a = Math.floor(Math.random() * this.arrayofimages.length); 
+   this.imgurl= this.arrayofimages[a]; 
   }
 
   public getroleid(event: any) {
