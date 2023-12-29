@@ -54,7 +54,11 @@ export class AttendanceDetailsDashComponent implements OnInit {
         this.loader = false;
       })
   }
-
+  public Reset(){
+    debugger
+    this.date='';
+    
+  }
   public getEndDate(event: any) {
     debugger
     this.startDate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
