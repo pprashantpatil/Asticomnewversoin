@@ -28,7 +28,10 @@ term: any;
   attendancelist: any;
   filtereddate: any;
   todaydate: any;
-  firstDayofcurrentmonth: any;
+  firstDayOfCurrentMonth: any;
+  lastDayOfCurrentMonthFilter:any;
+  firstDayOfCurrentMonthFilter:any;
+  lastDayOfCurrentMonth:any;
   loader:any;
   showPopup: number = 0;
   messageId: number = 0;
@@ -45,8 +48,10 @@ term: any;
     this.filtereddate = formatDate(myDate, format, locale);
     this.todaydate = this.filtereddate;
     debugger
-    this.firstDayofcurrentmonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-    this.firstDayofcurrentmonth = formatDate(this.firstDayofcurrentmonth, format, locale);
+    this.firstDayOfCurrentMonthFilter = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    this.lastDayOfCurrentMonthFilter = new Date(new Date().getFullYear(), new Date().getMonth(), 30);
+    this.firstDayOfCurrentMonth = formatDate(this.firstDayOfCurrentMonthFilter, format, locale);
+    this.lastDayOfCurrentMonth = formatDate(this.lastDayOfCurrentMonthFilter, format, locale);
     this.GetAttendance();
     this.GetMyDetails();
     this.dropdownSettings = {
@@ -87,7 +92,7 @@ term: any;
     console.log(item);
     this.employeeid = item.id;
     if (this.startdate == undefined || this.enddate == undefined) {
-      this.DigiofficeService.GetAttendanceByManagerID(this.employeeid, this.firstDayofcurrentmonth, this.todaydate)
+      this.DigiofficeService.GetAttendanceByManagerID(this.employeeid, this.firstDayOfCurrentMonth, this.todaydate)
         .subscribe({
           next: data => {
             debugger
@@ -205,12 +210,14 @@ term: any;
 
   public GetAttendance() {
     debugger
-    if (this.roleID == 10) {
-      this.DigiofficeService.GetAttendance()
+    this.loader=true;
+    if (this.roleID == 10||this.roleID == 11||this.roleID == 9) {
+      this.DigiofficeService.GetAttendanceBydate(this.firstDayOfCurrentMonth,this.lastDayOfCurrentMonth)
         .subscribe({
           next: data => {
             debugger
             this.attendancelist = data;
+            this.loader=false;
           }, error: (err) => {
             // Swal.fire('Issue in Getting Attendance');
             // Insert error in Db Here//
@@ -227,7 +234,7 @@ term: any;
         })
     }
     else {
-      this.DigiofficeService.GetAttendanceByManagerID(this.staffid, this.firstDayofcurrentmonth, this.todaydate)
+      this.DigiofficeService.GetAttendanceByManagerID(this.staffid, this.firstDayOfCurrentMonth, this.todaydate)
         .subscribe({
           next: data => {
             debugger
