@@ -161,7 +161,7 @@ export class EmployeeDashComponent implements OnInit {
     this.workType = '0';
     setInterval(() => {
       var time = new Date();
-      time.setMinutes(time.getMinutes() + 150);
+      time.setMinutes(time.getMinutes() );
       this.time = time.toLocaleString('en-US', { hour: '2-digit', minute: 'numeric', hour12: true });
       let temp: any = this.time.split(':');
       this.hh = temp[0];

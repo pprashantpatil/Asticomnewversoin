@@ -1121,6 +1121,7 @@ export class DigiofficecorehrService {
       this.host + "/MobileUser/GetAttendance?UserID=1&SDate=2022-10-01&EDate=2029-10-31"
     );
   }
+
   public GetAttendanceBydate(sdate: any, edate: any,) {
     return this.http.get<any[]>(
       this.host + "/MobileUser/GetAttendance?UserID=1&SDate=" + sdate + "&EDate=" + edate

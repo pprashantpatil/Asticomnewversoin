@@ -38,7 +38,7 @@
 }
 
 .hr-img{
-  width: 100%;
+  width: 80%;
     height: 85px;
    padding: 6px 10px 20px 0px;
 }
@@ -116,7 +116,7 @@
 
  .noti{
   display: flex;
-  margin-right: 4%;
+  margin-left: 140px;
   
 }
 .notifimodal{

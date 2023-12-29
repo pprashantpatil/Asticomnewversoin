@@ -30,7 +30,7 @@
 
           <div class="header-class">
             <div class="topheader">
-              <select class="form-control" id="companyid" name="companyid" [(ngModel)]="companyid"
+              <select *ngIf="login==9||login==11" class="form-control" id="companyid" name="companyid" [(ngModel)]="companyid"
                 (change)="getCompanyDetails($event)">
                 <option value="1001">Asticom Main</option>
                 <option value="1002">Asticom ABSI (ABSI)</option>
@@ -45,7 +45,7 @@
               <!-- <div class="sub-card" *ngIf="login!=undefined">
                 <span class="notify-number">{{notificationslist?.length}}</span>
               </div> -->
-              <div ngbDropdown container="body" placement="bottom-start">
+              <div ngbDropdown container="body" >
                 <img src="assets/Images/revamp/bell-icon-bg.png" class="icon-alignment" id="notificationmodal"
                   ngbDropdownToggle />
                 <div ngbDropdownMenu aria-labelledby="notificationmodal" class="notifimodal">

@@ -50,6 +50,7 @@ import { LevelTypeFormComponent } from './Master/level-type-form/level-type-form
 import { GrivelnecemasterdashComponent } from './Master/grivelnecemasterdash/grivelnecemasterdash.component';
 import { GrivelnecemasterComponent } from './Master/grivelnecemaster/grivelnecemaster.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { HRLeaveRequestDashComponent } from './Requests/hrleave-request-dash/hrleave-request-dash.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     LevelTypeDashComponent,
     LevelTypeFormComponent,
     GrivelnecemasterdashComponent,
-    GrivelnecemasterComponent
+    GrivelnecemasterComponent,
+    HRLeaveRequestDashComponent
   ],
   imports: [
     CommonModule,

@@ -353,6 +353,7 @@
 
 .card-head {
     width: 100%;
+    padding-top: 25px;
     font-weight: 600;
     position: relative;
     font-family: "Poppins";

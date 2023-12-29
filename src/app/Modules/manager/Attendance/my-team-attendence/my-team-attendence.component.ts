@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
-import { formatDate } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import * as XLSX from 'xlsx';
 import { ExportToCsv } from 'export-to-csv';
 
@@ -13,7 +13,7 @@ import { ExportToCsv } from 'export-to-csv';
 export class MyTeamAttendenceComponent implements OnInit {
 search: any;
 
-  constructor(public DigiofficeService: DigiofficecorehrService) { }
+  constructor(public DigiofficeService: DigiofficecorehrService,public datePipe:DatePipe) { }
   roleid: any
   staffID: any;
   p: any = 1;
@@ -112,6 +112,12 @@ search: any;
       })
   }
 
+  public Reset(){
+    debugger
+    this.startdate1='';
+      this.ngOnInit();
+  }
+
   roleonItemSelect(item: any) {
     debugger
     console.log(item);
@@ -191,6 +197,8 @@ search: any;
   public getenddate(event:any) {
     this.showPopup = 0;
     debugger
+    this.startdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.enddate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
     this.loader = true;
     if (this.enddate == "") {
       this.ngOnInit();

@@ -93,7 +93,6 @@
 #spinner {
     -webkit-animation: frames 1s infinite linear;
     animation: frames 1s infinite linear;
-
     border: 1.75vw solid #ffffff;
     border-radius: 100%;
     border-top-color: #3247d5;
@@ -102,6 +101,7 @@
     opacity: 1;
     padding: 0;
     left: 33%;
+    bottom: 5%;
     position: absolute;
     z-index: 9999;
 }
