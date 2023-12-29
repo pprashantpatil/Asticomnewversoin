@@ -299,6 +299,14 @@ export class AddressDetailsWizardComponent implements OnInit {
   allowancelist: any;
   SavedAllowancelist: any;
   fetchallowancelist: any;
+  public attachments2: any = [];
+  public attachments2url: any = [];
+  ExtensionEndDate: any;
+  ProbationEndDate: any;
+  ProbationStartDate: any;
+  show: any;
+  public restdaysarray: any = [];
+  public restdaysarray1: any = [];
   stepStates = {
     normal: STEP_STATE.normal,
     disabled: STEP_STATE.disabled,
@@ -899,20 +907,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         next: data => {
           debugger
           this.managerList = data.filter(x => x.loginType == '2');
-          // this.managerList = data.filter(x => x.type == 2);
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting All Staff New');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -920,7 +914,6 @@ export class AddressDetailsWizardComponent implements OnInit {
   onItemSelect(item: any) {
     debugger
     console.log(item);
-
     if (this.ID == undefined) {
       this.Supervisor = item.id;
     }
@@ -938,26 +931,12 @@ export class AddressDetailsWizardComponent implements OnInit {
     else {
       this.department1 = item.id;
     }
-
     this.DigiofficeService.GetMyDetails()
       .subscribe({
         next: data => {
           debugger
           this.supervisorlist = data.filter(x => x.logintype == 2 && x.department == this.Department);
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting My Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -968,19 +947,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         next: data => {
           debugger
           this.dropdownDeptList = data;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Department');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -991,19 +957,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         next: data => {
           debugger
           this.levellist = data;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Level Type');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -1014,19 +967,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         next: data => {
           debugger
           this.SubsidaryList = data
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Subsidary Master');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -1038,19 +978,6 @@ export class AddressDetailsWizardComponent implements OnInit {
           debugger
           this.Bankslist = data
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Banks');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -1061,19 +988,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         next: data => {
           debugger
           this.Shiflist = data
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Shift Master');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -1085,24 +999,9 @@ export class AddressDetailsWizardComponent implements OnInit {
           debugger
           this.Countrylist = data
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting CountryType ');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
-
 
   getstate() {
     this.DigiofficeService.GetStateType()
@@ -1110,19 +1009,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         next: data => {
           debugger
           this.Provincelist = data.filter(x => x.countryID == this.CountryID);
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting State Type');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -1135,23 +1021,9 @@ export class AddressDetailsWizardComponent implements OnInit {
           debugger
           this.Citylist = data.filter(x => x.stateID == this.StateID);
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting City Type');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
 
   public getbarangay(event: any) {
     debugger;
@@ -1163,19 +1035,6 @@ export class AddressDetailsWizardComponent implements OnInit {
           debugger
           this.barangaylist = data.filter(x => x.cityID == this.CityID);
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Barangay Master');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -1185,7 +1044,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.Barangay = event.id;
   }
 
-
   stepChanged(args: StepChangedArgs) {
     debugger
     window.scroll({
@@ -1193,55 +1051,26 @@ export class AddressDetailsWizardComponent implements OnInit {
       left: 0,
       behavior: 'auto'
     });
-    //   behavior: 'smooth'
-    // });
-
-    // if ((args instanceof NavigationEnd)) {
-
-    //   window.scrollTo(0, 0)
-    // }
-
-
-
   }
-  public attachments2: any = [];
-  public attachments2url: any = [];
 
   onSelect2(event: any) {
     debugger
     console.log(event);
     this.attachments2.push(...event.addedFiles);
-
     this.DigiofficeService.ProjectAttachments(this.attachments2)
       .subscribe({
         next: res => {
           debugger
           this.attachments2url.push(res);
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Project Attachments');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
+
   onRemove2(event: any) {
     debugger
     console.log(event);
     this.attachments2.splice(this.attachments2.indexOf(event), 1);
   }
-
-
-
-
 
   public getemploymentdetails() {
     this.DigiofficeService.GetEmploymentDetails()
@@ -1256,23 +1085,9 @@ export class AddressDetailsWizardComponent implements OnInit {
             this.Salary = this.leavelist[0].salary,
             this.CurrentEmployer = this.leavelist[0].currentEmployer
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Employment Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
 
   public Save() {
     this.showPopup = 0;
@@ -1284,7 +1099,6 @@ export class AddressDetailsWizardComponent implements OnInit {
       || this.EMPLOYEE_TIN == " " || this.PHILHEALTH_NO == " " || this.SSSNO == " " || this.Department == " " ||
       this.PlaceO_f_Birth == " " || this.Country_Of_Birth == " " || this.Gender == " " || this.DOB == " "
       || this.PreviousEffectivityBMSDate == " " || this.CurrentEffectivityBMSDate == " " || this.COLA == undefined || this.OrginalBms == undefined || this.CurrentBMS == undefined) {
-      /* Swal.fire('Please Fill All The Mandatory Fields') */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -1298,11 +1112,8 @@ export class AddressDetailsWizardComponent implements OnInit {
         'BuildingID': 56,
         'Name': this.Name,
         'PhoneNo': this.Mobile,
-
-
         'EmailID': ((this.Personal_Email).replaceAll(' ', '')),
         'TypeID': this.RoleType,
-        // 'Type': Number(this.RoleType),
         'Address': this.Address,
         'Attachment': this.Attachment == " " ? null : this.Attachment,
         'JoiningDate': this.JoiningDate,
@@ -1311,7 +1122,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         'WorkTimings': this.WorkTimings,
         'ContactNumber': this.ContactNumber,
         'Supervisor': this.Supervisor,
-
         'EmployeeID': this.EmployeeID,
         'ResignationDate': this.JoiningDate,
         'ChaildTotal': 10,
@@ -1330,10 +1140,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         'Age': this.Age,
         'Gender': this.Gender,
         'Status': this.Status,
-        // 'Date_Of_Marriage' : (String(this.Date_Of_Marriage ) == "" ? "Null" + "," : "'" + String(this.Date_Of_Marriage) + "',"),
-
-        // 'Date_Of_Marriage': this.Date_Of_Marriage == " " ? "1990-01-01 00:00:00.000" : this.Date_Of_Marriage,
-        // 'Date_Of_Marriage': this.Date_Of_Marriage,
         'Religion': this.Religion == undefined ? null : this.Religion,
         'Citizen_Ship': this.Citizen_Ship == undefined ? null : this.Citizen_Ship,
         'Ethnicity': this.Ethnicity == undefined ? null : this.Ethnicity,
@@ -1352,9 +1158,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         'EligibilityGroup': this.EligibilityGroup,
         'CivilStatus': this.CivilStatus,
         'PagiBigMP2': this.PagiBigMP2,
-        // 'PagiBigAccountNo': this.PagiBigAccountNo,
-        // 'PagibigMembership': this.PagibigMembership,
-        // 'PagibigRemarks': this.PagibigRemarks,
         'EMPLOYEE_TIN': this.EMPLOYEE_TIN,
         'PHILHEALTH_NO': this.PHILHEALTH_NO,
         'SSSNO': this.SSSNO,
@@ -1397,8 +1200,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-
-
             if (data == 0) {
               Swal.fire("EmailID or Mobile Number Already Exists. or your  License Count is over. ");
               var obj = {
@@ -1411,69 +1212,34 @@ export class AddressDetailsWizardComponent implements OnInit {
                 'LoginType': "HR",
                 'API': "BULK Upload",
               }
-
               this.DigiofficeService.InsertStaffBulkUploadExceptions(obj)
                 .subscribe({
                   next: data => {
-                    debugger
-                    //Swal.fire("Error in Uploading Data. Please see details under Bulk Upload Missing Staff Menu in Configuration");
                     location.href = "#/HR/StaffBulkUploadExceptions";
                     this.loader = false;
-                  }, error: (err) => {
-                    // Swal.fire('Issue in Inserting Exception');
-                    // this.loader = false;
-                    // Insert error in Db Here//
-                    var obj = {
-                      'PageName': this.currentUrl,
-                      'ErrorMessage': err.error.message
-                    }
-                    this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                      data => {
-                        debugger
-                      },
-                    )
                   }
                 })
             }
-
             else {
               this.StaffID = data;
-              /*             Swal.fire('Saved Successfully') */
               this.loader = false
               this.showPopup = 1;
               this.messageId = 8;
             }
-          }, error: (err) => {
-            // Swal.fire('Issue in Inserting My Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
-
   }
-
 
   public Update() {
     debugger
     this.showPopup = 0;
-    // this.loader = true
     if (this.Name == " " || this.Mobile == " " || this.Personal_Email == " " || this.RoleType == " " ||
       this.JoiningDate == " " || this.Supervisor == " " || this.Title == " " || this.Last_Name == "" || this.Paygroup == " "
       || this.PagiBig_ID == " "
       || this.EMPLOYEE_TIN == " " || this.PHILHEALTH_NO == " " || this.SSSNO == " " || this.Department == " " ||
       this.PlaceO_f_Birth == " " || this.Country_Of_Birth == " " || this.Gender == " " || this.DOB == " "
       || this.PreviousEffectivityBMSDate == " " || this.CurrentEffectivityBMSDate == " ") {
-      /*  Swal.fire('Please Fill All The Mandatory Fields') */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -1483,7 +1249,6 @@ export class AddressDetailsWizardComponent implements OnInit {
       for (let i = 0; i < this.restdaysarray1.length; i++) {
         this.Restdays = this.Restdays + this.restdaysarray1[i].name + ','
       }
-
       var eb = {
         'ID': this.ID,
         'BuildingID': 56,
@@ -1517,9 +1282,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         'Age': this.Age,
         'Gender': this.Gender,
         'Status': this.Status,
-        // 'Date_Of_Marriage': (this.Date_Of_Marriage == " " || this.Date_Of_Marriage == "") ? "1990-01-01 00:00:00.000" : this.Date_Of_Marriage,
-        // 'Date_Of_Marriage': this.Date_Of_Marriage == " " ? this.JoiningDate : this.Date_Of_Marriage,
-        // 'Date_Of_Marriage': this.Date_Of_Marriage,
         'Religion': this.Religion,
         'Citizen_Ship': this.Citizen_Ship,
         'Ethnicity': this.Ethnicity,
@@ -1538,9 +1300,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         'EligibilityGroup': this.EligibilityGroup,
         'CivilStatus': this.CivilStatus,
         'PagiBigMP2': this.PagiBigMP2,
-        // 'PagiBigAccountNo': this.PagiBigAccountNo,
-        // 'PagibigMembership': this.PagibigMembership,
-        // 'PagibigRemarks': this.PagibigRemarks,
         'EMPLOYEE_TIN': this.EMPLOYEE_TIN,
         'PHILHEALTH_NO': this.PHILHEALTH_NO,
         'SSSNO': this.SSSNO,
@@ -1590,31 +1349,16 @@ export class AddressDetailsWizardComponent implements OnInit {
             this.loader = false
             this.showPopup = 1;
             this.messageId = 10;
-          }, error: (err) => {
-            // Swal.fire('Issue in Updating Staff');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
   }
-
 
   public SaveDependantDetails() {
     debugger
     this.showPopup = 0;
     this.loader = true
     var eb = {
-
       'DependentName': this.DependentName == undefined ? null : this.DependentName,
       'Relationship': this.Relationship == undefined ? null : this.Relationship,
       'Gender': this.Gender1 == undefined ? null : this.Gender1,
@@ -1631,35 +1375,17 @@ export class AddressDetailsWizardComponent implements OnInit {
       'Working_Status': this.Working_Status == undefined ? null : this.Working_Status,
       'Request_Type': this.Request_Type == undefined ? null : this.Request_Type,
       'StaffID': this.StaffID
-
-
-
     }
     this.DigiofficeService.InsertDependentDetails(eb)
       .subscribe({
         next: data => {
           debugger
-          /*   Swal.fire('Saved Successfully') */
           this.loader = false
           this.showPopup = 1;
           this.messageId = 8;
-        }, error: (err) => {
-          // Swal.fire('Issue in Inserting Dependent Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
 
   public SaveNomination() {
     debugger
@@ -1667,7 +1393,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     if (this.Dependent == undefined || this.Dependent == null || this.Dependent == '' ||
       this.Percentage == undefined || this.Percentage == null || this.Percentage == '' || this.NomineeType == undefined ||
       this.NomineeType == null || this.NomineeType == '') {
-      /*     Swal.fire("Please fill Mandatory Fields"); */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -1684,23 +1409,9 @@ export class AddressDetailsWizardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            /* Swal.fire('Saved Successfully') */
             this.loader = false
             this.showPopup = 1;
             this.messageId = 8;
-          }, error: (err) => {
-            // Swal.fire('Issue in Inserting Nomination');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
@@ -1718,29 +1429,14 @@ export class AddressDetailsWizardComponent implements OnInit {
         'Salary': this.unitdetailsarray[0].Salary,
         'CurrentEmployer': this.CurrentEmployer,
         'StaffID': this.StaffID
-
       }
       this.DigiofficeService.InsertEmploymentDetails(eb)
         .subscribe({
           next: data => {
             debugger
-            /* Swal.fire('Saved Successfully') */
             this.loader = false
             this.showPopup = 1;
             this.messageId = 8;
-          }, error: (err) => {
-            // Swal.fire('Issue in Inserting Employment Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
@@ -1751,13 +1447,11 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.showPopup = 0;
     this.loader = true;
     if (this.StartDateMonth == undefined || this.StartDateMonth == 0 || this.EndDateMonth == undefined || this.EndDateMonth == "") {
-      /*   Swal.fire('Please Fill All Fields'); */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
     } else {
       var eb = {
-
         'EducationType': this.EducationType == undefined ? null : this.EducationType,
         'Qualification': this.Qualification == undefined ? null : this.Qualification,
         'NameOfQualification': this.NameOfQualification == undefined ? null : this.NameOfQualification,
@@ -1771,30 +1465,15 @@ export class AddressDetailsWizardComponent implements OnInit {
         'EndDateMonth': this.EndDateMonth == " " ? this.DOB : this.EndDateMonth,
         'EndDateYear': this.EndDateMonth == " " ? this.DOB : this.EndDateMonth,
         'StaffID': this.StaffID
-
       }
       this.DigiofficeService.InsertEducationDetails(eb)
         .subscribe({
           next: data => {
             debugger
             this.loader = false
-            /* Swal.fire('Saved Successfully') */
             this.loader = false
             this.showPopup = 1;
             this.messageId = 8;
-          }, error: (err) => {
-            // Swal.fire('Issue in Inserting Education Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
@@ -1805,7 +1484,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.showPopup = 0;
     this.loader = true;
     if (this.IssueDate == undefined || this.IssueDate == 0 || this.ExpiryDate == undefined || this.ExpiryDate == "") {
-      /*   Swal.fire('Please Fill All Fields'); */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -1820,30 +1498,15 @@ export class AddressDetailsWizardComponent implements OnInit {
         'IssuingAuthority': this.IssuingAuthority,
         'PlaceOfIssue': this.PlaceOfIssue,
         'StaffID': this.StaffID
-
       }
       this.DigiofficeService.InsertID_Details(eb)
         .subscribe({
           next: data => {
             debugger
-            /* Swal.fire('Saved Successfully') */
             this.loader = false;
             this.loader = false
             this.showPopup = 1;
             this.messageId = 8;
-          }, error: (err) => {
-            // Swal.fire('Issue in Inserting ID Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
@@ -1854,50 +1517,31 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.showPopup = 0;
     this.loader = true
     if (this.NameOfBank == undefined || this.AccountHolderName == undefined || this.BankAccountNumber == undefined) {
-      /*   Swal.fire('Please Fill All The Mandatory Fields') */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
     }
     else {
       var eb = {
-
         'NameOfBank': this.NameOfBank,
         'AccountHolderName': this.AccountHolderName,
         'BankAccountNumber': this.BankAccountNumber,
         'StaffID': this.StaffID
-
       }
       this.DigiofficeService.InsertBankDetails(eb)
         .subscribe({
           next: data => {
             debugger
-            /*  Swal.fire('Saved Successfully') */
             this.loader = false
             this.showPopup = 1;
             this.messageId = 8;
             this.loader = false
-          }, error: (err) => {
-            // Swal.fire('Issue in Inserting Bank Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
-
   }
 
   public UpdateAllowanceDetails() {
-
   }
 
   public SaveAllowanceDetails() {
@@ -1907,8 +1551,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     if (this.Allowance == undefined || this.Amount == undefined || this.startdate == undefined || this.endate == undefined) {
       Swal.fire('Please Fill All The Mandatory Fields')
       this.loader = false
-      // this.showPopup = 1;
-      // this.messageId = 13;
     }
     else {
       this.DigiofficeService.GetAllStaffNewByEmployeID(this.StaffID).subscribe(data => {
@@ -1916,16 +1558,12 @@ export class AddressDetailsWizardComponent implements OnInit {
         let temp: any = data;
         let staffid = temp[0]?.id;
         var eb = {
-
           'StaffID': staffid,
           'AllowanceID': this.Allowance,
           'Amount': this.Amount,
           'startdate': this.startdate,
           'enddate': this.endate,
-
-
         }
-        // this.SavedAllowancelist=eb;
         this.DigiofficeService.InsertStaffAllowanceDetails(eb)
           .subscribe({
             next: data => {
@@ -1938,28 +1576,10 @@ export class AddressDetailsWizardComponent implements OnInit {
                 Swal.fire('issue in InsertStaffAllowanceDetails ')
               }
               this.loader = false
-              // this.showPopup = 1;
-              // this.messageId = 8;
-            }, error: (err) => {
-              // Swal.fire('Issue in Inserting Bank Details');
-              this.loader = false;
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
-
       });
-
     }
-
   }
 
   public SaveVisaDetails() {
@@ -1967,7 +1587,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.showPopup = 0;
     this.loader = true
     var eb = {
-
       'VisaType': this.VisaType == undefined ? null : this.VisaType,
       'VisaNumber': this.VisaNumber == undefined ? null : this.VisaNumber,
       'VisaIssueDate': this.VisaIssueDate == " " ? this.DOB : this.VisaIssueDate,
@@ -1978,28 +1597,13 @@ export class AddressDetailsWizardComponent implements OnInit {
       .subscribe({
         next: data => {
           debugger
-          /*      Swal.fire('Saved Successfully') */
           this.loader = false
           this.showPopup = 1;
           this.messageId = 8;
           this.router.navigate(['/EmployeeDashboard']);
-        }, error: (err) => {
-          // Swal.fire('Issue in Inserting Visa Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
 
   public SaveSalaryDetails() {
     debugger
@@ -2014,34 +1618,17 @@ export class AddressDetailsWizardComponent implements OnInit {
       'EffectiveFromDate': this.EffectiveFromDate,
       'Reason': this.Reason,
       'StaffID': this.StaffID
-
-
     }
     this.DigiofficeService.InsertSalaryDetails(eb1)
       .subscribe({
         next: data => {
           debugger
-          /*   Swal.fire('Saved Successfully') */
           this.loader = false
           this.showPopup = 1;
           this.messageId = 8;
-        }, error: (err) => {
-          // Swal.fire('Issue in Inserting Salary Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
 
   public SaveAddressDetails() {
     debugger
@@ -2052,7 +1639,6 @@ export class AddressDetailsWizardComponent implements OnInit {
       this.Barangay == " " || this.Barangay == undefined || this.SubDistrictPostcode == " " || this.SubDistrictPostcode == undefined ||
       this.EmergencyContactName == "" || this.EmergencyContactName == undefined || this.EmergencyContactRelationship == "" || this.EmergencyContactRelationship == undefined
       || this.EmergencyContactMobileNumber == 0 || this.EmergencyContactMobileNumber == undefined) {
-      /*    Swal.fire('Please Fill All The Mandatory Fields') */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -2060,7 +1646,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     else {
       var eb = {
         'AddressType': this.AddressType,
-
         'FindPlace': this.FindPlace == undefined ? null : this.FindPlace,
         'AddressLine1': this.AddressLine1,
         'AddressLine2': this.AddressLine2,
@@ -2093,24 +1678,9 @@ export class AddressDetailsWizardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            /*  Swal.fire('Saved successfully.'); */
-            // this.router.navigate(['/EmployeeDashboard']);
             this.loader = false
             this.showPopup = 1;
             this.messageId = 8;
-          }, error: (err) => {
-            // Swal.fire('Issue in Inserting My Address Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
@@ -2121,17 +1691,12 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.RoleType = event.target.value;
   }
 
-  ExtensionEndDate: any;
-  ProbationEndDate: any;
-  ProbationStartDate: any;
-
   public SavePositionDetails() {
     debugger
     this.showPopup = 0;
     this.loader = true
     if (this.EmployeeCode == 0 || this.OfficialEmail == undefined || this.Band == " " || this.JobRole == undefined || this.EmployeeStatus == " " || this.NoticePeriod == " " || this.ProbationPeriod == " " || this.ConfirmationDueDate == " "
       || this.CostCenter == undefined || this.CostCenter == null) {
-      /* Swal.fire('Please Fill All The Mandatory Fields') */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -2168,28 +1733,13 @@ export class AddressDetailsWizardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            /*  Swal.fire('Saved Successfully') */
             this.loader = false
             this.showPopup = 1;
             this.messageId = 8;
-          }, error: (err) => {
-            // Swal.fire('Issue in Inserting Position Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
   }
-
 
   public UpdateDependentDetails() {
     debugger
@@ -2212,40 +1762,22 @@ export class AddressDetailsWizardComponent implements OnInit {
       'Religion': this.Religion == undefined ? null : this.Religion,
       'Working_Status': this.Working_Status == undefined ? null : this.Working_Status,
       'Request_Type': this.Request_Type == undefined ? null : this.Request_Type,
-
     }
     this.DigiofficeService.UpdateDependentDetails(eb)
       .subscribe({
         next: data => {
           debugger
-          /* Swal.fire("Updated Successfully!!!") */
-          // location.reload();
           this.loader = false
           this.showPopup = 1;
           this.messageId = 10;
-        }, error: (err) => {
-          // Swal.fire('Issue in Updating Dependent Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
 
   public UpdateNomination() {
     debugger
     this.showPopup = 0;
     if (this.Dependent == undefined || this.Percentage == undefined || this.NomineeType == undefined) {
-      /*  Swal.fire('Please Fill All Mandatory Fields') */
     }
     else {
       var eb = {
@@ -2260,30 +1792,12 @@ export class AddressDetailsWizardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            /*  Swal.fire("Updated Successfully!!!") */
-            // location.reload();
-            // this.loader = false
             this.loader = false
             this.showPopup = 1;
             this.messageId = 10;
-          }, error: (err) => {
-            // Swal.fire('Issue in Updating Nomination');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
-    // this.loader = true
-
   }
 
   public UpdateEmploymentDetails() {
@@ -2298,31 +1812,15 @@ export class AddressDetailsWizardComponent implements OnInit {
       'EndDate': this.EndDate,
       'Salary': this.Salary,
       'CurrentEmployer': this.CurrentEmployer,
-
     }
     this.DigiofficeService.UpdateEmploymentDetails(eb)
       .subscribe({
         next: data => {
           debugger
-          /*  Swal.fire("Updated Successfully!!!") */
           this.loader = false
           this.showPopup = 1;
           this.messageId = 10;
-          // location.reload();
           this.loader = false
-        }, error: (err) => {
-          // Swal.fire('Issue in Updating Employment Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -2332,7 +1830,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.showPopup = 0;
     this.loader = true;
     if (this.StartDateMonth == undefined || this.StartDateMonth == 0 || this.EndDateMonth == undefined || this.EndDateMonth == "") {
-      /*  Swal.fire('Please Fill All Fields'); */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -2351,30 +1848,14 @@ export class AddressDetailsWizardComponent implements OnInit {
         'StartDateYear': this.StartDateMonth == " " ? this.DOB : this.StartDateMonth,
         'EndDateMonth': this.EndDateMonth == " " ? this.DOB : this.EndDateMonth,
         'EndDateYear': this.EndDateMonth == " " ? this.DOB : this.EndDateMonth,
-
       }
       this.DigiofficeService.UpdateEducationDetails(eb)
         .subscribe({
           next: data => {
             debugger
-            /*  Swal.fire("Updated Successfully!!!") */
-            // location.reload();
             this.loader = false
             this.showPopup = 1;
             this.messageId = 10;
-          }, error: (err) => {
-            // Swal.fire('Issue in Updating Education Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
@@ -2385,7 +1866,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.showPopup = 0;
     this.loader = true;
     if (this.IssueDate == undefined || this.IssueDate == 0 || this.ExpiryDate == undefined || this.ExpiryDate == "") {
-      /* Swal.fire('Please Fill All Fields'); */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -2393,7 +1873,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     } else {
       var eb = {
         'ID': this.StaffID,
-
         'IDType': this.IDType,
         'Number': this.Number,
         'NameOnDocument': this.NameOnDocument,
@@ -2401,30 +1880,14 @@ export class AddressDetailsWizardComponent implements OnInit {
         'ExpiryDate': this.ExpiryDate,
         'IssuingAuthority': this.IssuingAuthority,
         'PlaceOfIssue': this.PlaceOfIssue,
-
       }
       this.DigiofficeService.UpdateID_Details(eb)
         .subscribe({
           next: data => {
             debugger
-            /*     Swal.fire("Updated Successfully!!!"); */
             this.loader = false
             this.showPopup = 1;
             this.messageId = 10;
-            // location.reload();
-          }, error: (err) => {
-            // Swal.fire('Issue in Updating ID Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
       this.loader = false;
@@ -2439,7 +1902,6 @@ export class AddressDetailsWizardComponent implements OnInit {
       this.NameOfBank == "" || this.AccountHolderName == "" || this.BankAccountNumber == "" ||
       this.NameOfBank == null || this.AccountHolderName == null || this.BankAccountNumber == null ||
       this.NameOfBank == "Select One") {
-      /*  Swal.fire('Please Fill All The Mandatory Fields'); */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -2455,30 +1917,13 @@ export class AddressDetailsWizardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            /*  Swal.fire("Updated Successfully!!!") */
-            // location.reload();
             this.loader = false
             this.showPopup = 1;
             this.messageId = 10;
-          }, error: (err) => {
-            // Swal.fire('Issue in Updating Bank Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
   }
-
-
 
   public UpdateVisaDetails() {
     debugger
@@ -2486,43 +1931,21 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.showPopup = 0
     var eb = {
       'ID': this.StaffID,
-
       'VisaType': this.VisaType == undefined ? null : this.VisaType,
       'VisaNumber': this.VisaNumber == undefined ? null : this.VisaNumber,
       'VisaIssueDate': this.VisaIssueDate == " " ? this.DOB : this.VisaIssueDate,
       'VisaExpiryDate': this.VisaExpiryDate == " " ? this.DOB : this.VisaExpiryDate,
-
-
-
-
-
     }
     this.DigiofficeService.UpdateVisaDetails(eb)
       .subscribe({
         next: data => {
           debugger
-          /*  Swal.fire("Updated Successfully!!!") */
-          // location.reload();
           this.loader = false
           this.showPopup = 1;
           this.messageId = 10;
-        }, error: (err) => {
-          // Swal.fire('Issue in Updating Visa Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
 
   public UpdateSalaryDetails() {
     debugger
@@ -2542,28 +1965,12 @@ export class AddressDetailsWizardComponent implements OnInit {
       .subscribe({
         next: data => {
           debugger
-          /*    Swal.fire("Updated Successfully!!!") */
-          // location.reload();
           this.loader = false
           this.showPopup = 1;
           this.messageId = 10;
-        }, error: (err) => {
-          // Swal.fire('Issue in Updating Salary Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
 
   public UpdateMyAddressDetails() {
     debugger
@@ -2574,7 +1981,6 @@ export class AddressDetailsWizardComponent implements OnInit {
       this.Barangay == " " || this.Barangay == undefined || this.SubDistrictPostcode == " " || this.SubDistrictPostcode == undefined ||
       this.EmergencyContactName == "" || this.EmergencyContactName == undefined || this.EmergencyContactRelationship == "" || this.EmergencyContactRelationship == undefined
       || this.EmergencyContactMobileNumber == 0 || this.EmergencyContactMobileNumber == undefined) {
-      /*   Swal.fire('Please Fill All The Mandatory Fields') */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -2583,15 +1989,11 @@ export class AddressDetailsWizardComponent implements OnInit {
       var eb = {
         'ID': this.StaffID,
         'AddressType': this.AddressType,
-
         'FindPlace': this.FindPlace,
         'AddressLine1': this.AddressLine1,
         'AddressLine2': this.AddressLine2,
         'AddressLine3': this.AddressLine3,
         'AddressLine4': this.AddressLine4,
-        // 'District': this.District,
-        // 'Province': this.Province,
-        // 'Country': this.Country1,
         'District': this.CityID,
         'Province': this.StateID,
         'Country': this.CountryID,
@@ -2618,32 +2020,14 @@ export class AddressDetailsWizardComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            /* Swal.fire("Updated Successfully!!!") */
-            // location.reload();
             this.loader = false
             this.loader = false
             this.showPopup = 1;
             this.messageId = 10;
-          }, error: (err) => {
-            // Swal.fire('Issue in Updating My Address Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
-
   }
-
-
 
   public UpdatePositionDetails() {
     debugger
@@ -2651,7 +2035,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.loader = true
     if (this.EmployeeCode == 0 || this.OfficialEmail == undefined || this.Band == " " || this.Band == undefined || this.JobRole == undefined || this.EmployeeStatus == " " || this.EmployeeStatus == undefined || this.NoticePeriod == " " || this.NoticePeriod == undefined || this.ProbationPeriod == 0 || this.ProbationPeriod == undefined || this.ConfirmationDueDate == " " || this.ConfirmationDueDate == undefined
       || this.CostCenter == undefined || this.CostCenter == null) {
-      /* Swal.fire('Please Fill All The Mandatory Fields') */
       this.loader = false
       this.showPopup = 1;
       this.messageId = 13;
@@ -2683,41 +2066,22 @@ export class AddressDetailsWizardComponent implements OnInit {
         'GLCode': this.GLCode,
         'ResignationDate': this.ResignationDate,
       }
-
-
       this.DigiofficeService.UpdatePositionDetails(eb)
         .subscribe({
           next: data => {
             debugger
-            /*   Swal.fire('Updated Successfully') */
-            // this.router.navigate(['/EmployeeForm']);
             this.loader = false
             this.showPopup = 1;
             this.messageId = 10;
-          }, error: (err) => {
-            // Swal.fire('Issue in Updating Position Details');
-            this.loader = false;
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
   }
 
-
   public insertdetails() {
     this.showtable = 1;
     debugger
     var stt = {
-
       'ComapanyName': this.ComapanyName,
       'Title': this.Title,
       'StartDate': this.StartDate,
@@ -2728,17 +2092,10 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.arrayid = this.arrayid + 1;
   }
 
-
-
-
   public cancel() {
     debugger
     location.reload();
   }
-
-
-
-
 
   public GetCountryID(event: any) {
     this.CountryID = event.target.value;
@@ -2747,23 +2104,9 @@ export class AddressDetailsWizardComponent implements OnInit {
         next: data => {
           debugger
           this.Provincelist = data.filter(x => x.countryID == this.CountryID)
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting State Type');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
 
   public GetProvinceID(event: any) {
     debugger
@@ -2775,19 +2118,6 @@ export class AddressDetailsWizardComponent implements OnInit {
           debugger
           this.Citylist = data.filter(x => x.stateID == this.StateID);
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting City Type');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -2799,46 +2129,15 @@ export class AddressDetailsWizardComponent implements OnInit {
         next: data => {
           debugger
           this.Barangaylist = data.filter(x => x.cityID == this.CityID)
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Barangay Master');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
-
-  show: any;
-
-  // public GetCItyID(event: any) {
-  //   debugger
-  //   this.CityID = event.target.value;
-  //   if (this.CityID == 103) {
-  //     this.show = 1;
-  //   } else {
-  //     this.show = 2;
-  //   }
-
-  // }
-
-  public restdaysarray: any = [];
-  public restdaysarray1: any = [];
-
 
   onItemSelect2(item: any) {
     debugger
     console.log(item);
     this.restdaysarray1.push(item)
   }
-
 
   public getAssignedCompany() {
     debugger
@@ -2848,19 +2147,6 @@ export class AddressDetailsWizardComponent implements OnInit {
           debugger
           this.supervisorlist = data.filter(x => x.type == 2 && x.assignedCompany == this.AssignedCompany);
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting My Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -2872,19 +2158,6 @@ export class AddressDetailsWizardComponent implements OnInit {
           debugger
           this.supervisorlist = data.filter(x => x.type == 2 && x.department == this.Department);
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting My Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -2896,19 +2169,6 @@ export class AddressDetailsWizardComponent implements OnInit {
           debugger
           this.supervisorlist = data.filter(x => x.level == this.level);
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting My Details');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -2918,9 +2178,7 @@ export class AddressDetailsWizardComponent implements OnInit {
   }
 
   public getdate() {
-
     var birthdate: any = new Date(this.DOB);
-
     var cur: any = new Date();
     var diff: any = cur - birthdate; // This is the difference in milliseconds
     this.Age = Math.floor(diff / 31557600000); // Divide by 1000*60*60*24*365.25
@@ -2946,16 +2204,6 @@ export class AddressDetailsWizardComponent implements OnInit {
               this.showPopup = 1;
               this.messageId = 11;
               this.ngOnInit()
-            }, error: (err) => {
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
       }
@@ -2980,18 +2228,6 @@ export class AddressDetailsWizardComponent implements OnInit {
           Swal.fire("Updated Successfully");
           this.ngOnInit();
           this.loader = false;
-        }, error: (err) => {
-          // this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -3002,7 +2238,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     console.log("this.allowanceID", this.allowanceID)
     this.DigiofficeService.GetStaffAllowanceDetailsByStaffID(this.StaffID).subscribe(
       data => {
-
         this.allowanceList = data.filter((x) => x.id == this.allowanceID);
         this.StaffID = this.allowanceList[0].staffID,
           this.Allowance = this.allowanceList[0].allowanceID,
@@ -3022,5 +2257,4 @@ export class AddressDetailsWizardComponent implements OnInit {
         this.loader = false;
       });
   }
-
 }
