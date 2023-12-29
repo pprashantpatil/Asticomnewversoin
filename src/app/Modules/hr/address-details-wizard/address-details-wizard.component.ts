@@ -12,11 +12,8 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./address-details-wizard.component.css']
 })
 export class AddressDetailsWizardComponent implements OnInit {
-
   allowanceID: any;
   allowanceList: any;
-
-  constructor(public DigiofficeService: DigiofficecorehrService, private ngWizardService: NgWizardService, public router: Router, private activatedroute: ActivatedRoute, public datepipe: DatePipe) { }
   Position: any;
   Restdays: any
   Is_Solo_Parent: any;
@@ -37,7 +34,6 @@ export class AddressDetailsWizardComponent implements OnInit {
   MedicineAllowance: any;
   MaintenanceDepreciationAllowance: any;
   EffectivityofAllowance: any;
-  // StateID: any;
   StateID: any = [];
   CityID: any = [];
   Barangay: any = [];
@@ -51,7 +47,6 @@ export class AddressDetailsWizardComponent implements OnInit {
   Name: any
   employmentlist: any;
   Country_Of_Birth: any
-  // Date_Of_Marriage: any
   Middle_Name: any
   Age: any;
   CostCenter: any;
@@ -154,7 +149,7 @@ export class AddressDetailsWizardComponent implements OnInit {
   AddressType: any;
   Relationship1: any;
   Frequency: any;
-  ProjectID:any;
+  ProjectID: any;
   FindPlace: any;
   AddressLine1: any;
   AddressLine2: any;
@@ -227,15 +222,12 @@ export class AddressDetailsWizardComponent implements OnInit {
   PreviousEffectivityBMSDate: any;
   CurrentEffectivityBMSDate: any;
   OrginalBms: any
-  // PagiBigAccountNo: any;
   PagiBigMP2: any;
   PagiBig_ID: any;
   Paygroup: any;
   SSSNO: any;
   PHILHEALTH_NO: any;
   EMPLOYEE_TIN: any;
-  // PagibigRemarks: any;
-  // PagibigMembership: any;
   currentUrl: any
   cb: any;
   unitdetailsarray: any = [];
@@ -313,12 +305,15 @@ export class AddressDetailsWizardComponent implements OnInit {
     error: STEP_STATE.error,
     hidden: STEP_STATE.hidden
   };
+
   config: NgWizardConfig = {
     selected: 0,
     theme: THEME.default,
     toolbarSettings: {
     }
   };
+
+  constructor(public DigiofficeService: DigiofficecorehrService, private ngWizardService: NgWizardService, public router: Router, private activatedroute: ActivatedRoute, public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.loader = true;
@@ -421,7 +416,6 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.Status = 'selected',
       this.Blood_Group = "";
     this.ActivatedRouteCallPrefil();
-
     this.roledropdownSettings = {
       singleSelection: true,
       idField: 'id',
@@ -441,6 +435,7 @@ export class AddressDetailsWizardComponent implements OnInit {
       itemsShowLimit: 10,
       allowSearchFilter: true,
     };
+
     this.provincedropdownSettings = {
       singleSelection: true,
       idField: 'id',
@@ -460,7 +455,6 @@ export class AddressDetailsWizardComponent implements OnInit {
       itemsShowLimit: 10,
       allowSearchFilter: true,
     };
-
 
     this.barangaydropdownSettings = {
       singleSelection: true,
@@ -493,19 +487,6 @@ export class AddressDetailsWizardComponent implements OnInit {
           debugger
           this.allowancelist = data;
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting De Minimis Master');
-          // this.loader=false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -519,19 +500,6 @@ export class AddressDetailsWizardComponent implements OnInit {
           debugger
           this.fetchallowancelist = data;
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting De Minimis Master');
-          // this.loader=false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -545,7 +513,6 @@ export class AddressDetailsWizardComponent implements OnInit {
       if (this.ID == undefined) {
         this.Title = 0,
           this.Age = ' ',
-          // this.Date_Of_Marriage = ' ',
           this.Is_Disabled = ' ',
           this.Height = 0,
           this.Weight = 0,
@@ -597,19 +564,6 @@ export class AddressDetailsWizardComponent implements OnInit {
               debugger
               this.supervisorlist = data.filter(x => x.type == 2);
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting All Staff New');
-              this.loader = false;
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
         this.DigiofficeService.GetAllStaffNewByEmployeID(this.StaffID)
@@ -637,12 +591,6 @@ export class AddressDetailsWizardComponent implements OnInit {
               this.CompRate = this.leavelist[0].compRate;
               this.RateCode = this.leavelist[0].rateCode;
               this.PagiBigMP2 = this.leavelist[0].pagiBigMP2;
-              // if ((this.datepipe.transform(this.leavelist[0].date_Of_Marriage, 'yyyy-MM-dd')) == "1990-01-01") {
-              //   this.Date_Of_Marriage = " "
-              // }
-              // else {
-              //   this.Date_Of_Marriage = this.datepipe.transform(this.leavelist[0].date_Of_Marriage, 'yyyy-MM-dd')
-              // }
               this.Personal_Email = this.leavelist[0].personal_Email;
               this.Mobile = this.leavelist[0].mobile;
               this.Religion = this.leavelist[0].religion,
@@ -669,39 +617,15 @@ export class AddressDetailsWizardComponent implements OnInit {
                       this.loader = false;
                       this.RoleType = this.RoleType12
                       this.RoleType1 = this.RoleType[0].id
-                    }, error: (err) => {
-                      // Swal.fire('Issue in Getting Role Type');
-                      this.loader = false;
-                      // Insert error in Db Here//
-                      var obj = {
-                        'PageName': this.currentUrl,
-                        'ErrorMessage': err.error.message
-                      }
-                      this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                        data => {
-                          debugger
-                        },
-                      )
                     }
                   })
               this.RoleType = this.leavelist[0].type,
-                // this.Supervisor = this.leavelist[0].supervisor;
-                // this.DigiofficeService.GetMyDetails().subscribe(data => {
-                //   debugger
-                //   this.supervisorlist12 = data.filter(x => x.id == this.Supervisor1);
-                //   this.loader = false;
-                //   this.Supervisor = this.supervisorlist12
-                // });
-                // this.Supervisorname = this.leavelist[0].manager;
                 this.Signature = this.leavelist[0].signature,
                 this.Paygroup = this.leavelist[0].paygroup,
                 this.PagiBig_ID = this.leavelist[0].pagiBig_ID,
-                // this.PagiBigAccountNo = this.leavelist[0].pagiBigAccountNo,
-                // this.PagibigRemarks = this.leavelist[0].pagibigRemarks,
                 this.EMPLOYEE_TIN = this.leavelist[0].employee_TIN,
                 this.PHILHEALTH_NO = this.leavelist[0].philhealtH_NO,
                 this.SSSNO = this.leavelist[0].sssno,
-                // this.PagibigMembership = this.leavelist[0].pagibigMembership,
                 this.level = this.leavelist[0].loginType,
                 this.LoginType = this.leavelist[0].logintype,
                 this.EmployeeID = this.leavelist[0].employeID,
@@ -735,19 +659,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                       this.Department12 = data.filter(x => x.id == this.Department);
                       this.Department = this.Department12
                       this.department1 = this.Department[0].id
-                    }, error: (err) => {
-                      // Swal.fire('Issue in Getting Department');
-                      this.loader = false;
-                      // Insert error in Db Here//
-                      var obj = {
-                        'PageName': this.currentUrl,
-                        'ErrorMessage': err.error.message
-                      }
-                      this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                        data => {
-                          debugger
-                        },
-                      )
                     }
                   })
               this.Department = this.leavelist[0].department,
@@ -759,19 +670,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                       this.managerList1 = data.filter(x => x.id == this.Supervisor);
                       this.Supervisor = this.managerList1
                       this.Supervisor1 = this.Supervisor[0].id
-                    }, error: (err) => {
-                      // Swal.fire('Issue in Getting All Staff New');
-                      this.loader = false;
-                      // Insert error in Db Here//
-                      var obj = {
-                        'PageName': this.currentUrl,
-                        'ErrorMessage': err.error.message
-                      }
-                      this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                        data => {
-                          debugger
-                        },
-                      )
                     }
                   })
               this.Supervisor = this.leavelist[0].supervisor,
@@ -804,19 +702,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                         this.BillingAddress = this.leavelist[0].billingAddress,
                         this.CostCenter = this.leavelist[0].costCenter,
                         this.loader = false;
-                    }, error: (err) => {
-                      // Swal.fire('Issue in Getting Position Details');
-                      this.loader = false;
-                      // Insert error in Db Here//
-                      var obj = {
-                        'PageName': this.currentUrl,
-                        'ErrorMessage': err.error.message
-                      }
-                      this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                        data => {
-                          debugger
-                        },
-                      )
                     }
                   })
               this.DigiofficeService.GetEmploymentDetails()
@@ -830,19 +715,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                     this.EndDate = this.employmentlist[0].endDate
                     this.Salary = this.employmentlist[0].salary
                     this.loader = false;
-                  }, error: (err) => {
-                    // Swal.fire('Issue in Getting Employment Details');
-                    this.loader = false;
-                    // Insert error in Db Here//
-                    var obj = {
-                      'PageName': this.currentUrl,
-                      'ErrorMessage': err.error.message
-                    }
-                    this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                      data => {
-                        debugger
-                      },
-                    )
                   }
                 })
               this.DigiofficeService.GetMyAddressDetails()
@@ -881,35 +753,9 @@ export class AddressDetailsWizardComponent implements OnInit {
                       this.CostCenter = this.leavelist[0].costCenter,
                       this.getstate();
                     this.getcity();
-                  }, error: (err) => {
-                    // Swal.fire('Issue in Getting My Address Details');
-                    this.loader = false;
-                    // Insert error in Db Here//
-                    var obj = {
-                      'PageName': this.currentUrl,
-                      'ErrorMessage': err.error.message
-                    }
-                    this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                      data => {
-                        debugger
-                      },
-                    )
                   }
                 })
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting All Staff New');
-              this.loader = false;
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
         this.DigiofficeService.GetDependentDetails()
@@ -933,19 +779,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                 this.Working_Status = this.leavelist[0].working_Status,
                 this.Request_Type = this.leavelist[0].request_Type
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting Dependent Details');
-              this.loader = false;
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
         this.DigiofficeService.GetNomination()
@@ -959,19 +792,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                 this.GuardianName = this.leavelist[0].guardianName,
                 this.GuardianRelationship = this.leavelist[0].guardianRelationship
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting Nomination');
-              this.loader = false;
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
         this.DigiofficeService.GetEducationDetails()
@@ -992,19 +812,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                 this.EndDateMonth = this.datepipe.transform(this.leavelist[0].endDateMonth, 'yyyy-MM-dd'),
                 this.EndDateYear = this.datepipe.transform(this.leavelist[0].endDateYear, 'yyyy-MM-dd')
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting Education Details');
-              this.loader = false;
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
         this.DigiofficeService.GetBankDetails()
@@ -1016,19 +823,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                 this.AccountHolderName = this.leavelist[0].accountHolderName,
                 this.BankAccountNumber = this.leavelist[0].bankAccountNumber
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting Bank Details');
-              this.loader = false;
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
         this.DigiofficeService.GetID_Details()
@@ -1044,19 +838,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                 this.IssuingAuthority = temp[0].issuingAuthority,
                 this.PlaceOfIssue = temp[0].placeOfIssue
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting ID Details');
-              this.loader = false;
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
         this.DigiofficeService.GetVisaDetails()
@@ -1069,19 +850,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                 this.VisaIssueDate = this.datepipe.transform(this.leavelist[0].visaIssueDate, 'yyyy-MM-dd'),
                 this.VisaExpiryDate = this.datepipe.transform(this.leavelist[0].visaExpiryDate, 'yyyy-MM-dd')
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting Visa Details');
-              this.loader = false;
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
         this.DigiofficeService.GetSalaryDetails()
@@ -1097,19 +865,6 @@ export class AddressDetailsWizardComponent implements OnInit {
                 this.EffectiveFromDate = this.datepipe.transform(this.leavelist[0].effectiveFromDate, 'yyyy-MM-dd'),
                 this.Reason = this.leavelist[0].reason
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting Salary Details');
-              this.loader = false;
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
       }
@@ -1122,19 +877,6 @@ export class AddressDetailsWizardComponent implements OnInit {
         next: data => {
           debugger
           this.dropdownRoleList = data;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Role Type');
-          this.loader = false;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -3255,9 +2997,9 @@ export class AddressDetailsWizardComponent implements OnInit {
   }
 
   public getAllowanceID(id: any) {
-debugger
+    debugger
     this.allowanceID = id
-    console.log("this.allowanceID",this.allowanceID)
+    console.log("this.allowanceID", this.allowanceID)
     this.DigiofficeService.GetStaffAllowanceDetailsByStaffID(this.StaffID).subscribe(
       data => {
 
