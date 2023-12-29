@@ -41,7 +41,7 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
   }
 
   public getData() {
-    if (this.roleID == 11 || this.roleID == 10 || this.roleID == 1) {
+    if (this.roleID == 11 || this.roleID == 10 || this.roleID == 1 || this.roleID == 9) {
       this.DigiofficecorehrService.GetAttendanceCorrection1().subscribe(
         res => {
           debugger;
