@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12">
             <ul>
-                <li><a class="Heading">
+                <li *ngIf="roledid!=11"><a class="Heading">
                         <p class="Heading">My Leave Details</p>
                         <hr class="line-border listForm">
                     </a>
@@ -15,9 +15,8 @@
                         Details</a>
                 </li>
 
-                <li *ngIf="roledid==9||roledid==10||roledid==11"><a class="Heading " routerLink="/Manager/MyTeamLeaveDetails">Staff
-                        Leave
-                        Details</a>
+                <li *ngIf="roledid==1||roledid==9||roledid==11||roledid==10"><a class="Heading "
+                        routerLink="/Manager/MyTeamLeaveDetails">All Company Leave Details</a>
                 </li>
             </ul>
 
@@ -36,7 +35,7 @@
                                     (ngModelChange)="getEndDate($event)" [bsConfig]="{ showWeekNumbers:false }">
                             </p>
                         </div>
-                        
+
                         <input class="form-control search-icon" [(ngModel)]="term" type="search" placeholder="Search">
                     </div>
 
@@ -327,14 +326,14 @@
                                             </td>
                                             <td>{{list.leaveReason}}<br>
                                             <td>{{list.noOfDays}}<br>
-                                            <td> 
+                                            <td>
                                                 <p
                                                     *ngIf="list.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
                                                     No Attachment</p>
                                                 <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
                                                 <a href="{{list.medicalUrl}}" target="_blank">
                                                     <img *ngIf="list.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
-                                                        src="assets/Images/image.png"  alt="pdf.img"
+                                                        src="assets/Images/image.png" alt="pdf.img"
                                                         class="attachmentPin"></a>
 
                                                 <!-- <img *ngIf="list.medicalUrl!=null && list.filetype!='pdf' && list.filetype!='docx'
@@ -568,83 +567,82 @@
 
             <div class="row">
 
-                    <div class="row">
-                        <div class="alignment" *ngFor="let item of Staffleaveenitilment">
-                            <div class="small-card1">
-                                <div class="Ellipse">
-                                    <img src="assets/Images/revamp/Leave_VAWC RA9262 1.png" class="Ellipse-img" />
-                                </div>
-                                <p class="align-text-smallcard"><b> Vacation Leave </b></p>
-                                <p><b class="number">{{item.vacation_Leaveremaining}}</b></p>
+                <div class="row">
+                    <div class="alignment" *ngFor="let item of Staffleaveenitilment">
+                        <div class="small-card1">
+                            <div class="Ellipse">
+                                <img src="assets/Images/revamp/Leave_VAWC RA9262 1.png" class="Ellipse-img" />
                             </div>
+                            <p class="align-text-smallcard"><b> Vacation Leave </b></p>
+                            <p><b class="number">{{item.vacation_Leaveremaining}}</b></p>
+                        </div>
 
-                            <div class="small-card1">
-                                <div class="Ellipse">
-                                    <img src="assets/Images/revamp/Leave_Current Reserve VL 1.png" class="Ellipse-img" />
-                                </div>
-                                <p class="align-text-smallcard"><b>Sick Leave</b></p>
-                                <p><b class="number">{{item.sick_Leaveremaining}}</b></p>
+                        <div class="small-card1">
+                            <div class="Ellipse">
+                                <img src="assets/Images/revamp/Leave_Current Reserve VL 1.png" class="Ellipse-img" />
                             </div>
+                            <p class="align-text-smallcard"><b>Sick Leave</b></p>
+                            <p><b class="number">{{item.sick_Leaveremaining}}</b></p>
+                        </div>
 
-                            <div class="small-card1" *ngIf="item.awardname != 'No Award'">
-                                <div class="Ellipse">
-                                    <img src="assets/Images/revamp/Leave_Current Reserve VL 1.png" class="Ellipse-img" />
-                                </div>
-                                <p class="align-text-smallcard"><b> Service Incentive Leave</b></p>
-                                <p><b class="number">{{item.service_Incentive_Leaveremaining}}</b></p>
+                        <div class="small-card1" *ngIf="item.awardname != 'No Award'">
+                            <div class="Ellipse">
+                                <img src="assets/Images/revamp/Leave_Current Reserve VL 1.png" class="Ellipse-img" />
                             </div>
+                            <p class="align-text-smallcard"><b> Service Incentive Leave</b></p>
+                            <p><b class="number">{{item.service_Incentive_Leaveremaining}}</b></p>
+                        </div>
 
-                            <div class="small-card1" *ngIf="item.gender == 'Female'">
-                                <div class="Ellipse">
-                                    <img src="assets/Images/revamp/Leave_VAWC RA9262 1.png" class="Ellipse-img" />
-                                </div>
-                                <p class="align-text-smallcard"><b>Maternity Leave</b></p>
-                                <p><b class="number">{{item.maternitityLeaveremaining}}</b></p>
+                        <div class="small-card1" *ngIf="item.gender == 'Female'">
+                            <div class="Ellipse">
+                                <img src="assets/Images/revamp/Leave_VAWC RA9262 1.png" class="Ellipse-img" />
                             </div>
+                            <p class="align-text-smallcard"><b>Maternity Leave</b></p>
+                            <p><b class="number">{{item.maternitityLeaveremaining}}</b></p>
+                        </div>
 
-                            <div class="small-card1" *ngIf="item.gender == 'Male' ">
-                                <div class="Ellipse">
-                                    <img src="assets/Images/revamp/Leave_SickLeave 1.png" class="Ellipse-img" />
-                                </div>
-                                <p class="align-text-smallcard"><b>Paternity Leave</b></p>
-                                <p><b class="number">{{item.paternitityLeaveremaining}}</b></p>
+                        <div class="small-card1" *ngIf="item.gender == 'Male' ">
+                            <div class="Ellipse">
+                                <img src="assets/Images/revamp/Leave_SickLeave 1.png" class="Ellipse-img" />
                             </div>
+                            <p class="align-text-smallcard"><b>Paternity Leave</b></p>
+                            <p><b class="number">{{item.paternitityLeaveremaining}}</b></p>
+                        </div>
 
-                            <!-- as per BRD ALPI only staff has SL Accrual -->
-                            <div class="small-card1">
-                                <div class="Ellipse">
-                                    <img src="assets/Images/revamp/Leave_Magna Carta of Women 1.png"
-                                        class="Ellipse-img" />
-                                </div>
-                                <p class="align-text-smallcard"><b>Leave without Pay - SL</b></p>
-                                <p><b class="number">{{item.leave_without_PaySLremaining}}</b></p>
+                        <!-- as per BRD ALPI only staff has SL Accrual -->
+                        <div class="small-card1">
+                            <div class="Ellipse">
+                                <img src="assets/Images/revamp/Leave_Magna Carta of Women 1.png" class="Ellipse-img" />
                             </div>
+                            <p class="align-text-smallcard"><b>Leave without Pay - SL</b></p>
+                            <p><b class="number">{{item.leave_without_PaySLremaining}}</b></p>
+                        </div>
 
-                            <div class="small-card1">
-                                <div class="Ellipse">
-                                    <img src="assets/Images/revamp/Leave_SickLeave 1.png" class="Ellipse-img" />
-                                </div>
-                                <p class="align-text-smallcard"><b>Leave without Pay - VL</b></p>
-                                <p><b class="number">{{item.leave_without_PayVLremaining}}</b></p>
+                        <div class="small-card1">
+                            <div class="Ellipse">
+                                <img src="assets/Images/revamp/Leave_SickLeave 1.png" class="Ellipse-img" />
                             </div>
+                            <p class="align-text-smallcard"><b>Leave without Pay - VL</b></p>
+                            <p><b class="number">{{item.leave_without_PayVLremaining}}</b></p>
+                        </div>
 
-                            <div class="small-card1">
-                                <div class="Ellipse">
-                                    <img src="assets/Images/revamp/Leave_Emergency 1.png" class="Ellipse-img" />
-                                </div>
-                                <p class="align-text-smallcard"><b>Leave with Pay</b></p>
-                                <p><b class="number">2</b></p>
+                        <div class="small-card1">
+                            <div class="Ellipse">
+                                <img src="assets/Images/revamp/Leave_Emergency 1.png" class="Ellipse-img" />
                             </div>
+                            <p class="align-text-smallcard"><b>Leave with Pay</b></p>
+                            <p><b class="number">2</b></p>
+                        </div>
 
-                            <div class="small-card1" *ngIf="item.is_Solo_Parent == 1">
-                                <div class="Ellipse">
-                                    <img src="assets/Images/revamp/Leave_EL Bereavement 1.png" class="Ellipse-img" />
-                                </div>
-                                <p class="align-text-smallcard"><b> Solo Parent Leave</b></p>
-                                <p><b class="number">{{item.solo_Parent_Leaveremaining}}</b></p>
+                        <div class="small-card1" *ngIf="item.is_Solo_Parent == 1">
+                            <div class="Ellipse">
+                                <img src="assets/Images/revamp/Leave_EL Bereavement 1.png" class="Ellipse-img" />
                             </div>
+                            <p class="align-text-smallcard"><b> Solo Parent Leave</b></p>
+                            <p><b class="number">{{item.solo_Parent_Leaveremaining}}</b></p>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

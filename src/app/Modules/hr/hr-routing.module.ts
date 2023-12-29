@@ -24,6 +24,7 @@ import { OtratesdashComponent } from './Master/otratesdash/otratesdash.component
 import { RoleMasterDashComponent } from './Master/role-master-dash/role-master-dash.component';
 import { LoadattedanceComponent } from './Configuration/loadattedance/loadattedance.component';
 import { LeaveUploadComponent } from './Configuration/leave-upload/leave-upload.component';
+import { HRLeaveRequestDashComponent } from './Requests/hrleave-request-dash/hrleave-request-dash.component';
 
 const routes: Routes = [
   { path: 'AddressDetailsWizard', component: AddressDetailsWizardComponent  ,canActivate: [AuthguardGuard]},
@@ -50,6 +51,7 @@ const routes: Routes = [
 
   { path: 'LoadAttendance', component: LoadattedanceComponent  ,canActivate: [AuthguardGuard]},
   { path: 'LeaveUpload', component: LeaveUploadComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'HRLeaveRequestDash', component: HRLeaveRequestDashComponent  ,canActivate: [AuthguardGuard]},
 ];
 
 @NgModule({

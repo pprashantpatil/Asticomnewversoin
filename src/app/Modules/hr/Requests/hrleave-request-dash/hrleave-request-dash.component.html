@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <ul>
-                <li><a class="Heading" routerLink="/Employee/LeaveRequestDash">
+                <li *ngIf="roleID!=11"><a class="Heading" routerLink="/Employee/LeaveRequestDash">
                         <p class="Heading">My Leave details</p>
                     </a>
                 </li>
@@ -33,7 +33,7 @@
 
             <div class="cardinputs">
                 <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
-                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate($event)">
+                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate()">
             </div>
 
             <div class="cardinputs">
@@ -120,7 +120,7 @@
         <div *ngSwitchCase="'tab1'" id="tab1">
             <div class="row">
                 <div class="col-md-10">
-                    <p class="show3res">SHOWING <span>{{(staffleaves1|filter:search)?.length}}
+                    <p class="show3res">SHOWING <span>{{(staffleaves2|filter:search)?.length}}
                         </span>RESULT(S)</p>
                 </div>
             </div>
@@ -129,54 +129,56 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th><input type="checkbox" (click)="selectALL($event)"></th>
-                            <th>Staff ID</th>
-                            <th>Staff Name</th>
-                            <th>Submitted Date</th>
+                            <th *ngIf="roleID!=9 && roleID!=1">Select All <input type="checkbox" name="select-all"
+                                    id="select-all" (click)="selectALL(true)" /></th>
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
                             <th>From Date</th>
                             <th>To Date</th>
+                            <th>Submitted Date</th>
                             <th>Leave Type</th>
-                            <th>HalfDay</th>
+                            <th>HalfDay Type</th>
                             <th>Leave Reason</th>
                             <th>Leave Days Count</th>
                             <th>Attachment</th>
-
-                            <th>Actions</th>
+                            <th>Stage & Status</th>
+                            <th *ngIf="roleID!=9 && roleID!=1 ">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of staffleaves1|filter:search">
-                            <td><input type="checkbox" [(ngModel)]="data.checked" [value]="data.value"
-                                    (click)="getCheckbocdetails(data,$event)"></td>
-                            <td>{{data.empid}}</td>
+                        <tr
+                            *ngFor="let data of staffleaves2|filter:search|paginate: { itemsPerPage: count1, currentPage: p }">
+                            <td *ngIf="roleID!=9 && roleID!=1"><input
+                                    *ngIf="data.status=='Manager Pending HR Pending' || data.status=='HR Pending'||data.status=='Manager Pending'"
+                                    type="checkbox" (click)="getCheckbocdetails(data)"></td>
+                            <td>{{data.employeID}}</td>
                             <td>{{data.staffName}}</td>
-                            <td>{{data.applieddate|date}} </td>
+                            <td>{{data.role}}</td>
+                            <td>{{data.department_name}}</td>
                             <td>{{data.sDateOfLeave}} </td>
                             <td>{{data.eDateOfLeave}} </td>
+                            <td>{{data.applieddate|date}} </td>
                             <td>{{data.leavetype}}</td>
                             <td>{{data.halfDaytype}}</td>
                             <td>{{data.leaveReason}}</td>
                             <td>{{data.noOfDays}}</td>
                             <td>
-                                <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
-                                <p
-                                    *ngIf="data.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
-                                    No Attachment</p>
-                                <a href="{{data.medicalUrl}}" target="_blank">
-                                    <img *ngIf="data.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
-                                        src="assets/Images/image.png" alt="pdf.img" class="attachmentPin"></a>
+                                <img src="assets/Images/image.png" style="width:20px; height:20px"
+                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
                             </td>
-
-                            <td class="onelinetext" *ngIf="roleID==2">
+                            <td>{{data.status}}</td>
+                            <td class="onelinetext" *ngIf="roleID!=9  && roleID!=1">
                                 <img class="dashedit-icon" src="assets/Images/accept-01.svg"
                                     (click)="ManagerLeaveApprove(data)" [ngbTooltip]="tipContentApprove"
                                     tooltipClass="my-custom-class"
-                                    *ngIf="data.status=='Manager Pending HR Pending'|| data.status==null || data.status=='Manager Pending'">
+                                    *ngIf="(data.status=='Manager Pending HR Pending' || data.supervisor==null || data.status=='HR Pending')&& data.status!='Manager Approved HR Approved'">
 
                                 <img class="dashedit-icon" src="assets/Images/cancel-02.svg" data-toggle="modal"
                                     data-target="#Reject" (click)="GetRejectID(data.id)" [ngbTooltip]="tipContentReject"
-                                    tooltipClass="my-custom-class" *ngIf="data.status=='Manager Pending HR Pending'||
-                                    data.status==null || data.status=='Manager Pending'">
+                                    tooltipClass="my-custom-class"
+                                    *ngIf="(data.status=='Manager Pending HR Pending'|| data.supervisor==null || data.status=='HR Pending')&& data.status!='Manager Approved HR Approved'">
 
                                 <div class="col-lg-2 Text p-0">
                                     <ng-template #tipContentApprove>
@@ -205,20 +207,20 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(staffleaves2).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+            <div class="text-right" *ngIf="(staffleaves2).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
 
         <div *ngSwitchCase="'tab2'" id="tab2">
             <div class="row">
                 <div class="col-md-10">
-                    <p class="show3res">SHOWING <span>{{(staffleaves2|filter:search)?.length}}
+                    <p class="show3res">SHOWING <span>{{(staffleaves1|filter:search)?.length}}
                         </span>RESULT(S)</p>
                 </div>
             </div>
@@ -227,24 +229,28 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th>Staff ID</th>
-                            <th>Staff Name</th>
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
                             <th>From Date</th>
                             <th>To Date</th>
                             <th>Submitted Date</th>
                             <th>Approved Date</th>
                             <th>Leave Type</th>
-                            <th>HalfDay</th>
+                            <th>HalfDay Type</th>
                             <th>Leave Reason</th>
                             <th>Leave Days Count</th>
                             <th>Attachment</th>
-
+                            <th>Stage & Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of staffleaves2|filter:search">
-                            <td>{{data.empid}}</td>
+                        <tr *ngFor="let data of staffleaves1|filter:search|paginate: { itemsPerPage: count1, currentPage: p }">
+                            <td>{{data.employeID}}</td>
                             <td>{{data.staffName}}</td>
+                            <td>{{data.role}}</td>
+                            <td>{{data.department_name}}</td>
                             <td>{{data.sDateOfLeave}} </td>
                             <td>{{data.eDateOfLeave}} </td>
                             <td>{{data.applieddate|date}} </td>
@@ -254,26 +260,21 @@
                             <td>{{data.leaveReason}}</td>
                             <td>{{data.noOfDays}}</td>
                             <td>
-                                <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
-                                <p
-                                    *ngIf="data.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
-                                    No Attachment</p>
-                                <a href="{{data.medicalUrl}}" target="_blank">
-                                    <img *ngIf="data.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
-                                        src="assets/Images/image.png" alt="pdf.img" class="attachmentPin"></a>
+                                <img src="assets/Images/image.png" style="width:20px; height:20px"
+                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
                             </td>
-
+                            <td>{{data.status}}</td>
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(staffleaves1).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+            <div class="text-right" *ngIf="(staffleaves1).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
 
         <div *ngSwitchCase="'tab3'" id="tab3">
@@ -288,24 +289,29 @@
                 <table class="table">
                     <thead>
                         <tr class="head">
-                            <th>Staff ID</th>
-                            <th>Staff Name</th>
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
                             <th>From Date</th>
                             <th>To Date</th>
                             <th>Submitted Date</th>
                             <th>Approved Date</th>
                             <th>Leave Type</th>
-                            <th>HalfDay </th>
+                            <th>HalfDay Type</th>
                             <th>Leave Reason</th>
                             <th>Leave Days Count</th>
                             <th>Attachment</th>
-
+                            <th>Stage & Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of staffleaves3|filter:search">
-                            <td>{{data.empid}}</td>
+                        <tr
+                            *ngFor="let data of staffleaves3|filter:search|paginate: { itemsPerPage: count1, currentPage: p }">
+                            <td>{{data.employeID}}</td>
                             <td>{{data.staffName}}</td>
+                            <td>{{data.role}}</td>
+                            <td>{{data.department_name}}</td>
                             <td>{{data.sDateOfLeave}} </td>
                             <td>{{data.eDateOfLeave}} </td>
                             <td>{{data.applieddate|date}} </td>
@@ -315,25 +321,21 @@
                             <td>{{data.leaveReason}}</td>
                             <td>{{data.noOfDays}}</td>
                             <td>
-                                <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
-                                <p
-                                    *ngIf="data.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
-                                    No Attachment</p>
-                                <a href="{{data.medicalUrl}}" target="_blank">
-                                    <img *ngIf="data.medicalUrl!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
-                                        src="assets/Images/image.png" alt="pdf.img" class="attachmentPin"></a>
+                                <img src="assets/Images/image.png" style="width:20px; height:20px"
+                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
                             </td>
+                            <td>{{data.status}}</td>
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(staffleaves3).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+            <div class="text-right" *ngIf="(staffleaves3).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
@@ -343,7 +345,7 @@
         <div class="modal-content ">
             <div class="modal-header">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-8">
                         <h5>Reject Notes</h5>
                     </div>
                 </div>
@@ -362,7 +364,8 @@
                     </div>
                     <br />
                     <div class="row centeralign">
-                        <div class="col-lg-4"> </div>
+                        <div class="col-lg-4">
+                        </div>
                         <div class="col-lg-5">
                             <button class="upload" (click)="ManagerLeaveDecline()">Submit</button>
                         </div>
@@ -371,6 +374,43 @@
                 </div>
                 <div class="modal-footer">
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Related Attachments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4" *ngFor="let details of multipleattachmentlist">
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <img src="{{details.attachment}}" *ngIf="details.filetype=='Image'"
+                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                <img src="assets/Images/pdf.png" *ngIf="details.filetype=='Pdf'"
+                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                <img src="assets/Images/word.png" *ngIf="details.filetype=='Document'"
+                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                                <img src="assets/Images/files.png" *ngIf="details.filetype=='Ppt'"
+                                    (click)="openAttchments(details.attachment)" style="width: 171px; height: 117px;">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cancel" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
