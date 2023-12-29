@@ -1,1 +1,83 @@
-<p>addbarangaymaster works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-5">
+            <p class="Heading">Barangay Details</p>
+        </div>
+        <div class="col-lg-3"></div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="card">
+
+        <div class="row leavereq">
+            <div class="col-lg-2">
+                <label class="textcolor">Country Name<span class="span">*</span></label>
+            </div>
+            <div class="col-md-2">
+                <label class="textcolor">Province<span class="span">*</span></label>
+            </div>
+            <div class="col-md-2">
+                <label class="textcolor">City <span class="span">*</span></label>
+            </div>
+            <div class="col-md-2">
+                <label class="textcolor">Barangay<span class="span">*</span></label>
+            </div>
+        </div>
+        <div class="row leavereq">
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <select class="form-control inputfield" id="CountryID" name="CountryID" [(ngModel)]="CountryID"
+                        (change)="GetCountryID($event)" placeholder="Select Country">
+                        <option class="textcolor" value="0">Select Country </option>
+                        <option class="textcolor" *ngFor="let role of Countrylist" value="{{role.id}}">{{role.short}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <select class="form-control inputfield" id="StateID" name="StateID" [(ngModel)]="StateID "
+                        (change)="GetStateID($event)" placeholder="Select Province">
+                        <option class="textcolor" value="0">Select Province </option>
+                        <option class="textcolor" *ngFor="let role of leavelist" value="{{role.id}}">{{role.short}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <select class="form-control inputfield" id="CityID" name="CityID" [(ngModel)]="CityID"
+                        placeholder="Select City">
+                        <option class="textcolor" value="0">Select City </option>
+                        <option class="textcolor" *ngFor="let role of Citylist" value="{{role.id}}">{{role.short}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="Barangay" [(ngModel)]="Name" name="Name" id="Name">
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                <button class="close-button" (click)="Cancel()">Cancel</button>
+                <button class="submit-button" *ngIf="ID!=undefined" (click)="UpdateCityType()">Save Changes</button>
+                <button class="submit-button" *ngIf="ID==undefined" (click)="InsertCityType()">Submit</button>
+            </div>
+<!--             
+            <div class="col-lg-10"></div>
+            <div class="col-lg-1">
+                <button class="clo-btn" (click)="Cancel()">CANCEL</button>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="Addbutton" *ngIf="ID!=undefined" (click)="UpdateCityType()">UPDATE</button>
+                <button class="Addbutton" *ngIf="ID==undefined" (click)="InsertCityType()">SAVE</button>
+            </div> -->
+
+
+        </div>
+    </div>
+ 

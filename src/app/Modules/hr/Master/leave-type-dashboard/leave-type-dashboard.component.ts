@@ -127,7 +127,7 @@ export class LeaveTypeDashboardComponent implements OnInit {
   //   modalRef.componentInstance.name = 'World';
     
   // }
-  Addleave(){
+ Addleave (){
     let ID= undefined
        this.matDialog.open(LeaveTypeFormComponent, {
       data: ID,
