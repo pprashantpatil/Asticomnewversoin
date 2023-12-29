@@ -287,7 +287,7 @@ export class SidebarComponent implements OnInit {
 
   public OTMaster() {
     this.active = 10.9;
-    this.router.navigate(['/HR/Departmentmasterdash']);
+    this.router.navigate(['/HR/Otratesdash']);
     localStorage.setItem('Pagename', 'OT Master');
     this.data11.emit('Ot Master');
   }

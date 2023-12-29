@@ -109,9 +109,21 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <button class="edit-btn" (click)="GetOTDetails(data)" data-toggle="modal"
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#otdetailsmodal"
+                                (click)="GetOTDetails(data)" [ngbTooltip]="tipDetails"
+                                tooltipClass="my-custom-class">
+                                <ng-template #tipDetails>
+                                    <div>
+                                        <div class="d-flex">
+                                            <div class="flex-column mt-2">
+                                                <p class="tooltip-txtForIcons">OT Details</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <!-- <button class="edit-btn" (click)="GetOTDetails(data)" data-toggle="modal"
                                     data-target="#otdetailsmodal">Details
-                                </button>
+                                </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
@@ -204,9 +216,21 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <button class="edit-btn" (click)="GetOTDetails(data)" data-toggle="modal"
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#otdetailsmodal"
+                                (click)="GetOTDetails(data)" [ngbTooltip]="tipDetails"
+                                tooltipClass="my-custom-class">
+                                <ng-template #tipDetails>
+                                    <div>
+                                        <div class="d-flex">
+                                            <div class="flex-column mt-2">
+                                                <p class="tooltip-txtForIcons">OT Details</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <!-- <button class="edit-btn" (click)="GetOTDetails(data)" data-toggle="modal"
                                     data-target="#otdetailsmodal">Details
-                                </button>
+                                </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
@@ -264,9 +288,18 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <button class="edit-btn" (click)="GetOTDetails(data)" data-toggle="modal"
-                                    data-target="#otdetailsmodal">Details
-                                </button>
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#otdetailsmodal"
+                                (click)="GetOTDetails(data)" [ngbTooltip]="tipDetails"
+                                tooltipClass="my-custom-class">
+                                <ng-template #tipDetails>
+                                    <div>
+                                        <div class="d-flex">
+                                            <div class="flex-column mt-2">
+                                                <p class="tooltip-txtForIcons">OT Details</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>

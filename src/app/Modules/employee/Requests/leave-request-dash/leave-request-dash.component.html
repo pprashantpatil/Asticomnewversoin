@@ -6,7 +6,7 @@
         <div class="col-12">
             <ul>
                 <li *ngIf="roledid!=11"><a class="Heading">
-                        <p class="Heading">My Leave Details</p>
+                        <p>My Leave Details</p>
                         <hr class="line-border listForm">
                     </a>
                 </li>
@@ -23,10 +23,10 @@
             <div class="d-flex flex-wrap justify-content-between">
                 <div class="cards-side">
                     <div class="d-flex flex-wrap ">
-                        <div class="d-flex align-items-center">
+                        <!-- <div class="d-flex align-items-center">
                             <img src="assets/Images/revamp/filter.svg" class="filter-img">
                             <p class="filter">Filter by:</p>
-                        </div>
+                        </div> -->
                         <div class="cardinputs">
                             <p class="leavecol">Select Dates</p>
                             <p class="leavereq">
@@ -34,9 +34,10 @@
                                     class="form-control" bsDaterangepicker [(ngModel)]="startdate"
                                     (ngModelChange)="getEndDate($event)" [bsConfig]="{ showWeekNumbers:false }">
                             </p>
+                            <input class="form-control search-icon" [(ngModel)]="term" type="search" placeholder="Search">
+
                         </div>
 
-                        <input class="form-control search-icon" [(ngModel)]="term" type="search" placeholder="Search">
                     </div>
 
                     <!-- <div class="leavetype">
@@ -179,16 +180,11 @@
                                     </div>
                                 </div>
                             </ng-template>
-
-
-
-
-
                         </ngb-carousel>
                     </div>
                     <div class="row Started">
                         <p data-toggle="modal" data-target="#LeaveTypeList" class="view-txt-all"
-                            style="font-weight: 600; margin-bottom: -2%;">View All</p>
+                            style="font-weight: 600; margin-bottom: -2%;margin-right: 10%;">View All</p>
                     </div>
                 </div>
             </div>
@@ -328,7 +324,7 @@
                                             <td>{{list.noOfDays}}<br>
                                             <td>
                                                 <p
-                                                    *ngIf="list.medicalUrl=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">
+                                                    *ngIf="list.medicalUrl=='https://asticom.digiofficeapp.com/Amazepayrollapi/Images/EmptyProfile/noimage.png'">
                                                     No Attachment</p>
                                                 <!-- <p *ngIf="list.medicalUrl==null">No Attachment</p> -->
                                                 <a href="{{list.medicalUrl}}" target="_blank">
