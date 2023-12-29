@@ -24,22 +24,32 @@
 
     <div class="card">
         <div class="d-flex flex-wrap">
-            <div class="d-flex align-items-center">
+            <div class="d-flex justify-content-end filterby" style="margin-top: 3%;">
                 <img src="assets/Images/revamp/filter.svg" class="filter-img">
                 <p class="filter">Filter by:</p>
             </div>
 
-            <div class="cardinputs">
-                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
-                    [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate($event)">
-            </div>
+            <div class="d-flex justify-content-start flex-wrap inputs">
+                <div class="cardinputs">
+                    <p class="leavereq">Select Dates
+                        <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                            [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }"
+                            (ngModelChange)="getEndDate($event)">
+                    </p>
+                </div>
 
-            <div class="cardinputs">
-                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
-            </div>
+                <div class="cardinputs">
+                    <input type="text" placeholder="Search" id="term" [(ngModel)]="search"
+                        class="form-control search-icon">
+                </div>
 
-            <div class="cardinputs" (click)="showDialog()">
-                <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Shift</button>
+                <div class="cardinputs" (click)="showDialog()">
+                    <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Shift</button>
+                </div>
+
+                <div class="cardinputs">
+                    <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
+                </div>
             </div>
         </div>
     </div>
@@ -124,10 +134,10 @@
                         </tr>
                     </tbody>
                 </table>
-                <span class="NoResultShow" *ngIf="(shiftList).length==0">
+                <span class="NoResultShow" *ngIf="(shiftList|filter:search).length==0">
                     <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <div class="text-right" *ngIf="(shiftList).length>count1">
+            <div class="text-right" *ngIf="(shiftList|filter:search).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
@@ -147,29 +157,32 @@
                 </div>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+
             <div class="modal-body ">
                 <div class="container-fluid">
                     <div class="row notes">
                         <div class="col-lg-3">
                             Notes
                         </div>
+
                         <div class="col-lg-7">
                             <textarea rows="3" type="text" [(ngModel)]="notes" id="Notes" name="Notes"
                                 class="form-control" placeholder="Notes"></textarea>
                         </div>
                     </div>
                     <br />
+
                     <div class="row centeralign">
-                        <div class="col-lg-4">
-                        </div>
+                        <div class="col-lg-4"></div>
+
                         <div class="col-lg-5">
                             <button class="upload" (click)="rejectShiftDetails()">Submit</button>
                         </div>
                     </div>
                     <br />
                 </div>
-                <div class="modal-footer">
-                </div>
+
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>

@@ -108,7 +108,7 @@ export class MyTeamWeeklyShiftComponent implements OnInit {
       this.loader = false;
     }
     else {
-      this.shiftList = this.shiftFilter.filter((x: { shiftDate: any; endDate: any; modifieddate: any; approveddate: any;}) => (x.shiftDate >= this.startDate && x.shiftDate <= this.endDate) || (x.endDate >= this.startDate && x.endDate <= this.endDate) || (x.modifieddate >= this.startDate && x.modifieddate <= this.endDate) || (x.approveddate >= this.startDate && x.approveddate <= this.endDate));
+      this.shiftList = this.shiftFilter.filter((x: { shiftDate: any; endDate: any; }) => (x.shiftDate >= this.startDate && x.shiftDate <= this.endDate) || (x.endDate >= this.startDate && x.endDate <= this.endDate));
       this.loader = false;
     }
   }
@@ -172,5 +172,11 @@ export class MyTeamWeeklyShiftComponent implements OnInit {
           this.messageId = 74;
         }
       })
+  }
+
+  public reset() {
+    debugger
+    this.date = '';
+    this.ngOnInit();
   }
 }

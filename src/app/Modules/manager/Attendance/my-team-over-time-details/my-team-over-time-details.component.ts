@@ -13,7 +13,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./my-team-over-time-details.component.css']
 })
 export class MyTeamOverTimeDetailsComponent implements OnInit {
-  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router,public datePipe:DatePipe) { }
+  startDate: any;
+  endDate: any;
   viewMode = 'tab1';
   viewMode1 = 'tab11';
   viewMode2 = 'tab111';
@@ -100,6 +101,15 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   OTEligibility: any;
   showPopup: number = 0;
   messageId: number = 0;
+  NSD_REGULAR: any;
+  multipleattachmentlist: any;
+  sequenceNumber1: any;
+  otFilter1: any;
+  otFilter2: any;
+  otFilter3: any;
+
+  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router,public datePipe:DatePipe) { }
+
   ngOnInit(): void {
     this.currentUrl = window.location.href;
     this.loader = true;
@@ -109,7 +119,6 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
     this.StaffID = localStorage.getItem('staffid');
     this.companyName = sessionStorage.getItem('companyName');
     this.OTEligibility = localStorage.getItem('OTEligibility');
-
     const format = 'yyyy-MM-dd';
     const myDate = new Date();
     const locale = 'en-US';
@@ -117,14 +126,11 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
     this.lastDayOfCurrentMonthFilter = new Date(new Date().getFullYear(), new Date().getMonth(), 30);
     this.firstDayOfCurrentMonth = formatDate(this.firstDayOfCurrentMonthFilter, format, locale);
     this.lastDayOfCurrentMonth = formatDate(this.lastDayOfCurrentMonthFilter, format, locale);
-
     if (this.roleid == 2) {
       this.GetMyOverTimeDetailsByManager();
     } else {
       this.GetMyOverTimeDetails();
     }
-
-
     let date = new Date()
     this.day = date.getDate();
     this.month = new Date().getMonth() + 1;
@@ -136,6 +142,7 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
       this.payrolltype = 2
     }
   }
+
   public GetMyOverTimeDetails() {
     debugger
     this.DigiofficeService.GetStaffOverTimeDetailsByDate(this.firstDayOfCurrentMonth, this.lastDayOfCurrentMonth)
@@ -148,22 +155,15 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
           this.timedetails2 = data.filter(x => (x.status == 'Manager Approved' || x.status == 'Manager Approved HR Pending'))
           this.timedetails3 = data.filter(x => x.status == 'Manager Rejected');
 
+          this.otFilter1 = data.filter(x => x.status == 'Manager Pending' || x.status == 'Manager Pending HR Pending');
+          this.otFilter2 = data.filter(x => (x.status == 'Manager Approved' || x.status == 'Manager Approved HR Pending'))
+          this.otFilter3 = data.filter(x => x.status == 'Manager Rejected');
+
           this.count = this.timedetails.length
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Staff Over Time Details');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
+
   public GetMyOverTimeDetailsByManager() {
     debugger
     this.DigiofficeService.GetStaffOverTimeDetailsByManagerID(localStorage.getItem('staffid'), '2022-01-01', '2025-12-01')
@@ -176,18 +176,6 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
           this.timedetails2 = data.filter(x => (x.status == 'Manager Approved' || x.status == 'Manager Approved HR Pending'))
           this.timedetails3 = data.filter(x => x.status == 'Manager Rejected');
           this.count = this.timedetails.length
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Staff Over Time Details');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -201,20 +189,15 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
     this.loader = false;
   }
 
-
-
   public filterdate() {
-
     debugger
     if (this.edate == "") {
       this.ngOnInit();
     } else {
       this.DigiofficeService.GetStaffOverTimeDetailsByDate(this.sdate, this.edate).subscribe(data => {
         debugger
-
         this.loader = false;
         if (this.roleid == 2) {
-         
           this.timedetails1 = data.filter(x => x.supervisor == localStorage.getItem('staffid') && (x.status == 'Manager Pending'));
           this.timedetails2 = data.filter(x => x.supervisor == localStorage.getItem('staffid') && (x.status == 'Manager Approved'));
           this.timedetails3 = data.filter(x => x.supervisor == localStorage.getItem('staffid') && x.status == 'Manager Rejected');
@@ -225,8 +208,6 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
           this.timedetails2 = data.filter(x => (x.status == 'Manager Approved'))
           this.timedetails3 = data.filter(x => x.status == 'Manager Rejected');
         }
-
-
         this.count = this.timedetails.length
       })
     }
@@ -249,12 +230,10 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
     this.selecallbtn = false;
     this.loader = false;
     this.messageId = 73;
-    /*   Swal.fire('Approved Successfully'); */
     var inputs = document.getElementsByTagName("input");
     for (var i = 0; i < inputs.length; i++) {
       if (inputs[i].type == "checkbox") {
         inputs[i].checked = false;
-        // This way it won't flip flop them and will set them all to the same value which is passed into the function
       }
     }
   }
@@ -281,23 +260,10 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
             .subscribe({
               next: data => {
                 debugger
-                /*     Swal.fire("Approved Successfully"); */
                 this.ngOnInit();
                 this.loader = false;
                 this.showPopup = 1;
                 this.messageId = 73;
-              }, error: (err) => {
-                // Swal.fire('Issue in Updating OT Approve From Manager');
-                // Insert error in Db Here//
-                var obj = {
-                  'PageName': this.currentUrl,
-                  'ErrorMessage': err.error.message
-                }
-                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                  data => {
-                    debugger
-                  },
-                )
               }
             })
         }
@@ -322,33 +288,16 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
             .subscribe({
               next: data => {
                 debugger
-                /* Swal.fire("Approved Successfully"); */
                 this.ngOnInit();
                 this.loader = false;
                 this.showPopup = 1;
                 this.messageId = 73;
-              }, error: (err) => {
-                // Swal.fire('Issue in Updating OT From Manager');
-                // Insert error in Db Here//
-                var obj = {
-                  'PageName': this.currentUrl,
-                  'ErrorMessage': err.error.message
-                }
-                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                  data => {
-                    debugger
-                  },
-                )
               }
             })
         }
       })
     }
-
   }
-
-
-
 
   public ManagerOTReject(id: any) {
     this.showPopup = 0;
@@ -362,29 +311,14 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
       .subscribe({
         next: data => {
           debugger
-          /*  Swal.fire("Rejected Successfully"); */
           this.ngOnInit();
           this.loader = false;
           this.showPopup = 1;
           this.messageId = 75;
-        }, error: (err) => {
-          // Swal.fire('Issue in Updating OT Reject From Manager');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
 
-  NSD_REGULAR: any;
-  multipleattachmentlist: any;
   image(id: any) {
     debugger
     this.DigiofficeService.GetStaffOverTimeDetailsAttachment().subscribe(
@@ -392,9 +326,7 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
         debugger
         this.multipleattachmentlist = data.filter(x => x.overTimeID == id);
         this.loader = false;
-      }
-    )
-
+      })
   }
 
   public GetOTDetails(time: any) {
@@ -431,31 +363,15 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
           this.LegalExccessRestNormalOt = temp[0].legalExccessRestNormalOt;
           this.LegalExccessRestNightOt = temp[0].legalExccessRestNightOt;
           this.NSD_REGULAR = temp[0].nSD_REGULAR;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Staff Over Time Details');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
 
-
-  sequenceNumber1: any;
   public exportexcel1() {
     debugger
-
     var ExportData = [];
     this.sequenceNumber1 = 0;
     for (let i = 0; i < this.timedetails2.length; i++) {
-      //debugger;
       this.sequenceNumber1 = i + 1;
       let singleData = {
         SequenceNumber: String,
@@ -488,12 +404,10 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
         specialRestExccessNormalOt: String,
         specialRestNightOt: String,
         specialRestNormalOT: String,
-
       }
       singleData.SequenceNumber = this.sequenceNumber1;
       singleData.EmployeeName = this.timedetails2[i].staffname;
       singleData.date = this.timedetails2[i].date;
-
       singleData.ActualStartTime = this.timedetails2[i].startTime;
       singleData.ActualEndTime = this.timedetails2[i].endTime;
       singleData.normalOT = this.timedetails2[i].noofhours;
@@ -522,7 +436,6 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
       singleData.specialRestNormalOT = this.timedetails2[i].specialRestNormalOT;
       singleData.companyName = this.companyName;
       ExportData.push(singleData);
-      //debugger
     }
     const Export_to_excel_options = {
       fieldSeparator: ',',
@@ -537,11 +450,7 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
       filename: 'Employee_OverTime_report'
     };
     const csvExporter = new ExportToCsv(Export_to_excel_options);
-    //debugger
     csvExporter.generateCsv(ExportData);
-
-
-
   }
 
   openAttchments(photo: any) {
@@ -549,9 +458,28 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   }
 
   public getEndDate(event: any) {
-    this.showPopup = 0;
-    this.sdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
-    this.edate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
+    debugger
+    this.startDate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.endDate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
+    if (this.endDate < this.startDate) {
+      Swal.fire("The end date should be greater than the start date")
+      this.endDate = ""
+      this.loader = false;
+    }
+    else if (this.startDate == undefined) {
+      Swal.fire("Please select the start date first")
+      this.endDate = ""
+      this.loader = false;
+    }
+    else {
+      this.timedetails1 = this.otFilter1.filter((x: { shiftDate: any; endDate: any; }) => (x.shiftDate >= this.startDate && x.shiftDate <= this.endDate) || (x.endDate >= this.startDate && x.endDate <= this.endDate));
+      this.loader = false;
+    }
   }
 
+  public reset() {
+    debugger
+    this.fulldate = '';
+    this.ngOnInit();
+  }
 }

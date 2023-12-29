@@ -4,7 +4,6 @@
     <div class="row">
         <div class="col-12">
             <ul>
-                <!-- *ngIf="otEligibility==1" -->
                 <li *ngIf="OTEligibility==1"><a class="Heading" routerLink="/Employee/OverTimeDetailsDash">
                         <p class="Heading">My Overtime Details</p>
                     </a>
@@ -16,7 +15,7 @@
                     <hr class="line-border listForm">
                 </li>
 
-                <li *ngIf="roleid==1||roleid==9||roleid==11||roleid==10"><a class="Heading" >
+                <li *ngIf="roleid==1||roleid==9||roleid==11||roleid==10"><a class="Heading">
                         <p class="Heading">Company Overtime Details</p>
                     </a>
                     <hr class="line-border listForm">
@@ -27,22 +26,32 @@
     </div>
     <div class="card">
         <div class="d-flex flex-wrap">
-            <div class="d-flex align-items-center">
+            <div class="d-flex justify-content-end filterby" style="margin-top: 3%;">
                 <img src="assets/Images/revamp/filter.svg" class="filter-img">
                 <p class="filter">Filter by:</p>
             </div>
 
-            <div class="cardinputs">
-                <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
-                    [(ngModel)]="fulldate" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate($event)">
-            </div>
+            <div class="d-flex justify-content-start flex-wrap inputs">
+                <div class="cardinputs">
+                    <p class="leavereq">Select Dates
+                        <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
+                            [(ngModel)]="fulldate" [bsConfig]="{ showWeekNumbers:false }"
+                            (ngModelChange)="getEndDate($event)">
+                    </p>
+                </div>
 
-            <div class="cardinputs">
-                <input type="text" placeholder="Search" id="term" [(ngModel)]="term" class="form-control search-icon">
-            </div>
+                <div class="cardinputs">
+                    <input type="text" placeholder="Search" id="term" [(ngModel)]="term"
+                        class="form-control search-icon">
+                </div>
 
-            <div class="cardinputs">
-                <button class="butn-sadow" type="button" (click)="exportexcel1()">Export to Excel</button>
+                <div class="cardinputs">
+                    <button class="butn-sadow" type="button" (click)="exportexcel1()">Export to Excel</button>
+                </div>
+
+                <div class="cardinputs">
+                    <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
+                </div>
             </div>
         </div>
     </div>
@@ -87,7 +96,7 @@
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
-                           
+
                             <th *ngIf="roleid==2 || roleid!=1">Action</th>
                         </tr>
                     </thead>
@@ -106,11 +115,12 @@
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
-                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png" style="width:20px; height:20px"
-                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png"
+                                    style="width:20px; height:20px" (click)="image(data.id)" data-toggle="modal"
+                                    data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-                           
+
                             <td class="actionpadding" *ngIf="roleid==2  || roleid!=1">
                                 <img class="dashedit-icon" src="assets/Images/accept-01.svg"
                                     (click)="ManagerOTApprove(data)" [ngbTooltip]="tipContentApprove"
@@ -181,7 +191,7 @@
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
-                          
+
                         </tr>
                     </thead>
                     <tbody>
@@ -200,11 +210,12 @@
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
-                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png" style="width:20px; height:20px"
-                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png"
+                                    style="width:20px; height:20px" (click)="image(data.id)" data-toggle="modal"
+                                    data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-                           
+
                         </tr>
                     </tbody>
                 </table>
@@ -240,7 +251,7 @@
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
-                          
+
                         </tr>
                     </thead>
                     <tbody>
@@ -259,11 +270,12 @@
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
-                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png" style="width:20px; height:20px"
-                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png"
+                                    style="width:20px; height:20px" (click)="image(data.id)" data-toggle="modal"
+                                    data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-                          
+
                         </tr>
                     </tbody>
                 </table>
@@ -279,7 +291,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="otdetailsmodal" tabindex="-1" role="dialog" aria-labelledby="CheckListStatusform" aria-hidden="true">
+<div class="modal fade" id="otdetailsmodal" tabindex="-1" role="dialog" aria-labelledby="CheckListStatusform"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

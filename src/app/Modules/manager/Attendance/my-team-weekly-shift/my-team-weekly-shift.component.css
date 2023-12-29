@@ -8,3 +8,12 @@ ul {
 li {
     float: left;
 }
+
+.filterby {
+    width: 100px;
+    margin-top: 16px;
+}
+
+.inputs {
+    width: 88%;
+}
