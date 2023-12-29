@@ -213,13 +213,12 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
     }
   }
 
-  selectALL(checked: boolean) { // pass true or false to check or uncheck all
+  selectALL(checked: boolean) {
     this.selecallbtn = true;
     var inputs = document.getElementsByTagName("input");
     for (var i = 0; i < inputs.length; i++) {
       if (inputs[i].type == "checkbox") {
         inputs[i].checked = checked;
-        // This way it won't flip flop them and will set them all to the same value which is passed into the function
       }
     }
   }

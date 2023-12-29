@@ -21,9 +21,9 @@
                     <hr class="line-border listForm">
                 </li>
             </ul>
-
         </div>
     </div>
+
     <div class="card">
         <div class="d-flex flex-wrap">
             <div class="d-flex justify-content-end filterby" style="margin-top: 3%;">
@@ -90,13 +90,12 @@
                             <th>Staff ID</th>
                             <th>Staff Name</th>
                             <th>Date</th>
-                            <th>Submit Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
+                            <th>Submit Date</th>
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
-
                             <th *ngIf="roleid==2 || roleid!=1">Action</th>
                         </tr>
                     </thead>
@@ -105,13 +104,13 @@
                             <td>{{data.employeID}}</td>
                             <td>{{data.staffname}}</td>
                             <td>{{data.date|date}}</td>
-                            <td>{{data.submitdate|date}}</td>
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
+                            <td>{{data.submitdate|date}}</td>
                             <td>
-                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#otdetailsmodal"
-                                (click)="GetOTDetails(data)" [ngbTooltip]="tipDetails"
-                                tooltipClass="my-custom-class">
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png" data-toggle="modal"
+                                    data-target="#otdetailsmodal" (click)="GetOTDetails(data)" [ngbTooltip]="tipDetails"
+                                    tooltipClass="my-custom-class">
                                 <ng-template #tipDetails>
                                     <div>
                                         <div class="d-flex">
@@ -121,9 +120,6 @@
                                         </div>
                                     </div>
                                 </ng-template>
-                                <!-- <button class="edit-btn" (click)="GetOTDetails(data)" data-toggle="modal"
-                                    data-target="#otdetailsmodal">Details
-                                </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
@@ -132,18 +128,15 @@
                                     data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-
                             <td class="actionpadding" *ngIf="roleid==2  || roleid!=1">
                                 <img class="dashedit-icon" src="assets/Images/accept-01.svg"
                                     (click)="ManagerOTApprove(data)" [ngbTooltip]="tipContentApprove"
                                     tooltipClass="my-custom-class"
                                     *ngIf="data.status=='Manager Pending HR Pending'|| data.status==null || data.status=='Manager Pending'">
-
                                 <img class="dashedit-icon" src="assets/Images/cancel-02.svg"
                                     (click)="ManagerOTReject(data)" [ngbTooltip]="tipContentReject"
                                     tooltipClass="my-custom-class" *ngIf="data.status=='Manager Pending HR Pending'||
                                     data.status==null || data.status=='Manager Pending'">
-
                                 <div class="col-lg-2 Text p-0">
                                     <ng-template #tipContentApprove>
                                         <div>
@@ -155,7 +148,6 @@
                                         </div>
                                     </ng-template>
                                 </div>
-
                                 <div class="col-lg-2 Text p-0">
                                     <ng-template #tipContentReject>
                                         <div>
@@ -171,14 +163,14 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(timedetails1|filter:term).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+            <div class="text-right" *ngIf="(timedetails1|filter:term).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
 
         <div *ngSwitchCase="'tab2'" id="tab2">
@@ -196,6 +188,8 @@
                             <th>Staff ID</th>
                             <th>Staff Name</th>
                             <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
                             <th>Submit Date</th>
                             <th>Approved Date</th>
                             <th>Start Time</th>
@@ -203,7 +197,6 @@
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -211,14 +204,14 @@
                             <td>{{data.employeID}}</td>
                             <td>{{data.staffname}}</td>
                             <td>{{data.date|date}}</td>
-                            <td>{{data.submitdate|date}}</td>
-                            <td>{{data.approvedDate|date}}</td>
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
+                            <td>{{data.submitdate|date}}</td>
+                            <td>{{data.approvedDate|date}}</td>
                             <td>
-                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#otdetailsmodal"
-                                (click)="GetOTDetails(data)" [ngbTooltip]="tipDetails"
-                                tooltipClass="my-custom-class">
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png" data-toggle="modal"
+                                    data-target="#otdetailsmodal" (click)="GetOTDetails(data)" [ngbTooltip]="tipDetails"
+                                    tooltipClass="my-custom-class">
                                 <ng-template #tipDetails>
                                     <div>
                                         <div class="d-flex">
@@ -228,9 +221,6 @@
                                         </div>
                                     </div>
                                 </ng-template>
-                                <!-- <button class="edit-btn" (click)="GetOTDetails(data)" data-toggle="modal"
-                                    data-target="#otdetailsmodal">Details
-                                </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
@@ -239,18 +229,17 @@
                                     data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(timedetails2|filter:term).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+            <div class="text-right" *ngIf="(timedetails2|filter:term).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
 
         <div *ngSwitchCase="'tab3'" id="tab3">
@@ -275,7 +264,6 @@
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -288,9 +276,9 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#otdetailsmodal"
-                                (click)="GetOTDetails(data)" [ngbTooltip]="tipDetails"
-                                tooltipClass="my-custom-class">
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png" data-toggle="modal"
+                                    data-target="#otdetailsmodal" (click)="GetOTDetails(data)" [ngbTooltip]="tipDetails"
+                                    tooltipClass="my-custom-class">
                                 <ng-template #tipDetails>
                                     <div>
                                         <div class="d-flex">
@@ -308,18 +296,17 @@
                                     data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(timedetails3|filter:term).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+            <div class="text-right" *ngIf="(timedetails3|filter:term).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
@@ -334,16 +321,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <table class="table">
                 <thead>
                     <tr>
                         <th>OT Type</th>
                         <th>No of Hours</th>
-                        <!-- <th></th> -->
                     </tr>
                 </thead>
                 <tbody>
-
                     <tr>
                         <td>Normal OT </td>
                         <td>{{noofhours}}</td>
@@ -352,23 +338,15 @@
                         <td>Night OT </td>
                         <td>{{nightOT}}</td>
                     </tr>
-                    <!-- <tr>
-                        <td> Restday OT </td>
-                        <td> {{restNormalOT}}</td>
-                    </tr> -->
-
                     <tr>
-
                         <td> Excess Night OT </td>
                         <td> {{ExccessNightOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Excess Normal OT </td>
                         <td> {{ExccessNormalOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Rest Night OT </td>
                         <td> {{RestNightOt}}</td>
                     </tr>
@@ -381,22 +359,18 @@
                         <td> {{ExccessRestNormalOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Rest Excess Night OT </td>
                         <td> {{RestExccessNightOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Legal Night OT </td>
                         <td> {{LegalNightOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Legal Normal OT </td>
                         <td> {{LegalNormalOT}}</td>
                     </tr>
                     <tr>
-
                         <td> Legal Excess Normal OT </td>
                         <td> {{LegalExccessNormalOt}}</td>
                     </tr>
@@ -409,22 +383,18 @@
                         <td> {{SpecialNightOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Special Normal OT </td>
                         <td> {{SpecialNormalOT}}</td>
                     </tr>
                     <tr>
-
                         <td> Special Excess Normal OT </td>
                         <td> {{SpecialExccessNormalOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Special Excess Night OT </td>
                         <td> {{SpecialExccessNightOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Special Rest Night OT </td>
                         <td> {{SpecialRestNightOt}}</td>
                     </tr>
@@ -437,32 +407,26 @@
                         <td> {{SpecialRestExccessNormalOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Special Rest Excess Night OT </td>
                         <td> {{SpecialRestExccessNightOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Legal Rest Night OT </td>
                         <td> {{LegalRestNightOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Legal Rest Normal OT </td>
                         <td> {{LegalRestNormalOT}}</td>
                     </tr>
                     <tr>
-
                         <td> Legal Excess Rest Normal OT </td>
                         <td> {{LegalExccessRestNormalOt}}</td>
                     </tr>
                     <tr>
-
                         <td> Legal Excess Rest Night OT </td>
                         <td> {{LegalExccessRestNightOt}}</td>
                     </tr>
                     <tr>
-
                         <td> NSD Regular </td>
                         <td> {{NSD_REGULAR}}</td>
                     </tr>
@@ -471,7 +435,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
     aria-hidden="true">
@@ -483,6 +446,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-4" *ngFor="let details of multipleattachmentlist">
@@ -504,6 +468,7 @@
                 </div>
                 <br>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="cancel" data-dismiss="modal">Close</button>
             </div>
