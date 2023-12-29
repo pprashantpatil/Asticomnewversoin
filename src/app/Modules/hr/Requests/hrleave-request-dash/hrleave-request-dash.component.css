@@ -1,0 +1,29 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+.event_Pending {
+    color: #3247d5;
+    background: linear-gradient(110deg, #fdcd3b 60%, #4282be 60%);
+    border-radius: 5px;
+    border-bottom: solid 6px white;
+    background: white;
+    font-size: 14px;
+  }
+
+  .callendernavButtons {
+    text-align: center;
+    font-size: xx-large;
+    margin-bottom: 2%;
+  }
+  
+  .callendernavButtons a {
+    color: white;
+  }

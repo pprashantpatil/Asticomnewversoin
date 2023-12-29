@@ -173,9 +173,16 @@ export class SidebarComponent implements OnInit {
 
   public leaveRequest() {
     this.active = 3.1;
-    this.router.navigate(['/Employee/LeaveRequestDash']);
-    localStorage.setItem('Pagename', 'Leave Request');
-    this.data11.emit('Leave Request');
+    if(this.roleid==11){
+      this.router.navigate(['/HR/HRLeaveRequestDash']);
+      localStorage.setItem('Pagename', 'Leave Request');
+      this.data11.emit('Leave Request');
+    }
+    else{
+      this.router.navigate(['/Employee/LeaveRequestDash']);
+      localStorage.setItem('Pagename', 'Leave Request');
+      this.data11.emit('Leave Request');
+    }
   }
 
   public timeSheetRequest() {
