@@ -28,6 +28,8 @@ export class AttendanceDetailsDashComponent implements OnInit {
   lastDayOfCurrentMonthFilter: any;
   showPopup: number = 0;
   messageId: number = 0;
+  p: any = 1;
+  count1: any = 10;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private datePipe: DatePipe) { }
 
@@ -54,11 +56,13 @@ export class AttendanceDetailsDashComponent implements OnInit {
         this.loader = false;
       })
   }
-  public Reset(){
+
+  public reset() {
     debugger
-    this.date='';
-    
+    this.date = '';
+    this.ngOnInit();
   }
+
   public getEndDate(event: any) {
     debugger
     this.startDate = this.datePipe.transform(event[0], 'yyyy-MM-dd');

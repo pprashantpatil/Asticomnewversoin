@@ -192,11 +192,51 @@ export class StaffdashboardComponent implements OnInit {
     this.getRoleType();
   }
 
+  getRoleType() {
+    if (this.roleID == 0) {
+      this.DigiofficeService.GetMyDetails()
+        .subscribe({
+          next: data => {
+            debugger
+            debugger
+            this.staffList = data;
+            this.stafflistCopy = this.staffList
+          }
+        })
+    } else {
+      debugger
+      this.staffList = this.staffFilter.filter((x: { type: any; }) => x.type == this.roleID);
+      this.stafflistCopy = this.staffList
+
+      this.nonStaffList = this.nonStaffFilter.filter((x: { type: any; }) => x.type == this.roleID);
+    }
+  }
+
   deptonItemSelect(item: any) {
     debugger
     console.log(item);
     this.Department = item.id;
     this.getDepartment();
+  }
+
+  public getDepartment() {
+    debugger
+    if (this.Department == 0) {
+      this.DigiofficeService.GetMyDetails()
+        .subscribe({
+          next: data => {
+            debugger
+            this.staffList = data;
+            this.stafflistCopy = this.staffList
+          }
+        })
+    } else {
+      debugger
+      this.staffList = this.staffFilter.filter((x: { department: any; }) => x.department == this.Department);
+      this.stafflistCopy = this.staffList
+
+      this.nonStaffList = this.nonStaffFilter.filter((x: { department: any; }) => x.department == this.Department);
+    }
   }
 
   public GetStaff() {
@@ -630,30 +670,6 @@ export class StaffdashboardComponent implements OnInit {
     }
   }
 
-  public getDepartment() {
-    debugger
-    if (this.Department == 0) {
-      this.DigiofficeService.GetMyDetails()
-        .subscribe({
-          next: data => {
-            debugger
-            this.staffList = data;
-            this.stafflistCopy = this.staffList
-          }
-        })
-    } else {
-      this.DigiofficeService.GetMyDetails()
-        .subscribe({
-          next: data => {
-            debugger
-            debugger
-            this.staffList = data.filter(x => x.department == this.Department);
-            this.stafflistCopy = this.staffList
-          }
-        })
-    }
-  }
-
   geLevel() {
     if (this.level == 0) {
       this.DigiofficeService.GetMyDetails()
@@ -670,29 +686,6 @@ export class StaffdashboardComponent implements OnInit {
           next: data => {
             debugger
             this.staffList = data.filter(x => x.levelid == this.level);
-            this.stafflistCopy = this.staffList
-          }
-        })
-    }
-  }
-
-  getRoleType() {
-    if (this.roleID == 0) {
-      this.DigiofficeService.GetMyDetails()
-        .subscribe({
-          next: data => {
-            debugger
-            debugger
-            this.staffList = data;
-            this.stafflistCopy = this.staffList
-          }
-        })
-    } else {
-      this.DigiofficeService.GetMyDetails()
-        .subscribe({
-          next: data => {
-            debugger
-            this.staffList = data.filter(x => x.type == this.roleID);
             this.stafflistCopy = this.staffList
           }
         })
@@ -801,8 +794,8 @@ export class StaffdashboardComponent implements OnInit {
       this.endDate = ""
     }
     else {
-      this.staffList = this.staffFilter.filter((x: { dateTime: any; time: any; }) => (x.dateTime >= this.startDate && x.dateTime <= this.endDate) || (x.time >= this.startDate && x.time <= this.endDate));
-      this.nonStaffList = this.nonStaffFilter.filter((x: { dateTime: any; }) => (x.dateTime >= this.startDate && x.dateTime <= this.endDate));
+      this.staffList = this.staffFilter.filter((x: { joiningDate: any; }) => (x.joiningDate >= this.startDate && x.joiningDate <= this.endDate));
+      this.nonStaffList = this.nonStaffFilter.filter((x: { joiningDate: any; }) => (x.joiningDate >= this.startDate && x.joiningDate <= this.endDate));
     }
   }
 
@@ -818,5 +811,17 @@ export class StaffdashboardComponent implements OnInit {
         console.log('Result' + result);
         this.ngOnInit();
       });
+  }
+
+  public reset() {
+    debugger
+    this.date = '';
+    this.ngOnInit();
+  }
+
+  onItemDeSelect(item: any): void {
+    debugger
+    this.date = '';
+    this.ngOnInit();
   }
 }

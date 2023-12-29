@@ -1,196 +1,160 @@
 .SubmitBTN {
-    background-color: #3247d5;
-    color: white;
-    cursor: pointer;
-    width: 60%;
-    height: auto;
-    padding: 2px;
-    margin-top: 5px;
-  
-  }
-  
-  .SubmitBTN:hover {
-    background-color: #27cdeb;
-  }
-  
-  .CancelBTN {
-    color: black;
-    cursor: pointer;
-  }
-  
-  
-  .validation {
-    color: red;
-    font-size: 15px;
-  }
-  
-  
-  
-  .BOXCARD {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, .125);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-  }
-  
-  th:first-of-type {
-  
-    border-top-left-radius: 5px;
-  
-  }
-  
-  
-  
-  th:last-of-type {
-  
-    border-top-right-radius: 5px;
-  
-  }
-  
-  
-  
-  tr:last-of-type td:first-of-type {
-  
-    border-bottom-left-radius: 10px;
-  
-  
-  
-  }
-  
-  
-  
-  tr:last-of-type td:last-of-type {
-  
-    border-bottom-right-radius: 10px;
-  
-  }
-  
-  
-  
-  table,
-  
-  tr,
-  
-  td {
-  
-    border: none !important;
-  
-    font-family: Poppins;
-  
-    font-style: normal;
-  
-    font-weight: normal;
-  
-    font-size: 13px;
-  
-    line-height: 17px;
-  
-    /* identical to box height, or 131% */
-  
-    color: #0C275A;
-    width: 5%;
-    height: 50px;
-    padding: 15px;
-  
-  }
-  
-  th {
-    background-color: #02CFFF;
-    color: white;
-    width: 5%;
-    height: 50px;
-    padding: 15px;
-    line-height: 17px;
-  }
-  
-  .NoResultShow {
-    font-size: 16px;
-  }
-  
-  
-  tr:nth-child(odd) {
-    background-color: #F2F2F2 !important
-  }
-  
-  
-  tr:nth-child(even) {
-  
-    background-color: #FFFFFF !important
-  }
-  
-  .dropdown-toggle {
-    text-align: left;
-  }
-  
-  .LocDashboard {
-    padding-top: 10px;
-    margin: 0px;
-    background-color: #e4e5e6;
-    margin-top: -20px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-  
-  }
-  
-  
-  .FormHeadText {
-    color: #494949 !important;
-    font-size: 15px !important;
-    font-weight: bold;
-    margin-left: 5px;
-    margin-top: 25px;
-    margin-bottom: 0px;
-  }
-  
-  body {
-    color: #494949 !important;
-  }
-  
-  .fontheading {
-    font-size: 15px;
-    font-weight: bold;
-  }
-  
-  .fonttxt {
-    font-size: 12px;
-    font-weight: bold;
-  }
-  
-  
-  .butn-sadow {
-    left: 0px;
-  }
-  
-  .butn-sadow1 {
-    box-sizing: border-box;
-    position: absolute;
-    width: 200px;
-    height: 40px;
-    left: -212px;
-    border-radius: 5px;
-    font-family: 'Poppins';
-    font-style: normal;
-    letter-spacing: 0.658333px;
-    color: #ffffff;
-    background: #3247D5;
-    box-shadow: 1px 1px 17px 1px rgb(50 71 213 / 60%);
-    border-radius: 5px solid #3247D5;
-    border: 5px solid #3247D5;
-    text-transform: uppercase;
-  
-  }
-.image{
+  background-color: #3247d5;
+  color: white;
+  cursor: pointer;
+  width: 60%;
+  height: auto;
+  padding: 2px;
+  margin-top: 5px;
+}
+
+.SubmitBTN:hover {
+  background-color: #27cdeb;
+}
+
+.CancelBTN {
+  color: black;
+  cursor: pointer;
+}
+
+.validation {
+  color: red;
+  font-size: 15px;
+}
+
+.BOXCARD {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+th:first-of-type {
+  border-top-left-radius: 5px;
+}
+
+th:last-of-type {
+  border-top-right-radius: 5px;
+}
+
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 10px;
+}
+
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 10px;
+}
+
+table,
+
+tr,
+
+td {
+  border: none !important;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 17px;
+  color: #0C275A;
+  width: 5%;
+  height: 50px;
+  padding: 15px;
+}
+
+th {
+  background-color: #02CFFF;
+  color: white;
+  width: 5%;
+  height: 50px;
+  padding: 15px;
+  line-height: 17px;
+}
+
+.NoResultShow {
+  font-size: 16px;
+}
+
+tr:nth-child(odd) {
+  background-color: #F2F2F2 !important
+}
+
+tr:nth-child(even) {
+  background-color: #FFFFFF !important
+}
+
+.dropdown-toggle {
+  text-align: left;
+}
+
+.LocDashboard {
+  padding-top: 10px;
+  margin: 0px;
+  background-color: #e4e5e6;
+  margin-top: -20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.FormHeadText {
+  color: #494949 !important;
+  font-size: 15px !important;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+
+body {
+  color: #494949 !important;
+}
+
+.fontheading {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.fonttxt {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.butn-sadow {
+  left: 0px;
+}
+
+.butn-sadow1 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  left: -212px;
+  border-radius: 5px;
+  font-family: 'Poppins';
+  font-style: normal;
+  letter-spacing: 0.658333px;
+  color: #ffffff;
+  background: #3247D5;
+  box-shadow: 1px 1px 17px 1px rgb(50 71 213 / 60%);
+  border-radius: 5px solid #3247D5;
+  border: 5px solid #3247D5;
+  text-transform: uppercase;
+}
+
+.image {
   width: 50% !important;
 }
-.step-anchor{
+
+.step-anchor {
   background: white !important;
 }
-.label{
+
+.label {
   line-height: normal;
-  }
+}

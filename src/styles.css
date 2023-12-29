@@ -232,6 +232,15 @@ textarea {
   text-transform: capitalize;
 }
 
+.tabHeading {
+  color: #1125a9;
+  font-family: "Poppins";
+  font-weight: bold;
+  font-size: 19px !important;
+  padding-left: 25px;
+  text-transform: capitalize;
+}
+
 .text {
   font-family: "Poppins";
   padding-left: 5px;
@@ -1349,20 +1358,20 @@ select::-ms-expand {
   z-index: 99 !important;
 }
 
+.tab-line-border {
+  border: 3px solid #1125a9;
+  border-top-left-radius: 51px;
+  border-top-right-radius: 51px;
+  margin-top: -14px;
+  margin-left: 25px
+}
+
 .line-border {
   border: 3px solid #1125a9;
   border-top-left-radius: 51px;
   border-top-right-radius: 51px;
   margin-top: -14px;
 }
-
-/* .line-border {
-  border: 3px solid #1125a9;
-  border-top-left-radius: 51px;
-  border-top-right-radius: 51px;
-  margin-top: -14px;
-  margin-left: -23px;
-} */
 
 .bttm-gap {
   color: #1125a9;

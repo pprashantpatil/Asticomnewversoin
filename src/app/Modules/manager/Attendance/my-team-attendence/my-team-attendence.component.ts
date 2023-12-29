@@ -11,9 +11,7 @@ import { ExportToCsv } from 'export-to-csv';
   styleUrls: ['./my-team-attendence.component.css']
 })
 export class MyTeamAttendenceComponent implements OnInit {
-search: any;
-
-  constructor(public DigiofficeService: DigiofficecorehrService,public datePipe:DatePipe) { }
+  search: any;
   roleid: any
   staffID: any;
   p: any = 1;
@@ -46,6 +44,15 @@ search: any;
   roleID: any;
   term: any;
   companyName: any;
+  showPopup: number = 0;
+  messageId: number = 0;
+  attendanceFilter: any;
+  startdate1: any;
+  attendancelist23: any;
+  sequenceNumber1: any;
+  fileName: any;
+
+  constructor(public DigiofficeService: DigiofficecorehrService, public datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.currentUrl = window.location.href;
@@ -63,7 +70,6 @@ search: any;
     this.firstDayofcurrentmonth = formatDate(this.firstDayofcurrentmonth, format, locale);
     this.RoleType = "";
     this.Department = "";
-
     this.GetRoleType();
     this.GetAttendance();
     this.GetStaffByManagerIDForDropdown();
@@ -76,6 +82,7 @@ search: any;
       itemsShowLimit: 10,
       allowSearchFilter: true,
     };
+
     this.roledropdownSettings = {
       singleSelection: true,
       idField: 'id',
@@ -86,8 +93,6 @@ search: any;
       allowSearchFilter: true,
     };
   }
-  showPopup: number = 0;
-  messageId: number = 0;
 
   public GetRoleType() {
     this.DigiofficeService.GetRoleType()
@@ -95,27 +100,14 @@ search: any;
         next: data => {
           debugger
           this.dropdownRoleList = data;
-          // this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Role Type');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
 
-  public Reset(){
+  public reset() {
     debugger
-    this.startdate1='';
-      this.ngOnInit();
+    this.startdate1 = '';
+    this.ngOnInit();
   }
 
   roleonItemSelect(item: any) {
@@ -123,206 +115,6 @@ search: any;
     console.log(item);
     this.roleID = item.id;
     this.FilterRoleType();
-  }
-
-  // public GetStaffByManagerID() {
-  //   this.DigiofficeService.GetStaffByManagerID(this.staffID)
-  //     .subscribe({
-  //       next: data => {
-  //         debugger
-  //         if (this.roleid == 2) {
-  //           this.dropdownList = data;
-  //         }
-  //         else {
-  //           this.dropdownList = data;
-  //         }
-  //       }, error: (err) => {
-  //         Swal.fire('Issue in Getting Staff By Manager ID');
-  //         // Insert error in Db Here//
-  //         var obj = {
-  //           'PageName': this.currentUrl,
-  //           'ErrorMessage': err.error.message
-  //         }
-  //         this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-  //           data => {
-  //             debugger
-  //           },
-  //         )
-  //       }
-  //     })
-  // }
-
-  public GetStaffByManagerIDForDropdown() {
-    this.DigiofficeService.GetAllStaffNew()
-      .subscribe({
-        next: data => {
-          debugger
-          if (this.roleid == 2) {
-            this.dropdownList = data.filter(x => x.supervisor == this.staffID);
-          }
-          else {
-            this.dropdownList = data;
-          }
-
-          this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Staff By Manager ID');
-          //  Insert error in Db Here
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
-        }
-      })
-  }
-
-
-
-  public filterTeamAttendance() {
-    debugger
-
-    let searchCopy = this.term.toLowerCase();
-    this.attendancelist = this.attendancelistCopy.filter((x: { employeID: string, name1: string }) => (x.employeID.toLowerCase().includes(searchCopy))
-      || (x.name1.toLowerCase().includes(searchCopy)));
-    this.count = this.attendancelist.length;
-    this.loader = false;
-  }
-
-
-  public getenddate(event:any) {
-    this.showPopup = 0;
-    debugger
-    this.startdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
-    this.enddate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
-    this.loader = true;
-    if (this.enddate == "") {
-      this.ngOnInit();
-    }
-    else if (this.startdate == undefined || this.startdate == "") {
-      /* Swal.fire('Please Select Start Date First'); */
-      this.loader = false;
-      this.enddate == "";
-      this.showPopup = 1;
-      this.messageId = 32;
-    }
-    else {
-      if (this.roleid == 6) {
-        this.DigiofficeService.GetAttendanceByEmployeeID(this.staffID, this.startdate, this.enddate)
-          .subscribe({
-            next: data => {
-              debugger
-              this.attendancelist = data;
-              // this.attendancelistCopy= this.attendancelist;
-
-              this.loader = false;
-            }, error: (err) => {
-              this.loader = false;
-              // Swal.fire('Issue in Getting Attendance By EmployeeID');
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
-            }
-          })
-      }
-      else if (this.roleid == 2) {
-        this.loader = true;
-        this.DigiofficeService.GetAttendanceByManagerID(this.staffID, this.startdate, this.enddate)
-          .subscribe({
-            next: data => {
-              debugger
-              this.attendancelist = data;
-              // this.attendancelistCopy= this.attendancelist;
-
-              this.loader = false;
-            }, error: (err) => {
-              this.loader = false;
-              // Swal.fire('Issue in Getting Attendance By EmployeeID');
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
-            }
-          })
-      }
-      else {
-        this.loader = true;
-        this.DigiofficeService.GetAttendanceBydate(this.startdate, this.enddate)
-          .subscribe({
-            next: data => {
-              debugger
-              this.attendancelist = data;
-              //this.attendancelistCopy = this.attendancelist;
-              this.loader = false;
-            }, error: (err) => {
-              this.loader = false;
-              // Swal.fire('Issue in Getting Attendance');
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
-            }
-          })
-      }
-    }
-
-  }
-
-
-
-  onItemSelect(item: any) {
-    this.showPopup = 0;
-    debugger
-    console.log(item);
-    this.employeeid = item.id;
-    this.DigiofficeService.GetAttendanceByEmployeeID(this.employeeid, this.startdate, this.enddate)
-      .subscribe({
-        next: data => {
-          debugger
-          this.attendancelist = data;
-          // this.attendancelistCopy= this.attendancelist;
-
-          console.log(" this.attendancelist", this.attendancelist)
-        }, error: (err) => {
-          /*  Swal.fire('Please Select Start Date and End Date'); */
-          this.loader = false;
-          this.showPopup = 1;
-          this.messageId = 32;
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
-        }
-      })
   }
 
   public FilterRoleType() {
@@ -335,21 +127,7 @@ search: any;
               next: data => {
                 debugger
                 this.attendancelist = data;
-                // this.attendancelistCopy= this.attendancelist;
-
                 this.loader = false;
-              }, error: (err) => {
-                // Swal.fire('Issue in Getting Attendance By Manager ID');
-                // Insert error in Db Here//
-                var obj = {
-                  'PageName': this.currentUrl,
-                  'ErrorMessage': err.error.message
-                }
-                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                  data => {
-                    debugger
-                  },
-                )
               }
             })
         }
@@ -359,21 +137,7 @@ search: any;
               next: data => {
                 debugger
                 this.attendancelist = data;
-                // this.attendancelistCopy= this.attendancelist;
-
                 this.loader = false;
-              }, error: (err) => {
-                // Swal.fire('Issue in Getting Attendance By Manager ID');
-                // Insert error in Db Here//
-                var obj = {
-                  'PageName': this.currentUrl,
-                  'ErrorMessage': err.error.message
-                }
-                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                  data => {
-                    debugger
-                  },
-                )
               }
             })
         }
@@ -385,21 +149,7 @@ search: any;
               next: data => {
                 debugger
                 this.attendancelist = data;
-                // this.attendancelistCopy= this.attendancelist;
-
                 this.loader = false;
-              }, error: (err) => {
-                // Swal.fire('Issue in Getting Attendance');
-                // Insert error in Db Here//
-                var obj = {
-                  'PageName': this.currentUrl,
-                  'ErrorMessage': err.error.message
-                }
-                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                  data => {
-                    debugger
-                  },
-                )
               }
             })
         }
@@ -409,26 +159,10 @@ search: any;
               next: data => {
                 debugger
                 this.attendancelist = data;
-                // this.attendancelistCopy= this.attendancelist;
-
-
                 this.loader = false;
-              }, error: (err) => {
-                // Swal.fire('Issue in Getting Attendance');
-                // Insert error in Db Here//
-                var obj = {
-                  'PageName': this.currentUrl,
-                  'ErrorMessage': err.error.message
-                }
-                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                  data => {
-                    debugger
-                  },
-                )
               }
             })
         }
-
       }
     } else {
       if (this.roleid == '2') {
@@ -438,21 +172,7 @@ search: any;
               next: data => {
                 debugger
                 this.attendancelist = data.filter(x => x.roleType == this.roleID);
-                // this.attendancelistCopy= this.attendancelist;
-                // this.count = this.attendancelist.length;
                 this.loader = false;
-              }, error: (err) => {
-                // Swal.fire('Issue in Getting Attendance By Manager ID');
-                // Insert error in Db Here//
-                var obj = {
-                  'PageName': this.currentUrl,
-                  'ErrorMessage': err.error.message
-                }
-                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                  data => {
-                    debugger
-                  },
-                )
               }
             })
         }
@@ -462,25 +182,10 @@ search: any;
               next: data => {
                 debugger
                 this.attendancelist = data.filter(x => x.roleType == this.roleID);
-                // this.attendancelistCopy= this.attendancelist;
-                // this.count = this.attendancelist.length;
                 this.loader = false;
-              }, error: (err) => {
-                // Swal.fire('Issue in Getting Attendance By Manager ID');
-                // Insert error in Db Here//
-                var obj = {
-                  'PageName': this.currentUrl,
-                  'ErrorMessage': err.error.message
-                }
-                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                  data => {
-                    debugger
-                  },
-                )
               }
             })
         }
-
       }
       else {
         if (this.startdate == undefined && this.enddate == undefined) {
@@ -489,22 +194,7 @@ search: any;
               next: data => {
                 debugger
                 this.attendancelist = data.filter(x => x.roleType == this.roleID);
-                // this.attendancelistCopy= this.attendancelist;
-                // this.count = this.attendancelist.length;
-
                 this.loader = false;
-              }, error: (err) => {
-                // Swal.fire('Issue in Getting Attendance');
-                // Insert error in Db Here//
-                var obj = {
-                  'PageName': this.currentUrl,
-                  'ErrorMessage': err.error.message
-                }
-                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                  data => {
-                    debugger
-                  },
-                )
               }
             })
         }
@@ -514,26 +204,157 @@ search: any;
               next: data => {
                 debugger
                 this.attendancelist = data.filter(x => x.roleType == this.roleID);
-                // this.attendancelistCopy= this.attendancelist;
-                // this.count = this.attendancelist.length;
-
                 this.loader = false;
-              }, error: (err) => {
-                // Swal.fire('Issue in Getting Attendance');
-                // Insert error in Db Here//
-                var obj = {
-                  'PageName': this.currentUrl,
-                  'ErrorMessage': err.error.message
-                }
-                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                  data => {
-                    debugger
-                  },
-                )
               }
             })
         }
+      }
+    }
+  }
 
+  onItemSelect(item: any) {
+    this.showPopup = 0;
+    debugger
+    console.log(item);
+    this.employeeid = item.id;
+    if (this.roleid == 6) {
+      if (this.startdate == undefined && this.enddate == undefined) {
+        this.DigiofficeService.GetAttendanceByEmployeeID(this.employeeid, this.firstDayofcurrentmonth, this.todaydate)
+          .subscribe({
+            next: data => {
+              debugger
+              this.attendancelist = data;
+            }
+          })
+      }
+      else {
+        this.DigiofficeService.GetAttendanceByEmployeeID(this.employeeid, this.startdate, this.enddate)
+          .subscribe({
+            next: data => {
+              debugger
+              this.attendancelist = data;
+            }
+          })
+      }
+    }
+    else if (this.roleid == 2) {
+      if (this.startdate == undefined && this.enddate == undefined) {
+        this.DigiofficeService.GetAttendanceByManagerID(this.employeeid, this.firstDayofcurrentmonth, this.todaydate)
+          .subscribe({
+            next: data => {
+              debugger
+              this.attendancelist = data;
+              this.loader = false;
+            }
+          })
+      }
+      else {
+        this.DigiofficeService.GetAttendanceByManagerID(this.employeeid, this.startdate, this.enddate)
+          .subscribe({
+            next: data => {
+              debugger
+              this.attendancelist = data;
+              this.loader = false;
+            }
+          })
+      }
+    }
+    else {
+      if (this.startdate == undefined && this.enddate == undefined) {
+        this.DigiofficeService.GetAttendanceByEmployeeID(this.employeeid, this.firstDayofcurrentmonth, this.todaydate)
+          .subscribe({
+            next: data => {
+              debugger
+              this.attendancelist = data;
+              this.loader = false;
+            }
+          })
+      }
+      else {
+        this.DigiofficeService.GetAttendanceByEmployeeID(this.employeeid, this.startdate, this.enddate)
+          .subscribe({
+            next: data => {
+              debugger
+              this.attendancelist = data;
+              this.loader = false;
+            }
+          })
+      }
+    }
+  }
+
+  public GetStaffByManagerIDForDropdown() {
+    this.DigiofficeService.GetAllStaffNew()
+      .subscribe({
+        next: data => {
+          debugger
+          if (this.roleid == 2) {
+            this.dropdownList = data.filter(x => x.supervisor == this.staffID);
+          }
+          else {
+            this.dropdownList = data;
+          }
+          this.loader = false;
+        }
+      })
+  }
+
+  public filterTeamAttendance() {
+    debugger
+    let searchCopy = this.term.toLowerCase();
+    this.attendancelist = this.attendancelistCopy.filter((x: { employeID: string, name1: string }) => (x.employeID.toLowerCase().includes(searchCopy))
+      || (x.name1.toLowerCase().includes(searchCopy)));
+    this.count = this.attendancelist.length;
+    this.loader = false;
+  }
+
+  public getenddate(event: any) {
+    this.showPopup = 0;
+    debugger
+    this.startdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.enddate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
+    this.loader = true;
+    if (this.enddate == "") {
+      this.ngOnInit();
+    }
+    else if (this.startdate == undefined || this.startdate == "") {
+      this.loader = false;
+      this.enddate == "";
+      this.showPopup = 1;
+      this.messageId = 32;
+    }
+    else {
+      if (this.roleid == 6) {
+        this.DigiofficeService.GetAttendanceByEmployeeID(this.staffID, this.startdate, this.enddate)
+          .subscribe({
+            next: data => {
+              debugger
+              this.attendancelist = data;
+              this.loader = false;
+            }
+          })
+      }
+      else if (this.roleid == 2) {
+        this.loader = true;
+        this.DigiofficeService.GetAttendanceByManagerID(this.staffID, this.startdate, this.enddate)
+          .subscribe({
+            next: data => {
+              debugger
+              this.attendancelist = data;
+              this.loader = false;
+            }
+          })
+      }
+      else {
+        this.loader = true;
+        this.DigiofficeService.GetAttendanceBydate(this.startdate, this.enddate)
+          .subscribe({
+            next: data => {
+              debugger
+              this.attendancelist = data;
+              this.loader = false;
+            }
+          })
       }
     }
   }
@@ -547,22 +368,8 @@ search: any;
           next: data => {
             debugger
             this.attendancelist = data;
-            // this.attendancelistCopy= this.attendancelist;
-            // this.count = this.attendancelist.length;
+            this.attendanceFilter = data;
             this.loader = false;
-          }, error: (err) => {
-            // Swal.fire('Issue in Getting Attendance By Manager ID');
-            // Insert error in Db Here//
-            this.loader = false;
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
@@ -572,49 +379,25 @@ search: any;
           next: data => {
             debugger
             this.attendancelist = data
-            // this.count = this.attendancelist.length;
-            // this.attendancelistCopy= this.attendancelist;
-
+            this.attendanceFilter = data;
             this.loader = false;
-          }, error: (err) => {
-            this.loader = false;
-            // Swal.fire('Issue in Getting Attendance');
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
   }
 
-
-  startdate1:any;
-  attendancelist23: any;
-  sequenceNumber1: any;
-  fileName: any;
   public exportexcel1() {
     debugger
-
     if (this.term != null) {
       this.attendancelist23 = this.attendancelist.filter((x: { search: string | any[]; }) => (x.search).includes(this.term.toUpperCase()))
     }
     else {
       this.attendancelist23 = this.attendancelist
-
     }
-
     var ExportData = [];
     this.sequenceNumber1 = 0;
     for (let
       i = 0; i < this.attendancelist23.length; i++) {
-      //debugger;
       this.sequenceNumber1 = i + 1;
       let singleData: any = {
         SequenceNumber: String,
@@ -639,7 +422,6 @@ search: any;
       singleData.ShiftDailyOut = this.attendancelist23[i].expectedOut;
       singleData.CompanyName = this.companyName;
       ExportData.push(singleData);
-      //debugger
     }
     const Export_to_excel_options = {
       fieldSeparator: ',',
@@ -654,29 +436,26 @@ search: any;
       filename: 'Employee_Attendance_Report'
     };
     const csvExporter = new ExportToCsv(Export_to_excel_options);
-    //debugger
     csvExporter.generateCsv(ExportData);
-
   }
+
   exporttoexcelsearch() {
     this.fileName = 'Attendance Report.xlsx'
     let element = document.getElementById('lvs');
-
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
-
-
     /* generate workbook and add the worksheet */
-
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-
-
     /* save to file */
-
     XLSX.writeFile(wb, this.fileName);
   }
 
+  onItemDeSelect(item: any): void {
+    debugger
+    this.startdate1 = '';
+    this.ngOnInit();
+    this.loader = false
+  }
 }

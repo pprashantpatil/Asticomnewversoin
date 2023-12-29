@@ -10,17 +10,17 @@
                             </a>
                         </li>
 
-                        <li *ngIf="roleid==2"><a class="Heading">
-                                <p class="Heading"> Team Attendance Details</p>
+                        <li *ngIf="roleid==2"><a class="tabHeading">
+                                <p class="tabHeading"> Team Attendance Details</p>
                             </a>
-                            <hr *ngIf="roleid==2" class="line-border listForm">
+                            <hr *ngIf="roleid==2" class="tab-line-border listForm">
                         </li>
 
-                        <li *ngIf="roleid==1||roleid==9||roleid==11||roleid==10"><a class="Heading">
-                            <p class="Heading">Company Attendance Details</p>
-                        </a>
-                        <hr *ngIf="roleid==1||roleid==9||roleid==11||roleid==10" class="line-border listForm">
-                    </li>
+                        <li *ngIf="roleid==1||roleid==9||roleid==11||roleid==10"><a class="tabHeading">
+                                <p class="tabHeading">Company Attendance Details</p>
+                            </a>
+                            <hr *ngIf="roleid==1||roleid==9||roleid==11||roleid==10" class="tab-line-border">
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -34,7 +34,7 @@
 
                     <div class="d-flex justify-content-start flex-wrap inputs">
                         <div class="cardinputs">
-                            <input type="text" placeholder="Search" id="term" [(ngModel)]="search"
+                            <input type="text" placeholder="Search" id="search" [(ngModel)]="search"
                                 class="form-control search-icon">
                         </div>
 
@@ -47,29 +47,21 @@
                         </div>
 
                         <div class="cardinputs">
-                            <select class="dropdown form-control select" [(ngModel)]="roleselectedItems"
-                                id="roleselectedItems" name="roleselectedItems" (change)="roleonItemSelect($event)">
-                                <option value="" disabled>Select Position</option>
-                                <option *ngFor="let Staff of dropdownRoleList" value="{{Staff.id}}">{{Staff.short}}
-                                </option>
-                            </select>
+                            <ng-multiselect-dropdown [placeholder]="'Select Position'" [settings]="roledropdownSettings"
+                                [data]="dropdownRoleList" [(ngModel)]="roleselectedItems"
+                                (onSelect)="roleonItemSelect($event)" (onDeSelect)="onItemDeSelect($event)">
+                            </ng-multiselect-dropdown>
                         </div>
 
                         <div class="cardinputs">
-                            <!-- <p>Staff -->
-                            <!-- <ng-multiselect-dropdown [placeholder]="'Select Staff'" [settings]="dropdownSettings" 
-                                [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)">
-                            </ng-multiselect-dropdown> -->
-                            <select class="dropdown form-control select" [(ngModel)]="selectedItems" id="selectedItems"
-                                name="selectedItems" (change)="onItemSelect($event)">
-                                <option value="" disabled>Select Staff</option>
-                                <option *ngFor="let Staff of dropdownList" value="{{Staff.id}}">{{Staff.fullname}}
-                                </option>
-                            </select>
+                            <ng-multiselect-dropdown [placeholder]="'Select Staff'" [settings]="dropdownSettings"
+                                [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="onItemDeSelect($event)">
+                            </ng-multiselect-dropdown>
                         </div>
 
                         <div class="cardinputs">
-                            <button class="butn-sadow" type="button" (click)="Reset()">Reset</button>
+                            <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
                         </div>
 
                         <div class="cardinputs">
@@ -82,13 +74,15 @@
             <div class="row">
                 <div class="col-10"></div>
             </div>
+
             <div class="row">
                 <div class="col-10">
                     <p class="show3res mt-1">SHOWING <span>{{(attendancelist
-                            |filter:term)?.length}}</span> RESULT(S)
+                            |filter:search)?.length}}</span> RESULT(S)
                     </p>
                 </div>
             </div>
+
             <div class="row ">
                 <div class="col-12">
                     <div class="listscroll">
@@ -112,79 +106,66 @@
                             </thead>
                             <tbody>
                                 <tr
-                                    *ngFor="let attendance of attendancelist | paginate: { itemsPerPage: count1, currentPage: p }|filter:term">
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    *ngFor="let attendance of attendancelist | paginate: { itemsPerPage: count1, currentPage: p }|filter:search">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.signinDate|date}}
                                     </td>
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.employeID}}
                                     </td>
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.name1}}
                                     </td>
 
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.role}}
                                     </td>
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.department_name}}
                                     </td>
-                                    <!-- <td>
-                                        {{attendance.signInType}}</td> -->
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.expectedIn}}
                                     </td>
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.stime}}</td>
-                                    <!-- <td>
-                                        <p *ngIf="attendance.signInType=='Web Application'">{{attendance.punchinip}}</p>
-                                        <p *ngIf="attendance.signInType!='Web Application'">{{attendance.signinLocation}}
-                                        </p>
-                                    </td> -->
-                                    <!-- <td>
-                                        <p *ngIf="attendance.signOutTypeID==2">Web Application</p>
-                                        <p *ngIf="attendance.signOutTypeID==1">Mobile</p>
-                                    </td> -->
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.expectedOut}}
-                                        <!-- <p *ngIf="attendance.expectedOut!=null"> </p>
-                                        <p *ngIf="attendance.expectedOut==null">NA</p> -->
                                     </td>
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.etime}}</td>
-                                    <!-- <td>
-                                        <p *ngIf="attendance.signOutTypeID==2">{{attendance.punchoutip}}</p>
-                                        <p *ngIf="attendance.signOutTypeID==1">{{attendance.signoutLocation}}
-                                        </p>
-                                    </td> -->
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.hr1}}</td>
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.undertime}}
                                     </td>
-                                    <td [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
+                                    <td
+                                        [ngClass]="{'bgred':attendance.undertime=='Yes'||attendance.latepunchin=='Yes'  }">
                                         {{attendance.latepunchin}}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <span class="NoResultShow" *ngIf="attendancelist?.length==0"><b>Sorry, we couldn't find any
+                        <span class="NoResultShow" *ngIf="(attendancelist|filter:search)?.length==0"><b>Sorry, we
+                                couldn't find any
                                 results.</b></span><br>
                     </div>
 
+                    <div class="text-right" *ngIf="(attendancelist|filter:search).length>count1">
+                        <br>
+                        <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                            class="poppinns"></pagination-controls>
+                    </div>
                 </div>
-                <!-- <ng-template #noResults>
-                    <p class="NoResultShow"> Sorry, we couldn't find any results. </p>
-                </ng-template> -->
-                <br>
-
-
-            </div>
-            <div class="text-right" *ngIf="attendancelist.length>count1">
-                <br>
-                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="" class="poppinns">
-                </pagination-controls>
-            </div>
-            <div class="col-1">
             </div>
         </div>
     </div>
@@ -198,11 +179,7 @@
                     <span class="header-loading-attend" id="exampleModalLongTitle">Please wait while
                         downloading...</span>
                     <div id="pause" class="d-flex align-items-center justify-content-center">
-                        <!-- <div class="cardloader"> -->
-                        <!-- <label class="loadertext">Please wait while downloading...</label> -->
-                        <!-- <img src="assets/Images/Ellipse.png"> -->
                         <div id="spinner"></div>
-                        <!-- </div> -->
                     </div>
                 </div>
             </div>

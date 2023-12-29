@@ -5,19 +5,18 @@
         <ng-wizard-step [title]="'Employee Profile '" [description]="''">
             <br />
             <div class="row">
-                <!-- <div class="col-lg-1"></div> -->
                 <div class="col-lg-12">
                     <div class="card  card-padding">
                         <label class="label"><b>My Information</b></label>
-                        <!-- <label class="label">My Information</label> -->
                         <hr>
+
                         <div class="row">
                             <div class="col-lg-3">
                                 <img *ngIf="Signature==null" class="image" src="assets/Images/profile_pic.png">
                                 <img *ngIf="Signature!=null" class="image" src="{{Signature}}">
                             </div>
-                            <div class="col-lg-2 Text">
 
+                            <div class="col-lg-2 Text">
                                 <p>Title <span style="color:red">*</span>
                                     <select [disabled]="roledid!=9 && roledid!=11 " class="form-control inputfield"
                                         id="Title" name="Title" [(ngModel)]="Title" placeholder="Select Title">
@@ -27,7 +26,6 @@
                                         <option value="Ms." selected>Ms</option>
                                         <option value="Miss" selected>Miss</option>
                                     </select>
-                                    <!-- <input type="text" class="form-control" placeholder="Title" > -->
                                 </p>
 
                                 <p>Place of Birth <span style="color: red;">*</span>
@@ -36,6 +34,7 @@
                                         onkeypress="return /[A-Za-z/\s/g]/i.test(event.key)" name="PlaceO_f_Birth"
                                         [(ngModel)]="PlaceO_f_Birth">
                                 </p>
+
                                 <p>Marital Status <span style="color: red;">*</span>
                                     <br>
                                     <select [disabled]="roledid!=9 && roledid!=11" class="form-control inputfield"
@@ -47,27 +46,26 @@
                                         <option value="Widow" selected>Widow</option>
                                     </select>
                                 </p>
+
                                 <p>Date of Joining <span style="color: red;">*</span>
                                     <input [disabled]="roledid!=9 && roledid!=11" type="date" class="form-control"
                                         id="JoiningDate" name="JoiningDate" [(ngModel)]="JoiningDate">
                                 </p>
                             </div>
+
                             <div class="col-lg-2 Text">
                                 <p>Name <span style="color: red;">*</span>
                                     <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                         placeholder="Name" id="Name" name="Name"
                                         onkeypress="return /[A-Z]/i.test(event.key)" [(ngModel)]="Name">
                                 </p>
-                                <!-- <p> Nick Name
-                                    <input type="text" class="form-control" placeholder="NickName" id="NickName"
-                                        name="NickName" onkeypress="return /[A-Z]/i.test(event.key)"
-                                        [(ngModel)]="NickName">
-                                </p> -->
+
                                 <p>Is Solo Parent </p>
                                 <p>
                                     <input [disabled]="roledid!=9 && roledid!=11" type="checkbox" id="Is_Solo_Parent"
                                         name="Is_Solo_Parent" [(ngModel)]="Is_Solo_Parent">
                                 </p>
+
                                 <p>Country of Birth <span style="color: red;">*</span>
                                     <select [disabled]="roledid!=9 && roledid!=11" class="form-control inputfield"
                                         (change)="GetCountryID($event)" id="Country_Of_Birth" name="Country_Of_Birth"
@@ -77,17 +75,14 @@
                                         </option>
                                     </select>
                                 </p>
-                                <!-- <p>Date of Marriage
-                                    <input type="date" class="form-control" id="Date_Of_Marriage"
-                                        name="Date_Of_Marriage" [(ngModel)]="Date_Of_Marriage">
-                                </p> -->
+
                                 <p>Date of Birth <span style="color: red;">*</span>
                                     <input [disabled]="roledid!=9 && roledid!=11" type="date" class="form-control"
                                         id="DOB" name="DOB" [(ngModel)]="DOB" (change)="getdate()" id="DOB"
                                         max={{myDate}}>
                                 </p>
-
                             </div>
+
                             <div class="col-lg-2 Text">
                                 <p>Middle Name
                                     <br> <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
@@ -99,7 +94,6 @@
                                     <br> <input [disabled]="roledid!=9 && roledid!=11" type="number"
                                         class="form-control" placeholder="Age" id="Age" name="Age" [(ngModel)]="Age">
                                 </p>
-
 
                                 <p>Company Email<span style="color: red;">*</span>
                                     <br> <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2 "
@@ -113,8 +107,8 @@
                                         id="EmployeeID" name="EmployeeID" maxlength="11" [(ngModel)]="EmployeeID"
                                         placeholder="Enter EmployeeID">
                                 </p>
-
                             </div>
+
                             <div class="col-lg-2 Text">
                                 <p>Last Name <span style="color: red;">*</span>
                                     <br> <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
@@ -132,6 +126,7 @@
                                         <option value="Other">Other</option>
                                     </select>
                                 </p>
+
                                 <p>Mobile <span style="color: red;">*</span>
                                     <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                                         type="text" class="form-control" id="Mobile" name="Mobile" maxlength="11"
@@ -150,11 +145,13 @@
                                     </select>
                                 </p>
                             </div>
+
                             <div class="col-lg-1"></div>
                         </div>
+
                         <div class="row">
-                            <div class="col-lg-3">
-                            </div>
+                            <div class="col-lg-3"></div>
+
                             <div class="col-lg-2 Text">
                                 <p>Position <span style="color: red;">*</span>
                                     <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11"
@@ -164,6 +161,7 @@
                                     </ng-multiselect-dropdown>
                                 </p>
                             </div>
+
                             <div class="col-lg-2 Text">
                                 <p>Department <span style="color: red; ">*</span>
                                     <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11"
@@ -172,35 +170,16 @@
                                         [(ngModel)]="Department" (onSelect)="deptonItemSelect($event)">
                                     </ng-multiselect-dropdown>
                                 </p>
-
                             </div>
+
                             <div class="col-lg-2 Text">
                                 <p>Manager <span style="color: red;">*</span>
                                     <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11"
                                         style="height: 30px;" [placeholder]="'Select Name'"
                                         [settings]="dropdownSettings" [data]="managerList" [(ngModel)]="Supervisor"
                                         (onSelect)="onItemSelect($event)"></ng-multiselect-dropdown>
-                                    <!-- class="fonttxt"></ng-multiselect-dropdown> -->
                                 </p>
-                                <!-- <p *ngIf="ID!=undefined">{{Supervisorname}}</p>  -->
-                                <!-- <p>{{Supervisorname}}</p>  -->
-
                             </div>
-
-                            <!-- <div class="col-lg-2 Text">
-                                <p>Level <span style="color: red; ">*</span>
-                                    <select class="form-control" id="level" name="level" [(ngModel)]="level"
-                                        placeholder="Select Level" (change)="getLevelid()">
-                                        <option value="0">Select Level</option>
-                                        <option value="{{item.id}}" *ngFor="let item of levellist">
-                                            {{item.short}}
-                                        </option>
-                                    </select>
-
-
-                                </p>
-
-                            </div> -->
 
                             <div class="col-lg-2 Text">
                                 <p>Login Type <span style="color: red; ">*</span>
@@ -215,89 +194,60 @@
                                         <option *ngIf="roledid==11" value="11">Super Admin</option>
                                         <option value="10">Payroll Admin</option>
                                     </select>
-
                             </div>
-
                         </div>
                         <br>
+
                         <div class="row">
-                            <div class="col-lg-3 Text">
+                            <div class="col-lg-3 Text"></div>
 
-                            </div>
-                            <!-- <div class="col-lg-3 Text">
-                                <p>Photo
-                                </p>
-                            </div> -->
                             <div class="col-lg-2 Text">
-                                <p>Paygroup <span style="color: red;">*</span>
-                                </p>
-
-                            </div>
-                            <div class="col-lg-2 Text">
-                                <p>Pag-IBIG ID <span style="color: red;">*</span>
-                                </p>
-
-                            </div>
-                            <div class="col-lg-2 Text">
-                                <p>Pag-IBIG MP2 <span style="color: red;">*</span>
-                                </p>
-
+                                <p>Paygroup <span style="color: red;">*</span></p>
                             </div>
 
                             <div class="col-lg-2 Text">
-                                <p>Eligibility Group<span style="color: red;">*</span>
-                                </p>
-
+                                <p>Pag-IBIG ID <span style="color: red;">*</span></p>
                             </div>
 
+                            <div class="col-lg-2 Text">
+                                <p>Pag-IBIG MP2 <span style="color: red;">*</span></p>
+                            </div>
+
+                            <div class="col-lg-2 Text">
+                                <p>Eligibility Group<span style="color: red;">*</span></p>
+                            </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-3 Text">
-
-                            </div>
-                            <!-- <div class="col-lg-3 Text">
-                                <ngx-dropzone (change)="onSelect2($event)" style="height: 130px;">
-                                    <ngx-dropzone-label>Drop files here!</ngx-dropzone-label>
-                                    <ngx-dropzone-preview *ngFor="let f of attachments2" [removable]="true"
-                                        (removed)="onRemove2(f)">
-                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                                    </ngx-dropzone-preview>
-                                </ngx-dropzone>
-                            </div> -->
+                            <div class="col-lg-3 Text"></div>
                             <div class="col-lg-2 Text">
                                 <select [disabled]="roledid!=9 && roledid!=11" class="form-control"
                                     placeholder="Pay Group" id="Paygroup" [(ngModel)]="Paygroup">
                                     <option value="">Select Paygroup</option>
                                     <option value="Rank and File">Rank and File</option>
                                     <option value="Officer">Officer</option>
-
                                 </select>
-
                             </div>
+
                             <div class="col-lg-2 Text">
                                 <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                     maxlength="15" placeholder="Pag-IBIG ID" id="PagiBig_ID" name="PagiBig_ID"
                                     [(ngModel)]="PagiBig_ID">
+
                                 <div *ngIf="PagiBig_ID==undefined || PagiBig_ID?.length<12" class="alert">
                                     <div class="validation" *ngIf="roledid==9 && roledid==11">
                                         * Pag-IBIG ID should be 12 Digits Number.
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-2 Text">
                                 <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                     maxlength="15" placeholder="Pag-IBIG MP2" id="PagiBigMP2" name="PagiBigMP2"
                                     [(ngModel)]="PagiBigMP2">
-                                <!-- <div *ngIf="PagiBigAccountNo==undefined || PagiBigAccountNo.length<12" class="alert">
-                                    <div class="validation">
-                                        * Pag-IBIG AccountNo should be 12 Digits Number.
-                                    </div>
-                                </div> -->
                             </div>
 
                             <div class="col-lg-2 Text">
-
                                 <select class="form-control" id="EligibilityGroup" name="EligibilityGroup"
                                     [disabled]="roledid!=9 && roledid!=11 && roledid!=10 "
                                     [(ngModel)]="EligibilityGroup" placeholder="EligibilityGroup">
@@ -335,133 +285,95 @@
                                     <option value="BR EG SPC" *ngIf="companyid==1003">BR EG SPC</option>
                                     <option value="BR EG SUP" *ngIf="companyid==1003">BR EG SUP</option>
                                     <option value="BR EG MGR" *ngIf="companyid==1003">BR EG MGR</option>
-                                    <!-- <option value="HCX22" *ngIf="companyid==1004">HCX22</option>
-                                <option value="HCX18" *ngIf="companyid==1004">HCX18</option> -->
-                                    <!-- <option value="AHM22">AHM22</option> -->
                                 </select>
-
-                                <!-- <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
-                                    onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)" maxlength="10"
-                                    placeholder="Eligibility Group" id="EligibilityGroup" name="EligibilityGroup"
-                                    [(ngModel)]="EligibilityGroup"> -->
-                                <!-- <select class="form-control" placeholder="Pay Group" id="Paygroup"
-                                    [(ngModel)]="Paygroup">
-                                    <option value="">Select Eligibility</option>
-                                    <option value="Rank and file">Economic</option>
-                                    <option value="Officer">Educational</option>
-
-                                </select> -->
-
                             </div>
-
                         </div>
                         <br>
+
                         <div class="row">
-                            <div class="col-lg-3 Text">
+                            <div class="col-lg-3 Text"></div>
 
-                            </div>
                             <div class="col-lg-2 Text">
-                                <p>Employee TIN <span style="color: red;">*</span>
-                                </p>
-
+                                <p>Employee TIN <span style="color: red;">*</span></p>
                             </div>
-                            <div class="col-lg-2 Text">
-                                <p>PhilHealth Number <span style="color: red;">*</span>
-                                </p>
 
+                            <div class="col-lg-2 Text">
+                                <p>PhilHealth Number <span style="color: red;">*</span></p>
                             </div>
-                            <div class="col-lg-2 Text">
-                                <p>SSS Number <span style="color: red;">*</span>
-                                </p>
 
+                            <div class="col-lg-2 Text">
+                                <p>SSS Number <span style="color: red;">*</span></p>
                             </div>
-                            <div class="col-lg-2 Text">
-                                <p>OT Eligibility <span style="color: red;">*</span>
-                                </p>
 
+                            <div class="col-lg-2 Text">
+                                <p>OT Eligibility <span style="color: red;">*</span></p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-3 Text">
 
-                            </div>
+                        <div class="row">
+                            <div class="col-lg-3 Text"></div>
+
                             <div class="col-lg-2 Text">
                                 <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                     maxlength="15" placeholder="Employee TIN" id="EMPLOYEE_TIN" name="EMPLOYEE_TIN"
                                     [(ngModel)]="EMPLOYEE_TIN">
+
                                 <div *ngIf="EMPLOYEE_TIN==undefined|| EMPLOYEE_TIN?.length<9" class="alert">
                                     <div class="validation" *ngIf="roledid==9 && roledid==11">
                                         * Employee TIN Should be 9 digit number.
                                     </div>
                                 </div>
-
                             </div>
+
                             <div class="col-lg-2 Text">
                                 <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                     maxlength="15" placeholder="PhilHealth No" id="PHILHEALTH_NO" name="PHILHEALTH_NO"
                                     [(ngModel)]="PHILHEALTH_NO">
+
                                 <div *ngIf="PHILHEALTH_NO==undefined|| PHILHEALTH_NO?.length<12" class="alert">
                                     <div class="validation" *ngIf="roledid==9 && roledid==11">
                                         * PhilHealth No Should be 12 digit number.
                                     </div>
                                 </div>
-
                             </div>
+
                             <div class="col-lg-2 Text">
                                 <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                     maxlength="15" placeholder="SSS No" id="SSSNO" name="SSSNO" [(ngModel)]="SSSNO">
+
                                 <div *ngIf="SSSNO==undefined|| SSSNO?.length<10" class="alert">
                                     <div class="validation" *ngIf="roledid==9 && roledid==11">
                                         * SSS No Should be 10 digit number.
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 Text">
 
+                            <div class="col-lg-2 Text">
                                 <select [disabled]="roledid!=9 && roledid!=11 && roledid!=10" class="form-control"
                                     id="OTEligibility" name="OTEligibility" [(ngModel)]="OTEligibility">
                                     <option value="0">Select</option>
                                     <option value="1">Yes</option>
                                     <option value="2">No</option>
                                 </select>
-
                             </div>
-                            <!-- <div class="col-lg-2 Text">
-                                <input type="text" class="form-control" placeholder="Pag-IBIG Membership"
-                                    id="PagibigMembership" name="PagibigMembership" [(ngModel)]="PagibigMembership">
-                            </div> -->
                         </div>
                         <br>
+
                         <div class="row">
-                            <div class="col-lg-3 Text">
+                            <div class="col-lg-3 Text"></div>
 
-                            </div>
                             <div class="col-lg-2 Text">
-                                <p>Frequency <span style="color: red;">*</span>
-                                </p>
-
+                                <p>Frequency <span style="color: red;">*</span></p>
                             </div>
+
                             <div class="col-lg-2 Text">
-                                <p>RateCode <span style="color: red;">*</span>
-                                </p>
-
+                                <p>RateCode <span style="color: red;">*</span></p>
                             </div>
-                            <!-- <div class="col-lg-2 Text">
-                                <p>Project ID
-                                </p>
-
-                            </div> -->
-                            <!-- <div class="col-lg-2 Text">
-                                <p>CompRate <span style="color: red;">*</span>
-                                </p>
-
-                            </div> -->
-
                         </div>
-                        <div class="row">
-                            <div class="col-lg-3 Text">
 
-                            </div>
+                        <div class="row">
+                            <div class="col-lg-3 Text"></div>
+
                             <div class="col-lg-2 Text">
                                 <select class="form-control" id="Frequency" name="Frequency"
                                     [disabled]="roledid!=9 && roledid!=11 && roledid!=10" [(ngModel)]="Frequency"
@@ -480,11 +392,9 @@
                                     <option value="BRD26" *ngIf="companyid==1003">BRD26</option>
                                     <option value="HCX22" *ngIf="companyid==1004">HCX22</option>
                                     <option value="HCX18" *ngIf="companyid==1004">HCX18</option>
-                                    <!-- <option value="AHM22">AHM22</option> -->
                                 </select>
-
-
                             </div>
+
                             <div class="col-lg-2 Text">
                                 <select class="form-control" id="RateCode" name="RateCode"
                                     [disabled]="roledid!=9 && roledid!=11 && roledid!=10" [(ngModel)]="RateCode">
@@ -503,71 +413,38 @@
                                     <option value="HCX22" *ngIf="companyid==1004">HCX22</option>
                                     <option value="HCX18" *ngIf="companyid==1004">HCX18</option>
                                 </select>
-
-
                             </div>
-                            <!-- <div class="col-lg-3 Text">
-                                <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
-                                maxlength="15" placeholder="Project ID" name="Project ID"
-                                [(ngModel)]="ProjectID">
-                            </div> -->
-                            <!-- <div class="col-lg-2 Text">
-                                <select class="form-control" id="CompRate" name="CompRate"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="CompRate"
-                                    >
-                                    <option value="">Select CompRate</option>
-                                    <option value="AHQ22" *ngIf="companyid==1006">AHQ22</option>
-                                    <option value="AHQ26" *ngIf="companyid==1006">AHQ26</option>
-                                    <option value="AHQ21" *ngIf="companyid==1006">AHQ21</option>
-                                    <option value="AST22" *ngIf="companyid==1001">AST22</option>
-                                    <option value="AST26" *ngIf="companyid==1001">AST26</option>
-                                    <option value="ABS22" *ngIf="companyid==1002">ABS22</option>
-                                    <option value="ABS26"  *ngIf="companyid==1002">ABS26</option>
-                                    <option value="FIN22"  *ngIf="companyid==1004">FIN22</option>
-                                    <option value="FIN26" *ngIf="companyid==1004">FIN26</option>
-                                    <option value="BRD22" *ngIf="companyid==1003">BRD22</option>
-                                    <option value="BRD26" *ngIf="companyid==1003">BRD26</option>
-                                    <option value="HCX22" *ngIf="companyid==1005">HCX22</option>
-                                    <option value="HCX18" *ngIf="companyid==1005">HCX18</option>
-                                </select>
-
-                            </div> -->
-
                         </div>
                     </div><br>
 
-
                     <div class="card card-padding">
                         <label class="label"><b>Ethnicity Information</b></label>
-                      
                         <hr>
+
                         <div class="row Text">
                             <div class="col-lg-2">
                                 <p>Religion</p>
-
                                 <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                     placeholder="Religion" id="Religion" name="Religion" [(ngModel)]="Religion"
                                     onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)">
-
                             </div>
+
                             <div class="col-lg-2">
                                 <p>Ethnicity</p>
-
                                 <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                     placeholder="Ethnicity" id="Ethnicity" name="Ethnicity" [(ngModel)]="Ethnicity"
                                     onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)">
                             </div>
+
                             <div class="col-lg-2">
                                 <p>Citizenship</p>
-
-
                                 <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                     id="Citizen_Ship" name="Citizen_Ship" [(ngModel)]="Citizen_Ship"
                                     placeholder="Citizenship" onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)">
                             </div>
+
                             <div class="col-lg-2">
                                 <p>Nationality </p>
-
                                 <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                     id="Nationality" name="Nationality" [(ngModel)]="Nationality"
                                     placeholder="Nationality" onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)">
@@ -575,58 +452,46 @@
                         </div>
                     </div> <br>
 
-                    <!-- <div class="card card-padding">
-                        <label class="label">Shift Information</label>
-                        <hr>
-                        <div class="row Text">
-                            <div class="col-lg-2">
-                                <p>Rest Days:</p>
-                                <ng-multiselect-dropdown [placeholder]="'Select Rest Day'"
-                                    [settings]="dropdownSettingsresdays" [data]="restdaylist"
-                                    [(ngModel)]="restdaysarray" (onSelect)="onItemSelect2($event)" class="fonttxt">
-                                </ng-multiselect-dropdown>
-                                <p *ngIf="ID!=undefined">{{Restdays}}</p>
-                            </div>
-                        </div>
-                    </div> <br> -->
                     <div class=" card card-padding">
                         <label class="label"><b>Health Information</b></label>
-                      
                         <hr>
                         <div class="row Text">
                             <div class="col-lg-2 ">
                                 <p>Blood Group </p>
-
                                 <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="text"
                                     class="form-control" id="Blood_Group" name="Blood_Group" [(ngModel)]="Blood_Group"
                                     placeholder="Blood Group">
                             </div>
+
                             <div class="col-lg-2">
                                 <p>Height[cm] </p>
                                 <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="number"
                                     id="Height" name="Height" [(ngModel)]="Height" class="form-control "
                                     placeholder="Height">
                             </div>
+
                             <div class="col-lg-2">
                                 <p>Weight[kg] </p>
                                 <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="number"
                                     id="Weight" name="Weight" [(ngModel)]="Weight" class="form-control "
                                     placeholder="Weight">
                             </div>
+
                             <div class="col-lg-2">
                                 <p>Is Night Blind </p>
                                 <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                                     type="checkbox" id="IS_Night_Blind" name="IS_Night_Blind">
                             </div>
+
                             <div class="col-lg-2">
                                 <p>Is Color Blind </p>
                                 <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                                     type="checkbox" id="Is_Color_Blind" name="Is_Color_Blind"
                                     [(ngModel)]="Is_Color_Blind">
                             </div>
-
                         </div>
                         <br>
+
                         <div class="row Text">
                             <div class="col-lg-2">
                                 <p>Major Illness</p>
@@ -635,37 +500,41 @@
                                     class="form-control " placeholder="Major Illness"
                                     onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)">
                             </div>
-
                         </div>
                     </div><br>
 
                     <div class=" card card-padding">
                         <label class="label"><b>BMS Details</b></label>
                         <hr>
+
                         <div class="row Text">
                             <div class="col-lg-2 ">
                                 <p>Original BMS <span style="color: red;">*</span> </p>
                                 <input class="form-control" id="OrginalBms" name="OrginalBms" [(ngModel)]="OrginalBms"
                                     [disabled]="roledid!=9 && roledid!=11 && roledid!=10" placeholder="Orginal Bms">
                             </div>
+
                             <div class="col-lg-3">
                                 <p>Effectivity of Previous BMS <span style="color: red;">*</span></p>
                                 <input type="date" class="form-control " id="EffectivityBMSDate"
                                     [disabled]="roledid!=9 && roledid!=11 && roledid!=10" name="EffectivityBMSDate"
                                     [(ngModel)]="PreviousEffectivityBMSDate">
                             </div>
+
                             <div class="col-lg-2">
                                 <p>Previous BMS<span style="color: red;">*</span> </p>
                                 <input type="text" class="form-control " placeholder="Previous BMS" id="PreviousBMS"
                                     [disabled]="roledid!=9 && roledid!=11 && roledid!=10" name="PreviousBMS"
                                     [(ngModel)]="PreviousBMS">
                             </div>
+
                             <div class="col-lg-3">
                                 <p>Effectivity date of Current BMS<span style="color: red;">*</span></p>
                                 <input type="date" class="form-control" placeholder="Effectivity date of Current BMS "
                                     [disabled]="roledid!=9 && roledid!=11 && roledid!=10" id="CurrentEffectivityBMSDate"
                                     name="CurrentEffectivityBMSDate" [(ngModel)]="CurrentEffectivityBMSDate">
                             </div>
+
                             <div class="col-lg-2">
                                 <p>Current BMS <span style="color: red;">*</span></p>
                                 <input type="text" class="form-control " placeholder="Current BMS" id="CurrentBMS"
@@ -673,298 +542,32 @@
                                     [(ngModel)]="CurrentBMS">
                             </div>
                         </div> <br>
-                        <div class="row Text">
 
+                        <div class="row Text">
                             <div class="col-lg-2">
                                 <p>COLA<span style="color: red;">*</span></p>
                                 <input type="text" class="form-control " placeholder="COLA" id="COLA" name="COLA"
                                     [disabled]="roledid!=9 && roledid!=11 && roledid!=10" [(ngModel)]="COLA">
                             </div>
+
                             <div class="col-lg-2">
                                 <p>Gcash Number</p>
                                 <input [disabled]="roledid!=9 && roledid!=11 && roledid!=10" type="Number"
                                     id="GCashNumber" name="GCashNumber" [(ngModel)]="GCashNumber" class="form-control "
                                     placeholder="GCashNumber">
                             </div>
-                            <!-- <div class="col-lg-2 Text">
-                                <p>MWE</p>
-                                <select class="form-control" id="RateCode" name="RateCode"
-                                    [disabled]="roledid!=9 && roledid!=11 && roledid!=10" [(ngModel)]="RateCode">
-                                    <option value="">Select MWE</option>
-                                    <option value="MWE">MWE</option>
-                                    <option value="Non-MWE">Non-MWE</option>
-                                </select>
-
-
-                            </div> -->
-                            <!-- <div class="col-lg-2">
-                                <p>Work Days<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Work Days" id="WorkDays" name="WorkDays"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="WorkDays">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Daily Rate<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Daily Rate" id="DailyRate" name="DailyRate"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="DailyRate">
-                            </div>
-                            <div class="col-lg-4">
-                                <p>Maintenance and Depreciation Allowance<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Maintenance Depreciation Allowance" id="MaintenanceDepreciationAllowance" name="MaintenanceDepreciationAllowance"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="MaintenanceDepreciationAllowance">
-                            </div> -->
-
-
-
                         </div> <br>
-                        <!-- <div class="row Text">
-                            <div class="col-lg-3">
-                                <p>Transportation Allowance<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Transportation Allowance" id="TranspoAllowance" name="TranspoAllowance"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="TranspoAllowance">
-                            </div>
-                            <div class="col-lg-3">
-                                <p>Communication Allowance<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Communication Allowance" id="CommAllowance" name="CommAllowance"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="CommAllowance">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Meal Allowance<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Meal Allowance" id="MealAllowance" name="MealAllowance"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="MealAllowance">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Rice Allowance<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Rice Allowance" id="RiceAllowance" name="RiceAllowance"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="RiceAllowance">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Lead Allowance<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Lead Allowance" id="LeadAllowance" name="LeadAllowance"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="LeadAllowance">
-                            </div>
-
-
-                        </div> <br> -->
-                        <!-- <div class="row Text">
-                            <div class="col-lg-3">
-                                <p>Medicine Allowance<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Medicine Allowance" id="MedicineAllowance" name="MedicineAllowance"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="MedicineAllowance">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Interim Allowance<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Interim Allowance" id="InterimAllowance" name="InterimAllowance"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="InterimAllowance">
-                            </div>
-                            <div class="col-lg-3">
-                                <p>Interim Allowance Note<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Interim Allowance Note" id="InterimAllowanceNote" name="InterimAllowanceNote"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="InterimAllowanceNote">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>13th Month<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="13th Month" id="Month13th" name="Month13th"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="Month13th">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>14th Month<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="14th Month" id="Month14th" name="Month14th"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="Month14th">
-                            </div>
-
-                        </div> <br> -->
-                        <!-- <div class="row Text">
-                            <div class="col-lg-3">
-                                <p>SSS and EC Employee Contribution<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="SSS and EC Employee Contribution" id="SSS_EC_EmpContribution" name="SSS_EC_EmpContribution"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="SSS_EC_EmpContribution">
-                            </div>
-                            <div class="col-lg-3">
-                                <p>PhilHealth Employee Contribution<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="PhilHealth Employee Contribution" id="PhilHealthEmpContribution" name="PhilHealthEmpContribution"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="PhilHealthEmpContribution">
-                            </div>
-                            <div class="col-lg-3">
-                                <p>Pagibig Employee Contribution<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Pagibig Employee Contribution" id="PagibigEmpContribution" name="PagibigEmpContribution"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="PagibigEmpContribution">
-                            </div>
-
-                            <div class="col-lg-3">
-                                <p>Dialer/System License<span style="color: red;">*</span></p>
-                                <input type="text" [disabled]="roledid!=9 && roledid!=11" id="DailerLicense" name="DailerLicense" [(ngModel)]="DailerLicense"
-                                    class="form-control" placeholder="Dialer/System License">
-                                </div>
-
-
-                        </div> <br> -->
-                        <!-- <div class="row Text">
-                            <div class="col-lg-2">
-                                <p>Life Insurance<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Life Insurance" id="LifeInsurance" name="LifeInsurance"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="LifeInsurance">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Tools of Work<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Tools of Work" id="ToolsOfWork" name="ToolsOfWork"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="ToolsOfWork">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Workspace<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Workspace" id="Workspace" name="Workspace"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="Workspace">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Incrementals<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Incrementals" id="Incrementals" name="Incrementals"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="Incrementals">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Total Direct Cost<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Total Direct Cost" id="TotalDirectCost" name="TotalDirectCost"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="TotalDirectCost">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Admin Fee 1<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Admin Fee 1" id="AdminFee1" name="AdminFee1"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="AdminFee1">
-                            </div>
-
-                        </div> <br> -->
-                        <!-- <div class="row Text">
-                            <div class="col-lg-3">
-                                <p>Additional Temporary Allowance<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Additional Temporary Allowance" id="AdditionalTempAllowance" name="AdditionalTempAllowance"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="AdditionalTempAllowance">
-                            </div>
-
-                            <div class="col-lg-2">
-                                <p>VAT 1<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="VAT 1" id="VAT1" name="VAT1"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="VAT1">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>VAT 2<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="VAT 2" id="VAT2" name="VAT2"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="VAT2">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Work Order Rate<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Work Order Rate" id="WorkOrderRate" name="WorkOrderRate"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="WorkOrderRate">
-                            </div>
-                            <div class="col-lg-3">
-                                <p>Other Billables Rate<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Other Billables Rate" id="OtherBillablesRate" name="OtherBillablesRate"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="OtherBillablesRate">
-                            </div>
-
-                        </div> <br> -->
-                        <!-- <div class="row Text">
-                            <div class="col-lg-2">
-                                <p>Admin Fee 2<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Admin Fee 2" id="AdminFee2" name="AdminFee2"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="AdminFee2">
-                            </div>
-
-                            <div class="col-lg-2">
-                                <p>Rate Card Total<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Rate Card Total" id="RateCardTotal" name="RateCardTotal"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="RateCardTotal">
-                            </div>
-                            <div class="col-lg-3">
-                                <p>Temporary Allowance 1<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Temporary Allowance 1" id="TemporaryAllowance1" name="TemporaryAllowance1"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="TemporaryAllowance1">
-                            </div>
-                            <div class="col-lg-3">
-                                <p>Temporary Allowance 1 Note<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Temporary Allowance 1 Note" id="TemporaryAllowance1Note" name="TemporaryAllowance1Note"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="TemporaryAllowance1Note">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Rainy Day Loan<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Rainy Day Loan" id="RainyDayLoan" name="RainyDayLoan"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="RainyDayLoan">
-                            </div>
-
-                        </div> <br>
-                        <div class="row Text">
-                            <div class="col-lg-3">
-                                <p>Ayala Membership Contribution<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Ayala Membership Contribution" id="AyalaMembershipContribution" name="AyalaMembershipContribution"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="AyalaMembershipContribution">
-                            </div>
-
-                            <div class="col-lg-3">
-                                <p>AC Credit Card Loan<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="AC Credit Card Loan" id="ACCreditCardLoan" name="ACCreditCardLoan"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="ACCreditCardLoan">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>AC Educ Loan<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="AC Educ Loan" id="ACEducLoan" name="ACEducLoan"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="ACEducLoan">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>AC Educ Loan 2<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="AC Educ Loan 2" id="ACEducLoan2" name="ACEducLoan2"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="ACEducLoan2">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>AC Hosp Loan<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="AC Hosp Loan" id="ACHospLoan" name="ACHospLoan"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="ACHospLoan">
-                            </div>
-
-                        </div> <br> -->
-                        <!-- <div class="row Text">
-                            <div class="col-lg-2">
-                                <p>AC Hosp Loan 2<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="AC Hosp Loan 2" id="ACHospLoan2" name="ACHospLoan2"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="ACHospLoan2">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>AC Travel Loan<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="AC Travel Loan" id="ACTravelLoan" name="ACTravelLoan"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="ACTravelLoan">
-                            </div>
-
-                            <div class="col-lg-2">
-                                <p>Christmas Treat Loan<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Christmas Treat Loan" id="ChristmasTreatLoan" name="ChristmasTreatLoan"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="ChristmasTreatLoan">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>NY Loan<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="NY Loan" id="NYLoan" name="NYLoan"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="NYLoan">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Petty Cash Loan<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Petty Cash Loan" id="PettyCashLoan" name="PettyCashLoan"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="PettyCashLoan">
-                            </div>
-                            <div class="col-lg-2">
-                                <p>Wedding Loan<span style="color: red;">*</span></p>
-                                <input type="text" class="form-control " placeholder="Wedding Loan" id="WeddingLoan" name="WeddingLoan"
-                                    [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="WeddingLoan">
-                            </div>
-
-                        </div> <br> -->
                     </div><br>
-
-
 
                     <div class="row">
                         <div class="col-lg-5"></div>
                         <div class="col-lg-2">
                             <button type="button" class="submit-button" *ngIf="ID!=undefined && roledid!=10 "
                                 (click)="Update()">Update</button>&nbsp;&nbsp;
-                            <button class="submit-button" (click)="Save()"
-                                *ngIf="ID==undefined">Submit</button> &nbsp;&nbsp;
-                            <!-- <button class="upload">Cancel</button> -->
+                            <button class="submit-button" (click)="Save()" *ngIf="ID==undefined">Submit</button>
+                            &nbsp;&nbsp;
                         </div>
+
                         <div class="col-lg-5"></div>
                     </div><br>
                 </div>
@@ -972,97 +575,6 @@
             <br />
 
         </ng-wizard-step>
-
-        <!-- <ng-wizard-step [title]="'Employee Allowance'" [description]="''">
-            <div class="card">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <label class="edudetails">Employee Allowance <span style="font-weight: 100;">
-
-                            </span></label>
-                    </div>
-                </div>
-                <hr>
-                <div *ngIf="roledid==9||roledid==10||roledid==11" class="row leavereq">
-
-                    <div class="col-md-3">
-                        <label>Allowance <span style="color: red;">*</span></label>
-                    </div>
-                    <div class="col-md-3">
-                        <label>Amount <span style="color: red;">*</span></label>
-                    </div>
-                    <div class="col-md-3">
-                        <p>Start Date <span style="color: red;">*</span></p>
-                    </div>
-                    <div class="col-md-3">
-                        <p>End Date <span style="color: red;">*</span></p>
-                    </div>
-                </div>
-                <div *ngIf="roledid==9||roledid==10||roledid==11" class="row leavereq">
-                    <div class="col-md-3">
-                        <div class="dropdown">
-                            <select class="form-control inputfield" id="Allowance" name="Allowance"
-                                [(ngModel)]="Allowance">
-                                <option value="Select One">Select Allowance Type</option>
-                                <option *ngFor="let data of allowancelist" value="{{data.id}}">{{data.item}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <input type="text" onkeypress="return /[0-9/\s/]/i.test(event.key) && this.value.length < 5"
-                            maxlength="5" class="form-control" placeholder="Enter Amount" id="Amount" name="Amount"
-                            [(ngModel)]="Amount">
-                    </div>
-                    <div class="col-md-3">
-                        <input type="date" class="form-control" id="startdate" name="startdate" [(ngModel)]="startdate">
-                    </div>
-
-                    <div class="col-md-3">
-                        <input type="date" class="form-control" id="endate" name="endate" [(ngModel)]="endate">
-                    </div>
-                </div><br>
-                <div *ngIf="roledid==9||roledid==10||roledid==11" class="row">
-                    <div class="col-lg-5"></div>
-                    <div class="col-lg-4">
-                        <button class="submit-button" *ngIf="ID==undefined || allowanceID == undefined" (click)="SaveAllowanceDetails()">Submit</button>
-                        <button type="button" class="form-control upload" *ngIf="ID!=undefined && allowanceID != undefined"
-                            (click)="UpdateStaffAllowanceDetails()">Update</button>
-                        &nbsp;&nbsp;
-                    </div>
-                    <div class="col-lg-5"></div>
-                </div><br>
-                <br>
-                <div class="row">
-                    <div class="col-12">
-                        <table class="w-100">
-                            <thead>
-                                <tr>
-                                    <th>Allowance Type</th>
-                                    <th>Amount</th>
-                                    <th>Stat Date</th>
-                                    <th>End Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let data of fetchallowancelist">
-                                    <td>{{data.allowanceName}}</td>
-                                    <td>{{data.amount}}</td>
-                                    <td>{{data.startdate |date }}</td>
-                                    <td>{{data.enddate | date}}</td>
-                                    <td> <button class="upload"
-                                        (click)="getAllowanceID(data.id)">Edit</button>&nbsp;
-                                    <button class="upload" (click)="DeleteStaffAllowanceDetails(data.id)">Delete</button>
-                                </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </ng-wizard-step> -->
 
         <ng-wizard-step [title]="'Position Details '" [description]="''">
             <div class="card card-padding">
@@ -1079,38 +591,21 @@
                         <input class="form-control" id="EmployeeCode" name="EmployeeCode" [(ngModel)]="EmployeeCode"
                             [disabled]="roledid!=9 && roledid!=11" placeholder="Employee Code">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Official Email <span style="color: red;">*</span></p>
                         <input class="form-control" id="OfficialEmail" name="OfficialEmail" [(ngModel)]="OfficialEmail"
                             [disabled]="roledid!=9 && roledid!=11" placeholder="Official Email">
                     </div>
-                    <!-- <div class="col-lg-2">
-                        <p>Level <span style="color: red;">*</span></p>
-                        <select class="form-control" id="Band" name="Band" [(ngModel)]="Band" placeholder="Band"
-                            [disabled]="roledid!=9 && roledid!=11">
-                            <option value="">Select Level</option>
-                            <option value="1">L1</option>
-                            <option value="2">L2</option>
-                            <option value="3">L3</option>
-                            <option value="4">L4</option>
-                            <option value="5">L5</option>
-                            <option value="6">L6</option>
-                            <option value="7">L7</option>
-                            <option value="8">L8</option>
-                        </select>
-                    </div> -->
-                    <!-- <div class="col-lg-2">
-                        <p>Grade: <span style="color: red;">*</span></p>
-                        <input class="form-control" id="Grade2" name="Grade2" [(ngModel)]="Grade2" placeholder="Grade2">
-                    </div> -->
+
                     <div class="col-lg-2">
                         <p>Job Position <span style="color: red;">*</span></p>
                         <input class="form-control" id="JobRole" name="JobRole" [(ngModel)]="JobRole"
                             [disabled]="roledid!=9 && roledid!=11" placeholder="Job Position">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Employment Status <span style="color: red;">*</span></p>
-
                         <select class="form-control" id="EmployeeStatus" name="EmployeeStatus"
                             [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="EmployeeStatus"
                             placeholder="Employee Status">
@@ -1119,64 +614,38 @@
                             <option value="Probationary">Probationary</option>
                             <option value="Regular">Regular</option>
                         </select>
-
-                        <!-- <input class="form-control" placeholder="Employee Status" id="EmployeeStatus"
-                            name="EmployeeStatus" [(ngModel)]="EmployeeStatus"> -->
                     </div>
                 </div><br>
+
                 <div class="row Details">
-                    <!-- <div class="col-lg-2">
-                        <p>Manager:</p>
-                        <input class="form-control" id="Manager" name="Manager" [(ngModel)]="Manager"
-                            placeholder="Manager">
-                    </div> -->
-                    <!-- <div class="col-lg-2">
-                        <p>Employment Type:</p>
-                        <input class="form-control" placeholder="Employee Type" id="EmployeeType" name="EmployeeType"
-                            [(ngModel)]="EmployeeType" placeholder="EmployeeType">
-                    </div> -->
-
-
                     <div class="col-lg-2">
                         <p>Notice Period <span style="color: red;">*</span></p>
-                        <!-- <select class="form-control" placeholder="Notice Period" id="NoticePeriod" name="NoticePeriod"
-                            [disabled]="roledid!=9 && roledid!=11" [(ngModel)]="NoticePeriod">
-                            <option value="">Notice Period</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                            <option value="60">60</option>
-                            <option value="90">90</option>
-                        </select> -->
                         <textarea rows="1" type="text" class="form-control" placeholder="Notice Period"
                             [(ngModel)]="NoticePeriod" name="NoticePeriod" id="NoticePeriod"
                             [disabled]="roledid!=9 && roledid!=11"></textarea>
-                        <!-- <input class="form-control" placeholder="Notice Period" id="NoticePeriod" name="NoticePeriod"
-                            [(ngModel)]="NoticePeriod"> -->
                     </div>
+
                     <div class="col-lg-2">
                         <p>Probation Period <span style="color: red;">*</span></p>
                         <input class="form-control" placeholder="Probation Period" id="ProbationPeriod"
                             [disabled]="roledid!=9 && roledid!=11" onkeypress="return /[0-9]/i.test(event.key)"
                             name="ProbationPeriod" [(ngModel)]="ProbationPeriod">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Probation Start Date <span style="color: red;">*</span></p>
                         <input type="date" class="form-control" placeholder="Probation Period" id="ProbationStartDate"
                             [disabled]="roledid!=9 && roledid!=11" onkeypress="return /[0-9]/i.test(event.key)"
                             name="ProbationStartDate" [(ngModel)]="ProbationStartDate">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Probation End Date <span style="color: red;">*</span></p>
                         <input type="date" class="form-control" placeholder="Probation Period" id="ProbationEndDate"
                             [disabled]="roledid!=9 && roledid!=11" onkeypress="return /[0-9]/i.test(event.key)"
                             name="ProbationEndDate" [(ngModel)]="ProbationEndDate">
                     </div>
-                    <!-- <div class="col-lg-2">
-                        <p>Confirmation Status:</p>
-                        <input class="form-control" placeholder="Confirmation Status" id="ConfirmationStatus"
-                            name="ConfirmationStatus" [(ngModel)]="ConfirmationStatus">
-                    </div> -->
+
                     <div class="col-lg-3">
                         <p>Regularization Date <span style="color: red;">*</span></p>
                         <input type="date" class="form-control" placeholder="Regularization Date"
@@ -1185,8 +654,8 @@
                     </div>
                 </div>
                 <br>
-                <div class="row Details">
 
+                <div class="row Details">
                     <div class="col-lg-2">
                         <p>Extension End date<span style="color: red;">*</span></p>
                         <input type="date" class="form-control" placeholder=" Extension EndDate" id="ExtensionEndDate"
@@ -1202,51 +671,21 @@
                             <option value="15">SALES & RETAIL</option>, ,
                             <option value="30">IT</option>
                             <option value="45">BPO/SHARED SERVICES & ENGINEERING</option>
+                        </select>
+                    </div>
 
-                        </select>
-                        <!-- <input class="form-control" placeholder="Notice Period" id="NoticePeriod" name="NoticePeriod"
-                            [(ngModel)]="NoticePeriod"> -->
-                    </div>
-                    <!-- <div class="col-lg-2">
-                        <p>Internal Cost Center <span style="color: red;">*</span></p>
-                        <input type="text" class="form-control" placeholder="Internal Cost Center " id="ProbationPeriod"
-                            onkeypress="return /[0-9]/i.test(event.key)" name="ProbationPeriod"
-                            [(ngModel)]="ProbationPeriod">
-                    </div>
-                    <div class="col-lg-2">
-                        <p>Area of Deployment <span style="color: red;">*</span></p>
-                        <input type="text" class="form-control" placeholder="Area of Deployment" id="ProbationPeriod"
-                            onkeypress="return /[0-9]/i.test(event.key)" name="ProbationPeriod"
-                            [(ngModel)]="ProbationPeriod">
-                    </div>
-                    <div class="col-lg-2">
-                        <p>TS AM<span style="color: red;">*</span></p>
-                        <select class="form-control" placeholder="Notice Period" id="NoticePeriod" name="NoticePeriod"
-                            [(ngModel)]="NoticePeriod">
-                            <option value="">Internal Cost Center</option>
-                            <option value="15">Ged</option>
-                            <option value="30">Lai</option>
-                            <option value="45">Leah</option>
-                            <option value="60">Marc</option>
-                            <option value="90">Billie</option>
-                        </select>
-                    </div> -->
-                    <!-- <div class="col-lg-2">
-                        <p>Confirmation Status:</p>
-                        <input class="form-control" placeholder="Confirmation Status" id="ConfirmationStatus"
-                            name="ConfirmationStatus" [(ngModel)]="ConfirmationStatus">
-                    </div> -->
                     <div class="col-lg-2">
                         <p>Start Date<span style="color: red;">*</span></p>
                         <input type="date" class="form-control" id="StartDate" name="StartDate" [(ngModel)]="StartDate"
                             [disabled]="roledid!=9 && roledid!=11">
                     </div>
+
                     <div class="col-lg-2">
                         <p>End Date <span style="color: red;">*</span></p>
-
                         <input type="date" class="form-control" id="EndDate" name="EndDate" [(ngModel)]="EndDate"
                             [disabled]="roledid!=9 && roledid!=11">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Resignation Date</p>
                         <input type="date" class="form-control" id="ResignationDate" name="ResignationDate"
@@ -1254,27 +693,22 @@
                     </div>
                 </div>
                 <br>
+
                 <div class="row Details">
                     <div class="col-lg-2">
-                        <p>Billing Address
-                        </p>
-                        <!-- <input type="text" class="form-control" placeholder="Billing Address" placeholder="Billing Address" id="AddressLine4" name="AddressLine4"
-            [(ngModel)]="AddressLine4"> -->
-                        <!-- <input type="text" class="form-control" placeholder="Billing Address"
-             [(ngModel)]="AddressLine4"> -->
+                        <p>Billing Address</p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 " class="form-control"
                             placeholder="Billing Address" placeholder="Billing Address" [(ngModel)]="BillingAddress"
                             id="BillingAddress" name="BillingAddress">
-                        <!-- <input type="number" id="Height" name="Height" [(ngModel)]="Height"
-             class="form-control " placeholder="Height"> -->
                     </div>
+
                     <div class="col-lg-3">
-                        <p>Email Address
-                        </p>
+                        <p>Email Address</p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control"
                             placeholder="Email Address" id="EmailAddress" name="EmailAddress"
                             [(ngModel)]="EmailAddress">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Cost Center
                             <span style="color: red;">*</span>
@@ -1282,46 +716,43 @@
                         <input [disabled]="roledid!=9 && roledid!=11" class="form-control" placeholder="Cost Center"
                             id="CostCenter" name="CostCenter" [(ngModel)]="CostCenter">
                     </div>
+
                     <div class="col-lg-2">
-                        <p>GL Code
-                        </p>
+                        <p>GL Code</p>
                         <input [disabled]="roledid!=9 && roledid!=11" class="form-control" placeholder="GL Code"
                             id="GLCode" name="GLCode" [(ngModel)]="GLCode">
                     </div>
                 </div>
                 <br>
 
-                <div class="row Details">
+                <div class="row Details"></div> <br>
 
-                </div> <br>
-                <div class="row Details">
-                </div> <br>
+                <div class="row Details"></div> <br>
+
                 <div class="row">
                     <div class="col-lg-5"></div>
                     <div class="col-lg-4">
-                        <button type="button" class="submit-button"
-                            *ngIf="ID!=undefined && (roledid==11 || roledid==9)"
+                        <button type="button" class="submit-button" *ngIf="ID!=undefined && (roledid==11 || roledid==9)"
                             (click)="UpdatePositionDetails()">Update</button>
                         <button class="submit-button" (click)="SavePositionDetails()"
                             *ngIf="ID==undefined && (roledid==11 || roledid==9)">Submit</button> &nbsp;&nbsp;
-
                     </div>
                     <div class="col-lg-5"></div>
                 </div><br>
                 <br>
             </div>
-
         </ng-wizard-step>
+
         <ng-wizard-step [title]="'Address Details'" [description]="''">
             <div class="card card-padding">
                 <br />
                 <div class="row">
                     <div class="col-lg-12">
                         <label class="label"><b>My Address Details</b></label>
-                     
                     </div>
                 </div>
                 <hr>
+
                 <div class="row Details">
                     <div class="col-lg-2">
                         <p>Address Type <span style="color: red;">*</span></p>
@@ -1331,15 +762,9 @@
                             <option value="Official">Official</option>
                             <option value="Permanent">Permanent</option>
                             <option value="Residence">Residence </option>
-
                         </select>
                     </div>
 
-                    <!-- <div class="col-lg-2">
-                        <p>Find Places </p>
-                        <input class="form-control" id="FindPlace" name="FindPlace" [(ngModel)]="FindPlace"
-                            placeholder="find your Address">
-                    </div> -->
                     <div class="col-lg-2">
                         <p>Address line 1
                             <span style="color: red;">*</span>
@@ -1347,49 +772,36 @@
                         <textarea rows="3" [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             type="text" class="form-control" placeholder="Address Line 1" [(ngModel)]="AddressLine1"
                             name="AddressLine1" id="AddressLine1"></textarea>
-                        <!-- <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control" placeholder="Address line 1" id="AddressLine1" name="AddressLine1"
-                            [(ngModel)]="AddressLine1"> -->
                     </div>
+
                     <div class="col-lg-2">
-                        <p>Address line 2
-                        </p>
+                        <p>Address line 2</p>
                         <textarea rows="3" [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             type="text" class="form-control" placeholder="Address Line 2" [(ngModel)]="AddressLine2"
                             name="AddressLine2" id="AddressLine2"></textarea>
-                        <!-- <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control" placeholder="Address line 2" id="AddressLine2" name="AddressLine2"
-                            [(ngModel)]="AddressLine2"> -->
                     </div>
+
                     <div class="col-lg-2">
-                        <p>Address line 3
-                        </p>
+                        <p>Address line 3</p>
                         <textarea rows="3" [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             type="text" class="form-control" placeholder="Address Line 3" [(ngModel)]="AddressLine3"
                             name="AddressLine3" id="AddressLine3"></textarea>
-                        <!-- <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control" placeholder="Address line 3" id="AddressLine3" name="AddressLine3"
-                            [(ngModel)]="AddressLine3"> -->
                     </div>
+
                     <div class="col-lg-2">
-                        <p>Address line 4
-                        </p>
+                        <p>Address line 4</p>
                         <textarea rows="3" [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             type="text" class="form-control" placeholder="Address Line 4" [(ngModel)]="AddressLine4"
                             name="AddressLine4" id="AddressLine4"></textarea>
-                        <!-- <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control" placeholder="Address line 4" id="AddressLine4" name="AddressLine4"
-                            [(ngModel)]="AddressLine4"> -->
                     </div>
+
                     <div class="col-lg-2">
-                        <p>Region
-                        </p>
+                        <p>Region</p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             placeholder="Region" id="Region" name="Region" [(ngModel)]="Region">
                     </div>
                 </div><br>
-                <!-- <div class="row Details">
 
-                   
-
-
-                </div><br> -->
                 <div class="row Details">
                     <div class="col-lg-2">
                         <p>Country
@@ -1400,82 +812,40 @@
                             (change)="GetCountryID($event)" [(ngModel)]="CountryID">
                             <option value="0" selected>Select Country </option>
                             <option *ngFor="let role of Countrylist" value="{{role.id}}">{{role.short}}</option>
-
                         </select>
-                        <!-- <select class="form-control inputfield" id="CountryID" name="CountryID"
-                            (change)="GetCountryID($event)" [(ngModel)]="CountryID">
-                            <option value="0" selected>Select Country </option>
-                            <option *ngFor="let role of Countrylist" value="{{role.id}}">{{role.countryName}}</option>
-
-                        </select> -->
-                        <!--
-                        <input class="form-control" placeholder="" id="Country" name="Country" [(ngModel)]="Country"> -->
                     </div>
-
-
 
                     <div class="col-lg-2">
                         <p> Province
                             <span style="color: red;">*</span>
                         </p>
-                        <!-- <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control inputfield" id="StateID" name="StateID" [(ngModel)]="StateID"
-                            (change)="GetProvinceID($event)">
-                            <option class="textcolor" value="0">Select Province </option>
-                            <option class="textcolor" *ngFor="let role of Provincelist" value="{{role.id}}">
-                                {{role.short}}
-                            </option>
-
-                        </select> -->
 
                         <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             [placeholder]="'Select Province'" [settings]="provincedropdownSettings"
                             [data]="Provincelist" [(ngModel)]="StateID" (onSelect)="GetProvinceID($event)">
                         </ng-multiselect-dropdown>
-
                     </div>
+
                     <div class="col-lg-2">
                         <p>City
                             <span style="color: red;">*</span>
                         </p>
-                        <!-- <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control inputfield" id="CityID" name="CityID" [(ngModel)]="CityID"
-                            (change)="getbarangay()">
-                            <option class="textcolor" value="0">Select City </option>
-                            <option class="textcolor" *ngFor="let role of Citylist" value="{{role.id}}">
-                                {{role.short}}
-                            </option>
-
-                        </select> -->
 
                         <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             [placeholder]="'Select City'" [settings]="citydropdownSettings" [data]="Citylist"
                             [(ngModel)]="CityID" (onSelect)="getbarangay($event)">
                         </ng-multiselect-dropdown>
                     </div>
+
                     <div class="col-lg-2">
                         <p>Barangay <span style="color: red;">*</span></p>
-                        <!-- <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control inputfield" id="Barangay" name="Barangay" [(ngModel)]="Barangay">
-                            <option class="textcolor" value="0">Select Barangay </option>
-                            <option class="textcolor" *ngFor="let role of barangaylist" value="{{role.id}}">
-                                {{role.name}}
-                            </option>
-
-                        </select> -->
 
                         <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             [placeholder]="'Select Barangay'" [settings]="barangaydropdownSettings"
                             [data]="barangaylist" [(ngModel)]="Barangay" (onSelect)="onSelectBarangay($event)">
                         </ng-multiselect-dropdown>
-
-
-                        <!-- <select class="form-control inputfield" id="Barangay" name="Barangay" [(ngModel)]="Barangay"
-                        (change)="GetCItyID($event)">
-                        <option class="textcolor" value="0">Select Barangay </option>
-                        <option class="textcolor" *ngFor="let role of barangaylist" value="{{role.id}}">
-                            {{role.short}}
-                        </option>
-
-                    </select> -->
                     </div>
+
                     <div class="col-lg-2">
                         <p>Postcode
                             <span style="color: red;">*</span>
@@ -1484,63 +854,63 @@
                             placeholder="Postcode" id="SubDistrictPostcode" name="SubDistrictPostcode"
                             [(ngModel)]="SubDistrictPostcode">
                     </div>
-                    <!-- <div class="col-lg-2">
-                        <p>Mobile::</p>
-                        <input class="form-control" placeholder="" id="Mobile1" name="Mobile1" [(ngModel)]="Mobile1">
-                    </div>
-                    <div class="col-lg-2">
-                        <p>Landline / Fax:</p>
-                        <input class="form-control" placeholder="" id="LandLineFax" name="LandLineFax"
-                            [(ngModel)]="LandLineFax">
-                    </div> -->
+
                     <div class="col-lg-2">
                         <p>Is Correspondance </p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="checkbox"
                             id="IsCorrespondance" name="IsCorrespondance">
-
-                        <!-- [(ngModel)]="IsCorrespondance" -->
                     </div>
                 </div> <br>
+
                 <div class="row">
                     <div class="col-lg-12">
                         <label class="Guidelines">Emergency Contact </label>
                         <hr>
                     </div>
                 </div>
+
                 <div class="row Details">
                     <div class="col-lg-2">
                         <p>Contact Name
                             <span style="color: red;">*</span>
                         </p>
+
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             placeholder="Contact Name" id="EmergencyContactName" name="EmergencyContactName"
                             onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)" [(ngModel)]="EmergencyContactName">
                     </div><br>
+
                     <div class="col-lg-2">
                         <p>Contact Relationship
                             <span style="color: red;">*</span>
                         </p>
+
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             placeholder="Contact Relationship" id="EmergencyContactRelationship"
                             onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)" name="EmergencyContactRelationship"
                             [(ngModel)]="EmergencyContactRelationship">
                     </div><br>
+
                     <div class="col-lg-2">
                         <p>Mobile Number
                             <span style="color: red;">*</span>
                         </p>
+
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             placeholder="Mobile Number" id="EmergencyContactMobileNumber"
                             onkeypress="return /[0-9/\s/]/i.test(event.key)" maxlength="11"
                             name="EmergencyContactMobileNumber" [(ngModel)]="EmergencyContactMobileNumber">
                     </div><br>
+
                     <div class="col-lg-2">
                         <p>Office Number </p>
+
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             placeholder="Office Number" id="EmergencyContactOfficeNumber"
                             onkeypress="return /[0-9/\s/]/i.test(event.key)" maxlength="11"
                             name="EmergencyContactOfficeNumber" [(ngModel)]="EmergencyContactOfficeNumber">
                     </div><br>
+
                     <div class="col-lg-2">
                         <p>Contact Address </p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
@@ -1549,6 +919,7 @@
                             [(ngModel)]="EmergencyContact_Address">
                     </div><br>
                 </div><br>
+
                 <div class="row Details">
                     <div class="col-lg-2">
                         <p>Landline Number </p>
@@ -1557,6 +928,7 @@
                             onkeypress="return /[0-9/\s/]/i.test(event.key)" maxlength="11"
                             name="EmergencyContactLandLineNumber" [(ngModel)]="EmergencyContactLandLineNumber">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Email ID </p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
@@ -1565,6 +937,7 @@
                     </div>
                 </div>
                 <br>
+
                 <div class="row">
                     <div class="col-lg-5"></div>
                     <div class="col-lg-4">
@@ -1572,21 +945,19 @@
                             (click)="UpdateMyAddressDetails()">Update</button>
                         <button class="submit-button" (click)="SaveAddressDetails()"
                             *ngIf="ID==undefined">Submit</button> &nbsp;&nbsp;
-
                     </div>
+
                     <div class="col-lg-5"></div>
                 </div><br>
                 <br>
-
             </div>
-
         </ng-wizard-step>
+
         <ng-wizard-step [title]="'Dependent Details'" [description]="''">
             <div class="card card-padding">
                 <div class="row">
                     <div class="col-lg-12">
                         <label class="label"><b>Dependent Details</b></label>
-                        
                     </div>
                 </div>
                 <hr>
@@ -1598,6 +969,7 @@
                             id="DependentName" name="DependentName" [(ngModel)]="DependentName"
                             placeholder="Dependent Name" onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Relationship </p>
                         <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
@@ -1617,6 +989,7 @@
                             <option value="Husband">Husband</option>
                         </select>
                     </div>
+
                     <div class="col-lg-2">
                         <p>Gender </p>
                         <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
@@ -1627,41 +1000,47 @@
                             <option value="Female">Female </option>
                         </select>
                     </div>
+
                     <div class="col-lg-2">
                         <p>Date Of Birth <span style="color: red;"></span> </p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             type="date" id="DateOfBirth" name="DateOfBirth" [(ngModel)]="DateOfBirth"
                             placeholder="DateOfBirth">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Address </p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             id="Address" name="Address" [(ngModel)]="Address" placeholder="Address">
                     </div>
                 </div><br>
+
                 <div class="row Details">
                     <div class="col-lg-2">
                         <p>Mobile Number</p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="text"
                             class="form-control" id="Mobile" name="Mobile" maxlength="11" [(ngModel)]="Mobile"
                             onkeypress="return /[0-9]/i.test(event.key)" placeholder="Mobile">
-
                     </div>
+
                     <div class="col-lg-2">
                         <p>Is Dependent</p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="checkbox"
                             id="Is_Dependent" name="Is_Dependent">
                     </div>
+
                     <div class="col-lg-2">
                         <p>ID Number </p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             placeholder="ID Number" id="Id_Number" name="Id_Number" [(ngModel)]="Id_Number">
                     </div>
+
                     <div class="col-lg-2">
                         <p>IS Child Adopted </p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="checkbox"
                             id="Is_Child_Adopted" name="Is_Child_Adopted">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Race </p>
                         <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
@@ -1673,9 +1052,9 @@
                         </select>
                     </div>
                 </div>
-                <div class="row Details">
 
-                </div> <br>
+                <div class="row Details"></div> <br>
+
                 <div class="row Details">
                     <div class="col-lg-2">
                         <p>Citizenship </p>
@@ -1683,6 +1062,7 @@
                             class="form-control" id="CitizenShip" name="CitizenShip" [(ngModel)]="CitizenShip"
                             placeholder="CitizenShip">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Country of Birth </p>
                         <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
@@ -1690,10 +1070,9 @@
                             <option value="">Select Country </option>
                             <option *ngFor="let role of Countrylist" value="{{role.id}}">{{role.short}}
                             </option>
-
                         </select>
-
                     </div>
+
                     <div class="col-lg-2">
                         <p>Religion </p>
                         <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
@@ -1707,10 +1086,7 @@
                             <option value="Non-Religious">Non-Religious</option>
                         </select>
                     </div>
-                    <!-- <div class="col-lg-2">
-                            <p>Reside in Singapore </p>
-                           <input type="checkbox">
-                        </div> -->
+
                     <div class="col-lg-2">
                         <p>Working Status </p>
                         <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
@@ -1721,6 +1097,7 @@
                         </select>
                     </div>
                 </div> <br>
+
                 <div class="row">
                     <div class="col-lg-5"></div>
                     <div class="col-lg-4">
@@ -1728,25 +1105,23 @@
                             (click)="UpdateDependentDetails()">Update</button>
                         <button class="submit-button" (click)="SaveDependantDetails()"
                             *ngIf="ID==undefined">Submit</button> &nbsp;&nbsp;
-
                     </div>
+
                     <div class="col-lg-5"></div>
                 </div><br>
                 <br> <br>
-
-
-
             </div>
         </ng-wizard-step>
+
         <ng-wizard-step [title]="'Nomination Details'" [description]="''">
             <div class="card card-padding">
                 <div class="row">
                     <div class="col-lg-12">
                         <label class="label"><b>Nomination</b></label>
-                        
                     </div>
                 </div>
                 <hr>
+
                 <div class="row Details">
                     <div class="col-lg-2">
                         <p>Dependent <span style="color: red;">*</span></p>
@@ -1754,23 +1129,27 @@
                             id="Dependent" name="Dependent" [(ngModel)]="Dependent"
                             onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)" placeholder="Dependent">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Percentage <span style="color: red;">*</span></p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             id="Percentage" name="Percentage" [(ngModel)]="Percentage"
                             onkeypress="return /[0-9/\s/%]/i.test(event.key)" placeholder="Percentage">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Nominee Type <span style="color: red;">*</span></p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             id="NomineeType" name="NomineeType" [(ngModel)]="NomineeType" placeholder="Nominee Type">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Guardian Name</p>
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
                             id="GuardianName" name="GuardianName" [(ngModel)]="GuardianName" placeholder="Guardian Name"
                             onkeypress="return /[A-Za-z0-9/\s/]/i.test(event.key)">
                     </div>
+
                     <div class="col-lg-2">
                         <p>Guardian Relationship</p>
                         <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
@@ -1787,23 +1166,22 @@
                             <option value="Son">Son</option>
                         </select>
                     </div>
+
                     <div class="col-lg-2"></div>
                 </div><br>
+
                 <div class="row">
                     <div class="col-lg-5"></div>
                     <div class="col-lg-4">
                         <button type="button" class="submit-button" *ngIf="ID!=undefined && roledid!=10"
                             (click)="UpdateNomination()">Update</button>&nbsp;&nbsp;
-                        <button class="submit-button" (click)="SaveNomination()"
-                            *ngIf="ID==undefined">Submit</button> &nbsp;&nbsp;
-                        <!-- <button  class="submit-button">Cancel</button> -->
+                        <button class="submit-button" (click)="SaveNomination()" *ngIf="ID==undefined">Submit</button>
+                        &nbsp;&nbsp;
                     </div>
+
                     <div class="col-lg-5"></div>
                 </div><br>
                 <br> <br>
-
-
-
             </div>
         </ng-wizard-step>
 
@@ -1815,27 +1193,30 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row leavereq">
 
+                <div class="row leavereq">
                     <div class="col-md-2">
                         <label>Education Type </label>
                     </div>
+
                     <div class="col-md-2">
                         <label>Qualification </label>
                     </div>
+
                     <div class="col-md-2">
                         <p>Name of Qualification </p>
                     </div>
+
                     <div class="col-md-3">
                         <label>Branch </label>
                     </div>
+
                     <div class="col-md-3">
                         <label>Institution Name </label>
                     </div>
-
                 </div>
-                <div class="row leavereq">
 
+                <div class="row leavereq">
                     <div class="col-md-2">
                         <div class="dropdown">
                             <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
@@ -1855,20 +1236,24 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="col-md-2">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="text"
                             class="form-control" placeholder="Qualification" id="Qualification" name="Qualification"
                             [(ngModel)]="Qualification">
                     </div>
+
                     <div class="col-md-2">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="text"
                             class="form-control" placeholder="Name Of Qualification" id="NameOfQualification"
                             name="NameOfQualification" [(ngModel)]="NameOfQualification">
                     </div>
+
                     <div class="col-md-3">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="text"
                             class="form-control" placeholder="Branch" id="Branch" name="Branch" [(ngModel)]="Branch">
                     </div>
+
                     <div class="col-md-3">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="text"
                             class="form-control" placeholder="Institution Name" id="InstitutionName"
@@ -1876,38 +1261,39 @@
                     </div>
                 </div>
                 <br>
-                <div class="row leavereq">
 
+                <div class="row leavereq">
                     <div class="col-md-2">
                         <label>Country </label>
                     </div>
+
                     <div class="col-md-2">
                         <label>Score Type </label>
                     </div>
+
                     <div class="col-md-2">
                         <p>Grade </p>
                     </div>
+
                     <div class="col-md-3">
                         <label>Start Date <span style="color: red;">*</span></label>
                     </div>
+
                     <div class="col-md-3">
                         <label>End Date <span style="color: red;">*</span></label>
                     </div>
-
                 </div>
-                <div class="row leavereq">
 
+                <div class="row leavereq">
                     <div class="col-md-2">
                         <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             class="form-control inputfield" id="Country" name="Country" (change)="GetCountryID($event)"
                             [(ngModel)]="Country">
                             <option value="0" selected>Select Country </option>
                             <option *ngFor="let role of Countrylist" value="{{role.id}}">{{role.short}}</option>
-
                         </select>
-                        <!-- <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6" type="text" class="form-control" placeholder="Country" id="Country" name="Country"
-                            [(ngModel)]="Country" onkeypress="return /[A-Za-z0-9/\s/g]/i.test(event.key)"> -->
                     </div>
+
                     <div class="col-md-2">
                         <div class="dropdown">
                             <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
@@ -1920,36 +1306,38 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="col-md-2">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="text"
                             class="form-control" id="EducationGrade" name="EducationGrade" [(ngModel)]="EducationGrade"
                             placeholder="Education Grade">
                     </div>
+
                     <div class="col-md-3">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="Date"
                             class="form-control" id="StartDateMonth" name="StartDateMonth" [(ngModel)]="StartDateMonth"
                             placeholder="Start Date Month">
                     </div>
+
                     <div class="col-md-3">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="Date"
                             class="form-control" id="EndDateMonth" name="EndDateMonth" [(ngModel)]="EndDateMonth"
                             placeholder="End Date Month">
-
                     </div>
                 </div><br>
+
                 <div class="row">
                     <div class="col-lg-5"></div>
                     <div class="col-lg-4">
                         <button type="button" class="submit-button" *ngIf="ID!=undefined && roledid!=10"
                             (click)="UpdateEducationDetails()">Update</button>&nbsp;&nbsp;
-                        <button class="submit-button" (click)="SaveEducation()"
-                            *ngIf="ID==undefined">Submit</button> &nbsp;&nbsp;
-
+                        <button class="submit-button" (click)="SaveEducation()" *ngIf="ID==undefined">Submit</button>
+                        &nbsp;&nbsp;
                     </div>
+
                     <div class="col-lg-5"></div>
                 </div><br>
                 <br>
-
             </div>
         </ng-wizard-step>
 
@@ -1961,18 +1349,21 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row leavereq">
 
+                <div class="row leavereq">
                     <div class="col-md-2">
                         <label>Name of Bank <span style="color: red;">*</span></label>
                     </div>
+
                     <div class="col-md-3">
                         <label>Account Holder Name <span style="color: red;">*</span></label>
                     </div>
+
                     <div class="col-md-3">
                         <p>Bank Account Number <span style="color: red;">*</span></p>
                     </div>
                 </div>
+
                 <div class="row leavereq">
                     <div class="col-md-2">
                         <div class="dropdown">
@@ -1984,11 +1375,13 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="col-md-3">
                         <input type="text" [disabled]="roledid!=9 && roledid!=11" class="form-control"
                             placeholder="Account Holder Name" id="AccountHolderName" name="AccountHolderName"
                             [(ngModel)]="AccountHolderName">
                     </div>
+
                     <div class="col-md-3">
                         <input type="text" [disabled]="roledid!=9 && roledid!=11" class="form-control"
                             placeholder="Bank Account Number" id="BankAccountNumber" maxlength="13"
@@ -1996,23 +1389,23 @@
                             [(ngModel)]="BankAccountNumber">
                     </div>
                 </div><br>
+
                 <div class="row">
                     <div class="col-lg-5"></div>
                     <div class="col-lg-4">
-                        <button type="button" class="submit-button"
-                            *ngIf="ID!=undefined && (roledid==11 || roledid==9)" (click)="UpdateBankDetails()"
+                        <button type="button" class="submit-button" *ngIf="ID!=undefined && (roledid==11 || roledid==9)"
+                            (click)="UpdateBankDetails()"
                             [disabled]="roledid!=9 && roledid!=11">Update</button>&nbsp;&nbsp;
-                        <button class="submit-button" (click)="SaveBankDetails()"
-                            *ngIf="ID==undefined">Submit</button> &nbsp;&nbsp;
-                        <!-- <button  class="submit-button">Cancel</button> -->
+                        <button class="submit-button" (click)="SaveBankDetails()" *ngIf="ID==undefined">Submit</button>
+                        &nbsp;&nbsp;
                     </div>
+
                     <div class="col-lg-5"></div>
                 </div><br>
                 <br>
-
-
             </div>
         </ng-wizard-step>
+
         <ng-wizard-step [title]="'ID Details'" [description]="''">
             <div class="card">
                 <div class="row">
@@ -2021,27 +1414,30 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row leavereq">
 
+                <div class="row leavereq">
                     <div class="col-md-2">
                         <label>ID Type </label>
                     </div>
+
                     <div class="col-md-2">
                         <label>Number </label>
                     </div>
+
                     <div class="col-md-3">
                         <p>Name on Document </p>
                     </div>
+
                     <div class="col-md-2">
                         <label>Issue Date <span style="color: red;">*</span></label>
                     </div>
+
                     <div class="col-md-2">
                         <label>Expiry Date <span style="color: red;">*</span></label>
                     </div>
-
                 </div>
-                <div class="row leavereq">
 
+                <div class="row leavereq">
                     <div class="col-md-2">
                         <div class="dropdown">
                             <select class="form-control inputfield" id="IDType" name="IDType" [(ngModel)]="IDType"
@@ -2055,20 +1451,24 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="col-md-2">
                         <input type="text" class="form-control" placeholder="Number" id="Number" name="Number"
                             onkeypress="return /[0-9/\s/]/i.test(event.key)" [(ngModel)]="Number"
                             [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2">
                     </div>
+
                     <div class="col-md-3">
                         <input type="text" class="form-control" id="NameOnDocument" name="NameOnDocument"
                             placeholder="Name On Document" [(ngModel)]="NameOnDocument"
                             [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2">
                     </div>
+
                     <div class="col-md-2">
                         <input type="date" class="form-control" id="IssueDate" name="IssueDate" [(ngModel)]="IssueDate"
                             placeholder="Issue Date" [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2">
                     </div>
+
                     <div class="col-md-2">
                         <input type="date" class="form-control" id="ExpiryDate" name="ExpiryDate"
                             [(ngModel)]="ExpiryDate" placeholder="Expiry Date"
@@ -2076,23 +1476,24 @@
                     </div>
                 </div>
                 <br>
-                <div class="row leavereq">
 
+                <div class="row leavereq">
                     <div class="col-md-2">
                         <label>Issuing Authority </label>
                     </div>
+
                     <div class="col-md-2">
                         <label>Place of Issue </label>
                     </div>
-
                 </div>
-                <div class="row leavereq">
 
+                <div class="row leavereq">
                     <div class="col-md-2">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="text"
                             class="form-control" placeholder="Issuing Authority" id="IssuingAuthority"
                             name="IssuingAuthority" [(ngModel)]="IssuingAuthority">
                     </div>
+
                     <div class="col-md-2">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="text"
                             class="form-control" id="PlaceOfIssue" name="PlaceOfIssue" [(ngModel)]="PlaceOfIssue"
@@ -2105,17 +1506,13 @@
                     <div class="col-lg-4">
                         <button type="button" class="submit-button" *ngIf="ID!=undefined && roledid!=10"
                             (click)="UpdateID_Details()">Update</button>&nbsp;&nbsp;
-                        <button class="submit-button" (click)="SaveIdDetails()"
-                            *ngIf="ID==undefined">Submit</button> &nbsp;&nbsp;
-                        <!-- <button  class="submit-button">Cancel</button> -->
+                        <button class="submit-button" (click)="SaveIdDetails()" *ngIf="ID==undefined">Submit</button>
+                        &nbsp;&nbsp;
                     </div>
                     <div class="col-lg-5"></div>
                 </div><br>
                 <br>
-
-
             </div>
-
         </ng-wizard-step>
         <ng-wizard-step [title]="'Visa Details'" [description]="''">
             <div class="card">
@@ -2127,10 +1524,10 @@
                 <hr>
 
                 <div class="row leavereq">
-
                     <div class="col-md-2">
                         <label>Visa Type </label>
                     </div>
+
                     <div class="col-md-2">
                         <label>Visa Number </label>
                     </div>
@@ -2138,16 +1535,15 @@
                     <div class="col-md-2">
                         <label>Visa Issue Date </label>
                     </div>
+
                     <div class="col-md-2">
                         <label>Visa Expiry Date </label>
                     </div>
-                    <div class="col-md-2">
 
-                    </div>
-
+                    <div class="col-md-2"></div>
                 </div>
-                <div class="row leavereq">
 
+                <div class="row leavereq">
                     <div class="col-md-2">
                         <div class="dropdown">
                             <select class="form-control inputfield" id="VisaType" name="VisaType" [(ngModel)]="VisaType"
@@ -2161,25 +1557,26 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="col-md-2">
                         <input type="text" class="form-control" placeholder="Visa Number" id="VisaNumber"
                             name="VisaNumber" [(ngModel)]="VisaNumber" onkeypress="return /[0-9/\s/]/i.test(event.key)"
                             [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2">
                     </div>
+
                     <div class="col-md-2">
                         <input type="date" class="form-control" placeholder="" id="VisaIssueDate" name="VisaIssueDate"
                             [(ngModel)]="VisaIssueDate"
                             [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2">
                     </div>
+
                     <div class="col-md-2">
                         <input type="date" class="form-control" placeholder="" id="VisaExpiryDate" name="VisaExpiryDate"
                             [(ngModel)]="VisaExpiryDate"
                             [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2">
                     </div>
-                    <div class="col-md-2">
 
-
-                    </div>
+                    <div class="col-md-2"></div>
                 </div>
                 <br>
                 <br>
@@ -2192,17 +1589,15 @@
                             (click)="UpdateVisaDetails()">Update</button>&nbsp;&nbsp;
                         <button class="butn-sadow" (click)="SaveVisaDetails()" *ngIf="ID==undefined">Submit</button>
                         &nbsp;&nbsp;
-
                     </div>
-                    <div class="col-lg-2">
 
+                    <div class="col-lg-2">
                         <button class="butn-sadow" (click)="cancel()">Cancel</button>
                     </div>
+
                     <div class="col-lg-5"></div>
                 </div><br>
-
             </div>
         </ng-wizard-step>
     </ng-wizard>
-
 </div>
