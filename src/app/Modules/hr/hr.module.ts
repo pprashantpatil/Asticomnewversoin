@@ -49,6 +49,7 @@ import { LevelTypeDashComponent } from './Master/level-type-dash/level-type-dash
 import { LevelTypeFormComponent } from './Master/level-type-form/level-type-form.component';
 import { GrivelnecemasterdashComponent } from './Master/grivelnecemasterdash/grivelnecemasterdash.component';
 import { GrivelnecemasterComponent } from './Master/grivelnecemaster/grivelnecemaster.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { HRLeaveRequestDashComponent } from './Requests/hrleave-request-dash/hrleave-request-dash.component';
 
 @NgModule({
@@ -105,6 +106,7 @@ import { HRLeaveRequestDashComponent } from './Requests/hrleave-request-dash/hrl
     NgxPaginationModule,
     NgbModule,
     BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot()
   ]
 })
 export class HrModule { }

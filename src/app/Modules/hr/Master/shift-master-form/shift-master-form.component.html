@@ -1,1 +1,101 @@
-<p>shift-master-form works!</p>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <p class="Heading">Shift Master Details</p>
+        </div>
+        <div class="col-lg-8"></div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="card">
+        <div class="row leavereq">
+            <div class="col-md-2">
+                <label>Shift type<span class="span">*</span></label>
+            </div>
+            <div class="col-md-2">
+                <label>Shift Name<span class="span">*</span></label>
+            </div>
+            <div class="col-md-2">
+                <label>Shift Description<span class="span">*</span></label>
+            </div>
+            <div class="col-md-2">
+                <label>Shift Timings<span class="span">*</span></label>
+            </div>
+            <div class="col-md-2">
+                <label>Grace Period<span class="span"></span></label>
+            </div>
+        </div>
+
+        <div class="row leavereq">
+            <div class="col-md-2">
+                <!-- <input type="text" class="form-control" placeholder="Enter Shift Type" placeholder="Enter Shift Type"
+                    [(ngModel)]="ShiftType" name="ShiftType" id="ShiftType"> -->
+                <select class="form-control inputfield" id="ShiftType" name="ShiftType" [(ngModel)]="ShiftType">
+                    <option value=0>Select Type </option>
+                    <option value=1>Day Shift</option>
+                    <option value=2>Night Shift</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="Enter Shift Name" placeholder="Enter Shift Name"
+                    [(ngModel)]="Short" name="Short" id="Short">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="Enter Rules" placeholder="Enter Rules"
+                    [(ngModel)]="Description" name="Description" id="Description">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="Shift Timings" placeholder="Shift Timings"
+                    [(ngModel)]="ShiftTimeings" name="ShiftTimeings" id="ShiftTimeings">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="Grace Period" placeholder="Grace Period"
+                    [(ngModel)]="Grace" name="Grace" id="Grace">
+            </div>
+        </div>
+
+        <br>
+        <div class="row leavereq">
+            <div class="col-md-2">
+                <p> Start Time<span class="span">*</span></p>
+            </div>
+            <div class="col-md-2">
+                <p> End Time<span class="span">*</span></p>
+            </div>
+        </div>
+        <div class="row leavereq">
+            <div class="col-md-2">
+                <timepicker [(ngModel)]="StartTime" [showMeridian]="false" [showSpinners]="showSpinners"
+                    name="StartTime" id="StartTime"></timepicker>
+
+            </div>
+            <div class="col-md-2">
+                <timepicker [showMeridian]="false" [showSpinners]="showSpinners" name="EndTime" [(ngModel)]="EndTime"
+                    id="EndTime"></timepicker>
+                <!-- <input type="time" class="form-control" id="EndTime" name="EndTime" [(ngModel)]="EndTime" (change)="changedate()"> -->
+            </div>
+        </div>
+
+
+        <br>
+        <div class="row">
+            <!-- <div class="col-lg-10"></div>
+            <div class="col-lg-1">
+                <button class="clo-btn" (click)="Cancel()">CANCEL</button>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="Addbutton" *ngIf="ID!=undefined"
+                    (click)="UpdateShiftMaster()">UPDATE</button>
+                <button class="Addbutton" *ngIf="ID==undefined" (click)="InsertShiftMaster()">SUBMIT</button>
+            </div> -->
+
+            <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                <button class="close-button" (click)="Cancel()">Cancel</button>
+                <button class="submit-button" *ngIf="ID!=undefined" (click)="UpdateShiftMaster()">Save Changes</button>
+                <button class="submit-button" *ngIf="ID==undefined" (click)="InsertShiftMaster()">Submit</button>
+            </div>
+        </div>
+    </div>
+  
