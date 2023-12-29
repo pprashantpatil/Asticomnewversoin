@@ -23,6 +23,8 @@ export class ShiftDetailsDashComponent implements OnInit {
   roleID: any;
   showPopup: number = 0;
   messageId: number = 0;
+  p: any = 1;
+  count1: any = 10;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
@@ -108,8 +110,14 @@ export class ShiftDetailsDashComponent implements OnInit {
       this.loader = false;
     }
     else {
-      this.shiftList = this.shiftFilter.filter((x: { staffID: any; filterdate: any; filterenddate: any; }) => x.staffID == this.staffID && (x.filterdate >= this.startDate && x.filterenddate <= this.endDate));
+      this.shiftList = this.shiftFilter.filter((x: { shiftDate: any; endDate: any; }) => (x.shiftDate >= this.startDate && x.shiftDate <= this.endDate) || (x.endDate >= this.startDate && x.endDate <= this.endDate));
       this.loader = false;
     }
+  }
+
+  public reset() {
+    debugger
+    this.date = '';
+    this.ngOnInit();
   }
 }
