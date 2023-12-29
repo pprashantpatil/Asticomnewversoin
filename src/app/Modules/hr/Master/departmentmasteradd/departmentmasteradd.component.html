@@ -1,1 +1,59 @@
-<p>departmentmasteradd works!</p>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3 class="Heading">Department Master</h3>
+                </div>
+
+                <div class="col-lg-6"></div>
+                <div class="col-lg-2">
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="row leavereq">
+                    <div class="col-md-2">
+                        <label>Department Name<span class="span">*</span></label>
+                    </div>
+                    <div class="col-md-5">
+                        <label>Department Description<span class="span">*</span></label>
+                    </div>
+                </div>
+                <div class="row leavereq">
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" placeholder="Department Name" [(ngModel)]="Short"
+                            name="Short" id="Short">
+                    </div>
+                    <div class="col-md-5">
+                        <textarea type="text" class="form-control" rows="4" placeholder="Description"
+                            [(ngModel)]="Description" name="Description" id="Description"></textarea>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+
+                    <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                        <button class="close-button" (click)="Cancel()">Cancel</button>
+                        <button class="submit-button" *ngIf="ID!=undefined" (click)="UpdateDepartmentMaster()">Save Changes</button>
+                        <button class="submit-button" *ngIf="ID==undefined" (click)="InsertDepartmentMaster()">Submit</button>
+                    </div>
+<!--                     
+                    <div class="col-lg-10"></div>
+                    <div class="col-lg-1">
+                        <button class="clo-btn" (click)="Cancel()">CANCEL</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="button" class="Addbutton" *ngIf="ID!=undefined ||ID!=null"
+                            (click)="UpdateDepartmentMaster()">UPDATE</button>
+                        <button class="Addbutton" *ngIf="ID==undefined"
+                            (click)="InsertDepartmentMaster()">SUBMIT</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

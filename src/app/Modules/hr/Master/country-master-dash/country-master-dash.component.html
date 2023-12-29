@@ -1,1 +1,77 @@
-<p>country-master-dash works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+            <div class="cardinputs">
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="term" class="form-control search-icon"
+                    >
+            </div>
+            <div class="cardinputs">
+                <button class="butn-sadow" (click)="AddCountry()"> <img src="assets/Images/plus.svg" class="plus-icon">Add
+                    Country</button>
+
+            </div>
+            <!-- <div class="cardinputs">
+
+                <button class="butn-sadow" (click)="AddConfiguration()"> <img src="assets/Images/plus.svg"
+                        class="plus-icon">Add Configuration</button>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <p class="show3res">SHOWING <span>{{(countryList | filter: term)?.length}} </span>RESULT(S)</p>
+        </div>
+        <!-- <div class="col-md-2">
+            <button class="butn-sadow"  (click)="Addleave()"> <img src="assets/Images/plus.svg"
+                    class="plus-icon">Add Leave</button>
+        </div> -->
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="container-fluid">
+                <div class="listscroll">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Country Name</th>
+                                <th>Description</th>
+                                <th *ngIf="login!=1">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let holiday of countryList|filter:term">
+                                <td>{{holiday.short}}</td>
+                                <td>{{holiday.description}}</td>
+                                <!-- <td *ngIf="login!=1"> <button class="edit-btn"
+                                        [routerLink]="['/Admin/CountryMasterForm',holiday.id]">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <img class="delete" src="/assets/Images/delete.svg" class="delete"
+                                        (click)="DeleteCountryType(holiday.id)">
+                                </td> -->
+
+                                <td style="display: flex;">
+                                    <img class="dashedit-icon" (click)="Edit(holiday.id)" title="Edit"
+                                        src="assets/Images/Edit.svg">
+                                    <img class="dashedit-icon" title="Delete"  (click)="DeleteCountryType(holiday.id)"  src="assets/Images/delete.svg">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <span class="NoResultShow" *ngIf="(countryList | filter: term).length==0">
+                        <b>Sorry, we couldn't find any results.</b></span> <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right" *ngIf="(countryList | filter: term).length>count1">
+        <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="" class="poppinns">
+        </pagination-controls>
+    </div>

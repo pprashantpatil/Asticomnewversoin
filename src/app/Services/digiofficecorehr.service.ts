@@ -1277,7 +1277,7 @@ export class DigiofficecorehrService {
 
   public UpdateShiftMaster(data: any) {
     debugger;
-    this.url = this.host + '/MobileUser/UpdateShiftMaster';
+    this.url = this.host + '/Master/UpdateShiftMaster';
     return this.http.post(this.url, data);
   }
 
