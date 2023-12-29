@@ -472,7 +472,9 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
       this.loader = false;
     }
     else {
-      this.timedetails1 = this.otFilter1.filter((x: { shiftDate: any; endDate: any; }) => (x.shiftDate >= this.startDate && x.shiftDate <= this.endDate) || (x.endDate >= this.startDate && x.endDate <= this.endDate));
+      this.timedetails1 = this.otFilter1.filter((x: { date: any; }) => (x.date >= this.startDate && x.date <= this.endDate));
+      this.timedetails2 = this.otFilter2.filter((x: { date: any; }) => (x.date >= this.startDate && x.date <= this.endDate));
+      this.timedetails3 = this.otFilter3.filter((x: { date: any; }) => (x.date >= this.startDate && x.date <= this.endDate));
       this.loader = false;
     }
   }
