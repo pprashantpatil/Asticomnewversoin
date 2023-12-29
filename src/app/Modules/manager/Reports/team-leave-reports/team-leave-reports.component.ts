@@ -173,6 +173,7 @@ export class TeamLeaveReportsComponent implements OnInit {
 
   public getstaffleaves() {
     debugger
+    this.loader=true;
     if (this.roledid == 2) {
       this.DigiofficeService.GetStaffLeaves(10331, 1, "01-01-2020", "01-01-2025")
         .subscribe({
@@ -187,9 +188,11 @@ export class TeamLeaveReportsComponent implements OnInit {
             this.staffRejectedLeaves = data.filter((x: {
               status: string; supervisor: string | null;
             }) => x.supervisor == localStorage.getItem('staffid') && x.status == 'Rejected');
+            this.loader=false;
           }, error: (err) => {
             // Swal.fire('Issue in Getting Staff Leaves');
             // Insert error in Db Here//
+            this.loader=false;
             var obj = {
               'PageName': this.currentUrl,
               'ErrorMessage': err.error.message
@@ -207,10 +210,20 @@ export class TeamLeaveReportsComponent implements OnInit {
         .subscribe({
           next: data => {
             debugger
-            this.staffPendingLeaves = data;
+            this.staffPendingLeaves = data.filter((x: {
+              status: string; supervisor: string | null;
+            }) =>  x.status == 'Manager Pending');
+            this.staffApprovedLeaves = data.filter((x: {
+              status: string; supervisor: string | null;
+            }) =>  x.status == 'Manager Approved');
+            this.staffRejectedLeaves = data.filter((x: {
+              status: string; supervisor: string | null;
+            }) => x.status == 'Rejected');
+            this.loader=false;
           }, error: (err) => {
             // Swal.fire('Issue in Getting Staff Leaves');
             // Insert error in Db Here//
+            this.loader=false;
             var obj = {
               'PageName': this.currentUrl,
               'ErrorMessage': err.error.message

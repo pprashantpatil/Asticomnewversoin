@@ -34,10 +34,13 @@
                 <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
                     [(ngModel)]="date" [bsConfig]="{ showWeekNumbers:false }" (ngModelChange)="getEndDate($event)">
             </div>
-
+            <div class="cardinputs">
+                <button class="butn-sadow" type="button" (click)="Reset()">Reset</button>
+            </div>
             <div class="cardinputs">
                 <button class="butn-sadow" type="button" (click)="exportexcel()">Export to Excel</button>
             </div>
+          
         </div>
     </div>
 

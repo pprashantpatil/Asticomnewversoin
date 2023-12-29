@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
 import * as XLSX from 'xlsx';
+import { formatDate } from '@angular/common';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 
@@ -51,7 +52,10 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
   selectedItems: any = [];
   showPopup: number = 0;
   messageId: number = 0;
-
+  firstDayOfCurrentMonthFilter:any;
+  lastDayOfCurrentMonthFilter:any;
+  firstDayOfCurrentMonth:any;
+  lastDayOfCurrentMonth:any;
   ngOnInit(): void {
     debugger
     this.loader = true;
@@ -59,6 +63,13 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
     this.IntID = false;
     this.roleid = localStorage.getItem('roledid');
     this.staffID = localStorage.getItem('staffid');
+    const format = 'yyyy-MM-dd';
+    const myDate = new Date();
+    const locale = 'en-US';
+    this.firstDayOfCurrentMonthFilter = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    this.lastDayOfCurrentMonthFilter = new Date(new Date().getFullYear(), new Date().getMonth(), 30);
+    this.firstDayOfCurrentMonth = formatDate(this.firstDayOfCurrentMonthFilter, format, locale);
+    this.lastDayOfCurrentMonth = formatDate(this.lastDayOfCurrentMonthFilter, format, locale);
     this.GetTeamAttendanceCorrection();
     this.GetMyDetails();
     this.dropdownSettings = {
@@ -75,11 +86,11 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
   public GetTeamAttendanceCorrection() {
     debugger
 
-    this.DigiofficeService.GetAttendanceCorrection(10000, "01-01-2020", "01-01-2025")
+    this.DigiofficeService.GetAttendanceCorrection(10000, this.firstDayOfCurrentMonth,this.lastDayOfCurrentMonth)
       .subscribe({
         next: data => {
           debugger
-          if (this.roleid==10) {
+          if (this.roleid==10||this.roleid==9||this.roleid==11) {
             this.correctionlist1 = data
           }
           else {

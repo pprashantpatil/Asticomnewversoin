@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
 import Swal from 'sweetalert2';
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import * as XLSX from 'xlsx';
 import { ExportToCsv } from 'export-to-csv';
 import { Router } from '@angular/router';
@@ -74,6 +74,10 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   RestNightOt: any;
   RestNormalOT: any;
   ExccessRestNormalOt: any;
+  firstDayOfCurrentMonthFilter:any;
+  lastDayOfCurrentMonthFilter:any;
+  firstDayOfCurrentMonth:any;
+  lastDayOfCurrentMonth:any
   RestExccessNightOt: any;
   LegalNightOt: any;
   LegalNormalOT: any;
@@ -106,6 +110,14 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
     this.companyName = sessionStorage.getItem('companyName');
     this.OTEligibility = localStorage.getItem('OTEligibility');
 
+    const format = 'yyyy-MM-dd';
+    const myDate = new Date();
+    const locale = 'en-US';
+    this.firstDayOfCurrentMonthFilter = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    this.lastDayOfCurrentMonthFilter = new Date(new Date().getFullYear(), new Date().getMonth(), 30);
+    this.firstDayOfCurrentMonth = formatDate(this.firstDayOfCurrentMonthFilter, format, locale);
+    this.lastDayOfCurrentMonth = formatDate(this.lastDayOfCurrentMonthFilter, format, locale);
+
     if (this.roleid == 2) {
       this.GetMyOverTimeDetailsByManager();
     } else {
@@ -126,7 +138,7 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   }
   public GetMyOverTimeDetails() {
     debugger
-    this.DigiofficeService.GetStaffOverTimeDetailsByDate('2023-01-01', '2023-01-10')
+    this.DigiofficeService.GetStaffOverTimeDetailsByDate(this.firstDayOfCurrentMonth, this.lastDayOfCurrentMonth)
       .subscribe({
         next: data => {
           debugger

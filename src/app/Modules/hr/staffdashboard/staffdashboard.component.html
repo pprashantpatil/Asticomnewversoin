@@ -212,13 +212,14 @@
                                 </p>
                             </td>
                             <td class="onelinetext" *ngIf="login!=1">
-                                <img src="assets/Images/enable.svg" *ngIf="data.payrollBit==0 ||data.payrollBit==null"
-                                    (click)="Disable_PayrollBit(data.id)" style="width: 40px;">
-                                <img class="dashedit-icon" (click)="Edit(data.employeID)" src="assets/Images/Edit.svg"
-                                    [ngbTooltip]="tipContenteidt" tooltipClass="my-custom-class">
-                                <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
-                                    src="assets/Images/delete.svg" [ngbTooltip]="tipContentCancel"
-                                    tooltipClass="my-custom-class">
+                                <img src="assets/Images/enable.svg" *ngIf="data.payrollBit==1"
+                                (click)="Disable_PayrollBit(data.id)" style="width: 40px;">
+                                <img class="dashedit-icon" (click)="Edit(data.employeID)"
+                                src="assets/Images/Edit.svg" [ngbTooltip]="tipContenteidt"
+                                tooltipClass="my-custom-class">
+                            <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
+                                src="assets/Images/delete.svg" [ngbTooltip]="tipContentCancel"
+                                tooltipClass="my-custom-class">
 
                                 <div class="col-lg-2 Text p-0">
                                     <ng-template #tipContentCancel>
