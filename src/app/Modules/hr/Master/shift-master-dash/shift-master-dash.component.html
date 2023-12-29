@@ -8,8 +8,7 @@
                 <p class="filter">Filter by:</p>
             </div>
             <div class="cardinputs">
-                <input type="text" placeholder="Search" id="term" [(ngModel)]="term" class="form-control search-icon"
-                   >
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="term" class="form-control search-icon">
             </div>
             <div class="cardinputs">
                 <button class="butn-sadow" (click)="Addleave()"> <img src="assets/Images/plus.svg" class="plus-icon">Add
@@ -38,7 +37,7 @@
         <div class="col-12">
             <div class="container-fluid">
                 <div class="listscroll">
-                    <table class="table" >
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Shift Type</th>
@@ -54,7 +53,10 @@
                         <tbody>
                             <tr
                                 *ngFor="let shifting of shiftmasterlist|filter:term| paginate: { itemsPerPage: count1, currentPage: p}">
-                                <td>{{shifting.shiftType}}</td>
+                                <td>
+                                    <p *ngIf="shifting.shiftType==1">Day</p>
+                                    <p *ngIf="shifting.shiftType==2">Night</p>
+                                </td>
                                 <td>{{shifting.short}}</td>
                                 <td>{{shifting.description}}</td>
                                 <td>{{shifting.shiftTimeings}}</td>
@@ -71,7 +73,8 @@
                                 <td style="display: flex;">
                                     <img class="dashedit-icon" (click)="Edit(shifting.id)" title="Edit"
                                         src="assets/Images/Edit.svg">
-                                    <img class="dashedit-icon" title="Delete" src="assets/Images/delete.svg" (click)="delete(shifting.id)">
+                                    <img class="dashedit-icon" title="Delete" src="assets/Images/delete.svg"
+                                        (click)="delete(shifting.id)">
                                 </td>
                             </tr>
                         </tbody>
