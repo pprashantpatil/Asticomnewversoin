@@ -100,7 +100,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of timedetails1|filter:term">
+                        <tr *ngFor="let data of timedetails1|filter:term|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.employeID}}</td>
                             <td>{{data.staffname}}</td>
                             <td>{{data.date|date}}</td>
@@ -192,15 +192,13 @@
                             <th>End Time</th>
                             <th>Submit Date</th>
                             <th>Approved Date</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of timedetails2|filter:term">
+                        <tr *ngFor="let data of timedetails2|filter:term|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.employeID}}</td>
                             <td>{{data.staffname}}</td>
                             <td>{{data.date|date}}</td>
@@ -267,7 +265,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of timedetails3|filter:term">
+                        <tr *ngFor="let data of timedetails3|filter:term|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.employeID}}</td>
                             <td>{{data.staffname}}</td>
                             <td>{{data.date|date}}</td>
