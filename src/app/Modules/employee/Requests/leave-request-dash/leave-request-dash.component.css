@@ -145,7 +145,7 @@ li {
 
 
 li a {
-  margin-left: 27px;
+ 
   display: block;
   color: #1125a9;
   text-align: center;
@@ -813,7 +813,7 @@ th {
   .small-card1 {
     background: #ffffff;
     border-radius: 16px;
-    width: 127px;
+    width: 120px;
     border: 3px solid #eaecf1;
     height: auto;
     margin: 10px 43px;
@@ -988,6 +988,5 @@ th {
 }
 
 .search-icon {
-  margin-left: 14%;
-  max-width: 42%;
+  max-width: 100%;
 }

@@ -5,7 +5,7 @@
         <div class="col-12">
             <ul>
                 <!-- *ngIf="otEligibility==1" -->
-                <li><a class="Heading" *ngIf="otEligibility==1">
+                <li><a class="Heading">
                         <p class="Heading">My Overtime Details</p>
                     </a>
                     <hr class="line-border listForm">
@@ -93,9 +93,12 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
-                                    data-target="#checkListStatusForm">Details
-                                </button>
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#checkListStatusForm"
+                                        (click)="getOTDetails(data)" [ngbTooltip]="tipDetails"
+                                        tooltipClass="my-custom-class">
+                                <!-- <button class="edit-btn" (click)="getOTDetails(data)"
+                                   >Details
+                                </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
@@ -116,6 +119,15 @@
                                             <div class="d-flex">
                                                 <div class="flex-column mt-2">
                                                     <p class="tooltip-txtForIcons">Delete</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template #tipDetails>
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="flex-column mt-2">
+                                                    <p class="tooltip-txtForIcons">OT Details</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -167,9 +179,12 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#checkListStatusForm"
+                                (click)="getOTDetails(data)" [ngbTooltip]="tipDetails"
+                                tooltipClass="my-custom-class">
+                                <!-- <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
                                     data-target="#checkListStatusForm">Details
-                                </button>
+                                </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
@@ -177,6 +192,15 @@
                                     (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
+                            <ng-template #tipDetails>
+                                <div>
+                                    <div class="d-flex">
+                                        <div class="flex-column mt-2">
+                                            <p class="tooltip-txtForIcons">OT Details</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
                         </tr>
                     </tbody>
                 </table>
@@ -222,9 +246,12 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#checkListStatusForm"
+                                (click)="getOTDetails(data)" [ngbTooltip]="tipDetails"
+                                tooltipClass="my-custom-class">
+                                <!-- <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
                                     data-target="#checkListStatusForm">Details
-                                </button>
+                                </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
@@ -232,6 +259,15 @@
                                     (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
+                            <ng-template #tipDetails>
+                                <div>
+                                    <div class="d-flex">
+                                        <div class="flex-column mt-2">
+                                            <p class="tooltip-txtForIcons">OT Details</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
                         </tr>
                     </tbody>
                 </table>
