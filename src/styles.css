@@ -241,6 +241,15 @@ textarea {
   text-transform: capitalize;
 }
 
+.tabHeading11 {
+  color: #1125a9;
+  font-family: "Poppins";
+  font-weight: bold;
+  font-size: 19px !important;
+  padding-left: 2px;
+  text-transform: capitalize;
+}
+
 .text {
   font-family: "Poppins";
   padding-left: 5px;
@@ -1364,6 +1373,14 @@ select::-ms-expand {
   border-top-right-radius: 51px;
   margin-top: -14px;
   margin-left: 25px
+}
+
+.tab-line-border11 {
+  border: 3px solid #1125a9;
+  border-top-left-radius: 51px;
+  border-top-right-radius: 51px;
+  margin-top: -14px;
+  margin-left: 2px
 }
 
 .line-border {

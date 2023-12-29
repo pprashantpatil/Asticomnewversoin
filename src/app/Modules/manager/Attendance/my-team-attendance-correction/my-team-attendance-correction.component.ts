@@ -29,6 +29,8 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
   messageId: number = 0;
   id: any;
   notes: any;
+  p: any = 1;
+  count1: any = 10;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
@@ -117,10 +119,32 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
       Swal.fire("Please select the start date first")
       this.endDate = ""
     }
+    else if (this.roleID == 11 || this.roleID == 10 || this.roleID == 1 || this.roleID == 9) {
+      this.attendanceCorrectionPendingList = this.attendanceCorrectionPendingFilter.filter((x: { sDate: any; }) => (x.sDate >= this.startDate && x.sDate <= this.endDate));
+      this.attendanceCorrectionApprovedList = this.attendanceCorrectionApprovedFilter.filter((x: { sDate: any; }) => (x.sDate >= this.startDate && x.sDate <= this.endDate));
+      this.attendanceCorrectionRejectedList = this.attendanceCorrectionRejectedFilter.filter((x: { sDate: any; }) => (x.sDate >= this.startDate && x.sDate <= this.endDate));
+    }
     else {
-      this.attendanceCorrectionPendingList = this.attendanceCorrectionPendingFilter.filter((x: { modifiedDate: any; sDate: any; }) => (x.modifiedDate >= this.startDate && x.modifiedDate <= this.endDate) || (x.sDate >= this.startDate && x.sDate <= this.endDate));
-      this.attendanceCorrectionApprovedList = this.attendanceCorrectionApprovedFilter.filter((x: { modifiedDate: any; sDate: any; approvedDate: any; }) => (x.modifiedDate >= this.startDate && x.modifiedDate <= this.endDate) || (x.sDate >= this.startDate && x.sDate <= this.endDate) || (x.approvedDate >= this.startDate && x.approvedDate <= this.endDate));
-      this.attendanceCorrectionPendingList = this.attendanceCorrectionPendingFilter.filter((x: { modifiedDate: any; sDate: any; approvedDate: any; }) => (x.modifiedDate >= this.startDate && x.modifiedDate <= this.endDate) || (x.sDate >= this.startDate && x.sDate <= this.endDate) || (x.approvedDate >= this.startDate && x.approvedDate <= this.endDate));
+      this.DigiofficecorehrService.GetPendingAttendanceCorrectionBySupervisor(this.staffID, "01-01-2020", "01-01-2025").subscribe(
+        res => {
+          debugger;
+          this.attendanceCorrectionPendingList = res.filter((x: { sDate: any; }) => (x.sDate >= this.startDate && x.sDate <= this.endDate));
+          this.loader = false;
+        })
+
+      this.DigiofficecorehrService.GetApprovedAttendanceCorrectionBySupervisor(this.staffID, "01-01-2020", "01-01-2025").subscribe(
+        res => {
+          debugger;
+          this.attendanceCorrectionApprovedList = res.filter((x: { sDate: any; }) => (x.sDate >= this.startDate && x.sDate <= this.endDate));
+          this.loader = false;
+        })
+
+      this.DigiofficecorehrService.GetRejectedAttendanceCorrectionBySupervisor(this.staffID, "01-01-2020", "01-01-2025").subscribe(
+        res => {
+          debugger;
+          this.attendanceCorrectionRejectedList = res.filter((x: { sDate: any; }) => (x.sDate >= this.startDate && x.sDate <= this.endDate));
+          this.loader = false;
+        })
     }
   }
 
@@ -199,5 +223,11 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
           this, this.messageId = 74;
         }
       })
+  }
+
+  public reset() {
+    debugger
+    this.date = '';
+    this.ngOnInit();
   }
 }

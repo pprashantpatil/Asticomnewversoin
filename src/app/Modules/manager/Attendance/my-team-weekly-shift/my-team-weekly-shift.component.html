@@ -9,14 +9,19 @@
                     </a>
                 </li>
 
-                <li *ngIf="roleID==2"><a class="Heading">
-                        <p class="Heading">Team Shift Details</p>
-                        <hr class="line-border listForm">
+                <li *ngIf="roleID==2"><a class="tabHeading">
+                        <p class="tabHeading">Team Shift Details</p>
+                        <hr class="tab-line-border listForm">
                     </a></li>
 
-                <li *ngIf="roleID==1||roleID==9||roleID==11||roleID==10"><a class="Heading">
-                        <p class="Heading">Company Weekly Shift</p>
-                        <hr class="line-border listForm">
+                <li *ngIf="roleID==1||roleID==9||roleID==10"><a class="tabHeading">
+                        <p class="tabHeading">Company Weekly Shift</p>
+                        <hr class="tab-line-border listForm">
+                    </a></li>
+
+                    <li *ngIf="roleID==11"><a class="tabHeading11">
+                        <p class="tabHeading11">Company Weekly Shift</p>
+                        <hr class="tab-line-border11 listForm">
                     </a></li>
             </ul>
         </div>

@@ -23,18 +23,20 @@ export class SidebarComponent implements OnInit {
   home: any;
   roleid: any;
   StaffID: any;
+  otEligibility: any;
+
   constructor(public router: Router) { }
 
   ngOnInit(): void {
     this.login = sessionStorage.getItem('roledid');
     this.temp1 = sessionStorage.getItem('temp');
-
     this.active = 0;
     this.companyid = sessionStorage.getItem('companyid');
     this.UserName = sessionStorage.getItem('UserName');
     this.role = sessionStorage.getItem('role');
     this.roleid = sessionStorage.getItem('roledid');
     this.StaffID = localStorage.getItem('staffid');
+    this.otEligibility = localStorage.getItem('OTEligibility');
   }
   public getvalues(val: any) {
     this.mini = val;
@@ -59,7 +61,7 @@ export class SidebarComponent implements OnInit {
     localStorage.setItem('Pagename', 'Staff');
     this.data11.emit('Staff');
   }
-  
+
   public licenceDetails() {
     this.active = 16;
     this.router.navigate(['/HR/LicenceDetails']);
@@ -85,7 +87,7 @@ export class SidebarComponent implements OnInit {
     localStorage.setItem('Pagename', 'Preliminary Report');
     this.data11.emit('Preliminary Report');
   }
-  
+
   public PAYROLLREPORT() {
     this.active = 19.2;
     this.router.navigate(['/HR/GenerateCsvfiles']);
@@ -138,12 +140,12 @@ export class SidebarComponent implements OnInit {
 
   public shiftDetails() {
     this.active = 2.2;
-    if(this.roleid==11){
+    if (this.roleid == 11) {
       this.router.navigate(['/Manager/MyTeamWeeklyShift']);
       localStorage.setItem('Pagename', 'Shift Details');
       this.data11.emit('Shift Details');
     }
-    else{
+    else {
       this.router.navigate(['/Employee/ShiftDetailsDash']);
       localStorage.setItem('Pagename', 'Shift Details');
       this.data11.emit('Shift Details');
@@ -152,12 +154,17 @@ export class SidebarComponent implements OnInit {
 
   public overTimeDetails() {
     this.active = 2.3;
-    if(this.roleid==11){
+    if (this.roleid == 11) {
       this.router.navigate(['/Manager/MyTeamOverTimeDetails']);
       localStorage.setItem('Pagename', 'Over Time Details');
       this.data11.emit('Over Time Details');
     }
-    else{
+    else if (this.otEligibility != 1) {
+      this.router.navigate(['/Manager/MyTeamOverTimeDetails']);
+      localStorage.setItem('Pagename', 'Over Time Details');
+      this.data11.emit('Over Time Details');
+    }
+    else {
       this.router.navigate(['/Employee/OverTimeDetailsDash']);
       localStorage.setItem('Pagename', 'Over Time Details');
       this.data11.emit('Over Time Details');
@@ -173,12 +180,12 @@ export class SidebarComponent implements OnInit {
 
   public leaveRequest() {
     this.active = 3.1;
-    if(this.roleid==11){
+    if (this.roleid == 11) {
       this.router.navigate(['/HR/HRLeaveRequestDash']);
       localStorage.setItem('Pagename', 'Leave Request');
       this.data11.emit('Leave Request');
     }
-    else{
+    else {
       this.router.navigate(['/Employee/LeaveRequestDash']);
       localStorage.setItem('Pagename', 'Leave Request');
       this.data11.emit('Leave Request');
@@ -297,15 +304,15 @@ export class SidebarComponent implements OnInit {
     localStorage.setItem('Pagename', 'Position Master');
     this.data11.emit('Ot Master');
   }
-  
+
   public attendanceReport() {
     this.active = 7.1;
-    if(this.roleid==11){
+    if (this.roleid == 11) {
       this.router.navigate(['/Manager/TeamAttendanceReports']);
       localStorage.setItem('Pagename', 'Attendance Report');
       this.data11.emit('Attendance Report');
     }
-    else{
+    else {
       this.router.navigate(['/Employee/AttendanceReport']);
       localStorage.setItem('Pagename', 'Attendance Report');
       this.data11.emit('Attendance Report');

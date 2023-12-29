@@ -57,7 +57,7 @@ export class MyTeamAttendenceComponent implements OnInit {
   ngOnInit(): void {
     this.currentUrl = window.location.href;
     this.loader = true;
-    this.roleid = sessionStorage.getItem('roledid');
+    this.roleid = localStorage.getItem('roledid');
     this.staffID = localStorage.getItem('staffid');
     this.companyName = sessionStorage.getItem('companycode');
     const format = 'yyyy-MM-dd';

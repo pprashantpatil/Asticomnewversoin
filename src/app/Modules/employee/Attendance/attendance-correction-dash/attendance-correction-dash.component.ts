@@ -28,6 +28,8 @@ export class AttendanceCorrectionDashComponent implements OnInit {
   attendanceCorrectionRejectedList: any;
   showPopup: number = 0;
   messageId: number = 0;
+  p: any = 1;
+  count1: any = 10;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
@@ -127,9 +129,15 @@ export class AttendanceCorrectionDashComponent implements OnInit {
       this.endDate = ""
     }
     else {
-      this.attendanceCorrectionPendingList = this.attendanceCorrectionPendingFilter.filter((x: { modifiedDate: any; sDate: any; }) => (x.modifiedDate >= this.startDate && x.modifiedDate <= this.endDate) || (x.sDate >= this.startDate && x.sDate <= this.endDate));
-      this.attendanceCorrectionApprovedList = this.attendanceCorrectionApprovedFilter.filter((x: { modifiedDate: any; sDate: any; approvedDate: any; }) => (x.modifiedDate >= this.startDate && x.modifiedDate <= this.endDate) || (x.sDate >= this.startDate && x.sDate <= this.endDate) || (x.approvedDate >= this.startDate && x.approvedDate <= this.endDate));
-      this.attendanceCorrectionPendingList = this.attendanceCorrectionPendingFilter.filter((x: { modifiedDate: any; sDate: any; approvedDate: any; }) => (x.modifiedDate >= this.startDate && x.modifiedDate <= this.endDate) || (x.sDate >= this.startDate && x.sDate <= this.endDate) || (x.approvedDate >= this.startDate && x.approvedDate <= this.endDate));
+      this.attendanceCorrectionPendingList = this.attendanceCorrectionPendingFilter.filter((x: { attendanceDate: any; }) => (x.attendanceDate >= this.startDate && x.attendanceDate <= this.endDate));
+      this.attendanceCorrectionApprovedList = this.attendanceCorrectionApprovedFilter.filter((x: { attendanceDate: any; }) => (x.attendanceDate >= this.startDate && x.attendanceDate <= this.endDate));
+      this.attendanceCorrectionPendingList = this.attendanceCorrectionPendingFilter.filter((x: { attendanceDate: any; }) => (x.attendanceDate >= this.startDate && x.attendanceDate <= this.endDate));
     }
+  }
+
+  public reset() {
+    debugger
+    this.date = '';
+    this.ngOnInit();
   }
 }
