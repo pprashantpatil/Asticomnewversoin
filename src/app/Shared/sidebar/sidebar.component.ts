@@ -154,13 +154,13 @@ export class SidebarComponent implements OnInit {
 
   public overTimeDetails() {
     this.active = 2.3;
-    if (this.roleid == 11) {
+    if (this.roleid == 11 && this.otEligibility != 1) {
       this.router.navigate(['/Manager/MyTeamOverTimeDetails']);
       localStorage.setItem('Pagename', 'Over Time Details');
       this.data11.emit('Over Time Details');
     }
-    else if (this.otEligibility != 1) {
-      this.router.navigate(['/Manager/MyTeamOverTimeDetails']);
+    else if (this.roleid == 6) {
+      this.router.navigate(['/Employee/OverTimeDetailsDash']);
       localStorage.setItem('Pagename', 'Over Time Details');
       this.data11.emit('Over Time Details');
     }

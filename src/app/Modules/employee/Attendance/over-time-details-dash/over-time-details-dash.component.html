@@ -4,7 +4,13 @@
     <div class="row">
         <div class="col-12">
             <ul>
-                <li *ngIf="otEligibility==1"><a class="Heading">
+                <li *ngIf="otEligibility==1 && roleID==2"><a class="Heading">
+                        <p class="Heading">My Overtime Details</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+
+                <li *ngIf="roleID==6"><a class="Heading">
                         <p class="Heading">My Overtime Details</p>
                     </a>
                     <hr class="line-border listForm">
@@ -15,10 +21,11 @@
                     </a>
                 </li>
 
-                <li *ngIf="roleID==1||roleID==9||roleID==11||roleID==10"><a class="Heading" routerLink="/Manager/MyTeamOverTimeDetails">
-                    <p class="Heading">Company Overtime Details</p>
-                </a>
-            </li>
+                <li *ngIf="roleID==1||roleID==9||roleID==11||roleID==10"><a class="Heading"
+                        routerLink="/Manager/MyTeamOverTimeDetails">
+                        <p class="Heading">Company Overtime Details</p>
+                    </a>
+                </li>
             </ul>
 
         </div>
@@ -80,7 +87,6 @@
                             <th>OT Details</th>
                             <th>Attachment</th>
                             <th>Comments</th>
-                            
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -92,20 +98,18 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#checkListStatusForm"
-                                        (click)="getOTDetails(data)" [ngbTooltip]="tipDetails"
-                                        tooltipClass="my-custom-class">
-                                <!-- <button class="edit-btn" (click)="getOTDetails(data)"
-                                   >Details
-                                </button> -->
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png" data-toggle="modal"
+                                    data-target="#checkListStatusForm" (click)="getOTDetails(data)"
+                                    [ngbTooltip]="tipDetails" tooltipClass="my-custom-class">
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
-                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png" style="width:20px; height:20px"
-                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png"
+                                    style="width:20px; height:20px" (click)="image(data.id)" data-toggle="modal"
+                                    data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-                            
+
                             <td class="actionpadding">
                                 <div class="arrangeIcon">
                                     <img class="dashedit-icon" src="assets/Images/delete.svg"
@@ -178,17 +182,18 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#checkListStatusForm"
-                                (click)="getOTDetails(data)" [ngbTooltip]="tipDetails"
-                                tooltipClass="my-custom-class">
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png" data-toggle="modal"
+                                    data-target="#checkListStatusForm" (click)="getOTDetails(data)"
+                                    [ngbTooltip]="tipDetails" tooltipClass="my-custom-class">
                                 <!-- <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
                                     data-target="#checkListStatusForm">Details
                                 </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
-                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png" style="width:20px; height:20px"
-                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png"
+                                    style="width:20px; height:20px" (click)="image(data.id)" data-toggle="modal"
+                                    data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
                             <ng-template #tipDetails>
@@ -245,17 +250,18 @@
                             <td>{{data.startTime|date:'HH:mm'}}</td>
                             <td>{{data.endTime|date:'HH:mm'}}</td>
                             <td>
-                                <img class="dashedit-icon" src="assets/Images/revamp/info.png"  data-toggle="modal"  data-target="#checkListStatusForm"
-                                (click)="getOTDetails(data)" [ngbTooltip]="tipDetails"
-                                tooltipClass="my-custom-class">
+                                <img class="dashedit-icon" src="assets/Images/revamp/info.png" data-toggle="modal"
+                                    data-target="#checkListStatusForm" (click)="getOTDetails(data)"
+                                    [ngbTooltip]="tipDetails" tooltipClass="my-custom-class">
                                 <!-- <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
                                     data-target="#checkListStatusForm">Details
                                 </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
-                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png" style="width:20px; height:20px"
-                                    (click)="image(data.id)" data-toggle="modal" data-target="#exampleModal1">
+                                <img *ngIf="data.aa!='No Attachemnt'" src="assets/Images/image.png"
+                                    style="width:20px; height:20px" (click)="image(data.id)" data-toggle="modal"
+                                    data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
                             <ng-template #tipDetails>
