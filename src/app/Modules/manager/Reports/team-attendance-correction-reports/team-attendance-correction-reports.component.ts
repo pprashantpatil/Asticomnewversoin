@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
 import * as XLSX from 'xlsx';
-import { formatDate } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 
@@ -56,7 +56,7 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
   firstDayOfCurrentMonth: any;
   lastDayOfCurrentMonth: any;
 
-  constructor(public DigiofficeService: DigiofficecorehrService) { }
+  constructor(public DigiofficeService: DigiofficecorehrService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     debugger
@@ -98,21 +98,7 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
           else {
             this.correctionlist1 = data.filter(x => String(x.supervisor) == this.staffID);
           }
-
-
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Attendance Correction');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
 
@@ -128,12 +114,13 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
   }
 
 
-  public getdate() {
+  public getdate(event:any) {
     debugger
+    this.date = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.edate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
     if (this.edate == "") {
       this.ngOnInit();
     } else {
-
       if (this.roleid == 10) {
         this.DigiofficeService.GetAttendanceCorrection1()
           .subscribe({
@@ -141,18 +128,6 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
               debugger
               this.correctionlist1 = data.filter(x => x.status == 'Manager Pending' && x.date >= this.date && x.date <= this.edate);
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting Approved Attendance Correction By StaffID');
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
       }
@@ -162,20 +137,7 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
             next: data => {
               debugger
               this.correctionlist1 = data.filter(x => x.supervisor == localStorage.getItem('staffid') && (x.filterdate >= this.date && x.filterdate <= this.edate));
-              // this.correctionlist1 = data.filter(x => (x.filterdate >= this.date && x.filterdate <= this.edate));
               this.loader = false;
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting Attendance Correction');
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
             }
           })
       }

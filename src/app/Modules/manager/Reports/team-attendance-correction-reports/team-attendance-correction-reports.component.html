@@ -34,7 +34,7 @@
             <div class="cardinputs">
                 <p class="leavereq">Select Dates
                     <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
-                        [(ngModel)]="startdate1" (ngModelChange)="getdate()" [bsConfig]="{showWeekNumbers:false }">
+                        [(ngModel)]="startdate1" (ngModelChange)="getdate($event)" [bsConfig]="{showWeekNumbers:false }">
             </div>
 
             <div class="cardinputs">

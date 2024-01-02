@@ -10,15 +10,15 @@
                     </a>
                 </li>
 
-                <li *ngIf="roledid==2"><a class="Heading">
-                        <p class="Heading">All Staff Leave Report</p>
-                        <hr class="line-border listForm">
+                <li *ngIf="roledid==2"><a class="tabHeading">
+                        <p class="tabHeading">All Staff Leave Report</p>
+                        <hr class="tab-line-border">
                     </a>
                 </li>
 
-                <li *ngIf="roledid==9  ||roledid==10 ||roledid==11||roledid==1"><a class="Heading">
-                    <p class="Heading">All Company Leave Report</p>
-                    <hr class="line-border listForm">
+                <li *ngIf="roledid==9  ||roledid==10 ||roledid==11||roledid==1"><a class="tabHeading">
+                    <p class="tabHeading">All Company Leave Report</p>
+                    <hr class="tab-line-border">
                 </a>
             </li>
             </ul>
@@ -36,9 +36,14 @@
                     [(ngModel)]="startdate1" (ngModelChange)="getenddate($event)"
                     [bsConfig]="{ showWeekNumbers:false }">
             </div>
+
+            <div class="cardinputs">
+                <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
+            </div>
+            
             <div class="cardinputs">
                 <button class="butn-sadow" type="button" (click)="exportexcel()" data-toggle="modal"
-                    data-target="#exampleModalCenter">Download Leaves</button>
+                    data-target="#exampleModalCenter">Export to Excel</button>
             </div>
             <!-- <div class="d-flex align-items-center">
                         <p class="show3res1">Count: <span>{{(staffPendingLeaves|filter:term)?.length}}</span></p>

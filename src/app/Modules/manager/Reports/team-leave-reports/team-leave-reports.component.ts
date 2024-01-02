@@ -251,4 +251,9 @@ export class TeamLeaveReportsComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
+  public reset() {
+    debugger
+    this.startdate1 = '';
+    this.ngOnInit();
+  }
 }
