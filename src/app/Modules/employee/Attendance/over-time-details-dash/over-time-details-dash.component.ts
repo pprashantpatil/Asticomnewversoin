@@ -55,6 +55,8 @@ export class OverTimeDetailsDashComponent implements OnInit {
   otEligibility: any;
   showPopup: number = 0;
   messageId: number = 0;
+  p: any = 1;
+  count1: any = 10;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 

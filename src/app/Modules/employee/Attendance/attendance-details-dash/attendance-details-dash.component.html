@@ -76,7 +76,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of attendanceList|filter:search">
+                        <tr *ngFor="let data of attendanceList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
                                 {{data.signinDate|date}}</td>
                             <td [ngClass]="{'bgred':data.undertime=='Yes'||data.latepunchin=='Yes'  }">
