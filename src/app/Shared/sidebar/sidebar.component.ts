@@ -241,7 +241,7 @@ export class SidebarComponent implements OnInit {
     this.data11.emit('Announcements');
   }
   public LeaveType() {
-    this.active = 10.1;
+    this.active = 10.11;
     this.router.navigate(['/HR/LeaveTypeDashboard']);
     localStorage.setItem('Pagename', 'Leave Type');
     this.data11.emit('Leave Type');
