@@ -23,19 +23,19 @@
             <div class="d-flex flex-wrap justify-content-between">
                 <div class="cards-side">
                     <div class="d-flex flex-wrap ">
-                        <!-- <div class="d-flex align-items-center">
-                            <img src="assets/Images/revamp/filter.svg" class="filter-img">
-                            <p class="filter">Filter by:</p>
-                        </div> -->
                         <div class="cardinputs">
                             <p class="leavecol">Select Dates</p>
+
                             <p class="leavereq">
                                 <input type="bsdate" style="width:220px" placeholder="mm/dd/yyyy-mm/dd/yyyy"
                                     class="form-control" bsDaterangepicker [(ngModel)]="startdate"
                                     (ngModelChange)="getEndDate($event)" [bsConfig]="{ showWeekNumbers:false }">
                             </p>
-                            <input class="form-control search-icon" [(ngModel)]="term" type="search" placeholder="Search">
-
+                            <input class="form-control search-icon" [(ngModel)]="term" type="search"
+                                placeholder="Search">
+                            <!-- <p class="leavecol">
+                                <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
+                            </p> -->
                         </div>
 
                     </div>

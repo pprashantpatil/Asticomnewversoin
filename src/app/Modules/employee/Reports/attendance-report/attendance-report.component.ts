@@ -5,7 +5,6 @@ import { DatePipe, formatDate } from '@angular/common';
 import { ExportToCsv } from 'export-to-csv';
 import * as XLSX from 'xlsx';
 
-
 @Component({
   selector: 'app-attendance-report',
   templateUrl: './attendance-report.component.html',
@@ -13,12 +12,12 @@ import * as XLSX from 'xlsx';
 })
 export class AttendanceReportComponent implements OnInit {
 
-  constructor(public DigiofficeService: DigiofficecorehrService,private datePipe:DatePipe) { }
+  constructor(public DigiofficeService: DigiofficecorehrService, private datePipe: DatePipe) { }
   roleid: any;
   p: any = 1;
   count1: any = 10;
   count: any;
-  startdate1:any;
+  startdate1: any;
   dropdownList: any = [];
   selectedItems: any = [];
   dropdownSettings: any = {};
@@ -35,6 +34,14 @@ export class AttendanceReportComponent implements OnInit {
   fileName = 'Attendance Report.xlsx';
   showPopup: number = 0;
   messageId: number = 0;
+  stafflist: any;
+  failedarray: any = [];
+  passedarray: any = [];
+  term: any
+  sequenceNumber1: any
+  attendancelist23: any
+  companyName: any
+
   ngOnInit(): void {
     this.currentUrl = window.location.href;
     this.loader = true;
@@ -69,18 +76,6 @@ export class AttendanceReportComponent implements OnInit {
           debugger
           this.attendancelist = data;
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Attendance');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
@@ -106,25 +101,21 @@ export class AttendanceReportComponent implements OnInit {
 
   public getenddate(event: any) {
     this.showPopup = 0;
-    this.startdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');;
-    this.enddate = this.datePipe.transform(event[1], 'yyyy-MM-dd');;
+    this.startdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.enddate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
     debugger
     if (this.startdate == undefined) {
-      /* Swal.fire('Please Select Start Date'); */
       this.enddate = ""
       this.loader = false;
       this.showPopup = 1;
       this.messageId = 28;
     }
-
     else if (this.enddate == "") {
       this.enddate = "";
       this.startdate = "";
       this.ngOnInit();
     }
-
     else if (this.enddate < this.startdate) {
-      /*  Swal.fire('Enddate Must Be Greater Than Startdate') */
       this.loader = false;
       this.showPopup = 1;
       this.messageId = 28;
@@ -138,58 +129,22 @@ export class AttendanceReportComponent implements OnInit {
             debugger
             this.attendancelist = data;
             this.loader = false;
-          }, error: (err) => {
-            // Swal.fire('Issue in Getting Attendance By Employee ID');
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
-
   }
-  stafflist: any;
-  failedarray: any = [];
-  passedarray: any = [];
-  term: any
-  sequenceNumber1: any
-  attendancelist23: any
-  companyName: any
-  // public exportexcel1() {
-  //   debugger
-  //   let element = document.getElementById('lvs');
-  //   const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
-
-  //   const wb: XLSX.WorkBook = XLSX.utils.book_new();
-  //   XLSX.utils.book_append_sheet(wb, ws, 'Attedance_Report');
-
-
-  //   XLSX.writeFile(wb, this.fileName);
-
-  // }
   public exportexcel1() {
     debugger
-
     if (this.term != null) {
       this.attendancelist23 = this.attendancelist.filter((x: { name: string | any[]; }) => (x.name).includes(this.term.toUpperCase()))
     }
     else {
       this.attendancelist23 = this.attendancelist
-
     }
-
     var ExportData = [];
     this.sequenceNumber1 = 0;
     for (let i = 0; i < this.attendancelist23.length; i++) {
-      //debugger;
       this.sequenceNumber1 = i + 1;
       let singleData = {
         SequenceNumber: String,
@@ -216,7 +171,6 @@ export class AttendanceReportComponent implements OnInit {
       singleData.CompanyName = this.companyName;
       singleData.ShiftTimings = this.attendancelist23[i].shiftTimeings;
       ExportData.push(singleData);
-      //debugger
     }
     const Export_to_excel_options = {
       fieldSeparator: ',',
@@ -231,76 +185,12 @@ export class AttendanceReportComponent implements OnInit {
       filename: 'Employee_Attendance_Report'
     };
     const csvExporter = new ExportToCsv(Export_to_excel_options);
-    //debugger
     csvExporter.generateCsv(ExportData);
-
   }
 
-
-
+  public reset() {
+    debugger
+    this.startdate1 = '';
+    this.ngOnInit();
+  }
 }
-
-
-// this.DigiofficeService.GetAllStaffNew().
-// subscribe({
-//   next: data => {
-//     debugger
-//     this.stafflist = data;
-
-//     for (let i = 0; i <= this.stafflist.length; i++) {
-
-//       this.DigiofficeService.GetMyDetailsForLogin(this.stafflist[i].emailID, this.stafflist[i].password, 9)
-//         .subscribe({
-//           next: data => {
-//             debugger
-//             let temp: any = data;
-//             var obj = {
-//               "employeid": this.stafflist[i].employeid
-//             }
-//             if (temp.length == 0) {
-
-//               this.failedarray.push(obj);
-
-//             }
-//             else {
-//               this.passedarray.push(obj);
-
-//             }
-//             if (this.stafflist.length - 1 == i) {
-//               console.log('failedarray', this.failedarray);
-//               console.log('passedarray', this.passedarray)
-//             }
-//           }, error: (err) => {
-//             Swal.fire('Issue in Getting My Details For Login');
-//             this.loader = false;
-//             // Insert error in Db Here//
-//             var obj = {
-//               'PageName': this.currentUrl,
-//               'ErrorMessage': err.error.message
-//             }
-//             this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-//               data => {
-//                 debugger
-//               },
-//             )
-//           }
-//         })
-//     }
-
-
-
-
-//   }, error: (err) => {
-//     Swal.fire('Issue in Getting All Staff');
-//     // Insert error in Db Here//
-//     var obj = {
-//       'PageName': this.currentUrl,
-//       'ErrorMessage': err.error.message
-//     }
-//     this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-//       data => {
-//         debugger
-//       },
-//     )
-//   }
-// })

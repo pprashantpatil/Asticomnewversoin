@@ -29,6 +29,8 @@ export class AnnouncementsDashComponent implements OnInit {
   todayDate: any;
   completedList: any;
   completedFilter: any;
+  p: any = 1;
+  count1: any = 10;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
@@ -126,7 +128,13 @@ export class AnnouncementsDashComponent implements OnInit {
     }
     else {
       this.upcomingList = this.upcomingFilter.filter((x: { dateTime: any; time: any; }) => (x.dateTime >= this.startDate && x.dateTime <= this.endDate) || (x.time >= this.startDate && x.time <= this.endDate));
-      this.completedList = this.completedFilter.filter((x: { dateTime: any; }) => (x.dateTime >= this.startDate && x.dateTime <= this.endDate ));
+      this.completedList = this.completedFilter.filter((x: { dateTime: any; }) => (x.dateTime >= this.startDate && x.dateTime <= this.endDate));
     }
+  }
+
+  public reset() {
+    debugger
+    this.date = '';
+    this.ngOnInit();
   }
 }

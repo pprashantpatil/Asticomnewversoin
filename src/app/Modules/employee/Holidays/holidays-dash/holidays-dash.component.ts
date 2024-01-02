@@ -24,7 +24,9 @@ export class HolidaysDashComponent implements OnInit {
   showPopup: number = 0;
   messageId: number = 0;
   holidayFilter: any;
-year: any;
+  year: any;
+  p: any = 1;
+  count1: any = 10;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 
@@ -75,7 +77,7 @@ year: any;
   }
 
   public openDeletePopUp(id: any) {
-    this.showPopup=0;
+    this.showPopup = 0;
     Swal.fire({
       title: 'Delete record',
       text: "Are you sure you want to delete it?",
@@ -119,12 +121,17 @@ year: any;
     }
   }
 
-  public getYear(){
-    if(this.year==''){
+  public getYear() {
+    if (this.year == '') {
       this.ngOnInit();
-    }else{
-      this.holidayList = this.holidayFilter.filter((x: { year: any; })=>x.year==this.year)
-
+    } else {
+      this.holidayList = this.holidayFilter.filter((x: { year: any; }) => x.year == this.year)
     }
+  }
+
+  public reset() {
+    debugger
+    this.date = '';
+    this.ngOnInit();
   }
 }

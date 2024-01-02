@@ -6,33 +6,33 @@ import { ExportToCsv } from 'export-to-csv';
 import * as XLSX from 'xlsx';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-attendance-correction-report',
   templateUrl: './attendance-correction-report.component.html',
   styleUrls: ['./attendance-correction-report.component.css']
 })
 export class AttendanceCorrectionReportComponent implements OnInit {
-
-  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router) { }
   viewMode = 'tab1';
   term: any;
   roleid: any;
   p: any = 1;
   count1: any = 10;
   count: any;
-  startdate1:any;
+  startdate1: any;
   correctionlist1: any = [];
   currentUrl: any;
   date: any;
   startdate: any;
   enddate: any;
-
+  fileName = 'Attendance Correction Report.xlsx';
   loader: any;
   staffID: any;
   StaffAttendanceCorrection: any;
   showPopup: number = 0;
   messageId: number = 0;
+
+  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router, private datePipe: DatePipe) { }
+
   ngOnInit(): void {
     debugger
     this.currentUrl = window.location.href;
@@ -50,32 +50,19 @@ export class AttendanceCorrectionReportComponent implements OnInit {
       .subscribe({
         next: data => {
           debugger
-
           this.correctionlist1 = data.filter(x => x.staffID == this.staffID);
-
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Attendance Correction');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
 
 
-  public getenddate(event:any) {
+  public getenddate(event: any) {
     this.showPopup = 0;
+    this.startdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.enddate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
     debugger
     if (this.startdate == undefined) {
-      /*  Swal.fire('Please Select Start Date'); */
       this.enddate = ""
       this.loader = false;
       this.showPopup = 1;
@@ -85,7 +72,6 @@ export class AttendanceCorrectionReportComponent implements OnInit {
       this.ngOnInit();
     }
     else if (this.enddate < this.startdate) {
-      /*    Swal.fire('Enddate Must Be Greater Than Startdate') */
       this.loader = false;
       this.showPopup = 1;
       this.messageId = 29;
@@ -97,24 +83,11 @@ export class AttendanceCorrectionReportComponent implements OnInit {
             debugger
             this.correctionlist1 = data.filter(x => (x.filterdate >= this.startdate && x.filterdate <= this.enddate) && x.staffID == localStorage.getItem('staffid'));
             this.loader = false;
-          }, error: (err) => {
-            // Swal.fire('Issue in Getting Attendance Correction');
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
   }
 
-  fileName = 'Attendance Correction Report.xlsx';
   exportexcel(): void {
     /* table id is passed over here */
     let element = document.getElementById('lvs');
@@ -128,4 +101,9 @@ export class AttendanceCorrectionReportComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
+  public reset() {
+    debugger
+    this.startdate1 = '';
+    this.ngOnInit();
+  }
 }

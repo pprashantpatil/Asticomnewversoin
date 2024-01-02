@@ -1,6 +1,5 @@
 <app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
 <app-loader *ngIf="loader"></app-loader>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -30,19 +29,20 @@
                 <img src="assets/Images/revamp/filter.svg" class="filter-img">
                 <p class="filter">Filter by:</p>
             </div>
+
             <div class="cardinputs">
                 <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
                     [(ngModel)]="startdate1" (ngModelChange)="getenddate($event)"
                     [bsConfig]="{ showWeekNumbers:false }">
             </div>
+
             <div class="cardinputs">
                 <button class="butn-sadow" type="button" (click)="exportexcel()" data-toggle="modal"
-                    data-target="#exampleModalCenter">Download Leaves</button>
+                    data-target="#exampleModalCenter">Export to Excel</button>
             </div>
-            <!-- <div class="d-flex align-items-center">
-                        <p class="show3res1">Count: <span>{{(staffPendingLeaves|filter:term)?.length}}</span></p>
-                    </div> -->
+
             <div class="cardinputs">
+                <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
             </div>
         </div>
     </div>
@@ -192,27 +192,4 @@
             </div>
         </div>
     </div>
-
-
 </div>
-
-
-<!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="loader-class ">
-                    <span class="header-loading-attend" id="exampleModalLongTitle">Please wait while
-                        downloading...</span>
-                    <div id="pause" class="d-flex align-items-center justify-content-center">
-                       
-                        <div id="spinner"></div>
-                       
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</div> -->

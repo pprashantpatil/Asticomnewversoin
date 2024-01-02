@@ -13,17 +13,11 @@
     </div>
 
     <div class="card">
-        <!-- <div class="row">
-            <div class="col-lg-12">
-                <p class="Heading1" style="text-align: center;">Payslip</p>
-                <hr class="HrLine">
-            </div>
-        </div> -->
         <div class="row">
-            <!-- <div class="col-lg-2"></div> -->
             <div class="col-lg-3">
                 <p style="text-align: center;"> Select Start Year & Month</p>
             </div>
+
             <div class="col-lg-3">
                 <select name="Year" id="Year" class="form-control" [(ngModel)]="Year">
                     <option value="0">Select Year</option>
@@ -33,6 +27,7 @@
                     <option value="2020">2020</option>
                 </select>
             </div>
+
             <div class="col-lg-3">
                 <select name="Month" id="Month" class="form-control" [(ngModel)]="Month">
                     <option value="0">Select Month</option>
@@ -50,6 +45,7 @@
                     <option value="12">December</option>
                 </select>
             </div>
+
             <div class="col-lg-3">
                 <select name="Payperiod" id="Payperiod" class="form-control" [(ngModel)]="Payperiod"
                     (change)="getpayperiod()">
@@ -58,47 +54,14 @@
                     <option value="2">2nd Pay Period</option>
                 </select>
             </div>
-
         </div><br>
-        <div class="row FilterClass fontheading">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-2">
-
-            </div>
-            <!-- <p style="text-align: center;">Signatory Person</p> -->
-            <div class="col-lg-2">
-
-            </div>
-            <!-- <select name="cars" id="Month" class="form-control" [(ngModel)]="sign" (change)="getsign()">
-                    <option value="0">Select</option>
-                    <option value="HR">HR</option>
-                </select> -->
-        </div>
-        <!-- <br />
-        <br /> -->
-        <!-- <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-4">
-              
-                <button class="butn-sadow" (click)="getpayslip()">Fetch</button>
-            </div>
-        </div> -->
     </div><br>
 
-
-    <!-- <br />
-    <br />
-    <br />
-    <br /> -->
     <div>
         <iframe *ngIf="showpdf" id="id_description_iframe" name="iframeName" (load)="oniFrameLoad($event)"
             [src]='payslip' onerror="onError()" type="application/pdf" style="width: 1299px;
     height: 1500px;"></iframe>
         <p *ngIf="!showpdf" style="margin-left: 100px;
-        font-size: 30px;
-       ">Pay Slip Not Available for Selected Pay Period</p>
+        font-size: 30px;">Pay Slip Not Available for Selected Pay Period</p>
     </div>
-
-
-
 </div>

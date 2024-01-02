@@ -7,7 +7,7 @@
                 <li><a class="Heading">
                         <p class="Heading">Announcement</p>
                     </a>
-                    <hr class="line-border listForm">
+                    <hr class="line-border">
                 </li>
             </ul>
         </div>
@@ -32,6 +32,10 @@
             <div class="cardinputs" (click)="showDialog()" *ngIf="roleID==1||roleID==9||roleID==10||roleID==11">
                 <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add
                     Announcement</button>
+            </div>
+
+            <div class="cardinputs">
+                <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
             </div>
         </div>
     </div>
@@ -68,13 +72,12 @@
                             <th>Announcement</th>
                             <th>Announcement Description</th>
                             <th>Attachment</th>
-                            <!-- <th>Link</th> -->
                             <th>Venue</th>
                             <th *ngIf="roleID==9|| roleID==11">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of upcomingList|filter:search">
+                        <tr *ngFor="let data of upcomingList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.dateTime|date}}</td>
                             <td>{{data.time|date}}</td>
                             <td>{{data.name}} </td>
@@ -83,10 +86,6 @@
                                 <a href="{{data.attachment}}" target="_blank"> <img src="assets/Images/image.png"
                                         style="width:20px; height:20px" alt="data.img"></a>
                             </td>
-                            <!-- <td> <a href={{data.reason}} target="_blank"><button class="edit-btn"
-                                        *ngIf="data.reason!=null">Link</button></a>
-                                <p *ngIf="data.reason==null">NA</p>
-                            </td> -->
                             <td>{{data.venue}}
                             <td class="onelinetext" *ngIf="roleID==9|| roleID==11"> <img class="dashedit-icon"
                                     (click)="edit(data.id)" src="assets/Images/Edit.svg" [ngbTooltip]="tipContenteidt"
@@ -94,7 +93,6 @@
                                 <img class="dashedit-icon" (click)="openDeletePopUp(data.id)"
                                     src="assets/Images/delete.svg" [ngbTooltip]="tipContentCancel"
                                     tooltipClass="my-custom-class">
-
                                 <div class="col-lg-2 Text p-0">
                                     <ng-template #tipContentCancel>
                                         <div>
@@ -105,6 +103,7 @@
                                             </div>
                                         </div>
                                     </ng-template>
+
                                     <ng-template #tipContenteidt>
                                         <div>
                                             <div class="d-flex">
@@ -119,14 +118,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(upcomingList|filter:search).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+
+            <div class="text-right" *ngIf="(upcomingList|filter:search).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
 
         <div *ngSwitchCase="'tab2'" id="tab2">
@@ -149,9 +149,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of completedList|filter:search">
+                        <tr *ngFor="let data of completedList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.dateTime|date}}</td>
-                            <td>{{data.time}}</td>
+                            <td>{{data.time|date:'hh:mm'}}</td>
                             <td>{{data.name}} </td>
                             <td>{{data.description}} </td>
                             <td>
@@ -162,14 +162,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(completedList|filter:search).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+
+            <div class="text-right" *ngIf="(completedList|filter:search).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

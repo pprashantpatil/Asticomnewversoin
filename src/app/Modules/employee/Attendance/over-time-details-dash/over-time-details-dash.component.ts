@@ -134,9 +134,9 @@ export class OverTimeDetailsDashComponent implements OnInit {
       this.endDate = ""
     }
     else {
-      this.overTimePendingList = this.overTimePendingFilter.filter((x: { submitdate: any; date: any; }) => (x.submitdate >= this.startDate && x.submitdate <= this.endDate) || (x.date >= this.startDate && x.date <= this.endDate));
-      this.overTimeApprovedList = this.overTimeApprovedFilter.filter((x: { submitdate: any; date: any; }) => (x.submitdate >= this.startDate && x.submitdate <= this.endDate) || (x.date >= this.startDate && x.date <= this.endDate));
-      this.overTimeRejectedList = this.overTimeRejectedFilter.filter((x: { submitdate: any; date: any; }) => (x.submitdate >= this.startDate && x.submitdate <= this.endDate) || (x.date >= this.startDate && x.date <= this.endDate));
+      this.overTimePendingList = this.overTimePendingFilter.filter((x: { date: any; }) => (x.date >= this.startDate && x.date <= this.endDate));
+      this.overTimeApprovedList = this.overTimeApprovedFilter.filter((x: { date: any; }) => (x.date >= this.startDate && x.date <= this.endDate));
+      this.overTimeRejectedList = this.overTimeRejectedFilter.filter((x: { date: any; }) => (x.date >= this.startDate && x.date <= this.endDate));
     }
   }
 
@@ -189,5 +189,11 @@ export class OverTimeDetailsDashComponent implements OnInit {
 
   openAttachments(photo: any) {
     window.open(photo, '_blank');
+  }
+
+  public reset() {
+    debugger
+    this.date = '';
+    this.ngOnInit();
   }
 }

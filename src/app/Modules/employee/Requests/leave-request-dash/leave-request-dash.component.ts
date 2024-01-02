@@ -16,10 +16,10 @@ import { NewLeaveRequestComponent } from '../new-leave-request/new-leave-request
 })
 export class LeaveRequestDashComponent implements OnInit {
 
-  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router, public datePipe: DatePipe,private matDialog: MatDialog,config: NgbCarouselConfig) {
+  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router, public datePipe: DatePipe, private matDialog: MatDialog, config: NgbCarouselConfig) {
     config.showNavigationArrows = false;
-		config.showNavigationIndicators = false;
-   }
+    config.showNavigationIndicators = false;
+  }
 
 
   public showorhidecontent: any;
@@ -410,7 +410,7 @@ export class LeaveRequestDashComponent implements OnInit {
   }
 
   previousStep() {
-      
+
     //this.isPrevious = true;
     //this.isNext = false;
     this.carousel.prev();
@@ -425,7 +425,7 @@ export class LeaveRequestDashComponent implements OnInit {
   }
 
   nextStep() {
-      
+
     // this.isNext = true;
     //this.isPrevious = false;
 
@@ -443,20 +443,20 @@ export class LeaveRequestDashComponent implements OnInit {
 
   showDialog() {
     let ID = undefined
-      
+
     this.matDialog.open(NewLeaveRequestComponent, {
       data: ID = undefined,
       height: '85%',
       width: '100%'
     }).afterClosed()
       .subscribe(result => {
- 
+
         this.ngOnInit();
       });
   }
 
   public ShowMaintenanceRequest(evn: any) {
-     
+
     var html = evn.srcElement.innerText.split(': ');
     var s1 = html[1].substring(0, html[1].indexOf('\n'));
     let MaintenanceRequest = this.staffleaves.filter((x: { id: string; }) => x.id == s1);
@@ -481,8 +481,13 @@ export class LeaveRequestDashComponent implements OnInit {
   }
 
   changeStatus1() {
-     
+
     this.showorhidecontent = true;
   }
 
+  public reset() {
+    debugger
+    this.startdate = '';
+    this.ngOnInit();
+  }
 }

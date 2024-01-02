@@ -1,5 +1,16 @@
 <app-loader *ngIf="loader"></app-loader>
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul style="margin-left: 2%;">
+                <li><a class="Heading">
+                        <p class="Heading">Leave Type Dashboard</p>
+                    </a>
+                    <hr class="line-border listForm">
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <div class="card">
         <div class="d-flex flex-wrap">
@@ -7,20 +18,16 @@
                 <img src="assets/Images/revamp/filter.svg" class="filter-img">
                 <p class="filter">Filter by:</p>
             </div>
+
             <div class="cardinputs">
                 <input type="text" placeholder="Search" id="term" [(ngModel)]="term" class="form-control search-icon"
                     (ngModelChange)="FilterLeave()">
             </div>
+
             <div class="cardinputs">
                 <button class="butn-sadow" (click)="Addleave()"> <img src="assets/Images/plus.svg" class="plus-icon">Add
                     Leave</button>
-
             </div>
-            <!-- <div class="cardinputs">
-
-                <button class="butn-sadow" (click)="AddConfiguration()"> <img src="assets/Images/plus.svg"
-                        class="plus-icon">Add Configuration</button>
-            </div> -->
         </div>
     </div>
 
@@ -28,10 +35,6 @@
         <div class="col-12">
             <p class="show3res">SHOWING <span>{{(leavelist | filter: term)?.length}} </span>RESULT(S)</p>
         </div>
-        <!-- <div class="col-md-2">
-            <button class="butn-sadow"  (click)="Addleave()"> <img src="assets/Images/plus.svg"
-                    class="plus-icon">Add Leave</button>
-        </div> -->
     </div>
 
     <div class="row">
@@ -43,7 +46,6 @@
                             <tr>
                                 <th>Leave Type</th>
                                 <th>Description</th>
-                                <!-- <th>Entitlement Per Year</th> -->
                                 <th [width]="200">Action</th>
                             </tr>
                         </thead>
@@ -52,10 +54,6 @@
                                 *ngFor="let holiday of leavelist|filter:term |paginate: { itemsPerPage: count1, currentPage: p}">
                                 <td class="tdtext">{{holiday.short}}</td>
                                 <td class="tdtext">{{holiday.description}}</td>
-                                <!-- <td style="color:#0C275A ">{{holiday.entitlement_Per_Year}}</td> -->
-                                <!-- <td> <button class="dashedit-btn" (click)="edit(holiday.id)">Edit</button>
-                                    <button class="edit-btn-red" (click)="delete(holiday.id)">Delete</button>
-                                </td> -->
                                 <td style="display: flex;">
                                     <img class="dashedit-icon" (click)="Edit(holiday.id)" title="Edit"
                                         src="assets/Images/Edit.svg">
@@ -64,14 +62,15 @@
                             </tr>
                         </tbody>
                     </table>
-
                     <span class="NoResultShow" *ngIf="(leavelist | filter: term).length==0">
                         <b>Sorry, we couldn't find any results.</b></span> <br>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="text-right" *ngIf="(leavelist | filter: term).length>count1">
         <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="" class="poppinns">
         </pagination-controls>
     </div>
+</div>

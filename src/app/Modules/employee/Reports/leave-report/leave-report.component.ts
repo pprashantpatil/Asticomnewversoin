@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
+import { DatePipe, formatDate } from '@angular/common';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
+
 @Component({
   selector: 'app-leave-report',
   templateUrl: './leave-report.component.html',
@@ -9,15 +11,13 @@ import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.servi
 export class LeaveReportComponent implements OnInit {
   staffApprovedLeaves: any;
   staffRejectedLeaves: any;
-
-  constructor(public DigiofficeService: DigiofficecorehrService) { }
   viewMode = 'tab1';
   roledid: any;
   p: any = 1;
   count1: any = 10;
   count: any;
-  term:any;
-  startdate1:any;
+  term: any;
+  startdate1: any;
   startdate: any;
   enddate: any
   currentUrl: any;
@@ -26,6 +26,9 @@ export class LeaveReportComponent implements OnInit {
   fileName = 'Leave Report.xlsx';
   showPopup: number = 0;
   messageId: number = 0;
+
+  constructor(public DigiofficeService: DigiofficecorehrService, private datePipe: DatePipe) { }
+
   ngOnInit(): void {
     this.currentUrl = window.location.href;
     this.loader = true;
@@ -35,23 +38,21 @@ export class LeaveReportComponent implements OnInit {
 
   public getenddate(event: any) {
     this.showPopup = 0;
+    this.startdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.enddate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
     debugger
     if (this.startdate == undefined) {
-      /*  Swal.fire('Please Select Start Date'); */
       this.enddate = ""
       this.loader = false;
       this.showPopup = 1;
       this.messageId = 28
     }
-
     else if (this.enddate == "") {
       this.ngOnInit();
       this.enddate = "";
       this.startdate = "";
     }
-
     else if (this.enddate < this.startdate) {
-      /*   Swal.fire('Enddate Must Be Greater Than Startdate') */
       this.enddate = ""
       this.startdate = ""
       this.loader = false;
@@ -67,18 +68,6 @@ export class LeaveReportComponent implements OnInit {
             this.staffApprovedLeaves = data.filter(x => (x.filterdate >= this.startdate && x.filterdate <= this.enddate) && x.staffID == localStorage.getItem('staffid') && x.status == 'Manager Approved');
             this.staffRejectedLeaves = data.filter(x => (x.filterdate >= this.startdate && x.filterdate <= this.enddate) && x.staffID == localStorage.getItem('staffid') && x.status == 'Rejected');
             this.loader = false;
-          }, error: (err) => {
-            // Swal.fire('Issue in Getting Staff Leaves');
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
           }
         })
     }
@@ -107,20 +96,13 @@ export class LeaveReportComponent implements OnInit {
           this.staffApprovedLeaves = data.filter(x => x.staffID == localStorage.getItem('staffid') && x.status == 'Manager Approved');
           this.staffRejectedLeaves = data.filter(x => x.staffID == localStorage.getItem('staffid') && x.status == 'Rejected');
           this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Staff Leaves');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
         }
       })
   }
 
+  public reset() {
+    debugger
+    this.startdate1 = '';
+    this.ngOnInit();
+  }
 }
