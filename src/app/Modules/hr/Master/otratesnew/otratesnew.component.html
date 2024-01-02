@@ -1,1 +1,54 @@
-<p>otratesnew works!</p>
+<app-commonalertpage [messageId]="messageId"  *ngIf="showPopup==1"></app-commonalertpage><app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2">
+            <p class="Heading1">OT Master Details</p>
+        </div>
+    </div>
+    <div class="card ">
+        <div class="row leavereq">
+            <div class="col-md-2 ">
+                <label class="labelText">Overtime Code <span class="span">*</span></label>
+            </div>
+            <div class="col-md-2">
+                <label class="labelText">Description<span class="span">*</span></label>
+            </div>
+            <div class="col-md-2">
+                <label class="labelText">Overtime Rates<span class="span">*</span></label>
+            </div>
+        </div>
+        <div class="row leavereq">
+            <div class="col-md-2">
+                <input type="text" class="form-control fonttxt inputfeild" [(ngModel)]="day"
+                    placeholder="Overtime Code">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control fonttxt inputfeild" [(ngModel)]="normal"
+                    placeholder="Description">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control fonttxt inputfeild" [(ngModel)]="oT"
+                    placeholder="Overtime Rates">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                <button class="close-button" (click)="Cancel()">Cancel</button>
+                <button class="submit-button" *ngIf="id!=undefined" (click)="Update()">Save Changes</button>
+                <button class="submit-button" *ngIf="id==undefined" (click)="save()">Submit</button>
+            </div>
+<!--             
+            <div class="col-lg-10"></div>
+            <div class="col-lg-1">
+                <button class="clo-btn" routerLink='/Admin/Otratesdash'>CANCEL</button>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="Addbutton" *ngIf="id==null || id==undefined"
+                    (click)="save()">SUBMIT</button>
+                <button type="button" class="Addbutton" *ngIf="id!=null || id!=undefined"
+                    (click)="Update()">UPDATE</button>
+            </div> -->
+        </div>
+    </div><br>
+</div>

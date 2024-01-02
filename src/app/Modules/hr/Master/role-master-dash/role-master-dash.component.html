@@ -1,1 +1,78 @@
-<p>role-master-dash works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+
+    <div class="card">
+        <div class="d-flex flex-wrap">
+            <div class="d-flex align-items-center">
+                <img src="assets/Images/revamp/filter.svg" class="filter-img">
+                <p class="filter">Filter by:</p>
+            </div>
+            <div class="cardinputs">
+                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon"
+                   >
+            </div>
+            <div class="cardinputs">
+                <button class="butn-sadow" (click)="AddPosition()"> <img src="assets/Images/plus.svg" class="plus-icon">Add
+                    Position</button>
+
+            </div>
+            <!-- <div class="cardinputs">
+
+                <button class="butn-sadow" (click)="AddConfiguration()"> <img src="assets/Images/plus.svg"
+                        class="plus-icon">Add Configuration</button>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <p class="show3res">SHOWING <span>{{(roletypeList | filter: search)?.length}} </span>RESULT(S)</p>
+        </div>
+        <!-- <div class="col-md-2">
+            <button class="butn-sadow"  (click)="Addleave()"> <img src="assets/Images/plus.svg"
+                    class="plus-icon">Add Leave</button>
+        </div> -->
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="container-fluid">
+                <div class="listscroll">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Position Name</th>
+                                <th>Description</th>
+                                <th >Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let position of roletypeList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
+                                <td>{{position.short}}</td>
+                                <td>{{position.description}}</td>
+                                <td >
+
+                                    <img class="dashedit-icon" (click)="Edit(position.id)" title="Edit"
+                                    src="assets/Images/Edit.svg">
+                                    <img class="dashedit-icon"  (click)="delete(position.id)" title="Delete" src="assets/Images/delete.svg" >
+                              
+<!--     
+                                    <button class="edit-btn"
+                                        [routerLink]="['/Admin/RoleMasterForm',position.id]">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button class="upload" (click)="delete(position.id)">Delete</button> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <span class="NoResultShow" *ngIf="(roletypeList | filter: search).length==0">
+                        <b>Sorry, we couldn't find any results.</b></span> <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right" *ngIf="(roletypeList | filter: search).length>count1">
+        <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel="" class="poppinns">
+        </pagination-controls>
+    </div>

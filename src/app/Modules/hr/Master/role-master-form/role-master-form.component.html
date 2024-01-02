@@ -1,1 +1,49 @@
-<p>role-master-form works!</p>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3">
+            <p class="Heading">Position Master Details</p>
+        </div>
+        <div class="col-lg-8"></div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="card">
+        <div class="row leavereq">
+            <div class="col-md-2">
+                <label>Position Name<span class="span">*</span></label>
+            </div>
+            <div class="col-md-2">
+                <label>Description<span class="span">*</span></label>
+            </div>
+        </div>
+        <div class="row leavereq">
+            <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="Enter Shift Name" placeholder="Position Name"
+                    [(ngModel)]="Short" name="Short" id="Short">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" placeholder="Enter Rules" placeholder="Description"
+                    [(ngModel)]="Description" name="Description" id="Description">
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                <button class="close-button" (click)="Cancel()">Cancel</button>
+                <button class="submit-button" *ngIf="ID!=undefined" (click)="UpdateRoleType()">Save Changes</button>
+                <button class="submit-button" *ngIf="ID==undefined" (click)="InsertRoleType()">Submit</button>
+            </div>
+            <!-- <div class="col-lg-10"></div>
+            <div class="col-lg-1">
+                <button class="clo-btn" (click)="Cancel()">CANCEL</button>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="Addbutton" *ngIf="ID!=undefined" (click)="UpdateRoleType()">UPDATE</button>
+                <button class="Addbutton" *ngIf="ID==undefined" (click)="InsertRoleType()">SUBMIT</button>
+            </div> -->
+        </div>
+    </div>
+   
