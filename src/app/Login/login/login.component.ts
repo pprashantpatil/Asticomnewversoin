@@ -40,13 +40,13 @@ export class LoginComponent implements OnInit {
   messageId: number = 0;
   id: any;
   public arrayofimages:any=[
-    '../../../assets/Images/sidebaricons/images-01.png',
-    '../../../assets/Images/sidebaricons/images-02.png',
-    '../../../assets/Images/sidebaricons/images-03.png',
-    '../../../assets/Images/sidebaricons/images-04.png',
-    '../../../assets/Images/sidebaricons/images-05.png',
-    '../../../assets/Images/sidebaricons/images-06.png',
-    '../../../assets/Images/sidebaricons/images-07.png',
+    'assets/Images/sidebaricons/images-01.png',
+    'assets/Images/sidebaricons/images-02.png',
+    'assets/Images/sidebaricons/images-03.png',
+    'assets/Images/sidebaricons/images-04.png',
+    'assets/Images/sidebaricons/images-05.png',
+    'assets/Images/sidebaricons/images-06.png',
+    'assets/Images/sidebaricons/images-07.png',
   ]
 
 
