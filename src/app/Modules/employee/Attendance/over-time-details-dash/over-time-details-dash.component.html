@@ -27,9 +27,9 @@
                     </a>
                 </li>
             </ul>
-
         </div>
     </div>
+
     <div class="card">
         <div class="d-flex flex-wrap">
             <div class="d-flex align-items-center">
@@ -91,7 +91,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of overTimePendingList|filter:search">
+                        <tr *ngFor="let data of overTimePendingList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.employeID}}</td>
                             <td>{{data.date|date}}</td>
                             <td>{{data.submitdate|date}}</td>
@@ -109,7 +109,6 @@
                                     data-target="#exampleModal1">
                             </td>
                             <td>{{data.comments}}</td>
-
                             <td class="actionpadding">
                                 <div class="arrangeIcon">
                                     <img class="dashedit-icon" src="assets/Images/delete.svg"
@@ -126,6 +125,7 @@
                                             </div>
                                         </div>
                                     </ng-template>
+
                                     <ng-template #tipDetails>
                                         <div>
                                             <div class="d-flex">
@@ -140,14 +140,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(overTimePendingList|filter:search).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+
+            <div class="text-right" *ngIf="(overTimePendingList|filter:search).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
 
         <div *ngSwitchCase="'tab2'" id="tab2">
@@ -174,7 +175,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of overTimeApprovedList|filter:search">
+                        <tr *ngFor="let data of overTimeApprovedList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.employeID}}</td>
                             <td>{{data.date|date}}</td>
                             <td>{{data.submitdate|date}}</td>
@@ -185,9 +186,6 @@
                                 <img class="dashedit-icon" src="assets/Images/revamp/info.png" data-toggle="modal"
                                     data-target="#checkListStatusForm" (click)="getOTDetails(data)"
                                     [ngbTooltip]="tipDetails" tooltipClass="my-custom-class">
-                                <!-- <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
-                                    data-target="#checkListStatusForm">Details
-                                </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
@@ -208,14 +206,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(overTimeApprovedList|filter:search).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+
+            <div class="text-right" *ngIf="(overTimeApprovedList|filter:search).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
 
         <div *ngSwitchCase="'tab3'" id="tab3">
@@ -242,7 +241,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of overTimeRejectedList|filter:search">
+                        <tr *ngFor="let data of overTimeRejectedList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.employeID}}</td>
                             <td>{{data.date|date}}</td>
                             <td>{{data.submitdate|date}}</td>
@@ -253,9 +252,6 @@
                                 <img class="dashedit-icon" src="assets/Images/revamp/info.png" data-toggle="modal"
                                     data-target="#checkListStatusForm" (click)="getOTDetails(data)"
                                     [ngbTooltip]="tipDetails" tooltipClass="my-custom-class">
-                                <!-- <button class="edit-btn" data-toggle="modal" (click)="getOTDetails(data)"
-                                    data-target="#checkListStatusForm">Details
-                                </button> -->
                             </td>
                             <td>
                                 <p *ngIf="data.aa=='No Attachemnt'">No Attachemnt</p>
@@ -276,14 +272,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(overTimeRejectedList|filter:search).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+
+            <div class="text-right" *ngIf="(overTimeRejectedList|filter:search).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
@@ -297,6 +294,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <table class="table">
                 <thead>
                     <tr>
