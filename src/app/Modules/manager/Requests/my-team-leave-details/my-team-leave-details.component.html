@@ -1,6 +1,6 @@
 <app-loader *ngIf="loader"></app-loader>
 <app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: -2%;">
     <div class="row">
         <div class="col-12">
             <ul>
@@ -9,16 +9,16 @@
                     </a>
                 </li>
 
-                <li *ngIf="roleID==2"><a class="Heading">
-                        <p class="Heading">Team Leave Details</p>
+                <li *ngIf="roleID==2"><a class="tabHeading">
+                        <p class="tabHeading">My Team Leave Details</p>
                     </a>
-                    <hr class="line-border listForm">
+                    <hr class="tab-line-border">
                 </li>
 
-                <li *ngIf="roleID==9 ||roleID==10 ||roleID==11"><a class="Heading">
-                        <p class="Heading">Company Leave Details</p>
+                <li *ngIf="roleID==9 ||roleID==10 ||roleID==11"><a class="tabHeading">
+                        <p class="tabHeading">Company Leave Details</p>
                     </a>
-                    <hr class="line-border listForm">
+                    <hr class="tab-line-border">
                 </li>
             </ul>
         </div>

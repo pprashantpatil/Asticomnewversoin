@@ -25,6 +25,8 @@ export class EmployeeResignationDashComponent implements OnInit {
   messageId: number = 0;
   multipleAttachmentList: any;
   type: any;
+  p: any = 1;
+  count1: any = 10;
 
   constructor(public DigiofficecorehrService: DigiofficecorehrService, private matDialog: MatDialog, private datePipe: DatePipe) { }
 

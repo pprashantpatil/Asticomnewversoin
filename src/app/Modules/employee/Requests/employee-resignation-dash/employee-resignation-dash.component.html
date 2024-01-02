@@ -10,39 +10,21 @@
                     <hr class="line-border listForm">
                 </li>
 
-                <li *ngIf="roleID==11"><a class="Heading">
-                        <p class="Heading">Employee Resignation</p>
+                <li *ngIf="roleID==11"><a class="tabHeading">
+                        <p class="tabHeading">Employee Resignation</p>
                     </a>
                     <hr class="line-border listForm">
                 </li>
 
-                <li *ngIf="roleID==2"><a class="Heading" routerLink="/Manager/Exitformalityformdash">
-                        <p class="Heading">Team Resignation Details</p>
+                <li *ngIf="roleID==2"><a class="tabHeading" routerLink="/Manager/Exitformalityformdash">
+                        <p class="tabHeading">Team Resignation Details</p>
                     </a></li>
             </ul>
         </div>
     </div>
 
-    <!-- <div class="card">
-        <div class="d-flex flex-wrap">
-            <div class="d-flex align-items-center">
-                <img src="assets/Images/revamp/filter.svg" class="filter-img">
-                <p class="filter">Filter by:</p>
-            </div>
-
-            <div class="cardinputs">
-                <input type="text" placeholder="Search" id="term" [(ngModel)]="search" class="form-control search-icon">
-            </div>
-
-            <div class="cardinputs" (click)="showDialog()" *ngIf="roleID !=1">
-                <button class="butn-sadow"> <img src="assets/Images/plus.svg" class="plus-icon">Add Resignation</button>
-            </div>
-        </div>
-    </div> -->
-
     <div class="row">
-        <div class="col-9">
-        </div>
+        <div class="col-9"></div>
 
         <div class="col-3">
             <button class="butn-sadow" (click)="showDialog()" *ngIf="roleID !=1 && resignationList?.length == 0"> <img
@@ -66,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of resignationList|filter:search">
+                        <tr *ngFor="let data of resignationList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td *ngIf="roleID!=6">{{data.name}}</td>
                             <td>{{data.lastworkingdate|date}}</td>
                             <td>{{data.notes}}</td>
@@ -86,7 +68,6 @@
                                 <img class="dashedit-icon" *ngIf="data.ownclearance!='1'"
                                     (click)="openDeletePopUp(data.id)" src="assets/Images/delete.svg"
                                     [ngbTooltip]="tipContentCancel" tooltipClass="my-custom-class">
-
                                 <div class="col-lg-2 Text p-0">
                                     <ng-template #tipContentCancel>
                                         <div>
@@ -97,6 +78,7 @@
                                             </div>
                                         </div>
                                     </ng-template>
+
                                     <ng-template #tipContenteidt>
                                         <div>
                                             <div class="d-flex">
@@ -111,14 +93,14 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <span class="NoResultShow" *ngIf="(uniquedropdownDeptList).length==0">
-                    <b>Sorry, we couldn't find any results.</b></span>   <br> -->
+                <span class="NoResultShow" *ngIf="(resignationList|filter:search).length==0">
+                    <b>Sorry, we couldn't find any results.</b></span>   <br>
             </div>
-            <!-- <div class="text-right" *ngIf="(uniquedropdownDeptList).length>count1">
+            <div class="text-right" *ngIf="(resignationList|filter:search).length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

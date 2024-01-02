@@ -12,8 +12,7 @@ const EXCEL_EXTENSION = '.xlsx';
   styleUrls: ['./team-attendance-correction-reports.component.css']
 })
 export class TeamAttendanceCorrectionReportsComponent implements OnInit {
-
-  constructor(public DigiofficeService: DigiofficecorehrService) { }
+  startdate1: any;
   viewMode = 'tab1';
   roleid: any;
   timesheets: any = [];
@@ -52,10 +51,13 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
   selectedItems: any = [];
   showPopup: number = 0;
   messageId: number = 0;
-  firstDayOfCurrentMonthFilter:any;
-  lastDayOfCurrentMonthFilter:any;
-  firstDayOfCurrentMonth:any;
-  lastDayOfCurrentMonth:any;
+  firstDayOfCurrentMonthFilter: any;
+  lastDayOfCurrentMonthFilter: any;
+  firstDayOfCurrentMonth: any;
+  lastDayOfCurrentMonth: any;
+
+  constructor(public DigiofficeService: DigiofficecorehrService) { }
+
   ngOnInit(): void {
     debugger
     this.loader = true;
@@ -86,11 +88,11 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
   public GetTeamAttendanceCorrection() {
     debugger
 
-    this.DigiofficeService.GetAttendanceCorrection(10000, this.firstDayOfCurrentMonth,this.lastDayOfCurrentMonth)
+    this.DigiofficeService.GetAttendanceCorrection(10000, this.firstDayOfCurrentMonth, this.lastDayOfCurrentMonth)
       .subscribe({
         next: data => {
           debugger
-          if (this.roleid==10||this.roleid==9||this.roleid==11) {
+          if (this.roleid == 10 || this.roleid == 9 || this.roleid == 11) {
             this.correctionlist1 = data
           }
           else {
@@ -132,52 +134,52 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
       this.ngOnInit();
     } else {
 
-      if(this.roleid==10){
+      if (this.roleid == 10) {
         this.DigiofficeService.GetAttendanceCorrection1()
-        .subscribe({
-          next: data => {
-            debugger
-            this.correctionlist1 = data.filter(x=>x.status=='Manager Pending' && x.date>= this.date &&x.date<=this.edate);
+          .subscribe({
+            next: data => {
+              debugger
+              this.correctionlist1 = data.filter(x => x.status == 'Manager Pending' && x.date >= this.date && x.date <= this.edate);
               this.loader = false;
-          }, error: (err) => {
-            // Swal.fire('Issue in Getting Approved Attendance Correction By StaffID');
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
+            }, error: (err) => {
+              // Swal.fire('Issue in Getting Approved Attendance Correction By StaffID');
+              // Insert error in Db Here//
+              var obj = {
+                'PageName': this.currentUrl,
+                'ErrorMessage': err.error.message
+              }
+              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                data => {
+                  debugger
+                },
+              )
             }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
-          }
-        })
+          })
       }
-      else{
+      else {
         this.DigiofficeService.GetAttendanceCorrection(this.staffID, this.date, this.edate)
-        .subscribe({
-          next: data => {
-            debugger
-            this.correctionlist1 = data.filter(x => x.supervisor == localStorage.getItem('staffid') && (x.filterdate >= this.date && x.filterdate <= this.edate));
-            // this.correctionlist1 = data.filter(x => (x.filterdate >= this.date && x.filterdate <= this.edate));
-            this.loader = false;
-          }, error: (err) => {
-            // Swal.fire('Issue in Getting Attendance Correction');
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
+          .subscribe({
+            next: data => {
+              debugger
+              this.correctionlist1 = data.filter(x => x.supervisor == localStorage.getItem('staffid') && (x.filterdate >= this.date && x.filterdate <= this.edate));
+              // this.correctionlist1 = data.filter(x => (x.filterdate >= this.date && x.filterdate <= this.edate));
+              this.loader = false;
+            }, error: (err) => {
+              // Swal.fire('Issue in Getting Attendance Correction');
+              // Insert error in Db Here//
+              var obj = {
+                'PageName': this.currentUrl,
+                'ErrorMessage': err.error.message
+              }
+              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                data => {
+                  debugger
+                },
+              )
             }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
-          }
-        })
+          })
       }
-    
+
     }
   }
 
@@ -276,4 +278,9 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
     }
   }
 
+  public reset() {
+    debugger
+    this.startdate1 = '';
+    this.ngOnInit();
+  }
 }

@@ -1,5 +1,5 @@
 <app-loader *ngIf="loader"></app-loader>
-<app-commonalertpage *ngIf="loader"></app-commonalertpage>
+<app-commonalertpage [messageId]="messageId" *ngIf="showPopup==1"></app-commonalertpage>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -9,16 +9,16 @@
                     </a>
                 </li>
 
-                <li *ngIf="roleID==2"><a class="Heading">
-                        <p class="Heading">My Team Attendance Report</p>
+                <li *ngIf="roleID==2"><a class="tabHeading">
+                        <p class="tabHeading">My Team Attendance Report</p>
                     </a>
-                    <hr class="line-border listForm">
+                    <hr class="tab-line-border">
                 </li>
 
-                <li *ngIf="roleID==9|| roleID==11 ||  roleID==10 ||  roleID==1"><a class="Heading">
-                        <p class="Heading">All Company Attendance Report</p>
+                <li *ngIf="roleID==9|| roleID==11 ||  roleID==10 ||  roleID==1"><a class="tabHeading">
+                        <p class="tabHeading">All Company Attendance Report</p>
                     </a>
-                    <hr class="line-border listForm">
+                    <hr class="tab-line-border">
                 </li>
             </ul>
         </div>
@@ -34,8 +34,12 @@
             <div class="cardinputs">
                 <p class="leavereq">Select Dates
                     <input type="bsdate" placeholder="mm/dd/yyyy-mm/dd/yyyy" class="form-control" bsDaterangepicker
-                        [(ngModel)]="startdate" (ngModelChange)="getenddate($event)"
+                        [(ngModel)]="startdate1" (ngModelChange)="getenddate($event)"
                         [bsConfig]="{showWeekNumbers:false }">
+            </div>
+
+            <div class="cardinputs">
+                <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
             </div>
 
             <div class="cardinputs">
@@ -55,7 +59,6 @@
 
     <div class="row">
         <div class="col-12">
-
             <div class="listscroll">
                 <table class="table" id="lvs">
                     <thead>

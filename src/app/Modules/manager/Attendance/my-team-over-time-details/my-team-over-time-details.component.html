@@ -46,11 +46,11 @@
                 </div>
 
                 <div class="cardinputs">
-                    <button class="butn-sadow" type="button" (click)="exportexcel1()">Export to Excel</button>
+                    <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
                 </div>
 
                 <div class="cardinputs">
-                    <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
+                    <button class="butn-sadow" type="button" (click)="exportexcel()">Export to Excel</button>
                 </div>
             </div>
         </div>
@@ -148,6 +148,7 @@
                                         </div>
                                     </ng-template>
                                 </div>
+
                                 <div class="col-lg-2 Text p-0">
                                     <ng-template #tipContentReject>
                                         <div>
@@ -163,10 +164,10 @@
                         </tr>
                     </tbody>
                 </table>
-                <span class="NoResultShow" *ngIf="(timedetails1|filter:term).length==0">
+                <span class="NoResultShow" *ngIf="(timedetails1|filter:term)?.length==0">
                     <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <div class="text-right" *ngIf="(timedetails1|filter:term).length>count1">
+            <div class="text-right" *ngIf="(timedetails1|filter:term)?.length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
@@ -230,10 +231,10 @@
                         </tr>
                     </tbody>
                 </table>
-                <span class="NoResultShow" *ngIf="(timedetails2|filter:term).length==0">
+                <span class="NoResultShow" *ngIf="(timedetails2|filter:term)?.length==0">
                     <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <div class="text-right" *ngIf="(timedetails2|filter:term).length>count1">
+            <div class="text-right" *ngIf="(timedetails2|filter:term)?.length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>
@@ -297,10 +298,10 @@
                         </tr>
                     </tbody>
                 </table>
-                <span class="NoResultShow" *ngIf="(timedetails3|filter:term).length==0">
+                <span class="NoResultShow" *ngIf="(timedetails3|filter:term)?.length==0">
                     <b>Sorry, we couldn't find any results.</b></span> <br>
             </div>
-            <div class="text-right" *ngIf="(timedetails3|filter:term).length>count1">
+            <div class="text-right" *ngIf="(timedetails3|filter:term)?.length>count1">
                 <br>
                 <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
                     class="poppinns"></pagination-controls>

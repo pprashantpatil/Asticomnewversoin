@@ -10,14 +10,14 @@
                     <hr class="line-border listForm">
                 </li>
 
-                <li *ngIf="roleid==2"><a class="Heading" routerLink="/Manager/TeamAttendanceReports">
-                        <p class="Heading">My Team Attendance Report</p>
+                <li *ngIf="roleid==2"><a class="tabHeading" routerLink="/Manager/TeamAttendanceReports">
+                        <p class="tabHeading">My Team Attendance Report</p>
                     </a>
                 </li>
 
-                <li *ngIf="roleid==9|| roleid==11 ||  roleid==10 ||  roleid==1"><a class="Heading"
+                <li *ngIf="roleid==9|| roleid==11 ||  roleid==10 ||  roleid==1"><a class="tabHeading"
                         routerLink="/Manager/TeamAttendanceReports">
-                        <p class="Heading">All Company Attendance Report</p>
+                        <p class="tabHeading">All Company Attendance Report</p>
                     </a>
                 </li>
             </ul>
@@ -39,12 +39,12 @@
             </div>
 
             <div class="cardinputs">
-                <button class="butn-sadow" type="button" (click)="exportexcel()" data-toggle="modal"
-                    data-target="#exampleModalCenter">Export to Excel</button>
+                <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
             </div>
 
             <div class="cardinputs">
-                <button class="butn-sadow" type="button" (click)="reset()">Reset</button>
+                <button class="butn-sadow" type="button" (click)="exportexcel()" data-toggle="modal"
+                    data-target="#exampleModalCenter">Export to Excel</button>
             </div>
         </div>
     </div>
