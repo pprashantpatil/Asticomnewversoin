@@ -1,0 +1,83 @@
+h6 {
+    color: red;
+    font-weight: 700;
+}
+
+
+h3 {
+    font-weight: 900;
+    color: black !important;
+}
+
+.view-textannoubce {
+    display: flex;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 20px 19px 2px -4px !important;
+    padding: 3px;
+    text-decoration: none;
+    line-height: 15px;
+    letter-spacing: 0.5px;
+    color: #1125a9;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+}
+
+.bgcolor {
+    background: #1f1e1e0d !important;
+    border-radius: 10px;
+}
+
+
+.heading {
+    position: relative;
+    top: 5px;
+    color: #3247d5 !important;
+    font-weight: 900;
+    right: 12px;
+}
+
+.card {
+    margin-bottom: 6px !important;
+    border-radius: 0px !important;
+}
+
+
+.small-card {
+    height: 105px !important;
+
+}
+
+.common-col {
+    padding: 0px 3px !important;
+}
+
+.mainheading {
+    color: red !important;
+    font-size: 14px;
+}
+
+.card-head {
+    width: 100%;
+    height: 10px;
+    position: relative;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    /* color: #1125a9; */
+}
+
+
+.sm-head {
+    font-size: 27px;
+    font-weight: 700;
+    color: #1125a9;
+}

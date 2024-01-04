@@ -51,6 +51,9 @@ import { GrivelnecemasterdashComponent } from './Master/grivelnecemasterdash/gri
 import { GrivelnecemasterComponent } from './Master/grivelnecemaster/grivelnecemaster.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { HRLeaveRequestDashComponent } from './Requests/hrleave-request-dash/hrleave-request-dash.component';
+import { HrdashboardComponent } from './hrdashboard/hrdashboard.component';
+import { HrGraphDashComponent } from './hr-graph-dash/hr-graph-dash.component';
+import { HranalyticsgraphComponent } from './hranalyticsgraph/hranalyticsgraph.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +97,10 @@ import { HRLeaveRequestDashComponent } from './Requests/hrleave-request-dash/hrl
     LevelTypeFormComponent,
     GrivelnecemasterdashComponent,
     GrivelnecemasterComponent,
-    HRLeaveRequestDashComponent
+    HRLeaveRequestDashComponent,
+    HrdashboardComponent,
+    HrGraphDashComponent,
+    HranalyticsgraphComponent
   ],
   imports: [
     CommonModule,

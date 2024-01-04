@@ -93,11 +93,11 @@ export class LoginComponent implements OnInit {
           this.showPopup = 1;
           this.messageId = 80;
         } else {
-          // sessionStorage.setItem('digiofficeapiurl', temp.officeapiurl);
-          sessionStorage.setItem(
-            'digiofficeapiurl',
-            'https://asticom.digiofficeapp.com/AsticomMainAPI1'
-          );
+           sessionStorage.setItem('digiofficeapiurl', temp.officeapiurl);
+          // sessionStorage.setItem(
+          //   'digiofficeapiurl',
+          //   'https://asticom.digiofficeapp.com/AsticomMainAPI1'
+          // );
           sessionStorage.setItem('payrollapiurl', temp.payrollapiurl);
           sessionStorage.setItem('Companylogo', temp.companylogo);
           sessionStorage.setItem('companyid', this.companyid);
@@ -410,7 +410,7 @@ export class LoginComponent implements OnInit {
                               localStorage.setItem('OTEligibility', temp[0].ot);
                               sessionStorage.setItem('temp23', '1');
                               this.InsertLogActivity();
-                              this.router.navigate(['/HR/Staffdashboard']).then(() => {
+                              this.router.navigate(['/HR/hrdashboard']).then(() => {
                                 this.loader = false;
                                 location.reload();
                               });
@@ -598,7 +598,7 @@ export class LoginComponent implements OnInit {
                               localStorage.setItem('OTEligibility', temp[0].ot);
                               sessionStorage.setItem('temp23', '1');
                               this.InsertLogActivity();
-                              this.router.navigate(['/HR/Staffdashboard']).then(() => {
+                              this.router.navigate(['/HR/hrdashboard']).then(() => {
                                 this.loader = false;
                                 location.reload();
                               });

@@ -1,0 +1,563 @@
+<app-loader *ngIf="loader"></app-loader>
+<div class="container-fluid" [ngClass]="loader?'blur-background':''">
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="second-card11 d-flex">
+                <div class="d-flex align-items-center">
+                    <div class="d-flex flex-column align-items-center left-part">
+                        <!-- <img src="assets/Images/revamp/team-request.png" class="Myteam-icon"> -->
+                        <img src="assets/Images/revamp/my-team-request-green-icon-manger.png" class="Myteam-icon">
+                        <h2 class="myteam-heading">Employee<br>Requests</h2>
+                    </div>
+
+                    <div class="d-flex flex-wrap justify-content-evenly right-part">
+                        <div class="card-one1-1" [ngStyle]="{'width': loanenable==1 ? '170px' : '220px' }">
+                            <div class="d-flex flex-column align-items-center">
+                                <p class="card-head">Onboarded Staff</p>
+                                <p class="card-day">1</p>
+                                <div class="d-flex align-items-center justify-content-center align-center-txt">
+                                    <img src="assets/FigmaImg/icon.svg" class="img-icon" />
+                                    <p class="card-paragraph">
+                                        Monitor the Pre-Employment docs
+                                    </p>
+                                </div>
+                                <button class="card-attendance text-attendance" (click)="onboarding()">View Onboarding
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-one1-1" [ngStyle]="{'width': loanenable==1 ? '170px' : '220px' }">
+                            <div class="d-flex flex-column align-items-center">
+                                <p class="card-head">Approved Leaves</p>
+                                <p class="card-day">{{approvedcountforhr}}</p>
+                                <div class="d-flex align-items-center justify-content-center align-center-txt">
+                                    <img src="assets/FigmaImg/icon.svg" class="img-icon" />
+                                    <p class="card-paragraph">
+                                        Update Leave Balance
+                                    </p>
+                                </div>
+                                <button class="card-attendance text-attendance" (click)="teamleave()">
+                                    View Leave Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-one1-1" [ngStyle]="{'width': loanenable==1 ? '170px' : '220px' }">
+                            <div class="d-flex flex-column align-items-center">
+                                <p class="card-head">Loan Request</p>
+                                <p class="card-day">{{newrquestloancount}}</p>
+                                <div class="d-flex align-items-center justify-content-center align-center-txt">
+                                    <img src="assets/Images/revamp/icon.png" class="img-icon" />
+                                    <p class="card-paragraph">
+                                        You have 0 loan request for approval
+                                    </p>
+                                </div>
+                                <button class="card-attendance text-attendance" (click)="ApplyLoan()">
+                                    View Loan Request
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between">
+            <!--Ali-->
+            <div class="left">
+                <div class="card">
+                    <div class="col-12 d-flex flex-column" style="gap:4px;">
+                        <div>
+                            <p class="Top_heading">Attendance Tracker</p>
+                        </div>
+
+                        <div class="d-flex time-alignment">
+                            <p class="time">{{hh}}</p>
+                            <p class="time">:</p>
+                            <p class="time">{{mm}}</p>
+                            <p class="time">:</p>
+                            <p class="time">{{ampm}}</p>
+                        </div>
+
+                        <div class="d-flex">
+                            <p class="date-text">{{todaydate}}</p>
+                        </div>
+                        <br>
+
+                        <div class="d-flex drp-align" *ngIf="punchintime!=null">
+                            <div class="punch-in-card" (click)=" punchin()">
+                                <img src="assets/Images/revamp/status-icon.png" class="status-icon">
+                                <p class="text-punch1">Punched In</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex drp-align" *ngIf="punchintime!=null">
+                            <div class="punch-time-card">
+                                <p class="text-punch-tym">Punched In at {{punchintime|date:'HH:mm'}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex drp-align" *ngIf="punchintime==null">
+                            <div class="punch-Out-card">
+                                <p class="text-punch" (click)="punchin()">Punch In</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex drp-align" *ngIf="punchintime==null">
+                            <div class="not-punch-card">
+                                <p class="text-punch-tym1">No punch in yet</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex drp-align" *ngIf="punchouttime!=null">
+                            <div class="punch-in-card" (click)="punchout1()">
+                                <img src="assets/Images/revamp/status-icon.png" class="status-icon">
+                                <p class="text-punch1">Punched Out</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex drp-align" *ngIf="punchouttime!=null">
+                            <div class="punch-time-card">
+                                <p class="text-punch-tym">Punched Out at {{punchouttime|date:'HH:mm'}}
+                                    {{punchoutworkType1}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex drp-align" *ngIf="punchouttime==null">
+                            <div class="punch-Out-card">
+                                <p class="text-punch" (click)="punchout1()">Punch Out</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex drp-align" *ngIf="punchouttime==null">
+                            <div class="not-punch-card">
+                                <p class="text-punch-tym1">No punch out yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ALO ALPI-->
+
+            <div class="">
+                <div class="d-flex flex-wrap justify-content-between mt-2">
+                    <div class="d-flex">
+                        <div class="annoc-card mb-2">
+                            <div class="card-content">
+
+                                <p class="card-head-one">Announcements</p>
+
+                                <img src="assets/Images/revamp/Annoucenment-white-img.png"
+                                    *ngIf="annnounecemnetlist.length==0" class="annou-img" />
+                                <p *ngIf="show==true" class="anno-text">No announcements <br> for
+                                    today </p>
+
+                                <div class="d-flex flex-column align-items-center p-2"
+                                    *ngIf="annnounecemnetlist.length!=0">
+
+                                    <ngb-carousel #carousel [interval]="0" [showNavigationArrows]="true" class="carus">
+
+                                        <ng-template ngbSlide *ngFor="let item of annnounecemnetlist">
+                                            <div>
+                                                <img src="{{item.attachment}}" class="img-annouc"
+                                                    (click)="getannouncement(item)" data-toggle="modal"
+                                                    data-target="#Announcement" />
+                                            </div>
+                                            <p class="fest-name">{{ item?.name }}</p>
+                                            <p class="fest-name">{{ item?.dateTime }}</p>
+                                        </ng-template>
+                                    </ngb-carousel>
+                                </div>
+                                <p class="view-textannoubce" (click)="announcement()">View All</p>
+                            </div>
+                        </div>
+                        <div class="annoc-card ml-2 mb-2 ml-4" *ngIf="annnounecemnetlist?.length==0">
+                            <div class="card-content">
+
+                                <p class="card-head-one">Holidays</p>
+
+                                <img src="assets/FigmaImg/noholiday.svg" *ngIf="annnounecemnetlist.length==0"
+                                    class="annou-img" />
+                                <p *ngIf="show==true" class="anno-text">No Holiday <br> for
+                                    today </p>
+
+
+                                <p class="view-textannoubce" (click)="holiday()">View All</p>
+                            </div>
+                        </div>
+
+                        <div class="annoc-card ml-2 mb-2 ml-4" *ngIf="annnounecemnetlist?.length>0">
+                            <div class="card-content">
+                                <p class="holidayimgtxt">Holidays</p>
+                                <div class="row ">
+                                    <div *ngIf="holidaylist?.length==0">
+                                        <img src="assets/FigmaImg/noholiday.svg" class="img-holi noholiday" />
+                                        <h4 class="noholidaytext" *ngIf="holidaylist?.length==0">No holiday has yet set
+                                        </h4>
+                                        <p class="d-flex justify-content-end noholidayviewall" (click)="holiday()">
+                                            View All</p>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div *ngIf="holidaylist?.length!=0">
+                                            <img class="tphoimg" src="{{tpholidayattachment}}"><br>
+                                            <p class="holidayname">{{topholidayname}}</p>
+                                            <p class="holidaydate">{{topholidaydate|date}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class=" hol-others">
+                                            <!-- <h5 class="others">Others</h5> -->
+                                            <div class="holi-atc">
+                                                <div class="list-holidays" *ngFor="let holiday of dispyList">
+                                                    <div class="">
+                                                        <img src="{{holiday?.attachment}}"
+                                                            class="holidaylistattachment">
+                                                    </div>
+                                                    <div class="holidaylistcol">
+                                                        <h6 class="attac-text">
+                                                            {{ holiday?.holiday.length > 20 ?
+                                                            holiday?.holiday.substring(0,20)+"..." :
+                                                            holiday?.holiday }}
+                                                            <!-- {{holiday?.holiday}} -->
+                                                        </h6>
+                                                        <h6 class="attac-day">{{holiday?.holidayDate|date}}</h6>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- <div>
+                                                   
+                                                   
+                                                </div> -->
+                                            </div>
+                                            <p *ngIf="holidaylist?.length!=0" class="seeall chnageseeAll"
+                                                (click)="holiday()">View All</p>
+                                            <!-- <p class="seeall chnageseeAll" (click)="holiday()">View All</p> -->
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="d-flex flex-wrap justify-content-between mt-3">
+                    <div class="card-one mb-2">
+                        <div class="card-content ">
+                            <p class="card-head">Attendance Details</p>
+                            <p class="card-day">{{presentcount}} Days</p>
+                            <div
+                                class="align-status-icon d-flex align-items-center justify-content-center align-center-txt">
+                                <img src="assets/Images/revamp/icon.png" class="img-icon" />
+                                <p class="card-paragraph">You have {{approvedcount1}} absents status this month</p>
+                            </div>
+                            <!-- <div class="card-attendance">
+                                <p class="text-attendance" (click)="attendanceCorrection()">Attendance Correction</p>
+                            </div> -->
+                            <button class="card-attendance text-attendance" (click)="attendanceCorrection()"> Attendance
+                                Correction
+                            </button>
+                            <p class="view-text1" (click)="attendance()">View Attendance</p>
+                        </div>
+                    </div>
+
+                    <div class="card-oneleave mb-2" style="height: 236px;">
+                        <div class="card-content ">
+                            <p class="card-head">Leave Details</p>
+                            <p class="card-day">{{pendingcount1}} Days</p>
+                            <!-- <div class="d-flex align-center-txt">
+                                <img src="assets/Images/revamp/icon.png" class="img-icon" />
+                                <p class="card-paragraph1">Pending Leave</p>
+                            </div> -->
+
+                            <div
+                                class="align-status-icon d-flex align-items-center justify-content-center align-center-txt">
+                                <img src="assets/Images/revamp/icon.png" class="img-icon" />
+                                <p class="card-paragraph">You have {{approvedcount1}} leaves for this month</p>
+                            </div>
+
+
+
+                            <!-- <div class="card-leave">
+                                <p class="text-attendance" (click)="AddLeave()">Apply Leave</p>
+                            </div> -->
+                            <button class="card-attendance text-attendance" (click)="AddLeave()">Apply Leave
+                            </button>
+                            <p class="view-textleave" (click)="applyleave()">View Leave</p>
+                        </div>
+
+                    </div>
+
+                    <div class="card-one mb-2" style="background-color: transparent;">
+                        <div class="card-content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <!-- <div class="row">
+
+        <!-- <div class="levc">
+            <div class="lea-sub">
+                <img src="assets/Images/leaveicon.png" class="lev-img">
+                <label class="atd-text">Leaves</label>
+                <label class="atd-sub">Always file your leaves on time</label>
+            </div>
+            <div>
+                <div>
+                    <button class="pendingcount">
+                        <p>{{pendingcount1}} <span>Pending</span> </p>
+                    </button>
+                    <button class="cnelcount">
+                        <p>{{CancelledCount}} <span>Cancelled</span> </p>
+                    </button>
+                </div>
+                <div class="">
+                    <button class="rejectedcount">
+                        <p>{{Rejectedcount1}} <span>Rejected</span> </p>
+                    </button>
+                    <button class="approdcount">
+                        <p>{{approvedcount1}} <span>Approved</span> </p>
+                    </button>
+                </div>
+            </div>
+        </div> 
+        <div class="col-lg-3">
+            <div class="card-one">
+                <div class="row">
+                    <p class="card-head">Leave Details</p>
+                </div>
+                <br />
+                <div class="row">
+                    <p class="card-day">{{pendingcountforhr}}</p>
+                </div>
+                <br />
+                <div class="d-flex">
+                    <img src="assets/Images/revamp/icon.png" class="img-icon" />
+                    <p class="card-paragraph1">Pending Leave</p>
+                </div>
+                <br />
+                <div class="row drp-align">
+                    <button class="card-attendance">
+                        <p class="text-attendance" (click)="applyleave()">Apply Leave</p>
+                    </button>
+                </div>
+                <br />
+                <div class="row">
+                    <a class="view-text" href="#">View Leave</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="card-one">
+                <div class="row">
+                    <p class="card-head">Announcement</p>
+                </div>
+                <br />
+                <div class="row">
+                    <!-- <p class="card-day">{{pendingcount1}}</p> 
+                </div>
+                <br />
+                <div class="d-flex">
+
+                    <img src="assets/Images/announcement.png" class="img-icon1" />
+                    <p class="card-paragraph1">Year End</p>
+                </div>
+                <br />
+                <div class="row drp-align">
+                    <!-- <button class="card-attendance">
+                        <p class="text-attendance">Apply Leave</p>
+                      </button> 
+                </div>
+                <br />
+                <div class="row">
+                    <a class="view-text" href="#">View All</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+            <div class="holiday">
+                <div class="lea-sub1">
+                    <!-- <img src="assets/Images/hld-new.svg" class="lev-img"> -->
+    <!-- <p class="holidayimgtxt">Holidays</p> -->
+    <!-- <p class="cm-holi">These are the upcoming holidays</p> -->
+    <!-- <p class="holidayname" *ngIf="tpholidayattachment==undefined">No Holiday</p> 
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <h4 class="noholiday" *ngIf="holidaylist?.length==0">No Holiday !</h4>
+                    </div>
+                    <div class="col-lg-6">
+                        <div *ngIf="holidaylist.length!=0">
+
+
+    <!-- <h2 *ngIf="roledid==2">My Team Requests</h2>
+        <h2 *ngIf="roledid==9">Company Staff Requests</h2>
+        <div class="my-levc">
+            <div class="my-lea-sub">
+                <img src="assets/Images/leaveicon.png" class="lev-img">
+                <label class="atd-text">Leaves</label>
+                <label class="atd-sub">Always Approve your Team leaves</label>
+            </div>
+            <div>
+                <div>
+                    <button class="pendingcount1">
+                        <p>{{pendingcountforhr}} <span>Pending</span> </p>
+                    </button>
+                    <button class="cnelcount1">
+                        <p>{{CancelledCount}} <span>Cancelled</span> </p>
+                    </button>
+                </div>
+                <div>
+                    <button class="rejectedcount1">
+                        <p>{{rejectedcountforhr}} <span>Rejected</span> </p>
+                    </button>
+                    <button class="approdcount1">
+                        <p>{{approvedcountforhr}} <span>Approved</span> </p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="overtime">
+            <div class="overtime-sub">
+                <img src="assets/Images/leaveicon.png" class="lev-img">
+                <label class="atd-text">Overtime</label>
+                <label class="atd-sub">Always file your Overtime on time</label>
+            </div>
+            <div>
+                <div>
+                    <button class="pendingcount1">
+                        <p>2 <span>Pending</span> </p>
+                    </button>
+                    <button class="cnelcount1">
+                        <p>0 <span>Cancelled</span> </p>
+                    </button>
+                </div>
+                <div class="">
+                    <button class="rejectedcount1">
+                        <p>1 <span>Rejected</span> </p>
+                    </button>
+                    <button class="approdcount1">
+                        <p>1 <span>Approved</span> </p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="my-loan"  *ngIf=" companyid=='1001'||companyid=='1005'">
+            <div class="loan-sub">
+                <img src="assets/Images/leaveicon.png" class="lev-img">
+                <label class="atd-text">Loan</label>
+                <label class="atd-sub">Always Approve your Team Loan</label>
+            </div>
+            <div>
+                <div>
+                    <button class="pendingcount1">
+                        <p>2 <span>Pending</span> </p>
+                    </button>
+                    <button class="cnelcount1">
+                        <p>0 <span> Cancelled</span> </p>
+                    </button>
+                </div>
+                <div class="">
+                    <button class="rejectedcount1">
+                        <p>1 <span> Rejected</span> </p>
+                    </button>
+                    <button class="approdcount1">
+                        <p>1 <span> Approved</span> </p>
+                    </button>
+                </div>
+            </div>
+        </div> -->
+    <!-- <div class="vcinc">
+            <div class="sub-vac">
+                <img src="assets/Images/covid-vaccin.svg" class="lev-img">
+                <label class="atd-text">Covid Vaccination</label>
+                <label class="atd-sub">Upload vaccination details</label>
+            </div>
+            <div>
+                <div class="vanc">
+                    <span class="dose-text">1st Dose</span>
+                    <span class="doseinfo"
+                        *ngIf="certificate_url=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">No
+                        Records Found</span>
+                    <span class="doseinfo"
+                        *ngIf="certificate_url!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">{{FirstDoseDate|date}}</span>
+                    <button
+                        *ngIf="certificate_url=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
+                        class="whitebtn3" [routerLink]="['/Employee/VaccineForm',staffID]">Upload</button>
+               
+                    <a data-toggle="modal" data-target="#VaccinationModal"><img src="assets/Images/editicon.png"
+                            class="requestbtn4 applyleavecol"></a>
+                    <a href="{{certificate_url}}" target="blank"><button class="form-control requestbtn applyleavecol"
+                            *ngIf="certificate_url!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">View
+                            File</button></a>
+                    
+                </div>
+                <div class="row vanc2">
+                    <span class="dose-text">2nd Dose</span>
+                    <span class="doseinfo"
+                        *ngIf="Certificate_url_second=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">No
+                        Records Found</span>
+                    <span class="doseinfo"
+                        *ngIf="Certificate_url_second!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">{{SecondDoseDate|date}}</span>
+                    <button
+                        *ngIf="Certificate_url_second=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
+                        class="whitebtn3" [routerLink]="['/Employee/VaccineForm',staffID]">Upload</button>
+                    <a data-toggle="modal" data-target="#VaccinationModal1"><img src="assets/Images/editicon.png"
+                            class="requestbtn5 applyleavecol"></a>
+                    <a href="{{Certificate_url_second}}" target="blank"><button
+                            class="form-control requestbtn1 applyleavecol"
+                            *ngIf="Certificate_url_second!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">View
+                            File</button></a>
+                </div>
+                <div class="row vancbs">
+                    <span class="dose-text">Booster</span>
+                    <span class="doseinfo"
+                        *ngIf="BoosterDoseCertificate=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">No
+                        Records Found</span>
+                    <span class="doseinfo"
+                        *ngIf="BoosterDoseCertificate!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">{{BoosterDoseDate|date}}</span>
+                    <button
+                        *ngIf="BoosterDoseCertificate=='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'"
+                        class="whitebtn3" [routerLink]="['/Employee/VaccineForm',staffID]">Upload</button>
+                    <a data-toggle="modal" data-target="#VaccinationModal2"><img src="assets/Images/editicon.png"
+                            class="requestbtn6 applyleavecol"></a>
+                    <a href="{{BoosterDoseCertificate}}" target="blank"><button
+                            class="form-control requestbtn2 applyleavecol"
+                            *ngIf="BoosterDoseCertificate!='https://www.digiofficehrhub.com/ALIAPI/Images/EmptyProfile/noimage.png'">View
+                            File</button></a>
+                </div>
+            </div>
+        </div> 
+
+        <div class="br-spac">
+        </div>-->
+</div>
+
+<div class="container-fluid" [ngClass]="loader?'blur-background':''">
+    <app-hr-graph-dash></app-hr-graph-dash>
+</div>

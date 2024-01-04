@@ -1,0 +1,142 @@
+<div class="container-fluid bgcolor mt-2">
+    <div class="row ">
+
+        <div class="card">
+            <select style="width: 100px;" class="form-control inputfield select" (change)="GetmonthID($event)"
+                id="MonthID" name="MonthID">
+                <option value="0">Select Month </option>
+                <option value="1">January </option>
+                <option value="2">February </option>
+                <option value="3">March </option>
+                <option value="4">April </option>
+                <option value="5">May </option>
+                <option value="6">June </option>
+                <option value="7">July </option>
+                <option value="8">August </option>
+                <option value="9">September </option>
+                <option value="10">October </option>
+                <option value="11" selected>November </option>
+                <option value="12">December </option>
+
+            </select>
+        </div>
+
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-4 common-col ">
+            <div class="card small-card1 d-flex flex-column align-items-center ">
+                <p class="card-head">Total Headcount</p>
+                <p class="mb-0 sm-head mt-3">1200</p>
+            </div>
+
+            <div class="card">
+                <p class="card-head">Headcount By Gender</p>
+                <div id="chart1">
+                </div>
+            </div>
+        </div>
+        <div class="col-4 common-col">
+            <div class="card small-card d-flex flex-cHeadcount % By Work Location Typeolumn align-items-center">
+                <p class="card-head">New Hires</p>
+                <p class="mb-0 sm-head">120</p>
+              
+            </div>
+            <div class="card small-card d-flex flex-column align-items-center">
+                <p class="card-head">Total Attritions</p>
+                <p class="mb-0 sm-head">21</p>
+               
+            </div>
+            <div class="card small-card2 d-flex flex-column align-items-center">
+                <p class="card-head">Headcount by Job Level</p>
+                <div id="chart"></div>
+                <!-- <p class="mb-0 sm-head">38</p>
+                <p class="mb-0 mainheading">-5.7% vs last month
+                </p> -->
+            </div>
+        </div>
+        <div class="col-4 common-col">
+            <div class="card">
+                <p class="card-head">Headcount By Employment Type</p>
+                <div id="chart2">
+                </div>
+            </div>
+            <div class="card small-card2 d-flex flex-column align-items-center">
+                <p class="card-head">Headcount By Department</p>
+                <div id="chart4"></div>
+                <!-- <p class="mb-0 sm-head">497</p>
+                <p class="mb-0 mainheading">+5.8% vs last month
+                </p> -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <p class="mt-2 heading">Leaves And Attendance Dashboard</p>
+    <div class="row">
+        <div class="col-4 common-col ">
+            <div class="card small-card d-flex flex-column align-items-center ">
+                <p class="card-head">% Emp with Complete Attendance</p>
+                <p class="mb-0 sm-head">22</p>
+                <p class="mb-0 mainheading">
+                </p>
+            </div>
+            <div class="card small-card d-flex flex-column align-items-center ">
+                <p class="card-head">Total Overtime Hours</p>
+                <p class="mb-0 sm-head">165</p>
+                
+            </div>
+            <div class="card small-card d-flex flex-column align-items-center ">
+                <p class="card-head">Total Leaves Taken</p>
+                <p class="mb-0 sm-head">45</p>
+              
+            </div>
+            <div class="card small-card d-flex flex-column align-items-center ">
+                <p class="card-head">Rejected Leaves</p>
+                <p class="mb-0 sm-head">331</p>
+                
+            </div>
+        </div>
+        <div class="col-4 common-col">
+            <div class="card small-card d-flex flex-column align-items-center ">
+                <p class="card-head">Punctuality %</p>
+                <p class="mb-0 sm-head">54
+                </p>
+              
+            </div>
+            <div class="card small-card d-flex flex-column align-items-center ">
+                <p class="card-head">Total Undertime Hours</p>
+                <p class="mb-0 sm-head">32</p>
+               
+            </div>
+            <div class="card small-card d-flex flex-column align-items-center ">
+                <p class="card-head">Total Leave Balance</p>
+                <p class="mb-0 sm-head">578</p>
+              
+            </div>
+            <div class="card small-card d-flex flex-column align-items-center ">
+                <p class="card-head">Pending Approval
+                </p>
+                <p class="mb-0 sm-head">45</p>
+                <p class="mb-0 mainheading">
+                </p>
+            </div>
+        </div>
+        <div class="col-4 common-col">
+            <div class="card">
+                <p class="card-head">Headcount % By Work Location Type</p>
+                <div id="chart6">
+                </div>
+            </div>
+            <div class="card small-card2 d-flex flex-column align-items-center">
+                <p class="card-head">Leaves Taken By Type</p>
+                <div id="chart5"></div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

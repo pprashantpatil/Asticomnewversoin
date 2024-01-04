@@ -25,6 +25,9 @@ import { RoleMasterDashComponent } from './Master/role-master-dash/role-master-d
 import { LoadattedanceComponent } from './Configuration/loadattedance/loadattedance.component';
 import { LeaveUploadComponent } from './Configuration/leave-upload/leave-upload.component';
 import { HRLeaveRequestDashComponent } from './Requests/hrleave-request-dash/hrleave-request-dash.component';
+import { HrdashboardComponent } from './hrdashboard/hrdashboard.component';
+import { HrGraphDashComponent } from './hr-graph-dash/hr-graph-dash.component';
+import { HranalyticsgraphComponent } from './hranalyticsgraph/hranalyticsgraph.component';
 
 const routes: Routes = [
   { path: 'AddressDetailsWizard', component: AddressDetailsWizardComponent  ,canActivate: [AuthguardGuard]},
@@ -52,6 +55,11 @@ const routes: Routes = [
   { path: 'LoadAttendance', component: LoadattedanceComponent  ,canActivate: [AuthguardGuard]},
   { path: 'LeaveUpload', component: LeaveUploadComponent  ,canActivate: [AuthguardGuard]},
   { path: 'HRLeaveRequestDash', component: HRLeaveRequestDashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'hrdashboard', component: HrdashboardComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'HrGraphDash', component: HrGraphDashComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'hranalyticsgraph', component: HranalyticsgraphComponent  ,canActivate: [AuthguardGuard]},
+
+  
 ];
 
 @NgModule({
