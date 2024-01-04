@@ -5,14 +5,13 @@ import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-exitformalityformdash',
   templateUrl: './exitformalityformdash.component.html',
   styleUrls: ['./exitformalityformdash.component.css']
 })
 export class ExitformalityformdashComponent implements OnInit {
-month: any;
+  month: any;
   roleID: any;
   staffID: any;
 
@@ -36,8 +35,8 @@ month: any;
   hrupdateid: any;
   showPopup: number = 0;
   messageId: number = 0;
-  roledropdownSettings : any
-  roleonItemSelect : any
+  roledropdownSettings: any
+  roleonItemSelect: any
   ngOnInit(): void {
     debugger
     this.currentUrl = window.location.href;
@@ -61,7 +60,7 @@ month: any;
 
 
   }
-  search:any;
+  search: any;
   EmployeeEmailID: any;
   manageremailid: any
   Staffleaveenitilment: any;
@@ -622,7 +621,7 @@ month: any;
     debugger
     console.log(item.id);
     this.ActingManager = item.id;
-    this.L1Manager=item.id;
+    this.L1Manager = item.id;
   }
 
   getchangemonth(event: any) {
@@ -644,5 +643,11 @@ month: any;
         })
       this.loader = false;
     }
+  }
+
+  public reset() {
+    debugger
+    this.month = '';
+    this.ngOnInit();
   }
 }

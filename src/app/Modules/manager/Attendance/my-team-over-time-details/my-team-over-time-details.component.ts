@@ -62,7 +62,7 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   id: any;
   sdte: any;
   Notes: any;
-  fulldate:any;
+  fulldate: any;
   month: any;
   payperiod: any;
   payrolltype: any;
@@ -75,10 +75,10 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   RestNightOt: any;
   RestNormalOT: any;
   ExccessRestNormalOt: any;
-  firstDayOfCurrentMonthFilter:any;
-  lastDayOfCurrentMonthFilter:any;
-  firstDayOfCurrentMonth:any;
-  lastDayOfCurrentMonth:any
+  firstDayOfCurrentMonthFilter: any;
+  lastDayOfCurrentMonthFilter: any;
+  firstDayOfCurrentMonth: any;
+  lastDayOfCurrentMonth: any
   RestExccessNightOt: any;
   LegalNightOt: any;
   LegalNormalOT: any;
@@ -107,8 +107,11 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   otFilter1: any;
   otFilter2: any;
   otFilter3: any;
+  otManagerFilter1: any;
+  otManagerFilter2: any;
+  otManagerFilter3: any;
 
-  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router,public datePipe:DatePipe) { }
+  constructor(public DigiofficeService: DigiofficecorehrService, public router: Router, public datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.currentUrl = window.location.href;
@@ -134,7 +137,6 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
     let date = new Date()
     this.day = date.getDate();
     this.month = new Date().getMonth() + 1;
-
     if ((this.day <= 15 && this.day >= 1)) {
       this.payrolltype = 1
     }
@@ -175,6 +177,10 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
           this.timedetails1 = data.filter(x => (x.status == 'Manager Pending' || x.status == 'Manager Pending HR Pending'));
           this.timedetails2 = data.filter(x => (x.status == 'Manager Approved' || x.status == 'Manager Approved HR Pending'))
           this.timedetails3 = data.filter(x => x.status == 'Manager Rejected');
+
+          this.otManagerFilter1 = data.filter(x => (x.status == 'Manager Pending' || x.status == 'Manager Pending HR Pending'));
+          this.otManagerFilter2 = data.filter(x => (x.status == 'Manager Approved' || x.status == 'Manager Approved HR Pending'))
+          this.otManagerFilter3 = data.filter(x => x.status == 'Manager Rejected');
           this.count = this.timedetails.length
         }
       })
@@ -366,7 +372,7 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
       })
   }
 
-  public exportexcel1() {
+  public exportexcel() {
     debugger
     var ExportData = [];
     this.sequenceNumber1 = 0;
@@ -468,6 +474,12 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
     else if (this.startDate == undefined) {
       Swal.fire("Please select the start date first")
       this.endDate = ""
+      this.loader = false;
+    }
+    else if (this.roleid == 2) {
+      this.timedetails1 = this.otManagerFilter1.filter((x: { date: any; }) => (x.date >= this.startDate && x.date <= this.endDate));
+      this.timedetails2 = this.otManagerFilter2.filter((x: { date: any; }) => (x.date >= this.startDate && x.date <= this.endDate));
+      this.timedetails3 = this.otManagerFilter3.filter((x: { date: any; }) => (x.date >= this.startDate && x.date <= this.endDate));
       this.loader = false;
     }
     else {

@@ -165,7 +165,7 @@ export class SidebarComponent implements OnInit {
       this.data11.emit('Over Time Details');
     }
     else {
-      this.router.navigate(['/Employee/OverTimeDetailsDash']);
+      this.router.navigate(['/Manager/MyTeamOverTimeDetails']);
       localStorage.setItem('Pagename', 'Over Time Details');
       this.data11.emit('Over Time Details');
     }

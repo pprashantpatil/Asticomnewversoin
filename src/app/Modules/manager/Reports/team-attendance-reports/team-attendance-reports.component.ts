@@ -4,7 +4,7 @@ const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.
 const EXCEL_EXTENSION = '.xlsx';
 import { DigiofficecorehrService } from 'src/app/Services/digiofficecorehr.service';
 import Swal from 'sweetalert2';
-import { formatDate } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-team-attendance-reports',
@@ -12,9 +12,7 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./team-attendance-reports.component.css']
 })
 export class TeamAttendanceReportsComponent implements OnInit {
-term: any;
-
-  constructor(public DigiofficeService: DigiofficecorehrService) { }
+  term: any;
   roleID: any
   dropdownList: any = [];
   selectedItems: any = [];
@@ -29,14 +27,17 @@ term: any;
   filtereddate: any;
   todaydate: any;
   firstDayOfCurrentMonth: any;
-  lastDayOfCurrentMonthFilter:any;
-  firstDayOfCurrentMonthFilter:any;
-  lastDayOfCurrentMonth:any;
-  loader:any;
+  lastDayOfCurrentMonthFilter: any;
+  firstDayOfCurrentMonthFilter: any;
+  lastDayOfCurrentMonth: any;
+  loader: any;
   showPopup: number = 0;
   messageId: number = 0;
   p: any = 1;
   count1: any = 10;
+startdate1: any;
+
+  constructor(public DigiofficeService: DigiofficecorehrService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.currentUrl = window.location.href;
@@ -71,18 +72,7 @@ term: any;
         next: data => {
           debugger
           this.dropdownList = data.filter(x => x.supervisor == this.staffid);
-        }, error: (err) => {
-          // Swal.fire('Issue in Getting Attendance');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
+          this.loader = false;
         }
       })
   }
@@ -97,18 +87,7 @@ term: any;
           next: data => {
             debugger
             this.attendancelist = data.filter(x => x.userID == this.employeeid)
-          }, error: (err) => {
-            // Swal.fire('Issue in Getting Attendance');
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
+            this.loader = false;
           }
         })
     }
@@ -118,18 +97,7 @@ term: any;
           next: data => {
             debugger
             this.attendancelist = data;
-          }, error: (err) => {
-            // Swal.fire('Issue in Getting Attendance');
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
+            this.loader = false;
           }
         })
     }
@@ -137,27 +105,25 @@ term: any;
 
   public getenddate(event: any) {
     debugger
-    this.showPopup=0;
+    this.showPopup = 0;
+    this.startdate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
+    this.enddate = this.datePipe.transform(event[1], 'yyyy-MM-dd');
     if (this.startdate == undefined) {
-     /*  Swal.fire('Please Select Start Date'); */
       this.enddate = ""
-      
-      this.showPopup=1;
-      this.messageId=82;
+      this.showPopup = 1;
+      this.messageId = 82;
     }
-
     else if (this.enddate == "") {
       this.enddate = "";
       this.startdate = "";
       this.ngOnInit();
     }
-
     else if (this.enddate < this.startdate) {
       Swal.fire('Enddate Must Be Greater Than Startdate')
       this.enddate = ""
       this.startdate = ""
-      this.showPopup=1;
-      this.messageId=29;
+      this.showPopup = 1;
+      this.messageId = 29;
     }
     else {
       if (this.roleID == 10) {
@@ -165,71 +131,34 @@ term: any;
           .subscribe({
             next: data => {
               debugger
-              this.attendancelist = data.filter(x=>x.signinDate >= this.startdate && x.signinDate <= this.enddate);
-            }, error: (err) => {
-              // Swal.fire('Issue in Getting Attendance');
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
+              this.attendancelist = data.filter(x => x.signinDate >= this.startdate && x.signinDate <= this.enddate);
+              this.loader = false;
             }
           })
       }
       else {
-        this.DigiofficeService.GetAttendanceByManagerID(this.staffid, this.startdate, this.enddate)
+        this.DigiofficeService.GetAttendanceByManagerID(this.staffid, this.firstDayOfCurrentMonth, this.todaydate)
           .subscribe({
             next: data => {
               debugger
-              this.attendancelist = data;
-            }, error: (err) => {
-              //Swal.fire('Issue in Getting Attendance');
-              // Insert error in Db Here//
-              var obj = {
-                'PageName': this.currentUrl,
-                'ErrorMessage': err.error.message
-              }
-              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                data => {
-                  debugger
-                },
-              )
+              this.attendancelist = data.filter(x => x.signinDate >= this.startdate && x.signinDate <= this.enddate);
+              this.loader = false;
             }
           })
       }
     }
   }
 
-
-
-
   public GetAttendance() {
     debugger
-    this.loader=true;
-    if (this.roleID == 10||this.roleID == 11||this.roleID == 9) {
-      this.DigiofficeService.GetAttendanceBydate(this.firstDayOfCurrentMonth,this.lastDayOfCurrentMonth)
+    this.loader = true;
+    if (this.roleID == 10 || this.roleID == 11 || this.roleID == 9) {
+      this.DigiofficeService.GetAttendanceBydate(this.firstDayOfCurrentMonth, this.lastDayOfCurrentMonth)
         .subscribe({
           next: data => {
             debugger
             this.attendancelist = data;
-            this.loader=false;
-          }, error: (err) => {
-            // Swal.fire('Issue in Getting Attendance');
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
+            this.loader = false;
           }
         })
     }
@@ -239,22 +168,10 @@ term: any;
           next: data => {
             debugger
             this.attendancelist = data;
-          }, error: (err) => {
-            // Swal.fire('Issue in Getting Attendance');
-            // Insert error in Db Here//
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              data => {
-                debugger
-              },
-            )
+            this.loader = false;
           }
         })
     }
-
   }
 
   exportexcel(): void {
@@ -268,5 +185,11 @@ term: any;
 
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
+  }
+
+  public reset() {
+    debugger
+    this.startdate1 = '';
+    this.ngOnInit();
   }
 }

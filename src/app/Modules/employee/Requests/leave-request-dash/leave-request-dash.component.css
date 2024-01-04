@@ -132,20 +132,8 @@ th {
   background-color: #e4e5e6;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-li {
-  float: left;
-}
-
 
 li a {
- 
   display: block;
   color: #1125a9;
   text-align: center;
