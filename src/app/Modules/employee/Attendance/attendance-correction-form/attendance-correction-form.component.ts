@@ -113,7 +113,7 @@ export class AttendanceCorrectionFormComponent implements OnInit {
       else {
         var eb = {
           'StaffID': localStorage.getItem('staffid'),
-          'date': this.date,
+          'SDate': this.date,
           'AttendanceDate': this.date,
           'StartTime1': this.add_leading0(this.startTime.getHours()) + ':' + this.add_leading0(this.startTime.getMinutes()),
           'EndTime1': this.add_leading0(this.endTime.getHours()) + ':' + this.add_leading0(this.endTime.getMinutes()),
@@ -125,14 +125,14 @@ export class AttendanceCorrectionFormComponent implements OnInit {
             next: data => {
               debugger
               if (data == 0) {
-                Swal.fire("Submitted Successfully to the manager " + this.managerName + " Please check ACR Report for periodic analysis");
+                Swal.fire("Submitted Successfully to the manager "+ " Please check ACR Report for periodic analysis");
                 location.href = "#/Employee/AttendanceCorrectionDash";
                 this.sendEmail();
                 this.insertNotification();
                 this.loader = false;
               }
               else {
-                Swal.fire("Submitted Successfully to the manager " + this.managerName + " Please check ACR Report for periodic analysis");
+                Swal.fire("Submitted Successfully to the manager " + " Please check ACR Report for periodic analysis");
                 this.sendEmail();
                 this.insertNotification();
                 location.href = "#/Employee/AttendanceCorrectionDash";
@@ -174,7 +174,7 @@ export class AttendanceCorrectionFormComponent implements OnInit {
       'Event': 'Attendance Correction',
       'FromUser': 'Admin',
       'ToUser': 'Admin',
-      'Message': 'Your Attendance Has been Submited to Manager for Approval',
+      'Message': 'Your Attendance Correction request Has been Submited to Manager for Approval',
       'Photo': 'Null',
       'Building': 'Dynamics 1',
       'UserID': localStorage.getItem('staffid'),
@@ -214,7 +214,7 @@ export class AttendanceCorrectionFormComponent implements OnInit {
       var entity = {
         'ID': this.ID,
         'StaffID': localStorage.getItem('staffid'),
-        'date': this.date,
+        'SDate': this.date,
         'AttendanceDate': this.date,
         'StartTime1': this.add_leading0(this.startTime.getHours()) + ':' + this.add_leading0(this.startTime.getMinutes()) ,
         'EndTime1': this.add_leading0(this.endTime.getHours()) + ':' +  this.add_leading0(this.endTime.getMinutes()),

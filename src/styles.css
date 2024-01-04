@@ -2083,7 +2083,15 @@ input[type="bsdate"] {
 }
 
 
+.callendernavButtons {
+  text-align: center;
+  font-size: xx-large;
+  margin-bottom: 2%;
+}
 
+.callendernavButtons a {
+  color: white;
+}
 
 
 .commondropzone {

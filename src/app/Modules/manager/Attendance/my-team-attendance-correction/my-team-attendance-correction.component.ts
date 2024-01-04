@@ -180,7 +180,7 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
               this.ngOnInit();
               this.loader = false;
               this.showPopup = 1;
-              this.messageId = 10
+              this.messageId = 10;
             }
           })
       }
