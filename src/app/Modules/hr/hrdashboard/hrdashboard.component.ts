@@ -222,7 +222,7 @@ export class HrdashboardComponent implements OnInit {
    // this.GetHRApprove() 
     this.GetAttendanceself();
    // this.GetEmployeeDataChangeDetails();
-    //this.GetOnBoardingInisiation();
+    this.GetOnBoardingInisiation();
     this.GetEmployeeLoansCountforDashboard1();
     this.GetStaffLeaveCountForDashboard1();
     this.GetAttendanceInit();
@@ -244,7 +244,7 @@ export class HrdashboardComponent implements OnInit {
           this.profilepercentage = temp[0].profilepercentage * 9;
           this.loader = false;
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+         // 
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -271,7 +271,7 @@ export class HrdashboardComponent implements OnInit {
   //         this.HRName = this.hrapprovalConfiglist[0].fullname
   //         this.loader = false;
   //       }, error: (err) => {
-  //         Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+  //         
   //         this.loader = false;
 
   //        var obj = {
@@ -299,7 +299,7 @@ export class HrdashboardComponent implements OnInit {
           this.presentcount = this.attendancelistforcount.length
           this.loader = false;
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+         // 
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -357,7 +357,7 @@ export class HrdashboardComponent implements OnInit {
             this.loader = false;
           }
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -383,7 +383,7 @@ export class HrdashboardComponent implements OnInit {
   //         this.loader=false;
   //         /* this.punchintime = temp[0].signinDate; */
   //       }, error: (err) => {
-  //         Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+  //         
   //        
   //         var obj = {
   //           'PageName': this.currentUrl,
@@ -407,7 +407,7 @@ export class HrdashboardComponent implements OnInit {
           this.punchouttime = temp[0].signoutDate;
           this.loader = false;
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -433,7 +433,7 @@ export class HrdashboardComponent implements OnInit {
           this.approevedreg = teamregularization.filter((x: { approve: number; }) => x.approve == 1).length;
           this.loader = false;
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -460,7 +460,7 @@ export class HrdashboardComponent implements OnInit {
           this.rejectedloancount = temp[0].rejectedcountforhr;
           this.loader = false;
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -539,7 +539,7 @@ export class HrdashboardComponent implements OnInit {
           this.CancelledCount = temp1[0].cancelcountsupervisor
           this.loader = false;
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -565,7 +565,7 @@ export class HrdashboardComponent implements OnInit {
           this.ipaddress = temap.ip
           this.loader = false;
         }, error: (err) => {
-          // Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');       
+          //        
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -604,7 +604,7 @@ export class HrdashboardComponent implements OnInit {
   //         this.emailID = this.Anniverserylist1[0].emailID
   //         this.loader = false;
   //       }, error: (err) => {
-  //         Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');        
+  //                 
   //         var obj = {
   //           'PageName': this.currentUrl,
   //           'ErrorMessage': err.error.message
@@ -632,7 +632,7 @@ export class HrdashboardComponent implements OnInit {
   //         this.AnniverserylistView = data.filter(x => x.dobdate == String(this.day).concat('-', String(this.month)));
   //         this.loader = false;
   //       }, error: (err) => {
-  //         Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+  //         
 
   //         var obj = {
   //           'PageName': this.currentUrl,
@@ -664,7 +664,7 @@ export class HrdashboardComponent implements OnInit {
   //         this.emailID = this.Anniverserylist2[0].emailID
   //         this.loader = false;
   //       }, error: (err) => {
-  //         Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+  //         
 
   //         var obj = {
   //           'PageName': this.currentUrl,
@@ -716,7 +716,7 @@ export class HrdashboardComponent implements OnInit {
             }
           }
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
           this.loader = false;
          var obj = {
             'PageName': this.currentUrl,
@@ -753,7 +753,7 @@ export class HrdashboardComponent implements OnInit {
             }
           }
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
           this.loader = false;
          var obj = {
             'PageName': this.currentUrl,
@@ -813,7 +813,7 @@ export class HrdashboardComponent implements OnInit {
 
                     this.InsertNotificationPunchIn();
                   }, error: (err) => {
-                  //  Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+                  //  
                     var obj = {
                       'PageName': this.currentUrl,
                       'ErrorMessage': err.error.message
@@ -828,7 +828,7 @@ export class HrdashboardComponent implements OnInit {
             }
           }, error: (err) => {
              
-          //  Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          //  
             this.loader = false;
             var obj = {
               'PageName': this.currentUrl,
@@ -869,7 +869,7 @@ export class HrdashboardComponent implements OnInit {
           this.ngOnInit();
           this.loader = false;
         }, error: (err) => {
-          // Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          // 
           this.loader = false;
          var obj = {
             'PageName': this.currentUrl,
@@ -934,7 +934,7 @@ export class HrdashboardComponent implements OnInit {
                             let temp: any = data;
                             this.punchouttime = temp[0].signoutDate;
                           }, error: (err) => {
-                          //  Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+                          //  
                            
                             var obj = {
                               'PageName': this.currentUrl,
@@ -949,7 +949,7 @@ export class HrdashboardComponent implements OnInit {
                         })
                     }
                   }, error: (err) => {
-                  //  Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+                  //  
                    
                     var obj = {
                       'PageName': this.currentUrl,
@@ -963,7 +963,7 @@ export class HrdashboardComponent implements OnInit {
                   }
                 })
             }, error: (err) => {
-            //  Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+            //  
              
               var obj = {
                 'PageName': this.currentUrl,
@@ -996,7 +996,7 @@ export class HrdashboardComponent implements OnInit {
   //         this.emailID = this.Anniverserylist[0].emailID
   //         this.loader = false;
   //       }, error: (err) => {
-  //         Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+  //         
 
   //         var obj = {
   //           'PageName': this.currentUrl,
@@ -1019,7 +1019,7 @@ export class HrdashboardComponent implements OnInit {
   //         this.Anniverserylist = data.filter(x => x.date_Of_Marriage == this.myDate + "T00:00:00");
   //         this.loader = false;
   //       }, error: (err) => {
-  //         Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+  //         
 
   //         var obj = {
   //           'PageName': this.currentUrl,
@@ -1054,7 +1054,7 @@ export class HrdashboardComponent implements OnInit {
                 this.loader = false;
               }
             }, error: (err) => {
-            //  Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+            //  
               this.loader = false;
               var obj = {
                 'PageName': this.currentUrl,
@@ -1095,7 +1095,7 @@ export class HrdashboardComponent implements OnInit {
             this.loader = false;
           }
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -1128,7 +1128,7 @@ export class HrdashboardComponent implements OnInit {
             this.loader = false;
           }
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -1161,7 +1161,7 @@ export class HrdashboardComponent implements OnInit {
             this.loader = false;
           }
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
          var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message,
@@ -1248,7 +1248,7 @@ export class HrdashboardComponent implements OnInit {
                       })
                   }
                 }, error: (err) => {
-                //  Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+                //  
                   this.loader = false;
                   var obj = {
                     'PageName': this.currentUrl,
@@ -1262,7 +1262,7 @@ export class HrdashboardComponent implements OnInit {
                 }
               })
           }, error: (err) => {
-          //  Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          //  
             this.loader = false;
             var obj = {
               'PageName': this.currentUrl,
@@ -1309,7 +1309,7 @@ export class HrdashboardComponent implements OnInit {
           this.ngOnInit();
           this.loader = false;
         }, error: (err) => {
-          // Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          // 
           this.loader = false;
          var obj = {
             'PageName': this.currentUrl,
@@ -1338,7 +1338,7 @@ export class HrdashboardComponent implements OnInit {
           this.onboardingcount = this.OnBoardingInisiationListpostjoining.length
           this.loader = false
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
           this.loader = false;
          var obj = {
             'PageName': this.currentUrl,
@@ -1586,7 +1586,7 @@ export class HrdashboardComponent implements OnInit {
 
           this.loader = false;
         }, error: (err) => {
-          Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
+          
 
          var obj = {
             'PageName': this.currentUrl,
