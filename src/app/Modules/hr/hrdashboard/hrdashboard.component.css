@@ -2228,7 +2228,7 @@ p {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
-  left: 68%;
+  left: 60%;
   top: 100%;
   position: absolute;
   font-size: 14px;
@@ -8358,16 +8358,16 @@ h3 {
 }
 
 .attac-text {
-  font-size: 12px;
+  font-size: 10px;
   margin-bottom: 0.2rem;
-  width: 150px;
+  width: 50px;
   color: #0C275A;
   font-weight: 600;
 
 }
 
 .attac-day {
-  font-size: 12px;
+  font-size: 10px;
   margin-bottom: 0.2rem;
   width: 150px;
   color: #737373;

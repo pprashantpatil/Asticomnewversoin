@@ -156,12 +156,12 @@
                                 <p class="card-head-one">Announcements</p>
 
                                 <img src="assets/Images/revamp/Annoucenment-white-img.png"
-                                    *ngIf="annnounecemnetlist.length==0" class="annou-img" />
+                                    *ngIf="annnounecemnetlist!=undefined && annnounecemnetlist.length==0" class="annou-img" />
                                 <p *ngIf="show==true" class="anno-text">No announcements <br> for
                                     today </p>
 
                                 <div class="d-flex flex-column align-items-center p-2"
-                                    *ngIf="annnounecemnetlist.length!=0">
+                                    *ngIf="annnounecemnetlist!=undefined &&  annnounecemnetlist.length!=0">
 
                                     <ngb-carousel #carousel [interval]="0" [showNavigationArrows]="true" class="carus">
 
@@ -179,12 +179,12 @@
                                 <p class="view-textannoubce" (click)="announcement()">View All</p>
                             </div>
                         </div>
-                        <div class="annoc-card ml-2 mb-2 ml-4" *ngIf="annnounecemnetlist?.length==0">
+                        <div class="annoc-card ml-2 mb-2 ml-4" *ngIf="dispyList?.length==0">
                             <div class="card-content">
 
                                 <p class="card-head-one">Holidays</p>
 
-                                <img src="assets/FigmaImg/noholiday.svg" *ngIf="annnounecemnetlist.length==0"
+                                <img src="assets/FigmaImg/noholiday.svg" *ngIf="dispyList.length==0"
                                     class="annou-img" />
                                 <p *ngIf="show==true" class="anno-text">No Holiday <br> for
                                     today </p>
@@ -194,20 +194,20 @@
                             </div>
                         </div>
 
-                        <div class="annoc-card ml-2 mb-2 ml-4" *ngIf="annnounecemnetlist?.length>0">
+                        <div class="annoc-card ml-2 mb-2 ml-4" *ngIf="dispyList?.length>0">
                             <div class="card-content">
                                 <p class="holidayimgtxt">Holidays</p>
                                 <div class="row ">
-                                    <div *ngIf="holidaylist?.length==0">
+                                    <div *ngIf="dispyList?.length==0">
                                         <img src="assets/FigmaImg/noholiday.svg" class="img-holi noholiday" />
-                                        <h4 class="noholidaytext" *ngIf="holidaylist?.length==0">No holiday has yet set
+                                        <h4 class="noholidaytext" *ngIf="dispyList?.length==0">No holiday has yet set
                                         </h4>
                                         <p class="d-flex justify-content-end noholidayviewall" (click)="holiday()">
                                             View All</p>
                                     </div>
 
                                     <div class="col-6">
-                                        <div *ngIf="holidaylist?.length!=0">
+                                        <div *ngIf="dispyList!=undefined &&  dispyList?.length!=0">
                                             <img class="tphoimg" src="{{tpholidayattachment}}"><br>
                                             <p class="holidayname">{{topholidayname}}</p>
                                             <p class="holidaydate">{{topholidaydate|date}}</p>
@@ -229,7 +229,7 @@
                                                             holiday?.holiday }}
                                                             <!-- {{holiday?.holiday}} -->
                                                         </h6>
-                                                        <h6 class="attac-day">{{holiday?.holidayDate|date}}</h6>
+                                                        <h6 class="attac-day">{{holiday?.holidayDate}}</h6>
                                                     </div>
 
                                                 </div>

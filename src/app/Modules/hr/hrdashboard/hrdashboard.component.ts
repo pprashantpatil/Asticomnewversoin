@@ -203,22 +203,7 @@ export class HrdashboardComponent implements OnInit {
     this.firstDayofcurrentmonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
     this.firstDayofcurrentmonth = formatDate(this.firstDayofcurrentmonth, format, locale);
     this.showfront = true;
-    this.Anniversery = true;
-    this.Birthday = false;
-    this.BirthdayView = false;
-    this.NewJoinee = false;
     this.staffID = localStorage.getItem('staffid');
-    this.DigiofficeService.GetLoanConfiguration()
-    .subscribe({
-      next: data => {
-        this.loanconfiglist = data.filter(x=>x.approver1 == this.staffID || x.approver2 == this.staffID || x.loanprocessor == this.staffID || x.approver3 == this.staffID || x.approver4 == this.staffID || x.approver5 == this.staffID)
-        if(this.loanconfiglist.length!=0){
-          this.loanenable=1;
-        }
-        else{
-          this.loanenable=0;        }
-      }
-    })
    // this.GetHRApprove() 
     //this.GetAttendanceself();
    // this.GetEmployeeDataChangeDetails();
@@ -734,17 +719,19 @@ export class HrdashboardComponent implements OnInit {
   }
 
   public GetHolidays() {
+      
     this.loader = true;
     this.DigiofficeService.GetHolidays()
       .subscribe({
-        next: data => {   
-          this.holidaylist = data;        
+        next: data => {
+            debugger
+          this.holidaylist = data;
           this.holidaylist1 = data;
           this.topholidayname = this.holidaylist[0].holiday;
           this.topholidaydate = this.holidaylist[0].holidayDate;
           this.tpholidayattachment = this.holidaylist[0].attachment;
           for (let i = 1; i <= this.holidaylist1.length; i++) {
-            if (this.dispyList.length < 3) {
+            if (this.dispyList.length < 2) {
               this.dispyList.push(this.holidaylist1[i]);
               this.loader = false;
             }
@@ -752,23 +739,9 @@ export class HrdashboardComponent implements OnInit {
               this.loader = false;
             }
           }
-        }, error: (err) => {
-          
-          this.loader = false;
-         var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message,
-            'StaffID':localStorage.getItem('staffid')
-          }
-          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-            data => {
-               
-            },
-          )
         }
       })
   }
-
   public punchin() {
     this.loader = true;
     if (this.punchintime != undefined) {
