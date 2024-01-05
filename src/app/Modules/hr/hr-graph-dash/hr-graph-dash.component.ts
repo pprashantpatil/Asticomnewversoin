@@ -13,43 +13,9 @@ export class HrGraphDashComponent implements OnInit {
   public data: any = [];
   public genderlist: any;
   ngOnInit(): void {
-    const donutChartOptions1 = {
-      chart: {
-        type: 'donut',
-        height: 204, // Set the height of the chart in pixels
-      },
-      series: [600, 600],
-      labels: ['Male', 'Female'],
-      // labels: ['Category 1', 'Category 2'],
-      // Customize colors in the colors array
-      colors: ['#3247d5', '#7a96ea'],
-      // Customize width of the donut chart's segments
-      plotOptions: {
-        pie: {
-          dataLabels: {
-            offset: 40
-          }
-        }
-      },
 
-      dataLabels: {
-        style: {
-          colors: ['black'],
-         
-        }
-      },
 
-      legend: {
-        show: true,
-        position: 'bottom',
-        verticalAlign: 'bottom',
-        align: 'center'
-      },
 
-    };
-
-    var chart1 = new ApexCharts(document.querySelector('#chart1'), donutChartOptions1)
-    chart1.render();
 
     const donutChartOptions2 = {
       chart: {
@@ -104,10 +70,98 @@ export class HrGraphDashComponent implements OnInit {
 
 
    // this.GetHRDashboard_HeadCount();
+    this.GetEmployeeLoansCountforDashboard();
 
 
 
-
+  }
+  public GetEmployeeLoansCountforDashboard() {
+      
+    this.DigiofficeService.GetEmployeeLoansCountforDashboard(localStorage.getItem('staffid'))
+      .subscribe({
+        next: data => {
+          //  
+         this.genderlist = data;
+         if(this.genderlist.length!=0){
+          const donutChartOptions1 = {
+            chart: {
+              type: 'donut',
+              height: 204, // Set the height of the chart in pixels
+            },
+            series: [ this.genderlist[0].staffmale,  this.genderlist[0].stafffemale],
+            labels: ['Male', 'Female'],
+            // labels: ['Category 1', 'Category 2'],
+            // Customize colors in the colors array
+            colors: ['#3247d5', '#7a96ea'],
+            // Customize width of the donut chart's segments
+            plotOptions: {
+              pie: {
+                dataLabels: {
+                  offset: 40
+                }
+              }
+            },
+      
+            dataLabels: {
+              style: {
+                colors: ['black'],
+               
+              }
+            },
+      
+            legend: {
+              show: true,
+              position: 'bottom',
+              verticalAlign: 'bottom',
+              align: 'center'
+            },
+      
+          };
+      
+          var chart1 = new ApexCharts(document.querySelector('#chart1'), donutChartOptions1)
+          chart1.render();
+         }else{
+          const donutChartOptions1 = {
+            chart: {
+              type: 'donut',
+              height: 204, // Set the height of the chart in pixels
+            },
+            series: [600, 600],
+            labels: ['Male', 'Female'],
+            // labels: ['Category 1', 'Category 2'],
+            // Customize colors in the colors array
+            colors: ['#3247d5', '#7a96ea'],
+            // Customize width of the donut chart's segments
+            plotOptions: {
+              pie: {
+                dataLabels: {
+                  offset: 40
+                }
+              }
+            },
+      
+            dataLabels: {
+              style: {
+                colors: ['black'],
+               
+              }
+            },
+      
+            legend: {
+              show: true,
+              position: 'bottom',
+              verticalAlign: 'bottom',
+              align: 'center'
+            },
+      
+          };
+      
+          var chart1 = new ApexCharts(document.querySelector('#chart1'), donutChartOptions1)
+          chart1.render();
+         }
+         
+        }
+      })
   }
 
 

@@ -514,7 +514,7 @@
                             <div class="col-lg-2 Text">
 
                                 <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11"
-                                    [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
+                                    
                                     [placeholder]="'Select Province'" [settings]="provincedropdownSettings"
                                     [data]="Provincelist1" [(ngModel)]="StateID" (onDeSelect)="removeProvinceforworklocation($event)"
                                     (onSelect)="GetProvinceforwroklocation($event)">
@@ -522,8 +522,8 @@
 
                             </div>
                             <div class="col-lg-2 Text">
-                                <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11" style
-                                    [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
+                                <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11"
+                                   
                                     [placeholder]="'Select City'" [settings]="citydropdownSettings" [data]="Citylist1"
                                     [(ngModel)]="CityID" (onDeSelect)="removeCityforworklocation($event)" (onSelect)="getCityforworklocation($event)">
                                 </ng-multiselect-dropdown>

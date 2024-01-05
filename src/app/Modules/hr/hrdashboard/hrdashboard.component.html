@@ -15,7 +15,7 @@
                         <div class="card-one1-1" [ngStyle]="{'width': loanenable==1 ? '170px' : '220px' }">
                             <div class="d-flex flex-column align-items-center">
                                 <p class="card-head">Onboarded Staff</p>
-                                <p class="card-day">1</p>
+                                <p class="card-day">{{newhires}}</p>
                                 <div class="d-flex align-items-center justify-content-center align-center-txt">
                                     <img src="assets/FigmaImg/icon.svg" class="img-icon" />
                                     <p class="card-paragraph">
@@ -30,7 +30,7 @@
                         <div class="card-one1-1" [ngStyle]="{'width': loanenable==1 ? '170px' : '220px' }">
                             <div class="d-flex flex-column align-items-center">
                                 <p class="card-head">Approved Leaves</p>
-                                <p class="card-day">{{approvedcountforhr}}</p>
+                                <p class="card-day">{{approvedleave}}</p>
                                 <div class="d-flex align-items-center justify-content-center align-center-txt">
                                     <img src="assets/FigmaImg/icon.svg" class="img-icon" />
                                     <p class="card-paragraph">
@@ -46,7 +46,7 @@
                         <div class="card-one1-1" [ngStyle]="{'width': loanenable==1 ? '170px' : '220px' }">
                             <div class="d-flex flex-column align-items-center">
                                 <p class="card-head">Loan Request</p>
-                                <p class="card-day">{{newrquestloancount}}</p>
+                                <p class="card-day">0</p>
                                 <div class="d-flex align-items-center justify-content-center align-center-txt">
                                     <img src="assets/Images/revamp/icon.png" class="img-icon" />
                                     <p class="card-paragraph">
@@ -256,7 +256,7 @@
                     <div class="card-one mb-2">
                         <div class="card-content ">
                             <p class="card-head">Attendance Details</p>
-                            <p class="card-day">{{presentcount}} Days</p>
+                            <p class="card-day">0 Days</p>
                             <div
                                 class="align-status-icon d-flex align-items-center justify-content-center align-center-txt">
                                 <img src="assets/Images/revamp/icon.png" class="img-icon" />
@@ -275,7 +275,7 @@
                     <div class="card-oneleave mb-2" style="height: 236px;">
                         <div class="card-content ">
                             <p class="card-head">Leave Details</p>
-                            <p class="card-day">{{pendingcount1}} Days</p>
+                            <p class="card-day">0 Days</p>
                             <!-- <div class="d-flex align-center-txt">
                                 <img src="assets/Images/revamp/icon.png" class="img-icon" />
                                 <p class="card-paragraph1">Pending Leave</p>

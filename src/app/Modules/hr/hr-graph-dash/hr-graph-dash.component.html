@@ -4,7 +4,7 @@
         <div class="col-4 common-col ">
             <div class="card small-card d-flex flex-column align-items-center ">
                 <p class="card-head">Total Headcount</p>
-                <p class="mb-0 sm-head">1200</p>
+                <p class="mb-0 sm-head">{{genderlist[0]?.staffcount}}</p>
                 
             </div>
             <div class="card">
@@ -16,17 +16,17 @@
         <div class="col-4 common-col">
             <div class="card small-card d-flex flex-column align-items-center">
                 <p class="card-head">New Hires</p>
-                <p class="mb-0 sm-head">600</p>
+                <p class="mb-0 sm-head">{{genderlist[0]?.newhires}}</p>
                 
             </div>
             <div class="card small-card d-flex flex-column align-items-center">
                 <p class="card-head">Total Attritions</p>
-                <p class="mb-0 sm-head">600</p>
+                <p class="mb-0 sm-head">0</p>
                 
             </div>
             <div class="card small-card d-flex flex-column align-items-center">
                 <p class="card-head">Total Leaves Taken</p>
-                <p class="mb-0 sm-head">120</p>
+                <p class="mb-0 sm-head">{{genderlist[0]?.approvedleave}}</p>
                
             </div>
         </div>
@@ -39,7 +39,7 @@
 
             <div class="card small-card d-flex flex-column align-items-center">
                 <p class="card-head">Total Overtime Hours</p>
-                <p class="mb-0 sm-head">234</p>
+                <p class="mb-0 sm-head">{{genderlist[0]?.approvedot}}</p>
                
             </div>
         </div>

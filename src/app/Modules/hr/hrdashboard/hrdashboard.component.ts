@@ -223,7 +223,7 @@ export class HrdashboardComponent implements OnInit {
     //this.GetAttendanceself();
    // this.GetEmployeeDataChangeDetails();
     //this.GetOnBoardingInisiation();
-   // this.GetEmployeeLoansCountforDashboard1();
+   this.GetEmployeeLoansCountforDashboard1();
     //this.GetStaffLeaveCountForDashboard1();
     this.GetAttendanceInit();
     //this.getipaddress();;
@@ -484,15 +484,16 @@ export class HrdashboardComponent implements OnInit {
       this.loader = false;
     })
   }
-
+  approvedleave:any;
+  newhires:any
   public GetEmployeeLoansCountforDashboard1() {
     this.loader = true;
     this.DigiofficeService.GetEmployeeLoansCountforDashboard(localStorage.getItem('staffid')).subscribe(data => {
-      this.stafflist = data;
-      let temp = this.stafflist
+      let temp = data
       this.newrquestloancount = temp[0].pendingcountforhr;
-      this.approvedloancount = temp[0].approvedcountforhr;
-      this.rejectedloancount = temp[0].rejectedcountforhr;
+      this.approvedleave = temp[0].approvedleave;
+      this.newhires = temp[0].newhires;
+
       this.loader = false;
     });
   }
