@@ -53,6 +53,11 @@ export class SidebarComponent implements OnInit {
       localStorage.setItem('Pagename', 'Dashboard');
       this.data11.emit('Dashboard');
     }
+    else  {
+      this.router.navigate(['/HR/hrdashboard']);
+      localStorage.setItem('Pagename', 'Dashboard');
+      this.data11.emit('Dashboard');
+    }
   }
 
   public StaffDash() {

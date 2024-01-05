@@ -184,7 +184,7 @@ export class HrdashboardComponent implements OnInit {
       this.mm = temp1[0];
       this.ampm = temp1[1];
     }, 1000);
-    this.loader = true;
+    
     this.show = false;
     this.username = localStorage.getItem('UserName');
     this.email = localStorage.getItem('email');
@@ -220,11 +220,11 @@ export class HrdashboardComponent implements OnInit {
       }
     })
    // this.GetHRApprove() 
-    this.GetAttendanceself();
+    //this.GetAttendanceself();
    // this.GetEmployeeDataChangeDetails();
-    this.GetOnBoardingInisiation();
-    this.GetEmployeeLoansCountforDashboard1();
-    this.GetStaffLeaveCountForDashboard1();
+    //this.GetOnBoardingInisiation();
+   // this.GetEmployeeLoansCountforDashboard1();
+    //this.GetStaffLeaveCountForDashboard1();
     this.GetAttendanceInit();
     //this.getipaddress();;
     this.GetHolidays();
@@ -693,7 +693,7 @@ export class HrdashboardComponent implements OnInit {
       .subscribe({
         next: data => {
          
-          this.annnounecemnetlist = data.filter(x => x.filterdate == this.TodayFilterdate);
+          this.annnounecemnetlist = data.filter(x => x.filterdate == this.todaydate);
           if (this.annnounecemnetlist.length == 0) {
             this.show = true
             this.firstAttachment = null
@@ -736,10 +736,9 @@ export class HrdashboardComponent implements OnInit {
     this.loader = true;
     this.DigiofficeService.GetHolidays()
       .subscribe({
-        next: data => {           
-          this.holidaylist = data.filter(x => x.filterholidaydate >= this.TodayFilterdate);
-          // this.holidaylist1 = data.filter(x => x.region == this.province || x.region == null);
-          this.holidaylist1 = data.filter(x => x.filterholidaydate >= this.TodayFilterdate);
+        next: data => {   
+          this.holidaylist = data;        
+          this.holidaylist1 = data;
           this.topholidayname = this.holidaylist[0].holiday;
           this.topholidaydate = this.holidaylist[0].holidayDate;
           this.tpholidayattachment = this.holidaylist[0].attachment;

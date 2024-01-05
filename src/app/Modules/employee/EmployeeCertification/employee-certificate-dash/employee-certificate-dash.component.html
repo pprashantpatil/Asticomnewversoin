@@ -28,7 +28,7 @@
                 <p style="text-align: center;"> Select Start Month & Year</p>
             </div> -->
 
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <p>COE Type</p>
                 <select name="coeType" id="coeType" class="form-control" [(ngModel)]="coeType">
                     <option value="0">Select COE Type</option>
@@ -43,7 +43,7 @@
                 </select>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <p>Reason for COE Request</p>
                 <select name="reason" id="reason" class="form-control" [(ngModel)]="reason">
                     <option value="0">Select Reason for COE Request</option>
@@ -62,7 +62,7 @@
             </div>
 
             <div class="col-lg-3" *ngIf="reason=='Visa Application'">
-                <p><b>Please specify</b></p>
+                <p>Please specify</p>
                 <input type="text" class="form-control" placeholder="Country Name" [(ngModel)]="countryName"
                     name="countryName" id="countryName">
             </div>

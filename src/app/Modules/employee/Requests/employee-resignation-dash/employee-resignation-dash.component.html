@@ -57,12 +57,13 @@
                                     (click)="images(data.id)" data-toggle="modal" data-target="#exampleModal1">
                             </td>
                             <td>
-                                <label *ngIf="data.ownclearance=='0'" class="pending">Manager Pending</label><br>
+                                Manager Pending  HR Pending
+                                <!-- <label *ngIf="data.ownclearance=='0'" class="pending">Manager Pending</label><br>
                                 <label *ngIf="data.hRclearance=='0'&& data.ownclearance!=2" class="pending">HR
                                     Pending</label>
                                 <label *ngIf="data.ownclearance=='1'" class="approved">Manager Approved</label><br>
                                 <label *ngIf="data.hRclearance=='1'" class="approved">HR Approved</label>
-                                <label *ngIf="data.ownclearance=='2'" class="approved">Retained</label>
+                                <label *ngIf="data.ownclearance=='2'" class="approved">Retained</label> -->
                             </td>
                             <td *ngIf="roleID!=1">
                                 <img class="dashedit-icon" *ngIf="data.ownclearance!='1'"

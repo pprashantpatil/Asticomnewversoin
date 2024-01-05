@@ -102,16 +102,16 @@
 
 
                                 <p>Company Email<span style="color: red;">*</span>
-                                    <br> <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2 "
+                                    <br> <input [disabled]="roledid!=9 && roledid!=11"
                                         type="text" id="Personal_Email" name="Personal Email"
                                         [(ngModel)]="Personal_Email" class="form-control"
                                         placeholder="Company Email Address">
                                 </p>
 
-                                <p> EmployeeID <span style="color: red;">*</span>
+                                <p> Employee ID <span style="color: red;">*</span>
                                     <input [disabled]="roledid!=9 && roledid!=11" type="text" class="form-control"
                                         id="EmployeeID" name="EmployeeID" maxlength="11" [(ngModel)]="EmployeeID"
-                                        placeholder="Enter EmployeeID">
+                                        placeholder="Enter Employee ID">
                                 </p>
 
                             </div>
@@ -132,7 +132,7 @@
                                         <option value="Other">Other</option>
                                     </select>
                                 </p>
-                                <p>Mobile <span style="color: red;">*</span>
+                                <p>Mobile Number<span style="color: red;">*</span>
                                     <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                                         type="text" class="form-control" id="Mobile" name="Mobile" maxlength="11"
                                         [(ngModel)]="Mobile" onkeypress="return /[0-9]/i.test(event.key)"

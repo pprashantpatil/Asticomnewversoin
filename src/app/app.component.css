@@ -76,16 +76,7 @@
   width: 17px;
 }
 
-.welcomename {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 15px;
-  color: #1125a9 !important;
-  margin-top: 5px;
-  font-weight: 400;
-}
+
 
 .header-class {
   display: flex;
@@ -116,7 +107,7 @@
 
  .noti{
   display: flex;
-  margin-left: 140px;
+  margin-left: 90px;
   
 }
 .notifimodal{
@@ -133,7 +124,7 @@
 
 .icon-alignment {
   width: 42px !important;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .icon-alignment1 {
@@ -494,9 +485,9 @@
   font-weight: bold;
   font-size: 13px;
   line-height: 16px;
-  /* identical to box height, or 123% */
-  color: #FFFFFF;
+  color: #1125a9 !important;
   margin-top: 10px;
+  margin-left: -50px !important;
   font-weight: 700;
 
 }
