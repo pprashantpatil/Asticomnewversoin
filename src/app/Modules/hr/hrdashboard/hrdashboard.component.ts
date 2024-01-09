@@ -679,7 +679,7 @@ export class HrdashboardComponent implements OnInit {
       .subscribe({
         next: data => {
          
-          this.annnounecemnetlist = data.filter(x => x.filterdate == this.todaydate);
+          this.annnounecemnetlist = data.filter(x => x.filterdate == this.TodayFilterdate);
           if (this.annnounecemnetlist.length == 0) {
             this.show = true
             this.firstAttachment = null

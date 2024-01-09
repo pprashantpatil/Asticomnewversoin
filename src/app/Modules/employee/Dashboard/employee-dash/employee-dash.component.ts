@@ -581,7 +581,7 @@ export class EmployeeDashComponent implements OnInit {
       .subscribe({
         next: data => {
           //  
-          this.annnounecemnetlist = data.filter(x => x.filterdate >= this.todayfilterdate);
+          this.annnounecemnetlist = data.filter(x => x.filterdate >= this.TodayFilterdate);
           if (this.annnounecemnetlist.length == 0) {
             this.show = true
             this.firstAttachment = null
