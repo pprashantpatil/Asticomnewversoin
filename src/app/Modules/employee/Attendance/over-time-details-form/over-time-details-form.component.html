@@ -64,11 +64,156 @@
                 </div>
 
                 <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
+                    <button *ngIf="showDetails" class="close-button" data-toggle="modal" data-target="#CheckListStatusform">OT
+                        Details</button>
                     <button class="close-button" (click)="cancel()">Cancel</button>
-                    <button *ngIf="ID==undefined" class="submit-button" (click)="submit()">Submit</button>
-                    <button *ngIf="ID!=undefined" class="submit-button" (click)="update()">Update</button>
+                    <button *ngIf="showDetails" class="submit-button" (click)="submit()">Submit</button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="CheckListStatusform" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">OT Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>OT Type</th>
+                        <th>No of Hours</th>
+                        <!-- <th></th> -->
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>Normal OT </td>
+                        <td>{{noOfHours}}</td>
+                    </tr>
+                    <tr>
+                        <td>Night OT </td>
+                        <td>{{nightOTHours}}</td>
+                    </tr>
+                    <!-- <tr>
+                        <td> Restday OT </td>
+                        <td> {{restNormalOT}}</td>
+                    </tr> -->
+
+                    <tr>
+
+                        <td> Excess Night OT </td>
+                        <td> {{exccessNightOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Excess Normal OT </td>
+                        <td> {{exccessNormalOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Rest Night OT </td>
+                        <td> {{restNightOT}}</td>
+                    </tr>
+                    <tr>
+                        <td>Rest Normal OT </td>
+                        <td>{{restNormalOT}}</td>
+                    </tr>
+                    <tr>
+                        <td> Excess Rest Normal OT </td>
+                        <td> {{exccessRestNormalOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Rest Excess Night OT </td>
+                        <td> {{restExccessNightOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Legal Night OT </td>
+                        <td> {{legalNightOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Legal Normal OT </td>
+                        <td> {{legalNormalOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Legal Excess Normal OT </td>
+                        <td> {{legalExccessNormalOT}}</td>
+                    </tr>
+                    <tr>
+                        <td>Legal Excess Night OT </td>
+                        <td>{{legalExccessNightOT}}</td>
+                    </tr>
+                    <tr>
+                        <td> Special Night OT </td>
+                        <td> {{specialNightOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Special Normal OT </td>
+                        <td> {{specialNormalOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Special Excess Normal OT </td>
+                        <td> {{specialExccessNormalOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Special Excess Night OT </td>
+                        <td> {{specialExccessNightOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Special Rest Night OT </td>
+                        <td> {{specialRestNightOT}}</td>
+                    </tr>
+                    <tr>
+                        <td>Special Rest Normal OT </td>
+                        <td>{{specialRestNormalOT}}</td>
+                    </tr>
+                    <tr>
+                        <td> Special Rest Excess Normal OT </td>
+                        <td> {{specialRestExccessNormalOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Special Rest Excess Night OT </td>
+                        <td> {{specialRestExccessNightOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Legal Rest Night OT </td>
+                        <td> {{legalRestNightOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Legal Rest Normal OT </td>
+                        <td> {{legalRestNormalOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Legal Excess Rest Normal OT </td>
+                        <td> {{legalExccessRestNormalOT}}</td>
+                    </tr>
+                    <tr>
+
+                        <td> Legal Excess Rest Night OT </td>
+                        <td> {{legalExccessRestNightOT}}</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
