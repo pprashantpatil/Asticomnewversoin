@@ -12,8 +12,8 @@
                 <div class="popupinputs">
                     <p>Date<span class="span">*</span></p>
                     <div>
-                        <input type="date" onkeydown="return false" (ngModelChange)="getOverTimeDate()" id="Date"
-                            name="Date" [(ngModel)]="date" class="form-control inputfield" max="{{maxDate}}">
+                        <input type="date" id="Date" name="Date" (change)="getOverTimeDate()" [(ngModel)]="Date"
+                            class="form-control inputfield" max="{{maxdate}}">
                             <br>
                         </div>
                 </div>
@@ -21,9 +21,9 @@
                 <div class="popupinputs">
                     <p>Start Time<span class="span">*</span></p>
                     <div>
-                        <timepicker [showMeridian]="false" [showSpinners]="showSpinners" name="startTime"
-                            [(ngModel)]="startTime" id="startTime" (change)="checkStartDate()">
-                        </timepicker>
+                        <timepicker [showMeridian]="false" [showSpinners]="showSpinners" name="starttime"
+                        [(ngModel)]="starttime" id="starttime" (change)="checkstartdate()">
+                    </timepicker>
                         <span class="red">Note:Please Enter Military Time</span>
                     </div>
                 </div>
@@ -31,8 +31,8 @@
                 <div class="popupinputs">
                     <p>End Time<span class="span">*</span></p>
                     <div>
-                        <timepicker [showMeridian]="false" [showSpinners]="showSpinners" name="endTime"
-                            [(ngModel)]="endTime" id="endTime" (change)="duration()"></timepicker>
+                        <timepicker [showMeridian]="false" [showSpinners]="showSpinners" name="endtime"
+                        [(ngModel)]="endtime" id="endtime" (change)="duration()"></timepicker>
                             <span class="red">Note:Please Enter Military Time</span>
                     </div>
                 </div>
@@ -58,22 +58,21 @@
                 <div class="popupinputs">
                     <p>Comments<span class="span">*</span></p>
                     <div>
-                        <textarea type="text" class="form-control" rows="4" placeholder="Comments" [(ngModel)]="comment"
-                            name="comment" id="comment"></textarea>
+                        <textarea rows="3" id="Comments" name="Comments" [(ngModel)]="Comments" type="text"
+                            placeholder="Comments" class="form-control inputfield"></textarea>
                     </div>
                 </div>
 
                 <div class="d-flex justify-content-end w-100 mt-2 mb-2 pr-2">
-                    <button *ngIf="showDetails" class="close-button" data-toggle="modal" data-target="#CheckListStatusform">OT
+                    <button *ngIf="showdetails" class="close-button" data-toggle="modal" data-target="#CheckListStatusform">OT
                         Details</button>
                     <button class="close-button" (click)="cancel()">Cancel</button>
-                    <button *ngIf="showDetails" class="submit-button" (click)="submit()">Submit</button>
+                    <button *ngIf="showdetails" class="submit-button" (click)="Save()">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div id="CheckListStatusform" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -95,11 +94,11 @@
 
                     <tr>
                         <td>Normal OT </td>
-                        <td>{{noOfHours}}</td>
+                        <td>{{noofhours}}</td>
                     </tr>
                     <tr>
                         <td>Night OT </td>
-                        <td>{{nightOTHours}}</td>
+                        <td>{{nightothous}}</td>
                     </tr>
                     <!-- <tr>
                         <td> Restday OT </td>
@@ -109,106 +108,106 @@
                     <tr>
 
                         <td> Excess Night OT </td>
-                        <td> {{exccessNightOT}}</td>
+                        <td> {{ExccessNightOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Excess Normal OT </td>
-                        <td> {{exccessNormalOT}}</td>
+                        <td> {{ExccessNormalOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Rest Night OT </td>
-                        <td> {{restNightOT}}</td>
+                        <td> {{RestNightOt}}</td>
                     </tr>
                     <tr>
                         <td>Rest Normal OT </td>
-                        <td>{{restNormalOT}}</td>
+                        <td>{{RestNormalOT}}</td>
                     </tr>
                     <tr>
                         <td> Excess Rest Normal OT </td>
-                        <td> {{exccessRestNormalOT}}</td>
+                        <td> {{ExccessRestNormalOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Rest Excess Night OT </td>
-                        <td> {{restExccessNightOT}}</td>
+                        <td> {{RestExccessNightOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Legal Night OT </td>
-                        <td> {{legalNightOT}}</td>
+                        <td> {{LegalNightOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Legal Normal OT </td>
-                        <td> {{legalNormalOT}}</td>
+                        <td> {{LegalNormalOT}}</td>
                     </tr>
                     <tr>
 
                         <td> Legal Excess Normal OT </td>
-                        <td> {{legalExccessNormalOT}}</td>
+                        <td> {{LegalExccessNormalOt}}</td>
                     </tr>
                     <tr>
                         <td>Legal Excess Night OT </td>
-                        <td>{{legalExccessNightOT}}</td>
+                        <td>{{LegalExccessNightOt}}</td>
                     </tr>
                     <tr>
                         <td> Special Night OT </td>
-                        <td> {{specialNightOT}}</td>
+                        <td> {{SpecialNightOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Special Normal OT </td>
-                        <td> {{specialNormalOT}}</td>
+                        <td> {{SpecialNormalOT}}</td>
                     </tr>
                     <tr>
 
                         <td> Special Excess Normal OT </td>
-                        <td> {{specialExccessNormalOT}}</td>
+                        <td> {{SpecialExccessNormalOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Special Excess Night OT </td>
-                        <td> {{specialExccessNightOT}}</td>
+                        <td> {{SpecialExccessNightOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Special Rest Night OT </td>
-                        <td> {{specialRestNightOT}}</td>
+                        <td> {{SpecialRestNightOt}}</td>
                     </tr>
                     <tr>
                         <td>Special Rest Normal OT </td>
-                        <td>{{specialRestNormalOT}}</td>
+                        <td>{{SpecialRestNormalOT}}</td>
                     </tr>
                     <tr>
                         <td> Special Rest Excess Normal OT </td>
-                        <td> {{specialRestExccessNormalOT}}</td>
+                        <td> {{SpecialRestExccessNormalOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Special Rest Excess Night OT </td>
-                        <td> {{specialRestExccessNightOT}}</td>
+                        <td> {{SpecialRestExccessNightOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Legal Rest Night OT </td>
-                        <td> {{legalRestNightOT}}</td>
+                        <td> {{LegalRestNightOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Legal Rest Normal OT </td>
-                        <td> {{legalRestNormalOT}}</td>
+                        <td> {{LegalRestNormalOT}}</td>
                     </tr>
                     <tr>
 
                         <td> Legal Excess Rest Normal OT </td>
-                        <td> {{legalExccessRestNormalOT}}</td>
+                        <td> {{LegalExccessRestNormalOt}}</td>
                     </tr>
                     <tr>
 
                         <td> Legal Excess Rest Night OT </td>
-                        <td> {{legalExccessRestNightOT}}</td>
+                        <td> {{LegalExccessRestNightOt}}</td>
                     </tr>
 
 

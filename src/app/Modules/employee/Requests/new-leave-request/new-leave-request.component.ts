@@ -1087,6 +1087,22 @@ export class NewLeaveRequestComponent implements OnInit {
       this.totaldays = this.calcBusinessDays(date1, date2);
     }
 
+    this.DigiofficeService.GetAttendanceByEmployeeID(
+      localStorage.getItem('staffid'),
+      this.SDateOfLeave,
+      this.SDateOfLeave
+    ).subscribe({
+      next: (data) => {
+        let temp1: any = data;
+        if (temp1.length != 0) {
+          Swal.fire('Sorry, You Can not Apply Leave on Punched in day');
+          this.loader = false;
+          this.SDateOfLeave=null;
+          this.EDateOfLeave=null
+        }
+      },
+    });
+
     this.DigiofficeService.GetHolidaybit(
       this.SDateOfLeave,
       this.staffid
