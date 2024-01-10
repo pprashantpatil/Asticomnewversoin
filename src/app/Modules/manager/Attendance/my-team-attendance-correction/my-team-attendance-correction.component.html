@@ -94,7 +94,7 @@
                             *ngFor="let data of attendanceCorrectionPendingList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.employeid}}</td>
                             <td>{{data.staffname}}</td>
-                            <td>{{data.sDate|date}}</td>
+                            <td>{{data.attendanceDate|date}}</td>
                             <td>{{data.startTime}}</td>
                             <td>{{data.endTime}}</td>
                             <td>{{data.modifiedDate|date}}</td>
@@ -174,7 +174,7 @@
                             *ngFor="let data of attendanceCorrectionApprovedList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.employeid}}</td>
                             <td>{{data.staffname}}</td>
-                            <td>{{data.sDate|date}}</td>
+                            <td>{{data.attendanceDate|date}}</td>
                             <td>{{data.startTime}}</td>
                             <td>{{data.endTime}}</td>
                             <td>{{data.modifiedDate|date}}</td>
@@ -223,7 +223,7 @@
                             *ngFor="let data of attendanceCorrectionRejectedList|filter:search|paginate: { itemsPerPage: count1, currentPage: p}">
                             <td>{{data.employeid}}</td>
                             <td>{{data.staffname}}</td>
-                            <td>{{data.sDate|date}}</td>
+                            <td>{{data.attendanceDate|date}}</td>
                             <td>{{data.startTime}}</td>
                             <td>{{data.endTime}}</td>
                             <td>{{data.modifiedDate|date}}</td>

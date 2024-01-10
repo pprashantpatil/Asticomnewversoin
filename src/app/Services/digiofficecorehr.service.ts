@@ -1347,11 +1347,56 @@ export class DigiofficecorehrService {
   }
 
 
-
   public InsertNotification(data: any) {
     debugger;
     this.url = this.host + '/User/InsertNotification';
     return this.http.post(this.url, data);
+  }
+
+  public pushnotification(data: any) {
+    debugger;
+    
+    this.url = this.host + '/Master/pushnotification';
+    return this.http.post(this.url, data);
+  }
+  public GetNotificationTokenByStaffID(StaffID: any) {
+    return this.http.get<any[]>(
+      'https://asticom.digiofficeapp.com/AsticomMainUATTestAll' + "/MobileUser/GetNotificationTokenByStaffID?StaffID=" + StaffID
+
+    );
+  }
+  deviceid:any;
+  public pushnotificationtomobile(StaffID:any, body:any,title:any) {
+    debugger;
+    this.GetNotificationTokenByStaffID(
+      StaffID
+    ).subscribe({
+      next: (data) => {
+        debugger;
+        let temp: any = data;
+        if(  temp.length!=0){
+          this.deviceid=  temp[0]?.androidToken;
+          var entity = {
+            deviceId:this.deviceid,
+            body: body,
+            title: title,
+          };
+          this.pushnotification(entity).subscribe({
+            next: (data) => {
+              debugger;
+              if (data != 0) {
+                /*  Swal.fire("Saved Successfully"); */
+              }
+            },
+          });
+        }else{
+          this.deviceid='na'
+        }
+     
+      },
+  
+    });
+
   }
 
 
