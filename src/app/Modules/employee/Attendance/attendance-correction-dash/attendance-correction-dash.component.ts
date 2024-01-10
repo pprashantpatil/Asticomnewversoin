@@ -131,7 +131,7 @@ export class AttendanceCorrectionDashComponent implements OnInit {
     else {
       this.attendanceCorrectionPendingList = this.attendanceCorrectionPendingFilter.filter((x: { attendanceDate: any; }) => (x.attendanceDate >= this.startDate && x.attendanceDate <= this.endDate));
       this.attendanceCorrectionApprovedList = this.attendanceCorrectionApprovedFilter.filter((x: { attendanceDate: any; }) => (x.attendanceDate >= this.startDate && x.attendanceDate <= this.endDate));
-      this.attendanceCorrectionPendingList = this.attendanceCorrectionPendingFilter.filter((x: { attendanceDate: any; }) => (x.attendanceDate >= this.startDate && x.attendanceDate <= this.endDate));
+      this.attendanceCorrectionRejectedList = this.attendanceCorrectionRejectedFilter.filter((x: { attendanceDate: any; }) => (x.attendanceDate >= this.startDate && x.attendanceDate <= this.endDate));
     }
   }
 
