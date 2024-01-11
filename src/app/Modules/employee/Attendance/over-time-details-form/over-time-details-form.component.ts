@@ -283,7 +283,7 @@ export class OverTimeDetailsFormComponent implements OnInit {
                 this.showPopup = 1;
                 this.messageId = 17;
               } else {
-                if (temp[0].restdays.includes(dayname) == true) {
+                if (temp[0].restDays.includes(dayname) == true) {
 
                 } else {
                   if (this.updatedstarttime < temp[0].shifendtime) {
@@ -906,7 +906,7 @@ export class OverTimeDetailsFormComponent implements OnInit {
 
                 let temp5 = data.filter(x => (x.filterenddate >= this.Date && x.filterdate <= this.Date) && x.approve == 1);
                 if (temp5.length == 0) {
-                  /*          Swal.fire('Please Add shift and Get Approved From your Manager Before Applying OT for this date.') */
+                          Swal.fire('Please Add shift and Get Approved From your Manager Before Applying OT for this date.') ;
                   this.loader = false;
                   this.showPopup = 1;
                   this.messageId = 21;
@@ -953,7 +953,7 @@ export class OverTimeDetailsFormComponent implements OnInit {
                           this.showdetails = false;
                           this.loader = false;
                         }
-                        if (temp5[0].restdays.includes(dayname) == true) {
+                        if (temp5[0].restDays.includes(dayname) == true) {
 
                         } else {
                           if (temp[0].minutesdiff < 480 && temp[0].minutesdiff > 0) {

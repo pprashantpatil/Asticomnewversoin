@@ -192,13 +192,14 @@ export class ManagerDashComponent implements OnInit {
     this.email = localStorage.getItem('email');
     this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
     this.GetMyDetailsByStaffID();
-    this.GetAttendanceByEmployeeID();
-    this.GetAttendanceByEmployeeID1();
+    this.CheckpunchInReset();
+    // this.GetAttendanceByEmployeeID();
+    // this.GetAttendanceByEmployeeID1();
     // this.GetAnnouncements();
     //this.changeAnniversary();
     //this.GetAttendance();
-    this.GetAttendanceInit();
-    this.GetAttendance1();
+    // this.GetAttendanceInit();
+    // this.GetAttendance1();
     this.GetStaffLeaveCountForDashboard();
     //this.GetStaffLeaveCountForDashboard1();
     this.GetAllStaffNew();
@@ -206,6 +207,101 @@ export class ManagerDashComponent implements OnInit {
 
   }
 
+
+  public CheckpunchInReset() {
+    debugger
+    this.DigiofficeService.GetCurrentPhTime(this.staffID, this.todaydate, this.todaydate)
+      .subscribe({
+        next: data => {
+          debugger
+          let temp: any = data;
+          this.currenttime = temp[0].currenttime;
+          this.resettime = temp[0].resettime;
+          if (this.resettime == '05:00:00') {
+            if (this.currenttime >= '00:00:00' && this.currenttime <= '05:00:00') {
+              this.GetAttendanceByEmployeeIDforpunchin1daybefore();
+              this.GetAttendanceByEmployeeIDforpunchin1daybefore1();
+            } else {
+              this.GetAttendanceByEmployeeID();
+              this.GetAttendanceByEmployeeID1();
+            }
+          }
+          else if (this.resettime == '17:00:00') {
+            if (this.currenttime >= '00:00:00' && this.currenttime <= '17:00:00') {
+              this.GetAttendanceByEmployeeIDforpunchin1daybefore();
+              this.GetAttendanceByEmployeeIDforpunchin1daybefore1();
+
+            } else {
+              this.GetAttendanceByEmployeeID();
+              this.GetAttendanceByEmployeeID1();
+            }
+          }
+          else if (this.resettime == '11:30:00') {
+            if (this.currenttime >= '00:00:00' && this.currenttime <= '11:30:00') {
+              this.GetAttendanceByEmployeeIDforpunchin1daybefore();
+              this.GetAttendanceByEmployeeIDforpunchin1daybefore1();
+            } else {
+              this.GetAttendanceByEmployeeID();
+              this.GetAttendanceByEmployeeID1();
+            }
+          }
+
+
+
+
+        }, error: (err) => {
+          // Swal.fire('Issue in Getting Attendance By Employee ID');
+        }
+      })
+  }
+
+  public GetAttendanceByEmployeeIDforpunchin1daybefore1() {
+    this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin1daybefore(this.staffID, this.todaydate, this.todaydate)
+      .subscribe({
+        next: data => {
+          debugger
+          let temp: any = data;
+          this.punchouttime = temp[0].signoutDate;
+          this.loader = false;
+        }, error: (err) => {
+          // Swal.fire('Issue in Getting Attendance By Employee ID');
+          // Insert error in Db Here//
+          var obj = {
+            'PageName': this.currentUrl,
+            'ErrorMessage': err.error.message
+          }
+          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+            data => {
+              debugger
+            },
+          )
+        }
+      })
+  }
+
+  public GetAttendanceByEmployeeIDforpunchin1daybefore() {
+    this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin1daybefore(this.staffID, this.todaydate, this.todaydate)
+      .subscribe({
+        next: data => {
+          debugger
+          let temp: any = data;
+          this.punchintime = temp[0].signinDate;
+          this.loader = false;
+        }, error: (err) => {
+          // Swal.fire('Issue in Getting Attendance By Employee ID');
+          // Insert error in Db Here//
+          var obj = {
+            'PageName': this.currentUrl,
+            'ErrorMessage': err.error.message
+          }
+          this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+            data => {
+              debugger
+            },
+          )
+        }
+      })
+  }
   getannouncementurl(_obj: string) {
     throw new Error('Method not implemented.');
   }
@@ -689,77 +785,576 @@ export class ManagerDashComponent implements OnInit {
     this.workType = even.target.value;
   }
 
+   staffid: any;
+  Date: any;
   public punchin() {
+    debugger;
+    this.DigiofficeService.GetStaffShiftDetailsByStaffID(localStorage.getItem('staffid'))
+      .subscribe({
+        next: data => {
+          debugger
+          let temp = data.filter(x => (x.filterenddate >= x.currentdate && x.filterdate <= x.currentdate) && x.approve == 1);
+          if (temp.length == 0) {
+            Swal.fire('Please add your shift details and get approval from your manager before punching in.')
+            this.loader = false;
+            // this.showPopup = 1;
+            // this.messageId = 17;
+          } else {
+           
+            if (this.punchintime != undefined) {
+                 Swal.fire('Already Punched In for the day'); 
+              this.loader = false;
+             
+            }
+            else {
+              this.loader = false;
+              var options = { hour12: false };
+              var date = new Date();
+              var entity = {
+                UserID: localStorage.getItem('staffid'),
+                SigninDate: date.toLocaleString('en-US', options),
+                SigninLocation: 'Office',
+                StatusID: 1,
+                punchinip: this.ipaddress == undefined ? '101.120.111.222' : this.ipaddress,
+                ApprovalStatus: 'Manager Pending HR Pending'
+              }
+              this.DigiofficeService.InsertAttendanceWeb(entity)
+                .subscribe({
+                  next: data => {
+                    debugger
+                    if (data == 0) {
+                        Swal.fire('Already Punched In for the day'); 
+                      this.loader = false;
+                    
+                    }
+                    else {
+                      this.punchinId = data;
+                      localStorage.setItem('PunchINid', this.punchinId);
+                       Swal.fire('Punched In Successfully'); 
+                      this.loader = false;
+                    
+                      this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin(this.staffID, this.todaydate, this.todaydate).subscribe(data => {
+                        debugger
+                        let temp: any = data;
+                        this.punchintime = temp[0].signinDate;
+                        this.loader = false;
+                      })
+                    }
+                  }
+                })
+            }
+          }
 
+          this.loader = false;
+        }, error: (err) => {
+
+        }
+      })
+
+
+  }
+
+
+  currenttime: any;
+  resettime: any;
+  public punchout() {
+    debugger;
+ 
     this.loader = true;
-    if (this.punchintime != undefined) {
-      Swal.fire('Already Punched In for the day');
+    if (this.punchouttime != undefined) {
+       Swal.fire('Already Punched Out for the day'); 
       this.loader = false;
-    }
-    else if (this.workType == undefined || this.workType == null || this.workType == "0") {
-      // Swal.fire('Please Fill Work Type');
-      this.loader = false
+     
     }
     else {
       var options = { hour12: false };
       var date = new Date();
-      var entity = {
-        UserID: localStorage.getItem('staffid'),
-        SigninDate: date.toLocaleString('en-US', options),
-        SigninLocation: 'Office',
-        StatusID: 1,
-        punchinip: this.ipaddress == undefined ? '101.120.111.222' : this.ipaddress,
-        ApprovalStatus: 'Manager Pending HR Pending',
-        WorkType: this.workType,
-      }
-      this.DigiofficeService.InsertAttendanceWeb(entity)
-        .subscribe({
-          next: data => {
+      if (this.resettime == '05:00:00') {
+        if (this.currenttime >= '00:00:00' && this.currenttime <= '05:00:00') {
+          this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin1daybefore(this.staffID, this.todaydate, this.todaydate)
+            .subscribe({
+              next: data => {
+                debugger
+                this.loader = false;
+                var todayDate = new Date().toISOString().slice(0, 10);
+                let temp: any = data;
 
-            if (data != 0) {
-              this.punchinId = data
-              localStorage.setItem('PunchINid', this.punchinId);
-              Swal.fire('Punched In Successfully');
-              this.loader = false;
-              this.DigiofficeService.GetAttendanceByEmployeeID(this.staffID, this.todaydate, this.todaydate)
-                .subscribe({
-                  next: data => {
-
-                    let temp: any = data;
-                    this.punchintime = temp[0].startTime;
-                    this.workType1 = temp[0].workType;
-                    this.punchoutworkType1 = temp[0].punchoutWorkType
-
-                    this.InsertNotificationPunchIn()
-                    this.loader = false;
-                  }, error: (err) => {
-                    Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-
-                    var obj = {
-                      'PageName': this.currentUrl,
-                      'ErrorMessage': err.error.message
+                this.punchoutid = temp[0].id;
+                var entity = {
+                  ID: this.punchoutid,
+                  SignoutDate:new Date(),
+                  SignoutLocation: 'Office',
+                  StatusID: 2,
+                  punchoutip: this.ipaddress == undefined ? '101.120.111.222' : this.ipaddress,
+                }
+                this.DigiofficeService.UpdateAttendanceWeb(entity)
+                  .subscribe({
+                    next: data => {
+                      debugger
+                      if (data != 0) {
+                          Swal.fire('Punched Out Successfully'); 
+                        localStorage.removeItem('PunchINid');
+                        this.loader = false;
+                      
+                        location.reload();
+                        this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin1daybefore(this.staffID, this.todaydate, this.todaydate)
+                          .subscribe({
+                            next: data => {
+                              debugger
+                              let temp: any = data;
+                              this.punchouttime = temp[0].signoutDate;
+                              this.loader = false;
+                              location.reload();
+                            }, error: (err) => {
+                              // Swal.fire('Issue in Getting Attendance By Employee ID');
+                              // Insert error in Db Here//
+                              var obj = {
+                                'PageName': this.currentUrl,
+                                'ErrorMessage': err.error.message
+                              }
+                              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                                data => {
+                                  debugger
+                                },
+                              )
+                            }
+                          })
+                      }
+                    }, error: (err) => {
+                      // Swal.fire('Issue in Updating Attendance Web');
+                      // Insert error in Db Here//
+                      var obj = {
+                        'PageName': this.currentUrl,
+                        'ErrorMessage': err.error.message
+                      }
+                      this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                        data => {
+                          debugger
+                        },
+                      )
                     }
-                    this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                      _data => {
+                  })
+              }, error: (err) => {
+                // Swal.fire('Issue in Getting Attendance');
+                // Insert error in Db Here//
+                var obj = {
+                  'PageName': this.currentUrl,
+                  'ErrorMessage': err.error.message
+                }
+                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                  data => {
+                    debugger
+                  },
+                )
+              }
+            })
+          this.loader = false
 
-                      },
-                    )
-                  }
-                })
-            }
-          }, error: (err) => {
-            Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-            var obj = {
-              'PageName': this.currentUrl,
-              'ErrorMessage': err.error.message
-            }
-            this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-              _data => {
+        } else {
+          this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin(this.staffID, this.todaydate, this.todaydate)
+            .subscribe({
+              next: data => {
+                debugger
+                this.loader = false;
+                var todayDate = new Date().toISOString().slice(0, 10);
+                let temp: any = data;
 
-              },
-            )
-          }
-        })
+                this.punchoutid = temp[0].id;
+                var entity = {
+                  ID: this.punchoutid,
+                  SignoutDate:new Date(),
+                  SignoutLocation: 'Office',
+                  StatusID: 2,
+                  punchoutip: this.ipaddress == undefined ? '101.120.111.222' : this.ipaddress,
+                }
+                this.DigiofficeService.UpdateAttendanceWeb(entity)
+                  .subscribe({
+                    next: data => {
+                      debugger
+                      if (data != 0) {
+                          Swal.fire('Punched Out Successfully'); 
+                        localStorage.removeItem('PunchINid');
+                        this.loader = false;
+                       
+                        location.reload();
+                        this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin(this.staffID, this.todaydate, this.todaydate)
+                          .subscribe({
+                            next: data => {
+                              debugger
+                              let temp: any = data;
+                              this.punchouttime = temp[0].signoutDate;
+                              this.loader = false;
+                              location.reload();
+                            }, error: (err) => {
+                              // Swal.fire('Issue in Getting Attendance By Employee ID');
+                              // Insert error in Db Here//
+                              var obj = {
+                                'PageName': this.currentUrl,
+                                'ErrorMessage': err.error.message
+                              }
+                              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                                data => {
+                                  debugger
+                                },
+                              )
+                            }
+                          })
+                      }
+                    }, error: (err) => {
+                      // Swal.fire('Issue in Updating Attendance Web');
+                      // Insert error in Db Here//
+                      var obj = {
+                        'PageName': this.currentUrl,
+                        'ErrorMessage': err.error.message
+                      }
+                      this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                        data => {
+                          debugger
+                        },
+                      )
+                    }
+                  })
+              }, error: (err) => {
+                // Swal.fire('Issue in Getting Attendance');
+                // Insert error in Db Here//
+                var obj = {
+                  'PageName': this.currentUrl,
+                  'ErrorMessage': err.error.message
+                }
+                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                  data => {
+                    debugger
+                  },
+                )
+              }
+            })
+          this.loader = false
+        }
+      }
+      else if (this.resettime == '17:00:00') {
+        if (this.currenttime >= '00:00:00' && this.currenttime <= '17:00:00') {
+          this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin1daybefore(this.staffID, this.todaydate, this.todaydate)
+            .subscribe({
+              next: data => {
+                debugger
+                this.loader = false;
+                var todayDate = new Date().toISOString().slice(0, 10);
+                let temp: any = data;
+
+                this.punchoutid = temp[0].id;
+                var entity = {
+                  ID: this.punchoutid,
+                  SignoutDate:new Date(),
+                  SignoutLocation: 'Office',
+                  StatusID: 2,
+                  punchoutip: this.ipaddress == undefined ? '101.120.111.222' : this.ipaddress,
+                }
+                this.DigiofficeService.UpdateAttendanceWeb(entity)
+                  .subscribe({
+                    next: data => {
+                      debugger
+                      if (data != 0) {
+                         Swal.fire('Punched Out Successfully'); 
+                        localStorage.removeItem('PunchINid');
+                        this.loader = false;
+                       
+                        location.reload();
+                        this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin1daybefore(this.staffID, this.todaydate, this.todaydate)
+                          .subscribe({
+                            next: data => {
+                              debugger
+                              let temp: any = data;
+                              this.punchouttime = temp[0].signoutDate;
+                              this.loader = false;
+                              location.reload();
+                            }, error: (err) => {
+                              // Swal.fire('Issue in Getting Attendance By Employee ID');
+                              // Insert error in Db Here//
+                              var obj = {
+                                'PageName': this.currentUrl,
+                                'ErrorMessage': err.error.message
+                              }
+                              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                                data => {
+                                  debugger
+                                },
+                              )
+                            }
+                          })
+                      }
+                    }, error: (err) => {
+                      // Swal.fire('Issue in Updating Attendance Web');
+                      // Insert error in Db Here//
+                      var obj = {
+                        'PageName': this.currentUrl,
+                        'ErrorMessage': err.error.message
+                      }
+                      this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                        data => {
+                          debugger
+                        },
+                      )
+                    }
+                  })
+              }, error: (err) => {
+                // Swal.fire('Issue in Getting Attendance');
+                // Insert error in Db Here//
+                var obj = {
+                  'PageName': this.currentUrl,
+                  'ErrorMessage': err.error.message
+                }
+                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                  data => {
+                    debugger
+                  },
+                )
+              }
+            })
+          this.loader = false
+
+        } else {
+          this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin(this.staffID, this.todaydate, this.todaydate)
+            .subscribe({
+              next: data => {
+                debugger
+                this.loader = false;
+                var todayDate = new Date().toISOString().slice(0, 10);
+                let temp: any = data;
+
+                this.punchoutid = temp[0].id;
+                var entity = {
+                  ID: this.punchoutid,
+                  SignoutDate:new Date(),
+                  SignoutLocation: 'Office',
+                  StatusID: 2,
+                  punchoutip: this.ipaddress == undefined ? '101.120.111.222' : this.ipaddress,
+                }
+                this.DigiofficeService.UpdateAttendanceWeb(entity)
+                  .subscribe({
+                    next: data => {
+                      debugger
+                      if (data != 0) {
+                         Swal.fire('Punched Out Successfully'); 
+                        localStorage.removeItem('PunchINid');
+                        this.loader = false;
+                      
+                        location.reload();
+                        this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin(this.staffID, this.todaydate, this.todaydate)
+                          .subscribe({
+                            next: data => {
+                              debugger
+                              let temp: any = data;
+                              this.punchouttime = temp[0].signoutDate;
+                              this.loader = false;
+                              location.reload();
+                            }, error: (err) => {
+                              // Swal.fire('Issue in Getting Attendance By Employee ID');
+                              // Insert error in Db Here//
+                              var obj = {
+                                'PageName': this.currentUrl,
+                                'ErrorMessage': err.error.message
+                              }
+                              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                                data => {
+                                  debugger
+                                },
+                              )
+                            }
+                          })
+                      }
+                    }, error: (err) => {
+                      // Swal.fire('Issue in Updating Attendance Web');
+                      // Insert error in Db Here//
+                      var obj = {
+                        'PageName': this.currentUrl,
+                        'ErrorMessage': err.error.message
+                      }
+                      this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                        data => {
+                          debugger
+                        },
+                      )
+                    }
+                  })
+              }, error: (err) => {
+                // Swal.fire('Issue in Getting Attendance');
+                // Insert error in Db Here//
+                var obj = {
+                  'PageName': this.currentUrl,
+                  'ErrorMessage': err.error.message
+                }
+                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                  data => {
+                    debugger
+                  },
+                )
+              }
+            })
+          this.loader = false
+        }
+      }
+      else if (this.resettime == '11:30:00') {
+        if (this.currenttime >= '00:00:00' && this.currenttime <= '11:30:00') {
+          this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin1daybefore(this.staffID, this.todaydate, this.todaydate)
+            .subscribe({
+              next: data => {
+                debugger
+                this.loader = false;
+                var todayDate = new Date().toISOString().slice(0, 10);
+                let temp: any = data;
+
+                this.punchoutid = temp[0].id;
+                var entity = {
+                  ID: this.punchoutid,
+                  SignoutDate:new Date(),
+                  SignoutLocation: 'Office',
+                  StatusID: 2,
+                  punchoutip: this.ipaddress == undefined ? '101.120.111.222' : this.ipaddress,
+                }
+                this.DigiofficeService.UpdateAttendanceWeb(entity)
+                  .subscribe({
+                    next: data => {
+                      debugger
+                      if (data != 0) {
+                           Swal.fire('Punched Out Successfully'); 
+                        localStorage.removeItem('PunchINid');
+                        this.loader = false;
+                       
+                        location.reload();
+                        this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin1daybefore(this.staffID, this.todaydate, this.todaydate)
+                          .subscribe({
+                            next: data => {
+                              debugger
+                              let temp: any = data;
+                              this.punchouttime = temp[0].signoutDate;
+                              this.loader = false;
+                              location.reload();
+                            }, error: (err) => {
+                              // Swal.fire('Issue in Getting Attendance By Employee ID');
+                              // Insert error in Db Here//
+                              var obj = {
+                                'PageName': this.currentUrl,
+                                'ErrorMessage': err.error.message
+                              }
+                              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                                data => {
+                                  debugger
+                                },
+                              )
+                            }
+                          })
+                      }
+                    }, error: (err) => {
+                      // Swal.fire('Issue in Updating Attendance Web');
+                      // Insert error in Db Here//
+                      var obj = {
+                        'PageName': this.currentUrl,
+                        'ErrorMessage': err.error.message
+                      }
+                      this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                        data => {
+                          debugger
+                        },
+                      )
+                    }
+                  })
+              }, error: (err) => {
+                // Swal.fire('Issue in Getting Attendance');
+                // Insert error in Db Here//
+                var obj = {
+                  'PageName': this.currentUrl,
+                  'ErrorMessage': err.error.message
+                }
+                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                  data => {
+                    debugger
+                  },
+                )
+              }
+            })
+          this.loader = false
+        } else {
+          this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin(this.staffID, this.todaydate, this.todaydate)
+            .subscribe({
+              next: data => {
+                debugger
+                this.loader = false;
+                var todayDate = new Date().toISOString().slice(0, 10);
+                let temp: any = data;
+
+                this.punchoutid = temp[0].id;
+                var entity = {
+                  ID: this.punchoutid,
+                  SignoutDate:new Date(),
+                  SignoutLocation: 'Office',
+                  StatusID: 2,
+                  punchoutip: this.ipaddress == undefined ? '101.120.111.222' : this.ipaddress,
+                }
+                this.DigiofficeService.UpdateAttendanceWeb(entity)
+                  .subscribe({
+                    next: data => {
+                      debugger
+                      if (data != 0) {
+                          Swal.fire('Punched Out Successfully'); 
+                        localStorage.removeItem('PunchINid');
+                        this.loader = false;
+                       
+                        location.reload();
+                        this.DigiofficeService.GetAttendanceByEmployeeIDforpunchin(this.staffID, this.todaydate, this.todaydate)
+                          .subscribe({
+                            next: data => {
+                              debugger
+                              let temp: any = data;
+                              this.punchouttime = temp[0].signoutDate;
+                              this.loader = false;
+                              location.reload();
+                            }, error: (err) => {
+                              // Swal.fire('Issue in Getting Attendance By Employee ID');
+                              // Insert error in Db Here//
+                              var obj = {
+                                'PageName': this.currentUrl,
+                                'ErrorMessage': err.error.message
+                              }
+                              this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                                data => {
+                                  debugger
+                                },
+                              )
+                            }
+                          })
+                      }
+                    }, error: (err) => {
+                      // Swal.fire('Issue in Updating Attendance Web');
+                      // Insert error in Db Here//
+                      var obj = {
+                        'PageName': this.currentUrl,
+                        'ErrorMessage': err.error.message
+                      }
+                      this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                        data => {
+                          debugger
+                        },
+                      )
+                    }
+                  })
+              }, error: (err) => {
+                // Swal.fire('Issue in Getting Attendance');
+                // Insert error in Db Here//
+                var obj = {
+                  'PageName': this.currentUrl,
+                  'ErrorMessage': err.error.message
+                }
+                this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
+                  data => {
+                    debugger
+                  },
+                )
+              }
+            })
+          this.loader = false
+        }
+      }
+
     }
   }
 
@@ -812,92 +1407,7 @@ export class ManagerDashComponent implements OnInit {
     return [year, month, day].join('-');
   }
 
-  /*  public punchout() {
-       
-     //this.getipaddress();;
-     if (this.punchouttime != undefined) {
-       Swal.fire('Already Punched Out for the day');
-       this.loader = false;
-     }
-     else {
-       var options = { hour12: false };
-       var date = new Date();
-       this.DigiofficeService.GetAttendanceByEmployeeID(this.staffID, this.todaydate, this.todaydate)
-         .subscribe({
-           next: data => {
-               
-             var todayDate = new Date().toISOString().slice(0, 10);
-             let temp: any = data;
-             this.punchoutid = temp[0].id;
-             this.loader = false;
-             var entity = {
-               ID: this.punchoutid,
-               SignoutDate: date.toLocaleString('en-US', options),
-               SignoutLocation: 'Office',
-               StatusID: 2,
-               punchoutip: this.ipaddress == undefined ? '101.120.111.222' : this.ipaddress,
-             }
-             this.DigiofficeService.UpdateAttendanceWeb(entity)
-               .subscribe({
-                 next: data => {
-                     
-                   if (data != 0) {
-                     Swal.fire('Punched Out Successfully');
-                     localStorage.removeItem('PunchINid');
-                     this.loader = false;
-                     this.DigiofficeService.GetAttendanceByEmployeeID(this.staffID, this.todaydate, this.todaydate)
-                       .subscribe({
-                         next: data => {
-                             
-                           let temp: any = data;
-                           this.punchouttime = temp[0].signoutDate;
-                           this.loader = false;
-                         }, error: (err) => {
-                           Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-                          
-                           var obj = {
-                             'PageName': this.currentUrl,
-                             'ErrorMessage': err.error.message
-                           }
-                           this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                             _data => {
-                                 
-                             },
-                           )
-                         }
-                       })
-                   }
-                 }, error: (err) => {
-                   Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-                  
-                   var obj = {
-                     'PageName': this.currentUrl,
-                     'ErrorMessage': err.error.message
-                   }
-                   this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-                     _data => {
-                         
-                     },
-                   )
-                 }
-               })
-           }, error: (err) => {
-             Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
-            
-             var obj = {
-               'PageName': this.currentUrl,
-               'ErrorMessage': err.error.message
-             }
-             this.DigiofficeService.InsertExceptionLogs(obj).subscribe(
-               _data => {
-                   
-               },
-             )
-           }
-         })
-     }
-   }
-  */
+  
   public changeAnniversary() {
 
     this.loader = true;

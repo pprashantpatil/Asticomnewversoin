@@ -4977,3 +4977,59 @@ margin-bottom: 10px; */
   color: #1125a9;
 
 }
+
+.card {
+  border-radius: 16px;
+  width: 100%;
+  height: 497px;
+  display: flex;
+  padding: 10%;
+  grid-gap: 10px;
+  gap: 10px;
+  box-shadow: none;
+  border: none;
+  margin-bottom: 20px;
+  flex-direction: column;
+  /* margin-left: 13px; */
+}
+
+.text-punch-tym {
+  color: #3247d5;
+  ;
+  font-size: 15px;
+  height: fit-content;
+}
+
+.punch-time-card,
+.not-punch-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 91%;
+  left: 75px;
+  letter-spacing: 0.5px;
+  height: 27px;
+  background: #f5f8fb;
+  border-radius: 7px;
+  /* margin-top: -8px; */
+}
+.Top_heading {
+  height: 15px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 15px;
+  padding-bottom: 28px;
+  /* align-items: center; */
+  width: 100%;
+  /* justify-content: center; */
+  /* display: flex; */
+  text-align: center;
+  /* text-align: center; */
+  /* position: relative; */
+  /* left: 94px; */
+  letter-spacing: 0.5px;
+  color: #1125a9;
+  margin-top: 12px;
+}
