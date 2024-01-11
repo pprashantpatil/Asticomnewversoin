@@ -553,6 +553,7 @@ search: any;
   }
 
   public GetRejectID(list: any) {
+    this.Employeeid = list.staffID;
     this.id = list.id;
     this.sdte = list.sdte;
     this.edate = list.edate;
