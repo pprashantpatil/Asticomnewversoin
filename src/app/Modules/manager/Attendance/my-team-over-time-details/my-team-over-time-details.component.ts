@@ -350,7 +350,7 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   
   public InsertPushNotificationreject() {
     this.DigiofficeService.pushnotificationtomobile(
-      localStorage.getItem('staffID'),
+    localStorage.getItem('staffid'),
       'You Have Successfully Rejected The Overtime Request!!',
       'Overtime Request'
     );
@@ -369,8 +369,8 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   
   public InsertPushNotification() {
     this.DigiofficeService.pushnotificationtomobile(
-      localStorage.getItem('staffID'),
-      'You Have Successfully Approved The Shift Request!!',
+    localStorage.getItem('staffid'),
+      'You Have Successfully Approved The Overtime Request!!',
       'Overtime Request'
     );
   }
@@ -379,7 +379,7 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   public InsertPushNotificationforstaff() {
     this.DigiofficeService.pushnotificationtomobile(
       this.staffid,
-      'Your Shift request Has been Approved by your Manager!!',
+      'Your Overtime request Has been Approved by your Manager!!',
       'Overtime Request'
     );
   }

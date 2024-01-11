@@ -110,7 +110,7 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
   
   public InsertPushNotification() {
     this.DigiofficecorehrService.pushnotificationtomobile(
-      localStorage.getItem('staffid'),
+    localStorage.getItem('staffid'),
       'You Have Successfully Approved ACR Request!!',
       'ACR Request'
     );
@@ -130,7 +130,7 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
   
   public InsertPushNotificationreject() {
     this.DigiofficecorehrService.pushnotificationtomobile(
-      localStorage.getItem('staffID'),
+    localStorage.getItem('staffid'),
       'You Have Successfully Rejected The ACR Request!!',
       'ACR Request'
     );

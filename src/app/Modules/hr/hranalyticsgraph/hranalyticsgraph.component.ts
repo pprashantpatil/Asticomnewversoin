@@ -216,7 +216,7 @@ export class HranalyticsgraphComponent implements OnInit {
   newhires: any;
   public GetEmployeeLoansCountforDashboard1() {
     this.DigiofficeService.GetEmployeeLoansCountforDashboard(
-      localStorage.getItem('staffid')
+    localStorage.getItem('staffid')
     ).subscribe((data) => {
       let temp = data;
      this.genderlist = data;

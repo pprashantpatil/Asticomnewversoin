@@ -90,6 +90,7 @@ export class EmployeeResignationFormComponent implements OnInit {
             } else {
               this.sendEmail();
               this.InsertPushNotification();
+              this.InsertPushNotificationformanager();
               this.resignID = data;
               this.uploadmultipleimages();
               location.href = "#/Employee/EmployeeResignation";
@@ -104,7 +105,7 @@ export class EmployeeResignationFormComponent implements OnInit {
 
   public InsertPushNotification() {
     this.DigiofficecorehrService.pushnotificationtomobile(
-      localStorage.getItem('staffID'),
+    localStorage.getItem('staffid'),
       'Your Resignation Request Sent Successfully !!',
       'Resignation Request'
     );

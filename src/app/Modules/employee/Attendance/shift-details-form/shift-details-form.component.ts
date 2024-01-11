@@ -182,6 +182,7 @@ export class ShiftDetailsFormComponent implements OnInit {
           location.href = "#/Employee/ShiftDetailsDash";
           this.sendEmail();
           this.InsertPushNotification();
+          this.InsertPushNotificationformanager();
         }
       })
     }
@@ -190,7 +191,7 @@ export class ShiftDetailsFormComponent implements OnInit {
   deviceid: any;
   public InsertPushNotification() {
     this.DigiofficecorehrService.pushnotificationtomobile(
-      localStorage.getItem('staffid'),
+    localStorage.getItem('staffid'),
       'Your Shift Request Sent Successfully !!',
       'Shift'
     );
