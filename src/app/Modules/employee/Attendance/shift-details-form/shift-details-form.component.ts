@@ -142,7 +142,7 @@ export class ShiftDetailsFormComponent implements OnInit {
   }
 
   public submit() {
-    debugger
+    debugger;
     this.showPopup = 0;
     // this.restDays = '';
     // for (let i = 0; i < this.restDaysArray1.length; i++) {
@@ -181,10 +181,31 @@ export class ShiftDetailsFormComponent implements OnInit {
           this.dialogRef.close(false);
           location.href = "#/Employee/ShiftDetailsDash";
           this.sendEmail();
+          this.InsertPushNotification();
         }
       })
     }
   }
+
+  deviceid: any;
+  public InsertPushNotification() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      localStorage.getItem('staffid'),
+      'Your Shift Request Sent Successfully !!',
+      'Shift'
+    );
+  }
+
+
+  public InsertPushNotificationformanager() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      localStorage.getItem('supervisor'),
+      'Hi  <br> Your Employee ' + this.userName + ' has Applied Shift Request in Digi-Office.',
+      'Shift'
+    );
+  }
+
+
 
   public sendEmail() {
     var entity1 = {

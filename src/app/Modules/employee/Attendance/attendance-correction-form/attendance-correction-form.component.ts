@@ -129,6 +129,7 @@ export class AttendanceCorrectionFormComponent implements OnInit {
                 location.href = "#/Employee/AttendanceCorrectionDash";
                 this.sendEmail();
                 this.insertNotification();
+                
                 this.loader = false;
               }
               else {
@@ -143,6 +144,24 @@ export class AttendanceCorrectionFormComponent implements OnInit {
       }
     }
   }
+
+  public InsertPushNotification() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      localStorage.getItem('staffID'),
+      'Your Attendance Correction request Has been Submited to Manager for Approval!!',
+      'Attendance Correction'
+    );
+  }
+
+  public InsertPushNotificationformanager() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      localStorage.getItem('supervisor'),
+      'Hi  <br> Your Employee ' +    localStorage.getItem('UserName') + ' has sent ACR Request in Digi-Office.',
+      'ACR Request'
+    );
+  }
+
+
 
   public sendEmail() {
     var entity1 = {

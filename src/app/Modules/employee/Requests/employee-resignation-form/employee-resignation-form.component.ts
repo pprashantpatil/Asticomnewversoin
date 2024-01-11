@@ -89,6 +89,7 @@ export class EmployeeResignationFormComponent implements OnInit {
               this.messageId = 45;
             } else {
               this.sendEmail();
+              this.InsertPushNotification();
               this.resignID = data;
               this.uploadmultipleimages();
               location.href = "#/Employee/EmployeeResignation";
@@ -100,6 +101,25 @@ export class EmployeeResignationFormComponent implements OnInit {
         })
     }
   }
+
+  public InsertPushNotification() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      localStorage.getItem('staffID'),
+      'Your Resignation Request Sent Successfully !!',
+      'Resignation Request'
+    );
+  }
+
+  public InsertPushNotificationformanager() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      localStorage.getItem('supervisor'),
+      'Hi  <br> Your Employee ' +    localStorage.getItem('UserName') + ' has sent Resignation Request in Digi-Office.',
+      'Resignation Request'
+    );
+  }
+
+
+
 
   public uploadmultipleimages() {
     debugger
