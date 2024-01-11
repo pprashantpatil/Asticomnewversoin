@@ -3451,7 +3451,8 @@ export class AddressDetailsWizardComponent implements OnInit {
 
   geteducatinenddate(){
     if(this.StartDateMonth>this.EndDateMonth){
-      Swal.fire('Start date must be less than End date')
+      Swal.fire('Start date must be less than End date');
+      this.EndDateMonth=null;
     }
   }
 
