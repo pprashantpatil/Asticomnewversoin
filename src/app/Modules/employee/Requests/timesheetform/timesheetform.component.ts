@@ -58,7 +58,7 @@ export class TimesheetformComponent implements OnInit {
   Touser: any;
   public GetMyDetailsByStaffID() {
     this.DigiofficeService.GetMyDetailsByStaffID(
-      localStorage.getItem('staffid')
+    localStorage.getItem('staffid')
     ).subscribe({
       next: (data) => {
         debugger;

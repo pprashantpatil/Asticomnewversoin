@@ -63,7 +63,7 @@ export class NewLeaveRequestComponent implements OnInit {
   manageremailid: any;
   public GetMyDetailsByStaffID() {
     this.DigiofficeService.GetMyDetailsByStaffID(
-      localStorage.getItem('staffid')
+    localStorage.getItem('staffid')
     ).subscribe({
       next: (data) => {
         debugger;
@@ -131,7 +131,7 @@ export class NewLeaveRequestComponent implements OnInit {
           debugger;
           if (this.LeaveTypeList[i].id == 10041) {
             this.DigiofficeService.GetMyDetailsByStaffID(
-              localStorage.getItem('staffid')
+            localStorage.getItem('staffid')
             ).subscribe({
               next: (data) => {
                 debugger;
@@ -165,7 +165,7 @@ export class NewLeaveRequestComponent implements OnInit {
             });
           } else if (this.LeaveTypeList[i].id == 10042) {
             this.DigiofficeService.GetMyDetailsByStaffID(
-              localStorage.getItem('staffid')
+            localStorage.getItem('staffid')
             ).subscribe({
               next: (data) => {
                 debugger;
@@ -200,7 +200,7 @@ export class NewLeaveRequestComponent implements OnInit {
           } else if (this.LeaveTypeList[i].id == 10043) {
             debugger;
             this.DigiofficeService.GetMyDetailsByStaffID(
-              localStorage.getItem('staffid')
+            localStorage.getItem('staffid')
             ).subscribe({
               next: (data) => {
                 debugger;
@@ -238,7 +238,7 @@ export class NewLeaveRequestComponent implements OnInit {
           } else if (this.LeaveTypeList[i].id == 10044) {
             debugger;
             this.DigiofficeService.GetMyDetailsByStaffID(
-              localStorage.getItem('staffid')
+            localStorage.getItem('staffid')
             ).subscribe({
               next: (data) => {
                 debugger;
@@ -275,7 +275,7 @@ export class NewLeaveRequestComponent implements OnInit {
           } else if (this.LeaveTypeList[i].id == 10047) {
             debugger;
             this.DigiofficeService.GetMyDetailsByStaffID(
-              localStorage.getItem('staffid')
+            localStorage.getItem('staffid')
             ).subscribe({
               next: (data) => {
                 debugger;
@@ -311,7 +311,7 @@ export class NewLeaveRequestComponent implements OnInit {
           } else if (this.LeaveTypeList[i].id == 10048) {
             debugger;
             this.DigiofficeService.GetMyDetailsByStaffID(
-              localStorage.getItem('staffid')
+            localStorage.getItem('staffid')
             ).subscribe({
               next: (data) => {
                 debugger;
@@ -347,7 +347,7 @@ export class NewLeaveRequestComponent implements OnInit {
           } else if (this.LeaveTypeList[i].id == 10049) {
             debugger;
             this.DigiofficeService.GetMyDetailsByStaffID(
-              localStorage.getItem('staffid')
+            localStorage.getItem('staffid')
             ).subscribe({
               next: (data) => {
                 debugger;
@@ -682,7 +682,7 @@ export class NewLeaveRequestComponent implements OnInit {
           let yearlyLimit = this.leaveconfig[0].yearlyLimit;
           var totaleaveentiletment: number = yearlyLimit;
           this.DigiofficeService.GetMyDetailsByStaffID(
-            localStorage.getItem('staffid')
+          localStorage.getItem('staffid')
           ).subscribe({
             next: (data) => {
               debugger;
@@ -780,7 +780,7 @@ export class NewLeaveRequestComponent implements OnInit {
                   debugger;
                   if (result.value == true) {
                     this.DigiofficeService.GetStaffLeaves(
-                      localStorage.getItem('staffid'),
+                    localStorage.getItem('staffid'),
                       1,
                       '01-02-2022',
                       '01-02-2099'
@@ -836,6 +836,7 @@ export class NewLeaveRequestComponent implements OnInit {
                               this.leaveID = data;
                               this.InsertNotification();
                               this.InsertPushNotification();
+                              this.InsertPushNotificationformanager();
                               this.uploadmultipleimages();
                               this.sendemail();
 
@@ -924,6 +925,10 @@ export class NewLeaveRequestComponent implements OnInit {
     }
   }
 
+
+
+
+
   public InsertNotification() {
     this.showPopup = 0;
     debugger;
@@ -967,7 +972,7 @@ export class NewLeaveRequestComponent implements OnInit {
   deviceid: any;
   public InsertPushNotification() {
     this.DigiofficeService.pushnotificationtomobile(
-      localStorage.getItem('StaffID'),
+    localStorage.getItem('staffid'),
       'Leave Applied Succssfully',
       'Leave'
     );
@@ -1099,7 +1104,7 @@ export class NewLeaveRequestComponent implements OnInit {
     }
 
     this.DigiofficeService.GetAttendanceByEmployeeID(
-      localStorage.getItem('staffid'),
+    localStorage.getItem('staffid'),
       this.SDateOfLeave,
       this.SDateOfLeave
     ).subscribe({
@@ -1135,7 +1140,7 @@ export class NewLeaveRequestComponent implements OnInit {
   public GetManagerlist() {
     debugger;
     this.DigiofficeService.GetStaffByManagerID(
-      localStorage.getItem('staffid')
+    localStorage.getItem('staffid')
     ).subscribe({
       next: (data) => {
         debugger;

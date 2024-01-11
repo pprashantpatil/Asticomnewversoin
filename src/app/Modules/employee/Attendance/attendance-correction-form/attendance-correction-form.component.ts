@@ -129,6 +129,8 @@ export class AttendanceCorrectionFormComponent implements OnInit {
                 location.href = "#/Employee/AttendanceCorrectionDash";
                 this.sendEmail();
                 this.insertNotification();
+                this.InsertPushNotification();
+                this.InsertPushNotificationformanager();
                 
                 this.loader = false;
               }
@@ -136,6 +138,8 @@ export class AttendanceCorrectionFormComponent implements OnInit {
                 Swal.fire("Submitted Successfully to the manager " + " Please check ACR Report for periodic analysis");
                 this.sendEmail();
                 this.insertNotification();
+                this.InsertPushNotification();
+                this.InsertPushNotificationformanager();
                 location.href = "#/Employee/AttendanceCorrectionDash";
                 this.loader = false;
               }
@@ -147,7 +151,7 @@ export class AttendanceCorrectionFormComponent implements OnInit {
 
   public InsertPushNotification() {
     this.DigiofficecorehrService.pushnotificationtomobile(
-      localStorage.getItem('staffID'),
+    localStorage.getItem('staffid'),
       'Your Attendance Correction request Has been Submited to Manager for Approval!!',
       'Attendance Correction'
     );

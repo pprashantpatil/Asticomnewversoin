@@ -1216,6 +1216,8 @@ export class OverTimeDetailsFormComponent implements OnInit {
               this.showPopup = 1;
               this.messageId = 8;
               this.uploadmultipleimages(data);
+              this.InsertPushNotification();
+              this.InsertPushNotificationformanager();
               this.router.navigate(['/Employee/MyOverTimeDetails']);
               this.loader = false;
             }
@@ -1240,7 +1242,7 @@ export class OverTimeDetailsFormComponent implements OnInit {
 
   public InsertPushNotification() {
     this.DigiofficeService.pushnotificationtomobile(
-      localStorage.getItem('staffID'),
+    localStorage.getItem('staffid'),
       'Your OT Request has been sent for Approval Successfully!!',
       'Overtime'
     );

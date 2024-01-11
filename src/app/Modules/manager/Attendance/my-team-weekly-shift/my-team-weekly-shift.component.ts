@@ -155,7 +155,7 @@ export class MyTeamWeeklyShiftComponent implements OnInit {
 
   public InsertPushNotification() {
     this.DigiofficecorehrService.pushnotificationtomobile(
-      localStorage.getItem('staffID'),
+    localStorage.getItem('staffid'),
       'You Have Successfully Approved The Shift Request!!',
       'Shift Request'
     );
@@ -174,7 +174,7 @@ export class MyTeamWeeklyShiftComponent implements OnInit {
   
   public InsertPushNotificationreject() {
     this.DigiofficecorehrService.pushnotificationtomobile(
-      localStorage.getItem('staffID'),
+    localStorage.getItem('staffid'),
       'You Have Successfully Rejected The Shift Request!!',
       'Shift Request'
     );

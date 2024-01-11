@@ -358,7 +358,7 @@ search: any;
   
   public InsertPushNotification() {
     this.DigiofficeService.pushnotificationtomobile(
-      localStorage.getItem('staffid'),
+    localStorage.getItem('staffid'),
       'You Have Successfully Approved Leave Request!!',
       'Leave Request'
     );
@@ -499,7 +499,7 @@ search: any;
   
   public InsertPushNotificationreject() {
     this.DigiofficeService.pushnotificationtomobile(
-      localStorage.getItem('staffID'),
+    localStorage.getItem('staffid'),
       'You Have Successfully Rejected The ACR Request!!',
       'ACR Request'
     );
