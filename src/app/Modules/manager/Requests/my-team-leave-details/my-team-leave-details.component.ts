@@ -328,6 +328,8 @@ search: any;
                 Swal.fire("Approved Successfully");
                 this.SaveEmployeeAttendance_Leavedays();
                 this.sendemail();
+                this.InsertPushNotification();
+                this.InsertPushNotificationforstaff();
                 this.ngOnInit();
                 this.loader = false;
                 this.showPopup = 1;
@@ -351,6 +353,24 @@ search: any;
     })
 
 
+  }
+
+  
+  public InsertPushNotification() {
+    this.DigiofficeService.pushnotificationtomobile(
+      localStorage.getItem('staffid'),
+      'You Have Successfully Approved Leave Request!!',
+      'Leave Request'
+    );
+  }
+
+  
+  public InsertPushNotificationforstaff() {
+    this.DigiofficeService.pushnotificationtomobile(
+      this.Employeeid,
+      'Your Leave request Has been Approved by your Manager!!',
+      'Leave Request'
+    );
   }
 
   email: any;
@@ -451,6 +471,8 @@ search: any;
           debugger
           if (data != 0) {
             this.sendemail1();
+            this.InsertPushNotificationreject();
+            this.InsertPushNotificationforstaffreject();
             Swal.fire("Rejected Successfully");
 
             location.reload();
@@ -472,6 +494,27 @@ search: any;
         }
       })
   }
+
+
+  
+  public InsertPushNotificationreject() {
+    this.DigiofficeService.pushnotificationtomobile(
+      localStorage.getItem('staffID'),
+      'You Have Successfully Rejected The ACR Request!!',
+      'ACR Request'
+    );
+  }
+
+  
+  public InsertPushNotificationforstaffreject() {
+    this.DigiofficeService.pushnotificationtomobile(
+      this.Employeeid,
+      'Your ACR request Has been Rejected by your Manager!!',
+      'ACR Request'
+    );
+  }
+
+
 
   public sendemail1() {
 
@@ -510,6 +553,7 @@ search: any;
   }
 
   public GetRejectID(list: any) {
+    this.Employeeid = list.staffID;
     this.id = list.id;
     this.sdte = list.sdte;
     this.edate = list.edate;

@@ -107,6 +107,46 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
     });
   }
 
+  
+  public InsertPushNotification() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      localStorage.getItem('staffid'),
+      'You Have Successfully Approved ACR Request!!',
+      'ACR Request'
+    );
+  }
+
+  
+  public InsertPushNotificationforstaff() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      this.employeeID,
+      'Your ACR request Has been Approved by your Manager!!',
+      'ACR Request'
+    );
+  }
+
+
+  
+  
+  public InsertPushNotificationreject() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      localStorage.getItem('staffID'),
+      'You Have Successfully Rejected The ACR Request!!',
+      'ACR Request'
+    );
+  }
+
+  
+  public InsertPushNotificationforstaffreject() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      this.employeeID,
+      'Your ACR request Has been Rejected by your Manager!!',
+      'ACR Request'
+    );
+  }
+
+
+
   public getEndDate(event: any) {
     debugger
     this.startDate = this.datePipe.transform(event[0], 'yyyy-MM-dd');
@@ -153,10 +193,11 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
     this.loader = false;
     this.save(item);
   }
-
+  employeeID:any;
   public save(item: any) {
     debugger
     this.showPopup = 0;
+    this.employeeID = item.staffID
     var entity = {
       'ID': item.id,
       'UserID': item.staffID,
@@ -177,6 +218,8 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
           .subscribe({
             next: data => {
               debugger
+              this.InsertPushNotification();
+              this.InsertPushNotificationforstaff();
               this.ngOnInit();
               this.loader = false;
               this.showPopup = 1;
@@ -201,6 +244,7 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
 
   public getID(id: any) {
     debugger;
+    this.employeeID= id.staffID
     this.id = id;
     this.loader = false;
   }
@@ -217,6 +261,8 @@ export class MyTeamAttendanceCorrectionComponent implements OnInit {
       .subscribe({
         next: data => {
           debugger
+          this.InsertPushNotificationreject();
+          this.InsertPushNotificationforstaffreject();
           location.reload();
           this.loader = false;
           this.showPopup = 1;

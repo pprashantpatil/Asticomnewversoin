@@ -242,11 +242,13 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
       }
     }
   }
-
+  staffid:any;
   public ManagerOTApprove(time: any) {
     this.showPopup = 0;
+    this.staffid=time.staffID
     debugger
     if (this.payrolltype != time.payrolltype && this.month == time.month || this.month == time.month - 1) {
+    
       var entity = {
         'ID': time.id,
         'Status': 'Manager Approved',
@@ -265,6 +267,9 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
             .subscribe({
               next: data => {
                 debugger
+              
+                this.InsertPushNotification();
+                this.InsertPushNotificationforstaff();
                 this.ngOnInit();
                 this.loader = false;
                 this.showPopup = 1;
@@ -293,6 +298,9 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
             .subscribe({
               next: data => {
                 debugger
+            
+                this.InsertPushNotification();
+                this.InsertPushNotificationforstaff();
                 this.ngOnInit();
                 this.loader = false;
                 this.showPopup = 1;
@@ -307,6 +315,8 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
   public ManagerOTReject(id: any) {
     this.showPopup = 0;
     debugger
+
+    this.staffid=id.staffID
     var entity = {
       'ID': id.id,
       'Status': 'Manager Rejected',
@@ -316,6 +326,9 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
       .subscribe({
         next: data => {
           debugger
+     
+          this.InsertPushNotificationreject();
+          this.InsertPushNotificationforstaffreject();
           this.ngOnInit();
           this.loader = false;
           this.showPopup = 1;
@@ -333,6 +346,44 @@ export class MyTeamOverTimeDetailsComponent implements OnInit {
         this.loader = false;
       })
   }
+
+  
+  public InsertPushNotificationreject() {
+    this.DigiofficeService.pushnotificationtomobile(
+      localStorage.getItem('staffID'),
+      'You Have Successfully Rejected The Overtime Request!!',
+      'Overtime Request'
+    );
+  }
+
+  
+  public InsertPushNotificationforstaffreject() {
+    this.DigiofficeService.pushnotificationtomobile(
+      this.staffid,
+      'Your Overtime request Has been Rejected by your Manager!!',
+      'Overtime Request'
+    );
+  }
+
+
+  
+  public InsertPushNotification() {
+    this.DigiofficeService.pushnotificationtomobile(
+      localStorage.getItem('staffID'),
+      'You Have Successfully Approved The Shift Request!!',
+      'Overtime Request'
+    );
+  }
+
+  
+  public InsertPushNotificationforstaff() {
+    this.DigiofficeService.pushnotificationtomobile(
+      this.staffid,
+      'Your Shift request Has been Approved by your Manager!!',
+      'Overtime Request'
+    );
+  }
+
 
   public GetOTDetails(time: any) {
     this.DigiofficeService.GetStaffOverTimeDetailsByID(time.id)

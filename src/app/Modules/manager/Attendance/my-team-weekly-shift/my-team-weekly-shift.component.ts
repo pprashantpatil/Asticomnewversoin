@@ -140,6 +140,8 @@ export class MyTeamWeeklyShiftComponent implements OnInit {
             next: data => {
               debugger
               Swal.fire('Approved Successfully');
+              this.InsertPushNotification();
+              this.InsertPushNotificationforstaff();
               this.loader = false;
               this.showPopup = 1;
               this.messageId = 73;
@@ -150,13 +152,53 @@ export class MyTeamWeeklyShiftComponent implements OnInit {
     })
   }
 
+
+  public InsertPushNotification() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      localStorage.getItem('staffID'),
+      'You Have Successfully Approved The Shift Request!!',
+      'Shift Request'
+    );
+  }
+
+  
+  public InsertPushNotificationforstaff() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      this.employeeID,
+      'Your Shift request Has been Approved by your Manager!!',
+      'Shift Request'
+    );
+  }
+
+  
+  
+  public InsertPushNotificationreject() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      localStorage.getItem('staffID'),
+      'You Have Successfully Rejected The Shift Request!!',
+      'Shift Request'
+    );
+  }
+
+  
+  public InsertPushNotificationforstaffreject() {
+    this.DigiofficecorehrService.pushnotificationtomobile(
+      this.employeeID,
+      'Your Shift request Has been Rejected by your Manager!!',
+      'Shift Request'
+    );
+  }
+
+  
   public getid(id: any) {
     this.id = id;
+    this.employeeID = id.staffID;
     this.loader = false;
   }
 
   public rejectShiftDetails() {
     this.showPopup = 0;
+
     debugger;[]
     var entity = {
       ID: this.id,
@@ -166,7 +208,10 @@ export class MyTeamWeeklyShiftComponent implements OnInit {
       .subscribe({
         next: data => {
           debugger
+          this.InsertPushNotificationreject();
+          this.InsertPushNotificationforstaffreject();
           location.reload();
+
           this.loader = false;
           this.showPopup = 1;
           this.messageId = 74;

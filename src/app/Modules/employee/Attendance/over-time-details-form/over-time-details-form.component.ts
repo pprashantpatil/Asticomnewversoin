@@ -1239,6 +1239,24 @@ export class OverTimeDetailsFormComponent implements OnInit {
         })
     }
   }
+
+  public InsertPushNotification() {
+    this.DigiofficeService.pushnotificationtomobile(
+      localStorage.getItem('staffID'),
+      'Your OT Request has been sent for Approval Successfully!!',
+      'Overtime'
+    );
+  }
+
+  public InsertPushNotificationformanager() {
+    this.DigiofficeService.pushnotificationtomobile(
+      localStorage.getItem('supervisor'),
+      'Hi  <br> Your Employee ' +    localStorage.getItem('UserName') + ' has Applied Overtime Request in Digi-Office.',
+      'Overtime Request'
+    );
+  }
+
+
   public uploadmultipleimages(id: any) {
     debugger
     for (let i = 0; i < this.attachmentsurl.length; i++) {

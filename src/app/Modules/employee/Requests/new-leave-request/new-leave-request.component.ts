@@ -968,10 +968,21 @@ export class NewLeaveRequestComponent implements OnInit {
   public InsertPushNotification() {
     this.DigiofficeService.pushnotificationtomobile(
       localStorage.getItem('StaffID'),
-      'Leave',
+      'Leave Applied Succssfully',
       'Leave'
     );
   }
+
+  public InsertPushNotificationformanager() {
+    this.DigiofficeService.pushnotificationtomobile(
+      localStorage.getItem('supervisor'),
+      'Hi  <br> Your Employee ' +    localStorage.getItem('UserName') + ' has sent Leave Request in Digi-Office.',
+      'Leave Request'
+    );
+  }
+
+
+
   email: any;
   Attactments: any = [];
   UserName: any;
