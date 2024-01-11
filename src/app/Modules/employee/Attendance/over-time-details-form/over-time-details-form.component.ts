@@ -1251,7 +1251,7 @@ export class OverTimeDetailsFormComponent implements OnInit {
   public InsertPushNotificationformanager() {
     this.DigiofficeService.pushnotificationtomobile(
       localStorage.getItem('supervisor'),
-      'Hi  <br> Your Employee ' +    localStorage.getItem('UserName') + ' has Applied Overtime Request in Digi-Office.',
+      'Hi Your Employee ' +    localStorage.getItem('UserName') + ' has Applied Overtime Request in Digi-Office.',
       'Overtime Request'
     );
   }

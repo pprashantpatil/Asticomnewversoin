@@ -160,7 +160,7 @@ export class AttendanceCorrectionFormComponent implements OnInit {
   public InsertPushNotificationformanager() {
     this.DigiofficecorehrService.pushnotificationtomobile(
       localStorage.getItem('supervisor'),
-      'Hi  <br> Your Employee ' +    localStorage.getItem('UserName') + ' has sent ACR Request in Digi-Office.',
+      'Hi Your Employee ' +    localStorage.getItem('UserName') + ' has sent ACR Request in Digi-Office.',
       'ACR Request'
     );
   }

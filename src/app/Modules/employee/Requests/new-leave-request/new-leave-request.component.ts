@@ -981,7 +981,7 @@ export class NewLeaveRequestComponent implements OnInit {
   public InsertPushNotificationformanager() {
     this.DigiofficeService.pushnotificationtomobile(
       localStorage.getItem('supervisor'),
-      'Hi  <br> Your Employee ' +    localStorage.getItem('UserName') + ' has sent Leave Request in Digi-Office.',
+      'Hi Your Employee ' +    localStorage.getItem('UserName') + ' has sent Leave Request in Digi-Office.',
       'Leave Request'
     );
   }

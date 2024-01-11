@@ -470,9 +470,10 @@ search: any;
         next: data => {
           debugger
           if (data != 0) {
-            this.sendemail1();
             this.InsertPushNotificationreject();
             this.InsertPushNotificationforstaffreject();
+            this.sendemail1();
+    
             Swal.fire("Rejected Successfully");
 
             location.reload();
@@ -500,8 +501,8 @@ search: any;
   public InsertPushNotificationreject() {
     this.DigiofficeService.pushnotificationtomobile(
     localStorage.getItem('staffid'),
-      'You Have Successfully Rejected The ACR Request!!',
-      'ACR Request'
+      'You Have Successfully Rejected The Leave Request!!',
+      'Leave Request'
     );
   }
 
@@ -509,8 +510,8 @@ search: any;
   public InsertPushNotificationforstaffreject() {
     this.DigiofficeService.pushnotificationtomobile(
       this.Employeeid,
-      'Your ACR request Has been Rejected by your Manager!!',
-      'ACR Request'
+      'Your Leave request Has been Rejected by your Manager!!',
+      'Leave Request'
     );
   }
 
