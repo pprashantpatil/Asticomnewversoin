@@ -1,6 +1,86 @@
 <div class="container-fluid" [ngClass]="loader?'blur-background':''"> <br>
     <div class="row">
-        <div class="col-3 col-lg-3 col-sm-3 p-1">
+
+        <div class="col-lg-3" style="padding: 5px;">
+            <div class="card p-5">
+                <div class="row">
+                    <div class="col-12 d-flex flex-column" style="gap:4px;">
+                        <div>
+                            <p class="Top_heading">Attendance Tracker</p>
+                        </div>
+    
+                        <div class="d-flex time-alignment">
+                            <p class="time">{{hh}}</p>
+                            <p class="time">:</p>
+                            <p class="time">{{mm}}</p>
+                            <p class="time">:</p>
+                            <p class="time">{{ampm}}</p>
+                        </div>
+    
+                        <div class="d-flex">
+                            <p class="date-text">{{todaydate}}</p>
+                        </div>
+                        <br>
+    
+                        <div class="d-flex drp-align" *ngIf="punchintime!=null">
+                            <div class="punch-in-card" (click)=" punchin()">
+                                <img src="assets/Images/revamp/status-icon.png" class="status-icon">
+                                <p class="text-punch1">Punched In</p>
+                            </div>
+                        </div>
+    
+                        <div class="d-flex drp-align" *ngIf="punchintime!=null">
+                            <div class="punch-time-card">
+                                <p class="text-punch-tym">Punched In at {{punchintime|date:'HH:mm'}}
+                                </p>
+                            </div>
+                        </div>
+    
+                        <div class="d-flex drp-align" *ngIf="punchintime==null">
+                            <div class="punch-Out-card">
+                                <p class="text-punch" (click)="punchin()">Punch In</p>
+                            </div>
+                        </div>
+    
+                        <div class="d-flex drp-align" *ngIf="punchintime==null">
+                            <div class="not-punch-card">
+                                <p class="text-punch-tym1">No punch in yet</p>
+                            </div>
+                        </div>
+    
+                        <div class="d-flex drp-align" *ngIf="punchouttime!=null">
+                            <div class="punch-in-card" (click)="punchout()">
+                                <img src="assets/Images/revamp/status-icon.png" class="status-icon">
+                                <p class="text-punch1">Punched Out</p>
+                            </div>
+                        </div>
+    
+                        <div class="d-flex drp-align" *ngIf="punchouttime!=null">
+                            <div class="punch-time-card">
+                                <p class="text-punch-tym">Punched Out at {{punchouttime|date:'HH:mm'}}
+                                    {{punchoutworkType1}}
+                                </p>
+                            </div>
+                        </div>
+    
+                        <div class="d-flex drp-align" *ngIf="punchouttime==null">
+                            <div class="punch-Out-card">
+                                <p class="text-punch" (click)="punchout()">Punch Out</p>
+                            </div>
+                        </div>
+    
+                        <div class="d-flex drp-align" *ngIf="punchouttime==null">
+                            <div class="not-punch-card">
+                                <p class="text-punch-tym1">No punch out yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+        <!-- <div class="col-3 col-lg-3 col-sm-3 p-1">
             <div class="card-one applydeatils pl-2 pr-2">
                 <div class="card-content">
                     <p class="card-head-one">Announcements</p>
@@ -31,83 +111,124 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="col-3 col-lg-3 col-sm-3 p-1">
-            <div class="card-one applydeatils">
-                <p class="card-head" style="padding: 7px !important;">Leave Details</p>
-                <p class="card-day">{{pendingcount1}}</p>
-                <div class="w-100 d-flex justify-content-center align-items-center mt-4" style="margin-left: 20px;">
-                    <img src="assets/Images/revamp/icon.png" class="img-icon" />
-                    <p class="card-paragraph1 p-0">Pending Leave</p>
-                </div>
-                <div class="align-atten-head pt-4">
-                    <button class="card-attendance">
-                        <p class="text-attendance" (click)="AddLeave()">Apply Leave</p>
-                    </button>
-                </div>
-                <div class="w-100 d-flex justify-content-end">
-                    <a class="view-text text-right" (click)="applyleave()"
-                        style="color: #1125a9 !important; font-weight: 600;">View Leave</a>
+        <div class="col-lg-9 ">
+          <div class="row ">
+            <div class="col-4 col-lg-4 col-sm-4 p-1">
+                <div class="card-one applydeatils">
+                    <p class="card-head" style="padding: 7px !important;">Leave Details</p>
+                    <p class="card-day">{{pendingcount1}}</p>
+                    <div class="w-100 d-flex justify-content-center align-items-center mt-4" style="margin-left: 20px;">
+                        <img src="assets/Images/revamp/icon.png" class="img-icon" />
+                        <p class="card-paragraph1 p-0">Pending Leave</p>
+                    </div>
+                    <div class="align-atten-head pt-4">
+                        <button class="card-attendance">
+                            <p class="text-attendance" (click)="AddLeave()">Apply Leave</p>
+                        </button>
+                    </div>
+                    <div class="w-100 d-flex justify-content-end">
+                        <a class="view-text text-right" (click)="applyleave()"
+                            style="color: #1125a9 !important; font-weight: 600;">View Leave</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class=" col-6 col-lg-6 col-sm-6 p-1">
-            <div class="holiday">
-                <p class="holidayimgtxt">Holidays</p>
-                <div class="row " *ngIf="holidaylist?.length==0">
-                    <img src="assets/FigmaImg/noholiday.svg" class="img-holi noholiday" />
-                    <h4 class="noholidaytext">No holiday has yet set</h4>
-                    <p class="seeall chnageseeAll" (click)="holiday()"
-                        style="color: #1125a9 !important; font-weight: 600;margin-right: 13px;">View All</p>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div *ngIf="holidaylist?.length!=0">
-                            <div class="d-flex flex-column">
-                                <img class="tphoimg" src="{{tpholidayattachment}}">
-                                <div class="d-flex flex-column align-holiday-txt">
-                                    <p class="holidayname">
-                                        {{topholidayname.length > 20 ? topholidayname.substring(0,20)+"..." :
-                                        topholidayname }}
-                                    </p>
-                                    <p class="holidaydate"> {{topholidaydate|date}}</p>
+    
+            <div class=" col-8 col-lg-8 col-sm-8 p-1">
+                <div class="holiday">
+                    <p class="holidayimgtxt">Holidays</p>
+                    <div class="row " *ngIf="holidaylist?.length==0">
+                        <img src="assets/FigmaImg/noholiday.svg" class="img-holi noholiday" />
+                        <h4 class="noholidaytext">No holiday has yet set</h4>
+                        <p class="seeall chnageseeAll" (click)="holiday()"
+                            style="color: #1125a9 !important; font-weight: 600;margin-right: 13px;">View All</p>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div *ngIf="holidaylist?.length!=0">
+                                <div class="d-flex flex-column">
+                                    <img class="tphoimg" src="{{tpholidayattachment}}">
+                                    <div class="d-flex flex-column align-holiday-txt">
+                                        <p class="holidayname">
+                                            {{topholidayname.length > 20 ? topholidayname.substring(0,20)+"..." :
+                                            topholidayname }}
+                                        </p>
+                                        <p class="holidaydate"> {{topholidaydate|date}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="row hol-others">
-                            <div class="holi-atc">
-                                <div class=" list-holidays" *ngFor="let holiday of dispyList">
-                                    <div class="col-lg-3">
-                                        <img src="{{holiday?.attachment}}" class="holidaylistattachment">
-                                    </div>
-                                    <div class="holidaylistcol">
-                                        <h6 class="attac-text">
-                                            {{ holiday?.holiday.length > 20 ? holiday?.holiday.substring(0,20)+"..." :
-                                            holiday?.holiday }}</h6>
-                                        <h6 class="attac-day">{{holiday?.holidayDate|date}}</h6>
+    
+                        <div class="col-lg-6">
+                            <div class="row hol-others">
+                                <div class="holi-atc">
+                                    <div class=" list-holidays" *ngFor="let holiday of dispyList">
+                                        <div class="col-lg-3">
+                                            <img src="{{holiday?.attachment}}" class="holidaylistattachment">
+                                        </div>
+                                        <div class="holidaylistcol">
+                                            <h6 class="attac-text">
+                                                {{ holiday?.holiday.length > 20 ? holiday?.holiday.substring(0,20)+"..." :
+                                                holiday?.holiday }}</h6>
+                                            <h6 class="attac-day">{{holiday?.holidayDate|date}}</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <p class="seeall chnageseeAll" (click)="holiday()"
-                                    style="color: #1125a9 !important; font-weight: 600;">View All</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-12 col-12 col-sm-9 p-1 pb-2">
+                <div class="second-card">
+                    <p class="card-head-one" style="padding: 11px;">Complete your Profile</p>
+                    <div class="inside-card" style="    margin-left: 31px;
+                    width: 92%; ">
+                        <div class="d-flex">
+                            <img src="assets/Images/revamp/Profile Completion Illustration 2.png" class="img-top" />
+                            <div class="d-flex flex-column justify-content-center">
+                              
+                                <p class="small-para">
+                                    Keep your basic information up to date. You can add, edit, or
+                                    remove information or submit a request through Personal Info Update.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="butt-n" *ngIf="profilepercentage==0" (click)="Profilecompletion()">Get
+                                Started</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row process">
+                            <div class="col-lg-2" [ngClass]="profiletab==1||contact==2  ? 'darkg' : 'bgred'"></div>
+                            <div class="col-lg-2" [ngClass]="dependent==3  ? 'lightg' : 'bgred'"></div>
+                            <div class="col-lg-2" [ngClass]="emplhist==4  ? 'darkg' : 'bgred'"></div>
+                            <div class="col-lg-2" [ngClass]="edu==5  ? 'lightg' : 'bgred'"></div>
+                            <div class="col-lg-2" [ngClass]="nomi==6  ? 'darkg' : 'bgred'"></div>
+                            <div class="col-lg-2" [ngClass]="bankID>6  ? 'lightg' : 'bgred'"></div>
+    
+                        </div>
+                    </div>
+    
+                    <div class="w-100 d-flex justify-content-between update">
+                        <P class="content1 mt-2"  (click)="Profilecompletion()">
+                            complete</P>
+                </div>
+            </div>
+        </div> 
+          </div>
+
         </div>
+
+       
     </div>
 
     <div class="row">
-        <div class="col-lg-3 col-3 col-sm-3 p-1 pb-2">
+        <!-- <div class="col-lg-3 col-3 col-sm-3 p-1 pb-2">
             <div class="card-one applydeatils">
                 <p class="card-head" style="padding: 0px !important;">Overtime Details</p>
                 <p class="card-day">{{pendingotcount}}</p>
@@ -124,59 +245,10 @@
                     </button>
                 </div>
 
-                <!-- <div class="row">
-                    <p class="seeall chnageseeAll" (click)="overtimeDash()"
-                        style="color: #1125a9 !important; font-weight: 600;">View OT</p>
-                </div> -->
+              
             </div>
-        </div>
-        <div class="col-lg-9 col-9 col-sm-9 p-1 pb-2">
-            <div class="second-card">
-                <p class="card-head-one" style="padding: 11px;">Complete your Profile</p>
-                <div class="inside-card" style="    margin-left: 31px;
-                width: 92%; ">
-                    <div class="d-flex">
-                        <img src="assets/Images/revamp/Profile Completion Illustration 2.png" class="img-top" />
-                        <div class="d-flex flex-column justify-content-center">
-                            <!-- <p class="para">Complete your profile</p> -->
-                            <p class="small-para">
-                                <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                                vulputate libero et velit interdum, ac aliquet odio mattis. -->
-                                Keep your basic information up to date. You can add, edit, or
-                                remove information or submit a request through Personal Info Update.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button class="butt-n" *ngIf="profilepercentage==0" (click)="Profilecompletion()">Get
-                            Started</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- <progress class="process" *ngIf="profilepercentage!=0" value="{{profilepercentage}}"
-                        max="100">profilepercentage%</progress> -->
-
-                    <div class="row process">
-                        <div class="col-lg-2" [ngClass]="profiletab==1||contact==2  ? 'darkg' : 'bgred'"></div>
-                        <div class="col-lg-2" [ngClass]="dependent==3  ? 'lightg' : 'bgred'"></div>
-                        <div class="col-lg-2" [ngClass]="emplhist==4  ? 'darkg' : 'bgred'"></div>
-                        <div class="col-lg-2" [ngClass]="edu==5  ? 'lightg' : 'bgred'"></div>
-                        <div class="col-lg-2" [ngClass]="nomi==6  ? 'darkg' : 'bgred'"></div>
-                        <div class="col-lg-2" [ngClass]="bankID>6  ? 'lightg' : 'bgred'"></div>
-
-                    </div>
-                </div>
-
-                <div class="w-100 d-flex justify-content-between update">
-                    <!-- <p class="content">Update your information</p> -->
-                    <P class="content1 mt-2"  (click)="Profilecompletion()">
-                        complete</P>
-                    
-
-
-            </div>
-        </div>
-    </div>
+        </div> -->
+      
 
 
     <div class="row" style="padding: 0px 0px 0px 5px;">

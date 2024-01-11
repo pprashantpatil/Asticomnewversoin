@@ -134,8 +134,8 @@
                                 </p>
                                 <p>Mobile Number<span style="color: red;">*</span>
                                     <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
-                                        type="text" class="form-control" id="Mobile" name="Mobile" maxlength="11"
-                                        [(ngModel)]="Mobile" onkeypress="return /[0-9]/i.test(event.key)"
+                                        type="text" class="form-control" id="phoneNo" name="phoneNo" maxlength="11"
+                                        [(ngModel)]="phoneNo" onkeypress="return /[0-9]/i.test(event.key)"
                                         placeholder="Enter Mobile No.">
                                 </p>
 
@@ -1778,8 +1778,8 @@
                     </div>
                     <div class="col-lg-2">
                         <p>Percentage <span style="color: red;">*</span></p>
-                        <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
-                            id="Percentage" name="Percentage" [(ngModel)]="Percentage"
+                        <input type="number" [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
+                            id="Percentage" name="Percentage" [(ngModel)]="Percentage"  max="100" (change)="getpercentege()"
                             onkeypress="return /[0-9/\s/%]/i.test(event.key)" placeholder="Percentage">
                     </div>
                     <div class="col-lg-2">
@@ -1958,7 +1958,7 @@
                     <div class="col-md-3">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="Date"
                             class="form-control" id="EndDateMonth" name="EndDateMonth" [(ngModel)]="EndDateMonth"
-                            placeholder="End Date Month">
+                            placeholder="End Date Month" (change)="geteducatinenddate()">
 
                     </div>
                 </div><br>
@@ -2015,12 +2015,12 @@
                     <div class="col-md-3">
                         <input type="text" [disabled]="roledid!=9 && roledid!=11" class="form-control"
                             placeholder="Account Holder Name" id="AccountHolderName" name="AccountHolderName"
-                            [(ngModel)]="AccountHolderName">
+                            [(ngModel)]="AccountHolderName" onkeypress="return /[a-z]/i.test(event.key)">
                     </div>
                     <div class="col-md-3">
                         <input type="text" [disabled]="roledid!=9 && roledid!=11" class="form-control"
                             placeholder="Bank Account Number" id="BankAccountNumber" maxlength="13"
-                            onkeypress="return /[0-9/\s/]/i.test(event.key)" name="BankAccountNumber"
+                            onkeypress="return /[0-9]/i.test(event.key)" name="BankAccountNumber"
                             [(ngModel)]="BankAccountNumber">
                     </div>
                 </div><br>

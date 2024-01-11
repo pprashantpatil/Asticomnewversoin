@@ -22,6 +22,7 @@ export class AddressDetailsWizardComponent implements OnInit {
   MeritInsurance: any;
   DailerLicense: any;
   Incrementals: any;
+  phoneNo:any;
   IncentiveLeave: any;
   TaxStatus: any;
   GCashNumber: any;
@@ -644,7 +645,7 @@ export class AddressDetailsWizardComponent implements OnInit {
             //   this.Date_Of_Marriage = this.datepipe.transform(this.leavelist[0].date_Of_Marriage, 'yyyy-MM-dd')
             // }
             this.Personal_Email = this.leavelist[0].personal_Email;
-            this.Mobile = this.leavelist[0].mobile;
+            this.phoneNo = this.leavelist[0].phoneNo;
             (this.Religion = this.leavelist[0].religion),
               (this.Citizen_Ship = this.leavelist[0].citizen_Ship);
             (this.Ethnicity = this.leavelist[0].ethnicity),
@@ -3446,5 +3447,19 @@ export class AddressDetailsWizardComponent implements OnInit {
     this.Citizen_Ship=parts[1];
     // Extract the desired part (in this case, the second part)
     
+  }
+
+  geteducatinenddate(){
+    if(this.StartDateMonth>this.EndDateMonth){
+      Swal.fire('Start date must be less than End date');
+      this.EndDateMonth=null;
+    }
+  }
+
+  getpercentege(){
+    if(this.Percentage>100){
+      Swal.fire('Percentage can not be more than 100');
+      this.Percentage=0;
+    }
   }
 }
