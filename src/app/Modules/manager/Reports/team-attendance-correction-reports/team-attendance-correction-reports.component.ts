@@ -168,6 +168,7 @@ export class TeamAttendanceCorrectionReportsComponent implements OnInit {
 
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
+  
   }
 
   public GetMyDetails() {

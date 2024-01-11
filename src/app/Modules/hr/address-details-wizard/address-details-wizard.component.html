@@ -1778,8 +1778,8 @@
                     </div>
                     <div class="col-lg-2">
                         <p>Percentage <span style="color: red;">*</span></p>
-                        <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
-                            id="Percentage" name="Percentage" [(ngModel)]="Percentage"
+                        <input type="number" [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" class="form-control"
+                            id="Percentage" name="Percentage" [(ngModel)]="Percentage"  max="100" (change)="getpercentege()"
                             onkeypress="return /[0-9/\s/%]/i.test(event.key)" placeholder="Percentage">
                     </div>
                     <div class="col-lg-2">
@@ -1958,7 +1958,7 @@
                     <div class="col-md-3">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="Date"
                             class="form-control" id="EndDateMonth" name="EndDateMonth" [(ngModel)]="EndDateMonth"
-                            placeholder="End Date Month" (ngModelChange)="geteducatinenddate()">
+                            placeholder="End Date Month" (change)="geteducatinenddate()">
 
                     </div>
                 </div><br>

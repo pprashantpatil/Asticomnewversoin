@@ -3454,4 +3454,11 @@ export class AddressDetailsWizardComponent implements OnInit {
       Swal.fire('Start date must be less than End date')
     }
   }
+
+  getpercentege(){
+    if(this.Percentage>100){
+      Swal.fire('Percentage can not be more than 100');
+      this.Percentage=0;
+    }
+  }
 }

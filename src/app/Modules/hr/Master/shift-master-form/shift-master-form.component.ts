@@ -54,6 +54,9 @@ export class ShiftMasterFormComponent implements OnInit {
               this.Description = this.shiftmasterlist[0].description;
               this.ShiftTimeings = this.shiftmasterlist[0].shiftTimeings;
               this.Grace = this.shiftmasterlist[0].grace;
+              this.ShiftType=this.shiftmasterlist[0].shiftType;
+              this.StartTime = this.shiftmasterlist[0].starttime;
+              this.EndTime=this.shiftmasterlist[0].endtime;
             }, error: (err) => {
               // Swal.fire('Issue in Getting Shift Master');
               // this.loader = false;
@@ -191,9 +194,7 @@ export class ShiftMasterFormComponent implements OnInit {
             this.messageId = 10;
             this.dialogRef.close(false);
           }, error: (err) => {
-            // Swal.fire('Issue in Deleting Shift Master');
-            // this.loader = false;
-            // Insert error in Db Here//
+            this.loader = false;
             var obj = {
               'PageName': this.currentUrl,
               'ErrorMessage': err.error.message

@@ -135,15 +135,9 @@ export class LeaveTypeFormComponent implements OnInit {
         subscribe({
           next: async data => {
               
-            if (data == 0) {
-              Swal.fire("Leave Type Already Exists");
-              this.dialogRef.close(false);
-            }
-            else {
-              Swal.fire("Updated Successfully");
-              this.dialogRef.close(false);
-              location.href = "#/HR/LeaveTypeDashboard";
-            }
+            Swal.fire("Updated Successfully");
+            this.dialogRef.close(false);
+            location.href = "#/HR/LeaveTypeDashboard";
           }, error: (err) => {
            
             Swal.fire('There is an issue executing your action. Please raise a Support Ticket.');
