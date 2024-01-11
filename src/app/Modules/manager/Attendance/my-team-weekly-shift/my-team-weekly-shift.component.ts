@@ -139,9 +139,10 @@ export class MyTeamWeeklyShiftComponent implements OnInit {
           .subscribe({
             next: data => {
               debugger
-              Swal.fire('Approved Successfully');
               this.InsertPushNotification();
               this.InsertPushNotificationforstaff();
+              Swal.fire('Approved Successfully');
+           
               this.loader = false;
               this.showPopup = 1;
               this.messageId = 73;

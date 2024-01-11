@@ -201,7 +201,7 @@ export class ShiftDetailsFormComponent implements OnInit {
   public InsertPushNotificationformanager() {
     this.DigiofficecorehrService.pushnotificationtomobile(
       localStorage.getItem('supervisor'),
-      'Hi  <br> Your Employee ' + this.userName + ' has Applied Shift Request in Digi-Office.',
+      'Hi Your Employee ' + this.userName + ' has Applied Shift Request in Digi-Office.',
       'Shift'
     );
   }
