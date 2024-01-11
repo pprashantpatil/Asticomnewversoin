@@ -2619,7 +2619,7 @@ export class AddressDetailsWizardComponent implements OnInit {
       this.Percentage == undefined ||
       this.NomineeType == undefined
     ) {
-      /*  Swal.fire('Please Fill All Mandatory Fields') */
+       Swal.fire('Please Fill All Mandatory Fields') ;
     } else {
       var eb = {
         ID: this.StaffID,
