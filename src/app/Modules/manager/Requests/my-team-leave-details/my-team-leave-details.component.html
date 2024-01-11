@@ -174,7 +174,7 @@
                                     *ngIf="data.status=='Manager Pending HR Pending'|| data.status==null || data.status=='Manager Pending'">
 
                                 <img class="dashedit-icon" src="assets/Images/cancel-02.svg" data-toggle="modal"
-                                    data-target="#Reject" (click)="GetRejectID(data.id)" [ngbTooltip]="tipContentReject"
+                                    data-target="#Reject" (click)="GetRejectID(data)" [ngbTooltip]="tipContentReject"
                                     tooltipClass="my-custom-class" *ngIf="data.status=='Manager Pending HR Pending'||
                                     data.status==null || data.status=='Manager Pending'">
 
