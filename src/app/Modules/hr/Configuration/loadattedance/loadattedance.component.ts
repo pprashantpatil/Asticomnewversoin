@@ -517,75 +517,9 @@ export class LoadattedanceComponent implements OnInit {
     }
   }
 
-  public InsertHolidays() {
-    debugger;
-    this.showPopup = 0;
-    var entity = {
-      Holiday: this.Holiday,
-      HolidayDescription: this.HolidayDescription,
-      HolidayDate: this.HolidayDate,
-      Attachment: this.attachmentsurl[0],
-    }
-    this.DigipayrollServiceService.InsertHolidays(entity)
-      .subscribe({
-        next: data => {
-          if (data != 0) {
-            /*  Swal.fire("Saved Successfully"); */
-            location.href = "#/Admin/HolidayDashboard";
-            this.loader = false;
-            this.showPopup = 1;
-            this.messageId = 8;
-          }
-        }, error: (err) => {
-          // Swal.fire('Issue in Inserting Hoilday');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigipayrollServiceService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
-        }
-      })
-  }
 
-  public UpdateHolidays() {
-    debugger;
-    this.showPopup = 0;
-    var entity = {
-      ID: this.ID,
-      Holiday: this.Holiday,
-      HolidayDescription: this.HolidayDescription,
-      HolidayDate: this.HolidayDate,
-      Attachment: this.attachmentsurl[0],
-    }
-    this.DigipayrollServiceService.UpdateHolidays(entity)
-      .subscribe({
-        next: data => {
-          /* Swal.fire("Updated Successfully"); */
-          this.loader = false;
-          this.showPopup = 1;
-          this.messageId = 10;
-          location.href = "#/HolidayDashboard";
-          this.loader = false;
-        }, error: (err) => {
-          // Swal.fire('Issue in Updating Hoilday');
-          // Insert error in Db Here//
-          var obj = {
-            'PageName': this.currentUrl,
-            'ErrorMessage': err.error.message
-          }
-          this.DigipayrollServiceService.InsertExceptionLogs(obj).subscribe(
-            data => {
-              debugger
-            },
-          )
-        }
-      })
-  }
+
+
 
   public cancel() {
     location.reload();
