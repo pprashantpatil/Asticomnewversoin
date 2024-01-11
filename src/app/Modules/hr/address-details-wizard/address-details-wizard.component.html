@@ -1958,7 +1958,7 @@
                     <div class="col-md-3">
                         <input [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2" type="Date"
                             class="form-control" id="EndDateMonth" name="EndDateMonth" [(ngModel)]="EndDateMonth"
-                            placeholder="End Date Month">
+                            placeholder="End Date Month" (ngModelChange)="geteducatinenddate()">
 
                     </div>
                 </div><br>
@@ -2015,12 +2015,12 @@
                     <div class="col-md-3">
                         <input type="text" [disabled]="roledid!=9 && roledid!=11" class="form-control"
                             placeholder="Account Holder Name" id="AccountHolderName" name="AccountHolderName"
-                            [(ngModel)]="AccountHolderName">
+                            [(ngModel)]="AccountHolderName" onkeypress="return /[a-z]/i.test(event.key)">
                     </div>
                     <div class="col-md-3">
                         <input type="text" [disabled]="roledid!=9 && roledid!=11" class="form-control"
                             placeholder="Bank Account Number" id="BankAccountNumber" maxlength="13"
-                            onkeypress="return /[0-9/\s/]/i.test(event.key)" name="BankAccountNumber"
+                            onkeypress="return /[0-9]/i.test(event.key)" name="BankAccountNumber"
                             [(ngModel)]="BankAccountNumber">
                     </div>
                 </div><br>

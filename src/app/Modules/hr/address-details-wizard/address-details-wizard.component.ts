@@ -3448,4 +3448,10 @@ export class AddressDetailsWizardComponent implements OnInit {
     // Extract the desired part (in this case, the second part)
     
   }
+
+  geteducatinenddate(){
+    if(this.StartDateMonth>this.EndDateMonth){
+      Swal.fire('Start date must be less than End date')
+    }
+  }
 }
