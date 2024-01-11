@@ -228,7 +228,7 @@ export class OverTimeDetailsFormComponent implements OnInit {
   public Save() {
     debugger
     this.loader = true;
-    this.DigiofficeService.ProjectAttachmentsbyuseridforovertime(this.attachments21,localStorage.getItem('EmployeeID'))
+    this.DigiofficeService.ProjectAttachments(this.attachments21)
       .subscribe({
         next: data => {
           debugger
@@ -237,9 +237,7 @@ export class OverTimeDetailsFormComponent implements OnInit {
           this.InsertStaffOverTimeDetails();
           this.loader = false;
         }, error: (err) => {
-          // Swal.fire('Issue in Inserting Project Attachments');
-          // this.loader = false;
-          // Insert error in Db Here//
+         
           var obj = {
             'PageName': this.currentUrl,
             'ErrorMessage': err.error.message
