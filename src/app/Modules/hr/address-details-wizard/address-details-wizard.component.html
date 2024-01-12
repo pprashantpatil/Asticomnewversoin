@@ -1442,53 +1442,53 @@
                         <p> Province
                             <span style="color: red;">*</span>
                         </p>
-                        <!-- <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control inputfield" id="StateID" name="StateID" [(ngModel)]="StateID"
+                        <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control inputfield" id="StateID" name="StateID" [(ngModel)]="StateID"
                             (change)="GetProvinceID($event)">
                             <option class="textcolor" value="0">Select Province </option>
                             <option class="textcolor" *ngFor="let role of Provincelist" value="{{role.id}}">
                                 {{role.short}}
                             </option>
 
-                        </select> -->
+                        </select>
 
-                        <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
+                        <!-- <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             [placeholder]="'Select Province'" [settings]="provincedropdownSettings"
                             [data]="Provincelist" [(ngModel)]="StateID" (onSelect)="GetProvinceID($event)">
-                        </ng-multiselect-dropdown>
+                        </ng-multiselect-dropdown> -->
 
                     </div>
                     <div class="col-lg-2">
                         <p>City
                             <span style="color: red;">*</span>
                         </p>
-                        <!-- <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control inputfield" id="CityID" name="CityID" [(ngModel)]="CityID"
-                            (change)="getbarangay()">
+                        <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control inputfield" id="CityID" name="CityID" [(ngModel)]="CityID"
+                            (change)="GetBarangay($event)">
                             <option class="textcolor" value="0">Select City </option>
                             <option class="textcolor" *ngFor="let role of Citylist" value="{{role.id}}">
                                 {{role.short}}
                             </option>
 
-                        </select> -->
+                        </select>
 
-                        <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
+                        <!-- <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             [placeholder]="'Select City'" [settings]="citydropdownSettings" [data]="Citylist"
                             [(ngModel)]="CityID" (onSelect)="getbarangay($event)">
-                        </ng-multiselect-dropdown>
+                        </ng-multiselect-dropdown> -->
                     </div>
-                    <div class="col-lg-2">
-                        <p>Barangay <span style="color: red;">*</span></p>
-                        <!-- <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control inputfield" id="Barangay" name="Barangay" [(ngModel)]="Barangay">
+                    <!-- <div class="col-lg-2"> -->
+                        <!-- <p>Barangay <span style="color: red;">*</span></p>
+                        <select [disabled]="roledid!=9 && roledid!=11 && roledid!=6" class="form-control inputfield" id="Barangay" name="Barangay" [(ngModel)]="Barangay">
                             <option class="textcolor" value="0">Select Barangay </option>
-                            <option class="textcolor" *ngFor="let role of barangaylist" value="{{role.id}}">
+                            <option class="textcolor" *ngFor="let role of Barangaylist" value="{{role.id}}">
                                 {{role.name}}
                             </option>
 
                         </select> -->
 
-                        <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
+                        <!-- <ng-multiselect-dropdown [disabled]="roledid!=9 && roledid!=11 && roledid!=6 && roledid!=2"
                             [placeholder]="'Select Barangay'" [settings]="barangaydropdownSettings"
                             [data]="barangaylist" [(ngModel)]="Barangay" (onSelect)="onSelectBarangay($event)">
-                        </ng-multiselect-dropdown>
+                        </ng-multiselect-dropdown> -->
 
 
                         <!-- <select class="form-control inputfield" id="Barangay" name="Barangay" [(ngModel)]="Barangay"
@@ -1499,7 +1499,7 @@
                         </option>
 
                     </select> -->
-                    </div>
+                    <!-- </div> -->
                     <div class="col-lg-2">
                         <p>Postcode
                             <span style="color: red;">*</span>

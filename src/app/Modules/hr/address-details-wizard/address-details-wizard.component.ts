@@ -3175,7 +3175,7 @@ export class AddressDetailsWizardComponent implements OnInit {
   }
 
   public GetBarangay(event: any) {
-    this.StateID = event.target.value;
+    this.CityID = event.target.value;
     this.DigiofficeService.GetBarangayMaster().subscribe({
       next: (data) => {
         debugger;
