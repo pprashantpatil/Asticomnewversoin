@@ -78,8 +78,14 @@ export class AttendanceDetailsDashComponent implements OnInit {
       this.loader = false;
     }
     else {
-      this.attendanceList = this.attendanceFilter.filter((x: { signinDate: any; }) => (x.signinDate >= this.startDate && x.signinDate <= this.endDate));
-      this.loader = false;
+      this.DigiofficecorehrService.GetAttendanceByEmployeeID(this.staffID, this.startDate, this.endDate).subscribe(
+        res => {
+          debugger;
+          this.attendanceList = this.attendanceFilter.filter((x: { signinDate: any; }) => (x.signinDate >= this.startDate && x.signinDate <= this.endDate));
+
+          this.loader = false;
+        })
+     
     }
   }
 

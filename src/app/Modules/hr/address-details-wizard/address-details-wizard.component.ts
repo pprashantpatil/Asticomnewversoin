@@ -2617,7 +2617,8 @@ export class AddressDetailsWizardComponent implements OnInit {
     if (
       this.Dependent == undefined ||
       this.Percentage == undefined ||
-      this.NomineeType == undefined
+      this.NomineeType == undefined ||  this.NomineeType == ''||
+      this.NomineeType == null
     ) {
        Swal.fire('Please Fill All Mandatory Fields') ;
     } else {
