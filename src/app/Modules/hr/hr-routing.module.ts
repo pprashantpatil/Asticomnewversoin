@@ -28,6 +28,7 @@ import { HRLeaveRequestDashComponent } from './Requests/hrleave-request-dash/hrl
 import { HrdashboardComponent } from './hrdashboard/hrdashboard.component';
 import { HrGraphDashComponent } from './hr-graph-dash/hr-graph-dash.component';
 import { HranalyticsgraphComponent } from './hranalyticsgraph/hranalyticsgraph.component';
+import { AllnotificationComponent } from './allnotification/allnotification.component';
 
 const routes: Routes = [
   { path: 'AddressDetailsWizard', component: AddressDetailsWizardComponent  ,canActivate: [AuthguardGuard]},
@@ -58,6 +59,7 @@ const routes: Routes = [
   { path: 'hrdashboard', component: HrdashboardComponent  ,canActivate: [AuthguardGuard]},
   { path: 'HrGraphDash', component: HrGraphDashComponent  ,canActivate: [AuthguardGuard]},
   { path: 'hranalyticsgraph', component: HranalyticsgraphComponent  ,canActivate: [AuthguardGuard]},
+  { path: 'allnotification', component: AllnotificationComponent  ,canActivate: [AuthguardGuard]},
 
   
 ];

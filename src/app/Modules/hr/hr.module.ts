@@ -54,6 +54,7 @@ import { HRLeaveRequestDashComponent } from './Requests/hrleave-request-dash/hrl
 import { HrdashboardComponent } from './hrdashboard/hrdashboard.component';
 import { HrGraphDashComponent } from './hr-graph-dash/hr-graph-dash.component';
 import { HranalyticsgraphComponent } from './hranalyticsgraph/hranalyticsgraph.component';
+import { AllnotificationComponent } from './allnotification/allnotification.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { HranalyticsgraphComponent } from './hranalyticsgraph/hranalyticsgraph.c
     HRLeaveRequestDashComponent,
     HrdashboardComponent,
     HrGraphDashComponent,
-    HranalyticsgraphComponent
+    HranalyticsgraphComponent,
+    AllnotificationComponent
   ],
   imports: [
     CommonModule,

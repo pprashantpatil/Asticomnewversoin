@@ -2615,8 +2615,8 @@ export class AddressDetailsWizardComponent implements OnInit {
     debugger;
     this.showPopup = 0;
     if (
-      this.Dependent == undefined ||
-      this.Percentage == undefined ||
+      this.Dependent == undefined ||  this.Dependent == '' ||  this.Dependent == null ||
+      this.Percentage == undefined ||    this.Percentage == '' ||    this.Percentage == null ||
       this.NomineeType == undefined ||  this.NomineeType == ''||
       this.NomineeType == null
     ) {

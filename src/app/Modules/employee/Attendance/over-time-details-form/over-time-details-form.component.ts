@@ -293,6 +293,7 @@ export class OverTimeDetailsFormComponent implements OnInit {
                     this.loader = false;
                     this.starttime = '';
                   }
+                
                 }
 
                 this.Shift = temp[0].shiftType;

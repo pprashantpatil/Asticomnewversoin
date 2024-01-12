@@ -81,7 +81,7 @@ export class AttendanceDetailsDashComponent implements OnInit {
       this.DigiofficecorehrService.GetAttendanceByEmployeeID(this.staffID, this.startDate, this.endDate).subscribe(
         res => {
           debugger;
-          this.attendanceList = this.attendanceFilter.filter((x: { signinDate: any; }) => (x.signinDate >= this.startDate && x.signinDate <= this.endDate));
+          this.attendanceList = res;
 
           this.loader = false;
         })
