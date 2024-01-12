@@ -110,7 +110,7 @@ export class ShiftDetailsDashComponent implements OnInit {
       this.loader = false;
     }
     else {
-      this.shiftList = this.shiftFilter.filter((x: { shiftDate: any; endDate: any; }) => (x.shiftDate >= this.startDate && x.shiftDate <= this.endDate) || (x.endDate >= this.startDate && x.endDate <= this.endDate));
+      this.shiftList =  this.shiftFilter.filter((x: { staffID: any; filterdate: number; filterenddate: number; }) => x.staffID == this.staffID && (x.filterdate >= this.startDate && x.filterenddate <= this.endDate));
       this.loader = false;
     }
   }

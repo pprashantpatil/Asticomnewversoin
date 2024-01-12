@@ -293,7 +293,15 @@ export class OverTimeDetailsFormComponent implements OnInit {
                     this.loader = false;
                     this.starttime = '';
                   }
-                
+                  // if (this.updatedstarttime > '09:30') {
+                  //    Swal.fire('OT Start time must be less than punch out time'); 
+                  //   this.loader = false;
+                  // //  this.showPopup = 1; 
+                  //   // this.messageId = 25;
+                  //   this.showbtn = false;
+                  //   this.loader = false;
+                  //   this.starttime = '';
+                  // }
                 }
 
                 this.Shift = temp[0].shiftType;
